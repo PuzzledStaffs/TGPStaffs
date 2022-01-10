@@ -5,17 +5,24 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Components"), SerializeField]
+    public Rigidbody m_rigidbody;
+
+    [Header("Movement")]
+    [SerializeField, ReadOnly]
     Vector2 m_moveDir = new Vector2();
-    // Start is called before the first frame update
+
+    public float m_speed = 5.0f;
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        transform.position += new Vector3(m_moveDir.x, 0.0f, m_moveDir.y);
+        // Gravity is handled by Rigidbody
+        m_rigidbody.velocity = new Vector3(m_moveDir.x * m_speed, m_rigidbody.velocity.y, m_moveDir.y * m_speed);
     }
 
     /// <summary>
