@@ -5,9 +5,7 @@ using UnityEngine.InputSystem;
 
 public class WeaponWheelController : MonoBehaviour
 {
-    public int ItemSelected;
     public GameObject WeaponWheel;
-    Item CurrentSelectItem = null;
 
 
     public void ToggleWheel() 
@@ -20,7 +18,6 @@ public class WeaponWheelController : MonoBehaviour
         {
             WeaponWheel.SetActive(true);
         }
-
     }
 
     private void Update()
@@ -35,9 +32,9 @@ public class WeaponWheelController : MonoBehaviour
     }
 
 
-    public void SelectItem(Item itemSelected)
+    public void SelectItem(WeaponButtonInfo weaponScript)
     {
-        CurrentSelectItem = itemSelected;
+        Item itemSelected = weaponScript.WheelItem;
         Debug.Log("Item Selected: " + itemSelected.name);
     }
 }
