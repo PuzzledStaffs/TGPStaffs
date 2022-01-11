@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9162364829834096147}
   - component: {fileID: 3233053506375406111}
   m_Layer: 0
-  m_Name: DungenDoor
+  m_Name: DungeonDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
