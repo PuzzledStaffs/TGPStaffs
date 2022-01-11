@@ -40,7 +40,7 @@ public class Enemy : MonoBehaviour, IHealth
     // Start is called before the first frame update
     void Start()
     {
-      //get fsm
+
     }
 
     // Update is called once per frame
