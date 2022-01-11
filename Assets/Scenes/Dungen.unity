@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &154948666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8926693824229221633, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+  m_PrefabInstance: {fileID: 1545993643}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &356700461
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +219,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 18.498, y: -30, z: 0}
 --- !u!1 &750432636
 GameObject:
@@ -325,7 +330,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5685329753367600117, guid: 05da39efd3961194582d17a558e84807, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5685329753367600117, guid: 05da39efd3961194582d17a558e84807, type: 3}
       propertyPath: m_LocalPosition.x
@@ -380,9 +385,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2889239414654348241, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_toRoomExitPoint
+      value: 
+      objectReference: {fileID: 8926693824765893079}
+    - target: {fileID: 2889239414654348241, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_toRoomCameraMove
+      value: 
+      objectReference: {fileID: 1813647359}
     - target: {fileID: 8926693823954975626, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8926693823954975626, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -435,6 +448,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3340157005658977965, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
   m_PrefabInstance: {fileID: 1545993643}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1813647359 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8926693824229221633, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+  m_PrefabInstance: {fileID: 8926693824765893078}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1865823039
 GameObject:
   m_ObjectHideFlags: 0
@@ -444,6 +462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865823040}
+  - component: {fileID: 1865823041}
   m_Layer: 0
   m_Name: DungenManager
   m_TagString: Untagged
@@ -463,8 +482,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865823041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865823039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc38904358441b47b67c8136685bff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DungenCam: {fileID: 750432638}
+  m_cameraSpeed: 4
 --- !u!1001 &8926693824765893078
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -480,9 +513,13 @@ PrefabInstance:
       propertyPath: m_toRoomExitPoint
       value: 
       objectReference: {fileID: 1545993644}
+    - target: {fileID: 6286991769445164864, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_toRoomCameraMove
+      value: 
+      objectReference: {fileID: 154948666}
     - target: {fileID: 8926693823954975626, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8926693823954975626, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_LocalPosition.x
