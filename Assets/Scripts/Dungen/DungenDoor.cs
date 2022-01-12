@@ -17,6 +17,8 @@ public class DungenDoor : MonoBehaviour
 
     public event Action OnEnterRoom;
     public event Action OnExitRoom;
+    public event Action OnUnFreezeEntered;
+    public event Action OnFrezzeExited;
 
 
     private void Awake()
@@ -24,10 +26,14 @@ public class DungenDoor : MonoBehaviour
         m_dungenManager = GameObject.FindObjectOfType<DungenManager>();
         m_doorRenderer = transform.GetComponent<Renderer>();
         m_DoorColider = transform.GetComponent<BoxCollider>();
-        OpenDoor();
+        
         if (m_toRoomCameraMove == null && m_toRoomExitPoint == null)
         {
             CloseDoor();
+        }
+        else
+        {
+            OpenDoor();
         }
     }
 
@@ -37,14 +43,24 @@ public class DungenDoor : MonoBehaviour
         {
             if (m_toRoomExitPoint != null)
             {
-                OnEnterRoom?.Invoke();
-                StartCoroutine(m_dungenManager.MoveCameraCoroutine(m_toRoomCameraMove.transform.position));
-                other.transform.position = m_toRoomExitPoint.transform.position;
-                OnExitRoom?.Invoke();
+                
+                StartCoroutine(MoveRoomCoroutine(other));
             }
         }
     }
 
+    private IEnumerator MoveRoomCoroutine(Collider other)
+    {
+        other.GetComponent<PlayerController>().enabled = false;
+        other.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        OnEnterRoom?.Invoke();
+        OnFrezzeExited?.Invoke();
+        other.transform.position = m_toRoomExitPoint.transform.position;
+        yield return StartCoroutine(m_dungenManager.MoveCameraCoroutine(m_toRoomCameraMove.transform.position));
+        OnUnFreezeEntered?.Invoke();
+        OnExitRoom?.Invoke();
+        other.GetComponent<PlayerController>().enabled = true;
+    }
     #region Door Controls
 
     public void OpenDoor()
