@@ -8,65 +8,48 @@ public class FOV : MonoBehaviour
     public float distance;
     public float radius;
     public GameObject target;
+    bool inFOV = false;
+
 
     private void FixedUpdate()
     {
-        
-        Vector3 targetDirection = target.transform.position - transform.position;
-        float angle = Vector3.Angle(targetDirection, transform.forward);
+        float distanceBetween = Vector3.Distance(transform.position, target.transform.position);
+        //float angle = Vector3.Angle(transform.forward, distanceBetween);
 
 
         //Gets all colliders within a radius around object
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
         foreach (var overlap in colliders)
         {
-            //Checks if each collider is the target one
-            if (overlap.transform == target.transform)
-            {
-                //if its within the angle
-                if (angle < maxAngle)
+            Vector3 colliderDirection = (overlap.transform.position - transform.position).normalized;
+            //if its within the angle
+            if (Vector3.Angle(transform.forward, colliderDirection) <= maxAngle)
                 {
-                    //Draws ray in front of object, if it collides with target object, then it can see the target
+                //Draws ray in front of object, if it collides with target object, then it can see the target
+                    Ray ray = new Ray(transform.forward, target.transform.position - transform.position);
                     RaycastHit hit;
 
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10))
+                //  if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10))
+                if (Physics.Raycast(transform.position, colliderDirection, out hit, distanceBetween))
+                {
+                    if (hit.transform == target.transform)
                     {
-                        if (hit.transform == target.transform)
-                        {
-                            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
-                            Debug.Log("Hit");
-                        }
+                        inFOV = true;
+                        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+                        Debug.Log("Hit");
                     }
-                    else
-                    {
-                        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-                    }
+                   
                 }
+                else
+                {
+                    inFOV = false;
+                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
+                }
+
+
             }
 
+
         }
-
-        
-       
-
-        /* Vector3 DirectionBetween = (target.position- checkObject.position).normalized;
-                    DirectionBetween.y *= 0;
-
-                    float angle = Vector3.Angle(checkObject.forward, DirectionBetween);
-
-                    if (angle <= maxAngle)
-                    {
-                        Ray ray = new Ray(checkObject.position, target.position - checkObject.position);
-                        RaycastHit hit;
-
-                        if (Physics.Raycast(ray, out hit, maxRadius))
-                        {
-                            if (hit.transform == target)
-                            {
-                              
-                                return true;
-                            }
-                        }*/
-
     }
 }
