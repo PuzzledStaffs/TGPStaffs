@@ -393,6 +393,18 @@ PrefabInstance:
       propertyPath: m_toRoomCameraMove
       value: 
       objectReference: {fileID: 1813647359}
+    - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_doorsIn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_doorsIn.Array.data[0]
+      value: 
+      objectReference: {fileID: 8926693824765893080}
+    - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_doorsIn.Array.data[1]
+      value: 
+      objectReference: {fileID: 8926693824765893080}
     - target: {fileID: 8926693823954975626, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -441,6 +453,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8926693824938039263, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: 419385456094870383, guid: 0000000000000000d000000000000000, type: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
 --- !u!1 &1545993644 stripped
@@ -448,6 +464,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3340157005658977965, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
   m_PrefabInstance: {fileID: 1545993643}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1545993645 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2889239414654348241, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+  m_PrefabInstance: {fileID: 1545993643}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8bf16201164794f858c4a1c076aa49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1813647359 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8926693824229221633, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
@@ -517,6 +544,14 @@ PrefabInstance:
       propertyPath: m_toRoomCameraMove
       value: 
       objectReference: {fileID: 154948666}
+    - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_doorsIn.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_doorsIn.Array.data[0]
+      value: 
+      objectReference: {fileID: 1545993645}
     - target: {fileID: 8926693823954975626, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -572,3 +607,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5872092881975982652, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
   m_PrefabInstance: {fileID: 8926693824765893078}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8926693824765893080 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6286991769445164864, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+  m_PrefabInstance: {fileID: 8926693824765893078}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d8bf16201164794f858c4a1c076aa49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
