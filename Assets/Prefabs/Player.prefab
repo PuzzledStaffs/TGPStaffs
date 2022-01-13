@@ -51,6 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponWheel: {fileID: 1470107789803987075}
   WeaponSelectedText: {fileID: 6029909721436314776}
+  CurrentItem: {fileID: 0}
 --- !u!1 &327361669212119291
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &404509732193891848
 RectTransform:
   m_ObjectHideFlags: 0
@@ -370,13 +371,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1827433117610071848}
-  - {fileID: 5425764764969001725}
-  - {fileID: 3549848918176738610}
-  - {fileID: 2178134231820535364}
   - {fileID: 468191569332898121}
-  - {fileID: 4858775333139148159}
-  - {fileID: 3048221020710383405}
+  - {fileID: 2178134231820535364}
   - {fileID: 2196263099022477928}
+  - {fileID: 5425764764969001725}
+  - {fileID: 3048221020710383405}
+  - {fileID: 3549848918176738610}
+  - {fileID: 4858775333139148159}
   - {fileID: 7469051296229678674}
   m_Father: {fileID: 1731071938268215827}
   m_RootOrder: 0
@@ -400,7 +401,7 @@ GameObject:
   - component: {fileID: 1643655770136691833}
   - component: {fileID: 4538855542846009556}
   m_Layer: 5
-  m_Name: Wheel-Item-8
+  m_Name: Wheel-Item-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -420,7 +421,7 @@ RectTransform:
   - {fileID: 706431368709705451}
   - {fileID: 8560117119526504788}
   m_Father: {fileID: 404509732193891848}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -135}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -533,7 +534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 1371983196918361326}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
@@ -668,7 +669,7 @@ GameObject:
   - component: {fileID: 6649532131321956580}
   - component: {fileID: 3686150404510282425}
   m_Layer: 5
-  m_Name: Wheel-Item-3
+  m_Name: Wheel-Item-7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -688,7 +689,7 @@ RectTransform:
   - {fileID: 7541048694456410818}
   - {fileID: 6936257614907311189}
   m_Father: {fileID: 404509732193891848}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -801,7 +802,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 410708065298450560}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
@@ -822,7 +823,7 @@ GameObject:
   - component: {fileID: 3762937135038880592}
   - component: {fileID: 2781969284659010450}
   m_Layer: 5
-  m_Name: Wheel-Item-7
+  m_Name: Wheel-Item-6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -842,7 +843,7 @@ RectTransform:
   - {fileID: 8889148571663148085}
   - {fileID: 5528186799072763534}
   m_Father: {fileID: 404509732193891848}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -955,7 +956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 1632311167917970991}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
@@ -1276,7 +1277,7 @@ GameObject:
   - component: {fileID: 5328753417334300553}
   - component: {fileID: 9188381192059124633}
   m_Layer: 5
-  m_Name: Wheel-Item-6
+  m_Name: Wheel-Item-8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1296,7 +1297,7 @@ RectTransform:
   - {fileID: 4996896824095833262}
   - {fileID: 3586145480643914609}
   m_Father: {fileID: 404509732193891848}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1409,7 +1410,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 4672190809841185537}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
@@ -1580,7 +1581,7 @@ GameObject:
   - component: {fileID: 6678742003781378835}
   - component: {fileID: 4860261977158121390}
   m_Layer: 5
-  m_Name: Wheel-Item-4
+  m_Name: Wheel-Item-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1600,7 +1601,7 @@ RectTransform:
   - {fileID: 8210992544849768992}
   - {fileID: 5676020030779248205}
   m_Father: {fileID: 404509732193891848}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1713,7 +1714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 4070225471532794596}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
@@ -1960,7 +1961,7 @@ GameObject:
   - component: {fileID: 2993419279781356281}
   - component: {fileID: 4289351694083666912}
   m_Layer: 5
-  m_Name: Wheel-Item-2
+  m_Name: Wheel-Item-5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1980,7 +1981,7 @@ RectTransform:
   - {fileID: 8661628662949341493}
   - {fileID: 2285728255845129391}
   m_Father: {fileID: 404509732193891848}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2093,7 +2094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: a80615c7383a2864f88a0d8f205e1379, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 5351769032579661271}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
@@ -2346,7 +2347,7 @@ GameObject:
   - component: {fileID: 2549247421821250299}
   - component: {fileID: 3483141473814378083}
   m_Layer: 5
-  m_Name: Wheel-Item-5
+  m_Name: Wheel-Item-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2366,7 +2367,7 @@ RectTransform:
   - {fileID: 440664066966614764}
   - {fileID: 5692363399635061884}
   m_Father: {fileID: 404509732193891848}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2479,7 +2480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 3937982159941431916}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
@@ -2708,7 +2709,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
+  WheelItem: {fileID: 0}
   WheelIcon: {fileID: 8301419231027759170}
   ItemBlocked: 0
   LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
