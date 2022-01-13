@@ -21,8 +21,6 @@ public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExi
     Vector2 desiredScale;
     public float ScaleFactor = 1.20f;
 
-
-
     private void Start()
     {
         //Assign the item icon to the weapon wheel button
@@ -70,7 +68,6 @@ public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             SelectionImage.SetActive(false);
             desiredScale = new Vector2(originalScale.x, originalScale.y);
-
         }
     }
 }

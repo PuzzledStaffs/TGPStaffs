@@ -9,6 +9,7 @@ public class WeaponWheelController : MonoBehaviour
     public GameObject WeaponWheel;
     public TextMeshProUGUI WeaponSelectedText;
     public bool isWheelOpen { get; private set; }
+    public Item CurrentItem;
 
     public void ToggleWheel()
     {
@@ -41,6 +42,8 @@ public class WeaponWheelController : MonoBehaviour
     public void SelectItem(WeaponButtonInfo weaponScript)
     {
         Item itemSelected = weaponScript.WheelItem;
+        CurrentItem = itemSelected;
+        ToggleWheel();
         Debug.Log("Item Selected: " + itemSelected.name);
     }
 }
