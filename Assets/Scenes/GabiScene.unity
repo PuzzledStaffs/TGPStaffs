@@ -364,7 +364,7 @@ GameObject:
   - component: {fileID: 268796234}
   - component: {fileID: 268796237}
   m_Layer: 5
-  m_Name: Wheel-Item-5
+  m_Name: Wheel-Item-2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,7 +384,7 @@ RectTransform:
   - {fileID: 1983384445}
   - {fileID: 2001611096}
   m_Father: {fileID: 1085213674}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1129,7 +1129,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1085213674
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1142,13 +1142,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1420124629}
-  - {fileID: 1221011933}
-  - {fileID: 1525047768}
-  - {fileID: 1641992966}
   - {fileID: 268796232}
-  - {fileID: 1199702430}
-  - {fileID: 1513539444}
+  - {fileID: 1641992966}
   - {fileID: 1557738376}
+  - {fileID: 1221011933}
+  - {fileID: 1513539444}
+  - {fileID: 1525047768}
+  - {fileID: 1199702430}
   - {fileID: 114272566}
   m_Father: {fileID: 622554157}
   m_RootOrder: 0
@@ -1247,7 +1247,7 @@ GameObject:
   - component: {fileID: 1199702432}
   - component: {fileID: 1199702435}
   m_Layer: 5
-  m_Name: Wheel-Item-6
+  m_Name: Wheel-Item-8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1267,7 +1267,7 @@ RectTransform:
   - {fileID: 1350443738}
   - {fileID: 1199300382}
   m_Father: {fileID: 1085213674}
-  m_RootOrder: 5
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1402,7 +1402,7 @@ GameObject:
   - component: {fileID: 1221011938}
   - component: {fileID: 1221011939}
   m_Layer: 5
-  m_Name: Wheel-Item-2
+  m_Name: Wheel-Item-5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1422,7 +1422,7 @@ RectTransform:
   - {fileID: 1378791566}
   - {fileID: 1529661645}
   m_Father: {fileID: 1085213674}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2023,7 +2023,7 @@ GameObject:
   - component: {fileID: 1513539446}
   - component: {fileID: 1513539449}
   m_Layer: 5
-  m_Name: Wheel-Item-7
+  m_Name: Wheel-Item-6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2043,7 +2043,7 @@ RectTransform:
   - {fileID: 2068393325}
   - {fileID: 879526621}
   m_Father: {fileID: 1085213674}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 135}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2177,7 +2177,7 @@ GameObject:
   - component: {fileID: 1525047770}
   - component: {fileID: 1525047773}
   m_Layer: 5
-  m_Name: Wheel-Item-3
+  m_Name: Wheel-Item-7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2197,7 +2197,7 @@ RectTransform:
   - {fileID: 2065603445}
   - {fileID: 399875691}
   m_Father: {fileID: 1085213674}
-  m_RootOrder: 2
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2406,7 +2406,7 @@ GameObject:
   - component: {fileID: 1557738378}
   - component: {fileID: 1557738381}
   m_Layer: 5
-  m_Name: Wheel-Item-8
+  m_Name: Wheel-Item-4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2426,7 +2426,7 @@ RectTransform:
   - {fileID: 397742482}
   - {fileID: 475412045}
   m_Father: {fileID: 1085213674}
-  m_RootOrder: 7
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -135}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2560,7 +2560,7 @@ GameObject:
   - component: {fileID: 1641992968}
   - component: {fileID: 1641992971}
   m_Layer: 5
-  m_Name: Wheel-Item-4
+  m_Name: Wheel-Item-3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2580,7 +2580,7 @@ RectTransform:
   - {fileID: 2103965069}
   - {fileID: 387832558}
   m_Father: {fileID: 1085213674}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

@@ -142,5 +142,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_toRoomExitPoint: {fileID: 0}
   m_toRoomCameraMove: {fileID: 0}
-  m_DoorClosed: {fileID: 2100000, guid: c86c06721a5b67f498126badcb3d5d48, type: 2}
+  m_DoorClosed: {fileID: 2100000, guid: 6455712f9a0aaae4aba45941d71a7c8e, type: 2}
   m_DoorOpen: {fileID: 2100000, guid: f53d0ae5abdc29b4c98f1fc1da30d3e8, type: 2}
+  m_ClosedOnStart: 0
