@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Bow
   m_EditorClassIdentifier: 
   name: Bow
-  ItemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  ItemIcon: {fileID: 21300000, guid: efcaa3ba66f5cab4eac67934853aceb7, type: 3}
   ItemDamage: 0
   CombatType: 1
+  Cooldown: 0.5
+  ItemSound: {fileID: 0}
