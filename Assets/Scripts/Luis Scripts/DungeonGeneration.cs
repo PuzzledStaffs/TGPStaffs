@@ -119,6 +119,12 @@ public class DungeonGeneration : MonoBehaviour
     }
 }
 
+
+public class DungeonGeneration1
+{
+
+}
+
 [System.Serializable]
 public class Room
 {

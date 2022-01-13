@@ -353,14 +353,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 597590465}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76739558a9fbdc64595aaebe8956d1bf, type: 3}
+  m_Script: {fileID: 11500000, guid: 4268c35fa555cc3428d7cc7bd1560836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NumberOfRooms: 6
-  EndRoomDistance: 0
-  CurrentRoom:
-    RT: 0
-    RoomCoordinates: {x: 0, y: 0}
+  dungeon: {fileID: 0}
 --- !u!1 &704325365
 GameObject:
   m_ObjectHideFlags: 0
