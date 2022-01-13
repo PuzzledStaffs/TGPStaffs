@@ -221,6 +221,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 18.498, y: -30, z: 0}
+--- !u!1 &453610168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
+  m_PrefabInstance: {fileID: 1245921454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &750432636
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +341,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Locked: 0
   m_CurrentRoomType: 0
+  m_roomOragin: {x: 0, y: 0, z: 0}
+  m_player: {fileID: 453610168}
+  m_BigRoomCamLimit: {x: 5, y: 5.8}
 --- !u!1001 &811052605
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -365,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 1177227396}
     - target: {fileID: 8926693823954975626, guid: ef42ac05d3e08a64f8262997a5be39fb, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8926693823954975626, guid: ef42ac05d3e08a64f8262997a5be39fb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -642,7 +650,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1865823041
 MonoBehaviour:
@@ -665,6 +673,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2889239414654348241, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_ClosedOnStart
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2889239414654348241, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_toRoomExitPoint
       value: 
@@ -689,6 +701,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 750432641}
+    - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_PlayerStartingRoom
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_doorsIn.Array.size
       value: 2

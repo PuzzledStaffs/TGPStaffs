@@ -752,6 +752,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c55a083c12642bc47ab085986157e64f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Camera: {fileID: 0}
+  m_RoomType: 1
+  m_origin: {fileID: 8926693824229221633}
   m_doorsIn: []
   m_doorsOut:
   - {fileID: 2889239414654348241}
