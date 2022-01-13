@@ -6,81 +6,86 @@ namespace Wizboyd
 {
     public class PlayerLocomotion : MonoBehaviour
     {
-        Transform CameObject;
-        InputHandler InputHandler;
-        Vector3 MoveDir;
+        Transform cameraObject;
+        InputHandler inputHandler;
+        Vector3 moveDirection;
 
         [HideInInspector]
-        public Transform MyTransform;
+        public Transform myTransform;
         [HideInInspector]
         public AnimatorHandler animatorHandler;
 
-        public new Rigidbody RB;
-        public GameObject NormalCamera;
+        public new Rigidbody rigidbody;
+        public GameObject normalCamera;
 
         [Header("Stats")]
-        [SerializeField] float MovementSpeed = 5;
-        [SerializeField] float RotationSpeed = 10;
+        [SerializeField]
+        float movementSpeed = 5;
+        [SerializeField]
+        float rotationSpeed = 10;
 
-        // Start is called before the first frame update
         void Start()
         {
-            RB = GetComponent<Rigidbody>();
-            InputHandler = GetComponent<InputHandler>();
-            CameObject = Camera.main.transform;
-            MyTransform = transform;
+            rigidbody = GetComponent<Rigidbody>();
+            inputHandler = GetComponent<InputHandler>();
             animatorHandler = GetComponentInChildren<AnimatorHandler>();
-            animatorHandler.Initalize();
+            cameraObject = Camera.main.transform;
+            myTransform = transform;
+            animatorHandler.Initialize();
+
         }
 
         public void Update()
         {
             float delta = Time.deltaTime;
 
-            InputHandler.TickInput(delta);
+            inputHandler.TickInput(delta);
 
-            MoveDir = CameObject.forward * InputHandler.Vertical;
-            MoveDir += CameObject.right * InputHandler.Horizontal;
-            MoveDir.Normalize();
+            moveDirection = cameraObject.forward * inputHandler.vertical;
+            moveDirection += cameraObject.right * inputHandler.horizontal;
+            moveDirection.Normalize();
 
-            float Speed = MovementSpeed;
-            MoveDir *= Speed;
+            float speed = movementSpeed;
+            moveDirection *= speed;
 
-            Vector3 Projectedvelocity = Vector3.ProjectOnPlane(MoveDir, NoramlVector);
-            RB.velocity = Projectedvelocity;
+            Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
+            rigidbody.velocity = projectedVelocity;
 
-            if (animatorHandler.CanRotate)
+            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0);
+
+            if (animatorHandler.canRotate)
             {
                 HandleRotation(delta);
             }
+
+
         }
 
         #region Movement
-
-        Vector3 NoramlVector;
-        Vector3 TargetPos;
+        Vector3 normalVector;
+        Vector3 targetPosition;
 
         private void HandleRotation(float delta)
         {
-            Vector3 TargetDir = Vector3.zero;
-            float moveOverrid = InputHandler.MoveAmount;
+            Vector3 targetDir = Vector3.zero;
+            float moveOverride = inputHandler.moveAmount;
 
-            TargetDir = CameObject.forward * InputHandler.Vertical;
-            TargetDir += CameObject.right * InputHandler.Horizontal;
-            TargetDir.Normalize();
-            TargetDir.y = 0;
+            targetDir = cameraObject.forward * inputHandler.vertical;
+            targetDir += cameraObject.right * inputHandler.horizontal;
 
-            if (TargetDir == Vector3.zero) { }
-            {
-                TargetDir = MyTransform.forward;
-            }
 
-            float RS = RotationSpeed;
+            targetDir.Normalize();
+            targetDir.y = 0;
 
-            Quaternion TR = Quaternion.LookRotation(TargetDir);
-            Quaternion TargetRotation = Quaternion.Slerp(MyTransform.rotation, TR, RS * delta);
+            if (targetDir == Vector3.zero)
+                targetDir = myTransform.forward;
 
-            MyTransform.rotation = TargetRotation;
+            float rs = rotationSpeed;
+
+            Quaternion tr = Quaternion.LookRotation(targetDir);
+            Quaternion targetRotation = Quaternion.Slerp(myTransform.rotation, tr, rs * delta);
+
+            myTransform.rotation = targetRotation;
         }
 
         #endregion

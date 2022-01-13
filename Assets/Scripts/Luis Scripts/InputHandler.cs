@@ -6,32 +6,32 @@ namespace Wizboyd
 {
     public class InputHandler : MonoBehaviour
     {
-        public float Horizontal;
-        public float Vertical;
-        public float MoveAmount;
-        public float MouseX;
-        public float MouseY;
+        public float horizontal;
+        public float vertical;
+        public float moveAmount;
+        public float mouseX;
+        public float mouseY;
 
-        PlayerControls InputActions;
+        PlayerControls inputActions;
 
-        Vector2 MovementInput;
-        Vector2 CameraInput;
+        Vector2 movementInput;
+        Vector2 cameraInput;
 
         public void OnEnable()
         {
-            if (InputActions == null)
+            if (inputActions == null)
             {
-                InputActions = new PlayerControls();
-                InputActions.PlayerMovement.Movement.performed += InputActions => MovementInput = InputActions.ReadValue<Vector2>();
-                InputActions.PlayerMovement.Camera.performed += i => CameraInput = i.ReadValue<Vector2>();
+                inputActions = new PlayerControls();
+                inputActions.PlayerMovement.Movement.performed += inputActions => movementInput = inputActions.ReadValue<Vector2>();
+                inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
             }
 
-            InputActions.Enable();
+            inputActions.Enable();
         }
 
         private void OnDisable()
         {
-            InputActions.Disable();
+            inputActions.Disable();
         }
 
         public void TickInput(float delta)
@@ -41,11 +41,11 @@ namespace Wizboyd
 
         private void MoveInput(float delta)
         {
-            Horizontal = MovementInput.x;
-            Vertical = MovementInput.y;
-            MoveAmount = Mathf.Clamp01(Mathf.Abs(Horizontal) + Mathf.Abs(Vertical));
-            MouseX = CameraInput.x;
-            MouseY = CameraInput.y;
+            horizontal = movementInput.x;
+            vertical = movementInput.y;
+            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+            mouseX = cameraInput.x;
+            mouseY = cameraInput.y;
         }
     }
 }

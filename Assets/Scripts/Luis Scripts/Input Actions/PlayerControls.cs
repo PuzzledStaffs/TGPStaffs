@@ -28,7 +28,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": ""Camera"",
-                    ""type"": ""PassThrough"",
+                    ""type"": ""Value"",
                     ""id"": ""0a591009-63f9-4d3d-b1ff-0ece32edb101"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -93,10 +93,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""1d685e2e-aa5f-4a99-9ccf-d6006665f0e3"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""id"": ""ea35b73a-e360-41e6-ba2a-b91ae2a02ff8"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone"",
+                    ""processors"": ""NormalizeVector2"",
                     ""groups"": """",
                     ""action"": ""Camera"",
                     ""isComposite"": false,
@@ -104,8 +104,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ea35b73a-e360-41e6-ba2a-b91ae2a02ff8"",
-                    ""path"": ""<Mouse>/delta"",
+                    ""id"": ""15ce7af2-d1f6-49ff-98b3-10688d9f8176"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": ""NormalizeVector2"",
                     ""groups"": """",

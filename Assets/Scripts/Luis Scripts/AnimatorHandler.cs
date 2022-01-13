@@ -6,82 +6,83 @@ namespace Wizboyd
 {
     public class AnimatorHandler : MonoBehaviour
     {
-        public Animator Anim;
+        public Animator anim;
         int vertical;
         int horizontal;
-        public bool CanRotate;
+        public bool canRotate;
 
-        public void Initalize()
+        public void Initialize()
         {
-            Anim = GetComponent<Animator>();
+            anim = GetComponent<Animator>();
             vertical = Animator.StringToHash("Vertical");
             horizontal = Animator.StringToHash("Horizontal");
         }
 
-        public void updateAnimatorValue(float verticalMovement, float HorizontalMovement)
+        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
         {
             #region Vertical
-
-            float V = 0;
+            float v = 0;
 
             if (verticalMovement > 0 && verticalMovement < 0.55f)
             {
-                V = 0.5f;
+                v = 0.5f;
             }
-            else if(vertical < 0.55f)
+            else if (verticalMovement > 0.55f)
             {
-                V = 1;
+                v = 1;
             }
-            else if(verticalMovement < 0 && verticalMovement > -0.55f)
+            else if (verticalMovement < 0 && verticalMovement > -0.55f)
             {
-                V = -0.5f;
+                v = -0.5f;
             }
-            else if(verticalMovement < -0.55f)
+            else if (verticalMovement < -0.55f)
             {
-                V = -1;
+                v = -1;
             }
             else
             {
-                V = 0;
+                v = 0;
             }
             #endregion
+
             #region Horizontal
+            float h = 0;
 
-            float H = 0;
-
-            if (HorizontalMovement > 0 && HorizontalMovement < 0.55f)
+            if (horizontalMovement > 0 && horizontalMovement < 0.55f)
             {
-                H = 0.5f;
+                h = 0.5f;
             }
-            else if (vertical < 0.55f)
+            else if (horizontalMovement > 0.55f)
             {
-                H = 1;
+                h = 1;
             }
-            else if (HorizontalMovement < 0 && HorizontalMovement > -0.55f)
+            else if (horizontalMovement < 0 && horizontalMovement > -0.55f)
             {
-                H = -0.5f;
+                h = -0.5f;
             }
-            else if (HorizontalMovement < -0.55f)
+            else if (horizontalMovement < -0.55f)
             {
-                H = -1;
+                h = -1;
             }
             else
             {
-                H = 0;
+                h = 0;
             }
             #endregion
-            Anim.SetFloat(vertical, V, 0.1f, Time.deltaTime);
-            Anim.SetFloat(horizontal, H, 0.1f, Time.deltaTime);
+
+            anim.SetFloat(vertical, v, 0.1f, Time.deltaTime);
+            anim.SetFloat(horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void canrotate()
+        public void CanRotate()
         {
-            CanRotate = true;
+            canRotate = true;
         }
 
-        public void Stoprotation()
+        public void StopRotation()
         {
-            CanRotate = false;
+            canRotate = false;
         }
+
     }
 }
