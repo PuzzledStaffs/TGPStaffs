@@ -6,6 +6,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Sword Item")]
 public class SwordItem : Item
 {
+
+
     public override void LeftClickAction()
     {
         Debug.Log("SWORD SLASH LEFT");
