@@ -10,14 +10,16 @@ public class Item : ScriptableObject
     public int CombatType = 0;
     public float Cooldown = 0.5f;
     public AudioClip ItemSound;
+    public bool CanUse = true;
+
 
     public virtual void LeftClickAction()
     {
-        
+
     }
 
     public virtual void RightClickAction()
     {
 
-    }
+    } 
 }

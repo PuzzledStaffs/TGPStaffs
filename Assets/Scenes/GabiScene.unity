@@ -1038,6 +1038,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponWheel: {fileID: 1085213673}
   WeaponSelectedText: {fileID: 114272567}
+  CurrentItem: {fileID: 0}
 --- !u!1 &879526620
 GameObject:
   m_ObjectHideFlags: 0
@@ -1916,7 +1917,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 0.24313727, g: 0.24313727, b: 0.24313727, a: 0.5686275}
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.5686275}
     m_HighlightedColor: {r: 1, g: 0.8675798, b: 0, a: 0.34117648}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 0.34117648}
     m_SelectedColor: {r: 0.1745283, g: 0.8771923, b: 1, a: 0.34117648}
