@@ -14,6 +14,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "0e420aa0-99df-48f6-b011-fa5186086a7b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "WeaponWheel",
                     "type": "Button",
                     "id": "2dd9ae26-1670-422b-828c-37ec53931a13",
@@ -487,6 +495,17 @@
                 },
                 {
                     "name": "",
+                    "id": "043847c4-5351-4b2a-8212-16bd2f1b1e6b",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Movement",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "e5374a64-d50b-4ad5-be14-6d60c48cdbdd",
                     "path": "<Touchscreen>/touch*/position",
                     "interactions": "",
@@ -586,12 +605,34 @@
                 },
                 {
                     "name": "",
+                    "id": "0061d24f-22b2-4f45-b02b-8c616c97a795",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard And Mouse",
+                    "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "fc6e06d7-af84-4f54-acad-21e5f48611ea",
                     "path": "<XRController>/deviceRotation",
                     "interactions": "",
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fe45dce4-072d-402b-98f7-1d6d30a16326",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -620,7 +661,7 @@
             "bindingGroup": "Controller",
             "devices": [
                 {
-                    "devicePath": "<DualShockGamepad>",
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
