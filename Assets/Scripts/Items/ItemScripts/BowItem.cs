@@ -5,9 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Bow Item")]
 public class BowItem : Item
 {
-    public override void LeftClickAction()
+    public override void LeftClickAction(PlayerController pc)
     {
-        base.LeftClickAction();
+       // base.LeftClickAction();
         Debug.Log("BOW FIRE LEFT!");
     }
 
