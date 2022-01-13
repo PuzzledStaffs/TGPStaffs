@@ -53,7 +53,7 @@ public class DungenDoor : MonoBehaviour
         }
     }
 
-    private IEnumerator MoveRoomCoroutine(Collider other)
+    protected virtual IEnumerator MoveRoomCoroutine(Collider other)
     {
         other.GetComponent<PlayerController>().enabled = false;
         other.GetComponent<Rigidbody>().velocity = Vector3.zero;
