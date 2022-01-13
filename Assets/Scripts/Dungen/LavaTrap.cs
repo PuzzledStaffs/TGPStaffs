@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider))]
 public class LavaTrap : MonoBehaviour
 {
     [SerializeField] private bool m_AmBrigde;
