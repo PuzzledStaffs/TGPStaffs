@@ -68,7 +68,6 @@ public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             SelectionImage.SetActive(false);
             desiredScale = new Vector2(originalScale.x, originalScale.y);
-
         }
     }
 }
