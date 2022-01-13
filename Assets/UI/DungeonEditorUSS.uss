@@ -1,0 +1,16 @@
+VisualElement {
+}
+
+.Container {
+    margin-left: 141px;
+    margin-right: 141px;
+    margin-top: 141px;
+    margin-bottom: 141px;
+}
+
+.Inspector {
+    flex-basis: 50%;
+}
+
+.MapView {
+}
