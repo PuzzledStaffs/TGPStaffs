@@ -8,14 +8,14 @@ public class BowItem : Item
     public override void LeftClickAction()
     {
         base.LeftClickAction();
-        Debug.Log("BOW FIRE LEFT");
+        Debug.Log("BOW FIRE LEFT!");
     }
 
 
     public override void RightClickAction()
     {
         base.RightClickAction();
-        Debug.Log("BOW FIRE RIGHT");
+        Debug.Log("BOW FIRE RIGHT!");
     }
 }
 
