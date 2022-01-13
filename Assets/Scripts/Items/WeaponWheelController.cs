@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class WeaponWheelController : MonoBehaviour
 {
     public GameObject WeaponWheel;
+    public TextMeshProUGUI WeaponSelectedText;
+    public Item CurrentItem;
 
 
-    public void ToggleWheel() 
+    public void ToggleWheel()
     {
         if (WeaponWheel.activeSelf)
         {
@@ -20,21 +23,17 @@ public class WeaponWheelController : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void UpdateText(WeaponButtonInfo weaponScript)
     {
-        // this is temporary for testing - cause i didnt want to set up the input stuff properly yet
-        var keyboard = Keyboard.current;
-
-        if (keyboard.tabKey.wasPressedThisFrame)
-        {
-            ToggleWheel();
-        }
+        Item itemSelected = weaponScript.WheelItem;
+        WeaponSelectedText.text = itemSelected.name;
     }
-
 
     public void SelectItem(WeaponButtonInfo weaponScript)
     {
         Item itemSelected = weaponScript.WheelItem;
+        CurrentItem = itemSelected;
+        ToggleWheel();
         Debug.Log("Item Selected: " + itemSelected.name);
     }
 }
