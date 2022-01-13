@@ -43,7 +43,7 @@ public class Enemy : MonoBehaviour, IHealth
     // Start is called before the first frame update
     void Start()
     {
-       // manager.ChangeState(State.StateType.IDLE);
+
     }
 
     // Update is called once per frame
@@ -52,15 +52,8 @@ public class Enemy : MonoBehaviour, IHealth
 
         if (fieldOfView.inFOV)
         {
-            Debug.Log("Player");
             manager.ChangeState(State.StateType.ATTACK);
-        }
-        else
-        { 
-        
-            
-        }
-        
+        }      
     }
 
     IEnumerator DeathCoroutine()

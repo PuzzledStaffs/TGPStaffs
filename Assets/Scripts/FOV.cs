@@ -60,10 +60,6 @@ public class FOV : MonoBehaviour
                 {
                     //if the object is the target, return true
                     inFOV = hit.transform == target.transform;
-                    if (inFOV)
-                    {
-                        Debug.Log("Hit");
-                    }
                 }
             }
             else
