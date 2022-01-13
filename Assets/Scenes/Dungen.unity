@@ -221,6 +221,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 18.498, y: -30, z: 0}
+--- !u!1 &453610168 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
+  m_PrefabInstance: {fileID: 1245921454}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &750432636
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,6 +341,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Locked: 0
   m_CurrentRoomType: 0
+  m_roomOragin: {x: 0, y: 0, z: 0}
+  m_player: {fileID: 453610168}
+  m_BigRoomCamLimit: {x: 5, y: 5.8}
 --- !u!1001 &811052605
 PrefabInstance:
   m_ObjectHideFlags: 0

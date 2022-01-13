@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class DungenDoor : MonoBehaviour
 {
-    [SerializeField] private GameObject m_toRoomExitPoint;
-    [SerializeField] private GameObject m_toRoomCameraMove;
+    [SerializeField][Tooltip("This is the ExitPoint item on the door prefab, this is where the player go")] private GameObject m_toRoomExitPoint;
+    [SerializeField][Tooltip("This is where the camara gose to")] private GameObject m_toRoomCameraMove;
     private DungenManager m_dungenManager;
     [Header("Door Closed Controls")]
     private Renderer m_doorRenderer;
