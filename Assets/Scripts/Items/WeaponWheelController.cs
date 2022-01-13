@@ -8,19 +8,32 @@ public class WeaponWheelController : MonoBehaviour
 {
     public GameObject WeaponWheel;
     public TextMeshProUGUI WeaponSelectedText;
+    public bool isWheelOpen { get; private set; }
     public Item CurrentItem;
-
 
     public void ToggleWheel()
     {
-        if (WeaponWheel.activeSelf)
+        isWheelOpen = !isWheelOpen;
+        if (isWheelOpen)
         {
-            WeaponWheel.SetActive(false);
+            WeaponWheel.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
         }
         else
         {
-            WeaponWheel.SetActive(true);
+            WeaponWheel.SetActive(false);
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Locked;
         }
+    }
+
+    // Pulse the weapon wheel with an angle.
+    public void Pulse(float angle)
+    {
+        angle /= Mathf.PI;
+        angle *= WeaponWheel.transform.childCount;
+        int item = (int)(angle % WeaponWheel.transform.childCount);
+        Debug.Log(item);
     }
 
     public void UpdateText(WeaponButtonInfo weaponScript)
