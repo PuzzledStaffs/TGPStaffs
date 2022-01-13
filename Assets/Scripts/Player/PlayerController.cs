@@ -25,10 +25,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     WeaponWheelController m_weaponWheelController;
 
+    public bool ButtonHeld = false;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         m_respawnPosition = transform.position;
     }
 
@@ -42,6 +44,17 @@ public class PlayerController : MonoBehaviour
             // Rotates model to face the direction of movement
             if (m_moveDir.x != 0 || m_moveDir.y != 0)
                 m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+        }
+
+        if (m_weaponWheelController.isWheelOpen)
+        {
+            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+            if (direction.x != 0 && direction.y != 0)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x);
+                angle += Mathf.PI;
+                m_weaponWheelController.Pulse(angle);
+            }
         }
     }
 
@@ -85,16 +98,32 @@ public class PlayerController : MonoBehaviour
         {
             // Button was pressed
             case InputActionPhase.Started:
-                // Gets all objects with a collider in a box (halfExtents = scale / 2) in front of the player
-                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(1.0f, 1.0f, 1.0f) / 2, m_model.transform.rotation))
-                    // If the collider also has a IInteractable script, interact with it
-                    col.GetComponent<IInteractable>()?.Interact();
-
+                if (m_weaponWheelController.isWheelOpen)
+                {
+                    m_weaponWheelController.SelectItem(m_weaponWheelController.currentIndex);
+                    break;
+                }
+                
+                if (!m_weaponWheelController.CurrentItem.ItemHold)
+                {
+                    m_weaponWheelController.LeftClickAction();
+                }
+                else
+                {
+                    ButtonHeld = true;
+                }
                 break;
             // Button is being held
             case InputActionPhase.Performed:
+                break;
             // Button was released
             case InputActionPhase.Canceled:
+                if (ButtonHeld)
+                {
+                    ButtonHeld = false;
+                    m_weaponWheelController.HoldActionCooldown();
+                }
+                break;
             case InputActionPhase.Disabled:
             case InputActionPhase.Waiting:
             default:
