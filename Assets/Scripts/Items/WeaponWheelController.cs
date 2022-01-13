@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class WeaponWheelController : MonoBehaviour
 {
@@ -11,17 +13,41 @@ public class WeaponWheelController : MonoBehaviour
     public bool isWheelOpen { get; private set; }
     public Item CurrentItem;
 
+    List<Button> buttons;
+    List<WeaponButtonInfo> buttonInfos;
+    public int currentIndex = 0;
+    public int selectedIndex = 0;
+
+    private void Start()
+    {
+        buttons = new List<Button>();
+        foreach (Transform tr in WeaponWheel.transform)
+        {
+            buttons.Add(tr.GetComponent<Button>());
+        }
+
+        buttonInfos = new List<WeaponButtonInfo>();
+        foreach (Transform tr in WeaponWheel.transform)
+        {
+            buttonInfos.Add(tr.GetComponent<WeaponButtonInfo>());
+        }
+    }
+
     public void ToggleWheel()
     {
         isWheelOpen = !isWheelOpen;
         if (isWheelOpen)
         {
             WeaponWheel.SetActive(true);
+            WeaponSelectedText.gameObject.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
+            EventSystem.current.SetSelectedGameObject(null);
+            buttons[selectedIndex].Select();
         }
         else
         {
             WeaponWheel.SetActive(false);
+            WeaponSelectedText.gameObject.SetActive(false);
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Locked;
         }
@@ -30,10 +56,23 @@ public class WeaponWheelController : MonoBehaviour
     // Pulse the weapon wheel with an angle.
     public void Pulse(float angle)
     {
-        angle /= Mathf.PI;
-        angle *= WeaponWheel.transform.childCount;
-        int item = (int)(angle % WeaponWheel.transform.childCount);
-        Debug.Log(item);
+        int count = WeaponWheel.transform.childCount;
+        angle += Mathf.PI / 2;
+        angle -= (Mathf.PI * 2) / (count * 2);
+        angle %= Mathf.PI * 2;
+        angle /= Mathf.PI * 2;
+        angle *= count;
+        int item = (count - 1) - (int)(angle % count);
+        //Debug.Log(item);
+
+        if (currentIndex != item)
+        {
+            buttons[currentIndex].OnPointerExit(null);
+            buttonInfos[currentIndex].OnPointerExit(null);
+            buttons[item].OnPointerEnter(null);
+            buttonInfos[item].OnPointerEnter(null);
+            currentIndex = item;
+        }
     }
 
     public void UpdateText(WeaponButtonInfo weaponScript)
@@ -45,8 +84,24 @@ public class WeaponWheelController : MonoBehaviour
     public void SelectItem(WeaponButtonInfo weaponScript)
     {
         Item itemSelected = weaponScript.WheelItem;
-        CurrentItem = itemSelected;
+        if (itemSelected == CurrentItem)
+        {
+            Debug.Log("Item Already Selected: " + itemSelected.name);
+        }
+        else
+        {
+            CurrentItem = itemSelected;
+            Debug.Log("Item Selected: " + itemSelected.name);
+        }
         ToggleWheel();
-        Debug.Log("Item Selected: " + itemSelected.name);
+    }
+
+    public void SelectItem(int index)
+    {
+        buttons[selectedIndex].OnDeselect(null);
+        buttons[index].Select();
+        buttons[index].OnSelect(null);
+        buttons[index].onClick.Invoke();
+        selectedIndex = index;
     }
 }

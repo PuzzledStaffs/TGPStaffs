@@ -653,7 +653,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2520645135329754909
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponWheel: {fileID: 8391508179049173678}
   WeaponSelectedText: {fileID: 945630856303727977}
-  CurrentItem: {fileID: 0}
+  CurrentItem: {fileID: 11400000, guid: b37193148d3c6794cb35ed8bcf95358c, type: 2}
 --- !u!1 &1981050936752868659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2934,7 +2934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3659198449235849898
 RectTransform:
   m_ObjectHideFlags: 0
