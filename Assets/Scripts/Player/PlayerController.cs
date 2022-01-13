@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         m_respawnPosition = transform.position;
     }
 
@@ -42,6 +42,17 @@ public class PlayerController : MonoBehaviour
             // Rotates model to face the direction of movement
             if (m_moveDir.x != 0 || m_moveDir.y != 0)
                 m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+        }
+
+        if (m_weaponWheelController.isWheelOpen)
+        {
+            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+            if (direction.x != 0 && direction.y != 0)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x);
+                //angle += Mathf.PI / 2;
+                Debug.Log(angle);
+            }
         }
     }
 
