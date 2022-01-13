@@ -19,7 +19,7 @@
                     "id": "0e420aa0-99df-48f6-b011-fa5186086a7b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Hold,Press"
                 },
                 {
                     "name": "ToggleWeaponWheel",

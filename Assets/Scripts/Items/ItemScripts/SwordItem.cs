@@ -17,6 +17,7 @@ public class SwordItem : Item
             col.GetComponent<IHealth>()?.TakeDamage(ItemDamage);
             pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
         }
+        Debug.Log("SWORD SLASH LEFT");
     }
 
 

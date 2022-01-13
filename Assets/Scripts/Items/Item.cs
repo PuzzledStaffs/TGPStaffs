@@ -11,6 +11,7 @@ public class Item : ScriptableObject
     public float MaxCooldown = 0.5f;
     public AudioClip ItemSound;
     public bool CanUse = true;
+    public bool ItemHold;
 
 
     public virtual void LeftClickAction(PlayerController pc)
@@ -22,4 +23,8 @@ public class Item : ScriptableObject
     {
 
     } 
+    public virtual void ReleaseAction(PlayerController pc)
+    {
+
+    }
 }

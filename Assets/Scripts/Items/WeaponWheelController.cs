@@ -8,25 +8,42 @@ public class WeaponWheelController : MonoBehaviour
 {
     public GameObject WeaponWheel;
     public TextMeshProUGUI WeaponSelectedText;
-    float CoolDownCounter;
+    public float CoolDownCounter;
+    public PlayerController pc;
     
     public bool isWheelOpen { get; private set; }
     public Item CurrentItem;
 
 
-    public void LeftClickAction(PlayerController pc)
+    public void LeftClickAction()
     {
-        CoolDownCounter = CurrentItem.MaxCooldown;
-        if(CoolDownCounter <= 0)
+        if (CoolDownCounter <= 0)
         {
-            CurrentItem.LeftClickAction(pc);
+          CoolDownCounter = CurrentItem.MaxCooldown;
+          CurrentItem.LeftClickAction(pc);
         }
-
     }
+
+    public void LeftClickHoldAction()
+    {
+        CurrentItem.LeftClickAction(pc);
+    }
+
+    public void HoldActionCooldown()
+    {
+        CurrentItem.ReleaseAction(pc);
+        CoolDownCounter = CurrentItem.MaxCooldown;
+    }
+
 
     private void Update()
     {
-        if(CoolDownCounter >= 0)
+        if (pc.ButtonHeld)
+        {
+            LeftClickHoldAction();
+        }
+
+        if (CoolDownCounter >= 0)
         {
             CoolDownCounter -= Time.deltaTime;
         }
