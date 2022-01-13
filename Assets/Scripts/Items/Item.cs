@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "Weapons/item")]
 public class Item : ScriptableObject
 {
     new public string name = "Item Name";
@@ -14,13 +13,11 @@ public class Item : ScriptableObject
 
     public virtual void LeftClickAction()
     {
-
+        
     }
 
     public virtual void RightClickAction()
     {
 
     }
-
-
 }
