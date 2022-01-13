@@ -5,12 +5,36 @@ using UnityEngine;
 public class DungeonGeneration : MonoBehaviour
 {
     [SerializeField] private int NumberOfRooms;
+    [SerializeField] private int EndRoomDistance;
 
-    private Room[,] rooms;
+   [SerializeField] private Room[,] rooms;
+
+   [SerializeField] private Room CurrentRoom;
+
+    private static DungeonGeneration instance = null;
+
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            DontDestroyOnLoad(this.gameObject);
+            instance = this;
+            this.CurrentRoom = GenerateDungeon();
+        }
+        else
+        {
+            string roomprefabname = instance.CurrentRoom.PrefabName();
+            GameObject roomobject = (GameObject)Instantiate(Resources.Load(roomprefabname));
+            Destroy(this.gameObject);
+        }
+    }
 
     private void Start()
     {
-        GenerateDungeon();
+        //this.CurrentRoom = GenerateDungeon();
+        string RoomPrefabName = this.CurrentRoom.PrefabName();
+        GameObject RoomObject = (GameObject)Instantiate(Resources.Load(RoomPrefabName));
     }
 
     private Room GenerateDungeon()
@@ -47,6 +71,7 @@ public class DungeonGeneration : MonoBehaviour
             return this.rooms[InitRoomCoordinate.x, InitRoomCoordinate.y];
         }
 
+
     private void AddNeighbors(Room CurrentRoom, Queue<Room> RoomsToCreate)
     {
         List<Vector2Int> NeighborCoords = CurrentRoom.NeighborCoordinates();
@@ -82,10 +107,22 @@ public class DungeonGeneration : MonoBehaviour
             AvalibleNeighbors.Remove(ChosenNeighbor);
         }
     }
+
+    public Room currentroom()
+    {
+        return this.CurrentRoom;
+    }
+
+    public void MoveToRoom(Room room)
+    {
+        this.CurrentRoom = room;
+    }
 }
 
+[System.Serializable]
 public class Room
 {
+    public DungeonRoomType RT;
     public Vector2Int RoomCoordinates;
     public Dictionary<string, Room> neihboringrooms;
 
@@ -99,6 +136,16 @@ public class Room
     {
         this.RoomCoordinates = RoomCoordinates;
         this.neihboringrooms = new Dictionary<string, Room>();
+    }
+
+    public string PrefabName()
+    {
+        string name = "Room_";
+        foreach (KeyValuePair<string,Room> neighborpair in neihboringrooms)
+        {
+            name += neighborpair.Key;
+        }
+        return name;
     }
 
     public List<Vector2Int> NeighborCoordinates()
@@ -133,4 +180,18 @@ public class Room
         }
         this.neihboringrooms.Add(Direction, neighbor);
     }
+
+    public Room Neighbor(string direction)
+    {
+        return this.neihboringrooms[direction];
+    }
+
+
 }
+public enum DungeonRoomType
+{
+    StartRoom,
+    EndRoom,
+    TransitionRoom
+}
+
