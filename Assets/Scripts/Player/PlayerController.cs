@@ -50,8 +50,9 @@ public class PlayerController : MonoBehaviour
             if (direction.x != 0 && direction.y != 0)
             {
                 float angle = Mathf.Atan2(direction.y, direction.x);
-                //angle += Mathf.PI / 2;
-                Debug.Log(angle);
+                angle += Mathf.PI;
+                angle /= 2;
+                m_weaponWheelController.Pulse(angle);
             }
         }
     }
@@ -98,9 +99,14 @@ public class PlayerController : MonoBehaviour
             case InputActionPhase.Started:
                 // Gets all objects with a collider in a box (halfExtents = scale / 2) in front of the player
                 foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(1.0f, 1.0f, 1.0f) / 2, m_model.transform.rotation))
+                {
+                    if (col.CompareTag("Player"))
+                        continue;
                     // If the collider also has a IInteractable script, interact with it
                     col.GetComponent<IInteractable>()?.Interact();
-
+                    col.GetComponent<IHealth>()?.TakeDamage(1);
+                }
+                m_weaponWheelController.CurrentItem.LeftClickAction();
                 break;
             // Button is being held
             case InputActionPhase.Performed:

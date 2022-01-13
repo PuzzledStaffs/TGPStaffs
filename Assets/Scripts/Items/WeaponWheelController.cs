@@ -30,7 +30,10 @@ public class WeaponWheelController : MonoBehaviour
     // Pulse the weapon wheel with an angle.
     public void Pulse(float angle)
     {
-
+        angle /= Mathf.PI;
+        angle *= WeaponWheel.transform.childCount;
+        int item = (int)(angle % WeaponWheel.transform.childCount);
+        Debug.Log(item);
     }
 
     public void UpdateText(WeaponButtonInfo weaponScript)
