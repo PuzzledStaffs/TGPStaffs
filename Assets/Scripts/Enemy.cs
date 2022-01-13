@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IHealth
 {
-    /// <summary>
-    /// CHANGING STATES CURRENTLY CRASHES UNITY, 
-    /// DO NOT USE StateManager.ChangeStates();
-    /// </summary>
-
+  
     int m_health = 50;
     public StateManager manager;
     public FOV fieldOfView;
@@ -53,11 +49,16 @@ public class Enemy : MonoBehaviour, IHealth
     // Update is called once per frame
     void Update()
     {
-        
+
         if (fieldOfView.inFOV)
         {
             Debug.Log("Player");
-           // manager.ChangeState(State.StateType.IDLE);   
+            manager.ChangeState(State.StateType.ATTACK);
+        }
+        else
+        { 
+        
+            
         }
         
     }
