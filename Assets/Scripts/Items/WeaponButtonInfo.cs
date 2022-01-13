@@ -7,7 +7,7 @@ public class WeaponButtonInfo : MonoBehaviour
 {
     public Item WheelItem;
     public Image WheelIcon;
-    public bool ItemBlocked;
+    public bool ItemBlocked = false;
 
 
     private void Start()
