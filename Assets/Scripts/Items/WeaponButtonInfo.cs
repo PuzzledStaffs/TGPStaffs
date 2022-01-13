@@ -7,6 +7,7 @@ public class WeaponButtonInfo : MonoBehaviour
 {
     public Item WheelItem;
     public Image WheelIcon;
+    public bool ItemBlocked;
 
 
     private void Start()
@@ -14,4 +15,12 @@ public class WeaponButtonInfo : MonoBehaviour
         WheelIcon.sprite = WheelItem.ItemIcon;
     }
 
+    public void Update()
+    {
+        GetComponent<Button>().interactable = ItemBlocked;
+        WheelIcon.color = new Color(0,0,0,0.3f);
+    }
+
 }
+
+
