@@ -362,7 +362,6 @@ GameObject:
   - component: {fileID: 268796236}
   - component: {fileID: 268796235}
   - component: {fileID: 268796234}
-  - component: {fileID: 268796233}
   - component: {fileID: 268796237}
   m_Layer: 5
   m_Name: Wheel-Item-5
@@ -392,63 +391,6 @@ RectTransform:
   m_AnchoredPosition: {x: 264, y: 270}
   m_SizeDelta: {x: 292, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &268796233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 268796231}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1983384444}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 268796237}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1983384444}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &268796234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,6 +500,10 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
   WheelIcon: {fileID: 2001611097}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 1983384444}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
 --- !u!1 &341602445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1298,7 +1244,6 @@ GameObject:
   - component: {fileID: 1199702434}
   - component: {fileID: 1199702433}
   - component: {fileID: 1199702432}
-  - component: {fileID: 1199702431}
   - component: {fileID: 1199702435}
   m_Layer: 5
   m_Name: Wheel-Item-6
@@ -1328,63 +1273,6 @@ RectTransform:
   m_AnchoredPosition: {x: -264, y: 270}
   m_SizeDelta: {x: 292, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1199702431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1199702429}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1350443737}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1199702435}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1350443737}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1199702432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1494,6 +1382,10 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
   WheelIcon: {fileID: 1199300383}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 1350443737}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
 --- !u!1 &1221011932
 GameObject:
   m_ObjectHideFlags: 0
@@ -1506,8 +1398,8 @@ GameObject:
   - component: {fileID: 1221011937}
   - component: {fileID: 1221011936}
   - component: {fileID: 1221011935}
-  - component: {fileID: 1221011934}
   - component: {fileID: 1221011938}
+  - component: {fileID: 1221011939}
   m_Layer: 5
   m_Name: Wheel-Item-2
   m_TagString: Untagged
@@ -1536,63 +1428,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -373}
   m_SizeDelta: {x: 292, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1221011934
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1221011932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1378791565}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1221011938}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1378791565}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1221011935
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1702,6 +1537,23 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: a80615c7383a2864f88a0d8f205e1379, type: 2}
   WheelIcon: {fileID: 1529661646}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 1378791565}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
+--- !u!114 &1221011939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221011932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0244596c5cff6b643a3723c81a0af059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
 --- !u!1 &1224972273
 GameObject:
   m_ObjectHideFlags: 0
@@ -2014,7 +1866,6 @@ GameObject:
   - component: {fileID: 1420124632}
   - component: {fileID: 1420124631}
   - component: {fileID: 1420124630}
-  - component: {fileID: 1420124633}
   - component: {fileID: 1420124634}
   m_Layer: 5
   m_Name: Wheel-Item-1
@@ -2065,7 +1916,7 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 0.5686275}
+    m_NormalColor: {r: 0.24313727, g: 0.24313727, b: 0.24313727, a: 0.5686275}
     m_HighlightedColor: {r: 1, g: 0.8675798, b: 0, a: 0.34117648}
     m_PressedColor: {r: 1, g: 1, b: 1, a: 0.34117648}
     m_SelectedColor: {r: 0.1745283, g: 0.8771923, b: 1, a: 0.34117648}
@@ -2138,63 +1989,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420124628}
   m_CullTransparentMesh: 1
---- !u!114 &1420124633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1420124628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1374211542}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1420124634}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1374211542}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1420124634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2210,6 +2004,10 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
   WheelIcon: {fileID: 1224972275}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 1374211542}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
 --- !u!1 &1513539443
 GameObject:
   m_ObjectHideFlags: 0
@@ -2222,7 +2020,6 @@ GameObject:
   - component: {fileID: 1513539448}
   - component: {fileID: 1513539447}
   - component: {fileID: 1513539446}
-  - component: {fileID: 1513539445}
   - component: {fileID: 1513539449}
   m_Layer: 5
   m_Name: Wheel-Item-7
@@ -2252,63 +2049,6 @@ RectTransform:
   m_AnchoredPosition: {x: -264, y: -270}
   m_SizeDelta: {x: 292, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1513539445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1513539443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2068393324}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1513539449}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2068393324}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1513539446
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2418,6 +2158,10 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
   WheelIcon: {fileID: 879526622}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 2068393324}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
 --- !u!1 &1525047767
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,7 +2174,6 @@ GameObject:
   - component: {fileID: 1525047772}
   - component: {fileID: 1525047771}
   - component: {fileID: 1525047770}
-  - component: {fileID: 1525047769}
   - component: {fileID: 1525047773}
   m_Layer: 5
   m_Name: Wheel-Item-3
@@ -2460,63 +2203,6 @@ RectTransform:
   m_AnchoredPosition: {x: -373, y: 0}
   m_SizeDelta: {x: 292, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1525047769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1525047767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2065603444}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1525047773}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2065603444}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1525047770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2626,6 +2312,10 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
   WheelIcon: {fileID: 399875692}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 2065603444}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
 --- !u!1 &1529661644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,7 +2403,6 @@ GameObject:
   - component: {fileID: 1557738380}
   - component: {fileID: 1557738379}
   - component: {fileID: 1557738378}
-  - component: {fileID: 1557738377}
   - component: {fileID: 1557738381}
   m_Layer: 5
   m_Name: Wheel-Item-8
@@ -2743,63 +2432,6 @@ RectTransform:
   m_AnchoredPosition: {x: 264, y: -270}
   m_SizeDelta: {x: 292, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1557738377
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1557738375}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 397742481}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1557738381}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 397742481}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1557738378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2909,6 +2541,10 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
   WheelIcon: {fileID: 475412046}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 397742481}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
 --- !u!1 &1641992965
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,7 +2557,6 @@ GameObject:
   - component: {fileID: 1641992970}
   - component: {fileID: 1641992969}
   - component: {fileID: 1641992968}
-  - component: {fileID: 1641992967}
   - component: {fileID: 1641992971}
   m_Layer: 5
   m_Name: Wheel-Item-4
@@ -2951,63 +2586,6 @@ RectTransform:
   m_AnchoredPosition: {x: 373, y: 0}
   m_SizeDelta: {x: 292, y: 157}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1641992967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1641992965}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 0
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2103965068}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-        - m_Target: {fileID: 622554158}
-          m_TargetAssemblyTypeName: WeaponWheelController, Assembly-CSharp
-          m_MethodName: UpdateText
-          m_Mode: 2
-          m_Arguments:
-            m_ObjectArgument: {fileID: 1641992971}
-            m_ObjectArgumentAssemblyTypeName: WeaponButtonInfo, Assembly-CSharp
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
-  - eventID: 1
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2103965068}
-          m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
 --- !u!114 &1641992968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3117,6 +2695,10 @@ MonoBehaviour:
   WheelItem: {fileID: 11400000, guid: 13a3abb2b0cf42d448850d2c7a82be58, type: 2}
   WheelIcon: {fileID: 387832559}
   ItemBlocked: 0
+  LockIcon: {fileID: 21300000, guid: d55a11a116d82e24c9237e840acf6b49, type: 3}
+  SelectionImage: {fileID: 2103965068}
+  weaponController: {fileID: 622554158}
+  ScaleFactor: 1.1
 --- !u!1 &1773206094
 GameObject:
   m_ObjectHideFlags: 0
