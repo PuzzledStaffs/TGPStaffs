@@ -10,6 +10,14 @@ public class DungonCamaraControler : MonoBehaviour
     [SerializeField] GameObject m_player;
     [SerializeField] private Vector2 m_BigRoomCamLimit;
 
+    private void Start()
+    {
+        if(m_player == null)
+        {
+            m_player = GameObject.FindGameObjectWithTag("Player");
+        }
+    }
+
     void LateUpdate()
     {
         if(!m_Locked)
