@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 9162364829834096147}
   - component: {fileID: 3233053506375406111}
   m_Layer: 0
-  m_Name: DungeonDoor
+  m_Name: DungeonDoorExit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f53d0ae5abdc29b4c98f1fc1da30d3e8, type: 2}
+  - {fileID: 2100000, guid: d0f7bd220426987439b2d8416dddd19c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -142,6 +142,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_toRoomExitPoint: {fileID: 0}
   m_toRoomCameraMove: {fileID: 0}
-  m_DoorClosed: {fileID: 2100000, guid: 6455712f9a0aaae4aba45941d71a7c8e, type: 2}
-  m_DoorOpen: {fileID: 2100000, guid: f53d0ae5abdc29b4c98f1fc1da30d3e8, type: 2}
+  m_DoorClosed: {fileID: 2100000, guid: c86c06721a5b67f498126badcb3d5d48, type: 2}
+  m_DoorOpen: {fileID: 2100000, guid: d0f7bd220426987439b2d8416dddd19c, type: 2}
   m_ClosedOnStart: 0
