@@ -6,8 +6,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Components"), SerializeField]
-    public Rigidbody m_rigidbody;
+    private Rigidbody m_rigidbody;
     public GameObject m_model;
+
+    [Header("Health and Death")]
+    public Vector3 m_respawnPosition;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -16,9 +19,17 @@ public class PlayerController : MonoBehaviour
     private bool m_movementFrozen = false;
     public float m_speed = 5.0f;
 
+    [Header("Weapon Wheel")]
+    [SerializeField, ReadOnly]
+    Vector2 m_pointerPos;
+    [SerializeField]
+    WeaponWheelController m_weaponWheelController;
+
     void Start()
     {
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        m_respawnPosition = transform.position;
     }
 
     void Update()
@@ -57,6 +68,14 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>
+    /// Unity Input Action callback for movement
+    /// </summary>
+    public void OnPointerMove(InputAction.CallbackContext ctx)
+    {
+        m_pointerPos = ctx.ReadValue<Vector2>();
+    }
+
+    /// <summary>
     /// Unity Input Action callback for use button
     /// </summary>
     public void OnUse(InputAction.CallbackContext ctx)
@@ -74,16 +93,49 @@ public class PlayerController : MonoBehaviour
                 break;
             // Button is being held
             case InputActionPhase.Performed:
-                break;
             // Button was released
             case InputActionPhase.Canceled:
-                break;
             case InputActionPhase.Disabled:
             case InputActionPhase.Waiting:
             default:
                 break;
         }
 
+    }
+
+    /// <summary>
+    /// Unity Input Action callback for use button
+    /// </summary>
+    public void OnToggleWeaponWheel(InputAction.CallbackContext ctx)
+    {
+        // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
+        switch (ctx.phase)
+        {
+            // Button was pressed
+            case InputActionPhase.Started:
+                m_weaponWheelController.ToggleWheel();
+                break;
+            // Button is being held
+            case InputActionPhase.Performed:
+            // Button was released
+            case InputActionPhase.Canceled:
+            case InputActionPhase.Disabled:
+            case InputActionPhase.Waiting:
+            default:
+                break;
+        }
+
+    }
+    #endregion
+
+    #region Player Health And Death
+    /// <summary>
+    /// Teleports the player to their repsawn position.
+    /// Not to be confused with death functions.
+    /// </summary>
+    public void Respawn()
+    {
+        transform.position = m_respawnPosition;
     }
     #endregion
 }
