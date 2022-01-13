@@ -10,7 +10,7 @@ public class WeaponWheelController : MonoBehaviour
     public TextMeshProUGUI WeaponSelectedText;
 
 
-    public void ToggleWheel() 
+    public void ToggleWheel()
     {
         if (WeaponWheel.activeSelf)
         {
@@ -42,6 +42,5 @@ public class WeaponWheelController : MonoBehaviour
     {
         Item itemSelected = weaponScript.WheelItem;
         Debug.Log("Item Selected: " + itemSelected.name);
-        ToggleWheel();
     }
 }
