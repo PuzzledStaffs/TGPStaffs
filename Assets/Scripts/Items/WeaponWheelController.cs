@@ -10,6 +10,9 @@ public class WeaponWheelController : MonoBehaviour
 {
     public GameObject WeaponWheel;
     public TextMeshProUGUI WeaponSelectedText;
+    public float CoolDownCounter;
+    public PlayerController pc;
+    
     public bool isWheelOpen { get; private set; }
     public Item CurrentItem;
 
@@ -30,6 +33,40 @@ public class WeaponWheelController : MonoBehaviour
         foreach (Transform tr in WeaponWheel.transform)
         {
             buttonInfos.Add(tr.GetComponent<WeaponButtonInfo>());
+        }
+    }
+
+    public void LeftClickAction()
+    {
+        if (CoolDownCounter <= 0)
+        {
+          CoolDownCounter = CurrentItem.MaxCooldown;
+          CurrentItem.LeftClickAction(pc);
+        }
+    }
+
+    public void LeftClickHoldAction()
+    {
+        CurrentItem.LeftClickAction(pc);
+    }
+
+    public void HoldActionCooldown()
+    {
+        CurrentItem.ReleaseAction(pc);
+        CoolDownCounter = CurrentItem.MaxCooldown;
+    }
+
+
+    private void Update()
+    {
+        if (pc.ButtonHeld)
+        {
+            LeftClickHoldAction();
+        }
+
+        if (CoolDownCounter >= 0)
+        {
+            CoolDownCounter -= Time.deltaTime;
         }
     }
 

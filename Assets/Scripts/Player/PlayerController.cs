@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     WeaponWheelController m_weaponWheelController;
 
+    public bool ButtonHeld = false;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -101,11 +103,27 @@ public class PlayerController : MonoBehaviour
                     m_weaponWheelController.SelectItem(m_weaponWheelController.currentIndex);
                     break;
                 }
+                
+                if (!m_weaponWheelController.CurrentItem.ItemHold)
+                {
+                    m_weaponWheelController.LeftClickAction();
+                }
+                else
+                {
+                    ButtonHeld = true;
+                }
                 break;
             // Button is being held
             case InputActionPhase.Performed:
+                break;
             // Button was released
             case InputActionPhase.Canceled:
+                if (ButtonHeld)
+                {
+                    ButtonHeld = false;
+                    m_weaponWheelController.HoldActionCooldown();
+                }
+                break;
             case InputActionPhase.Disabled:
             case InputActionPhase.Waiting:
             default:
