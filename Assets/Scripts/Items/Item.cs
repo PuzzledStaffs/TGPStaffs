@@ -9,11 +9,13 @@ public class Item : ScriptableObject
     public Sprite ItemIcon = null;
     public float ItemDamage = 0.0f;
     public int CombatType = 0;
+    public float Cooldown = 0.5f;
+    public AudioClip ItemSound;
 
 
-    public virtual void ItemActionRightClick(int Type)
+    public virtual void ItemActionRightClick()
     {
-        switch (Type)
+        switch (CombatType)
         {
             case 0: //Sword
                 Debug.Log("Sword Right Click Attack");
@@ -24,9 +26,9 @@ public class Item : ScriptableObject
         }
     }
 
-    public virtual void ItemActionLeftClick(int Type)
+    public virtual void ItemActionLeftClick()
     {
-        switch (Type)
+        switch (CombatType)
         {
             case 0: //Sword
                 Debug.Log("Sword Left Click Attack");
