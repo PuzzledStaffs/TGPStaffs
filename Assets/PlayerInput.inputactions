@@ -22,10 +22,18 @@
                     "interactions": ""
                 },
                 {
-                    "name": "WeaponWheel",
+                    "name": "ToggleWeaponWheel",
                     "type": "Button",
                     "id": "2dd9ae26-1670-422b-828c-37ec53931a13",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "f15156a6-433f-43fd-b191-94e02fd270e4",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 }
@@ -104,7 +112,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard And Mouse",
-                    "action": "WeaponWheel",
+                    "action": "ToggleWeaponWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -115,7 +123,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
-                    "action": "WeaponWheel",
+                    "action": "ToggleWeaponWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -138,6 +146,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Use",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "50a16a04-16f6-43d8-929d-74f3dbfa5fbe",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8046ef7c-e504-452e-a380-59b539a013e9",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard And Mouse",
+                    "action": "PointerPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

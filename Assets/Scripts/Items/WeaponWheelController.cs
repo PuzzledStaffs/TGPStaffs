@@ -22,16 +22,6 @@ public class WeaponWheelController : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        // this is temporary for testing - cause i didnt want to set up the input stuff properly yet
-        var keyboard = Keyboard.current;
-        if (keyboard.tabKey.wasPressedThisFrame)
-        {
-            ToggleWheel();
-        }
-    }
-
     public void UpdateText(WeaponButtonInfo weaponScript)
     {
         Item itemSelected = weaponScript.WheelItem;
