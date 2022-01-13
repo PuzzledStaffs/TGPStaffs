@@ -7,7 +7,6 @@ public class IdleState : State
     public int timer;
     public StateManager stateManager;
     public bool isAlive = true;
-    StateType idlestate = StateType.IDLE;
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +27,7 @@ public class IdleState : State
     IEnumerator WaitCoroutine()
     {
         yield return new WaitForSeconds(timer);
-        this.type = StateType.ROAM;
-        stateManager.ChangeState(type);
+        stateManager.ChangeState(StateType.ROAM);
     }
 }
 

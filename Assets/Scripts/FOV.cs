@@ -5,51 +5,77 @@ using UnityEngine;
 public class FOV : MonoBehaviour
 {
     public float maxAngle;
-    public float distance;
     public float radius;
     public GameObject target;
-    bool inFOV = false;
+    public bool inFOV = false;
 
+    //Draws Debug lines
+    public void OnDrawGizmos()
+    {
+        //Sphere
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, radius);
+
+        //Line forward
+        Gizmos.color = Color.black;
+        Gizmos.DrawLine(transform.position, transform.position + (transform.forward * radius));
+
+        //Boundaries
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawLine(transform.position, transform.position + (Quaternion.AngleAxis(maxAngle, transform.up) * (transform.forward * radius)));
+        Gizmos.DrawLine(transform.position, transform.position + (Quaternion.AngleAxis(-maxAngle, transform.up) * (transform.forward * radius)));
+
+        //green if detected
+        if (inFOV)
+        {
+            Gizmos.color = Color.green;
+        }
+        else
+        {
+            Gizmos.color = Color.red;
+        }
+
+        //detection line
+        Gizmos.DrawLine(transform.position, ((target.transform.position - transform.position).normalized * radius) + transform.position);
+    }
 
     private void FixedUpdate()
     {
+        //calculate the distance between this and the target
         float distanceBetween = Vector3.Distance(transform.position, target.transform.position);
-        //float angle = Vector3.Angle(transform.forward, distanceBetween);
 
+        //direction of the object
+        Vector3 colliderDirection = (target.transform.position - transform.position).normalized;
 
-        //Gets all colliders within a radius around object
-        Collider[] colliders = Physics.OverlapSphere(transform.position, radius);
-        foreach (var overlap in colliders)
+        //Check if the target is in the radius
+        if (distanceBetween <= radius)
         {
-            Vector3 colliderDirection = (overlap.transform.position - transform.position).normalized;
             //if its within the angle
             if (Vector3.Angle(transform.forward, colliderDirection) <= maxAngle)
-                {
-                //Draws ray in front of object, if it collides with target object, then it can see the target
-                    Ray ray = new Ray(transform.forward, target.transform.position - transform.position);
-                    RaycastHit hit;
+            {
+                RaycastHit hit;
 
-                //  if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 10))
+                //Draws ray in front of object and returns the object in front
                 if (Physics.Raycast(transform.position, colliderDirection, out hit, distanceBetween))
                 {
-                    if (hit.transform == target.transform)
+                    //if the object is the target, return true
+                    inFOV = hit.transform == target.transform;
+                    if (inFOV)
                     {
-                        inFOV = true;
-                        Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                         Debug.Log("Hit");
                     }
-                   
                 }
-                else
-                {
-                    inFOV = false;
-                    Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1000, Color.white);
-                }
-
-
             }
-
-
+            else
+            {
+                //reset bool
+                inFOV = false;
+            }
+        }
+        else
+        {
+            //reset bool
+            inFOV = false;
         }
     }
 }

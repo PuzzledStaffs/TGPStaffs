@@ -16,8 +16,7 @@ public class AttackState : State
     void Update()
     {
         //if(true)
-        this.type = StateType.IDLE;
-        manager.ChangeState(type);
+        manager.ChangeState(StateType.ROAM);
 
     }
 }

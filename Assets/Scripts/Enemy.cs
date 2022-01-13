@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour, IHealth
 {
+    /// <summary>
+    /// CHANGING STATES CURRENTLY CRASHES UNITY, 
+    /// DO NOT USE StateManager.ChangeStates();
+    /// </summary>
+
     int m_health = 50;
+    public StateManager manager;
+    public FOV fieldOfView;
 
     public int GetHealth()
     {
@@ -40,13 +47,19 @@ public class Enemy : MonoBehaviour, IHealth
     // Start is called before the first frame update
     void Start()
     {
-
+       // manager.ChangeState(State.StateType.IDLE);
     }
 
     // Update is called once per frame
     void Update()
     {
-        //update state
+        
+        if (fieldOfView.inFOV)
+        {
+            Debug.Log("Player");
+           // manager.ChangeState(State.StateType.IDLE);   
+        }
+        
     }
 
     IEnumerator DeathCoroutine()
@@ -55,7 +68,4 @@ public class Enemy : MonoBehaviour, IHealth
         yield return new WaitForSeconds(5);
         Destroy(gameObject);
     }
-
-
-
 }
