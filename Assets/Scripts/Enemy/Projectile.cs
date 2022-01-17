@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
             player.GetComponent<PlayerController>().TakeDamage(attack.damage);
             Debug.Log("Hit player");
 
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 }
