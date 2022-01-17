@@ -22,13 +22,13 @@ public class Dispencer : Trap
     {
         if(m_spawnedThings.Count < m_MaxiumInstances)
         {
-            m_spawnedThings.Add(Instantiate(m_spawnedObject, Vector3.forward/2 + transform.position, transform.rotation));
+            m_spawnedThings.Add(Instantiate(m_spawnedObject, transform.forward/2 + transform.position, transform.rotation));
         }
         else
         {
             Destroy(m_spawnedThings[0]);
             m_spawnedThings.RemoveAt(0);
-            m_spawnedThings.Add(Instantiate(m_spawnedObject, Vector3.forward/2 + transform.position, transform.rotation));
+            m_spawnedThings.Add(Instantiate(m_spawnedObject, transform.forward / 2 + transform.position, transform.rotation));
         }
     }
 }
