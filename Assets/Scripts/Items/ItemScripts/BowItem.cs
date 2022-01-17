@@ -37,10 +37,6 @@ public class BowItem : Item
         Debug.Log("BOW RELEASE!");
     }
 
-    public override void RightClickAction()
-    {
-        base.RightClickAction();
-        Debug.Log("BOW FIRE RIGHT!");
-    }
+
 }
 

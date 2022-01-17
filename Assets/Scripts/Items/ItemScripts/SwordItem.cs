@@ -14,15 +14,11 @@ public class SwordItem : Item
             if (col.CompareTag("Player"))
                 continue;
             col.GetComponent<IInteractable>()?.Interact();
-            col.GetComponent<IHealth>()?.TakeDamage(ItemDamage);
-            pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
+            col.GetComponent<IHealth>()?.TakeDamage(ItemDamage); 
         }
-        Debug.Log("SWORD SLASH LEFT");
-    }
-
-
-    public override void RightClickAction()
-    {
-        Debug.Log("SWORD SLASH RIGHT");
+        pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
+        pc.FreezeMovement();
+        pc.Sword.SetActive(true);
+        pc.Sword.GetComponent<Animator>().SetTrigger("SwordAttack");
     }
 }
