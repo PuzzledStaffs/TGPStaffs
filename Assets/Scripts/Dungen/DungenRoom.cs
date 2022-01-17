@@ -52,6 +52,7 @@ public class DungenRoom : MonoBehaviour
         }
     }
     #endregion
+
     #region RoomJoiningControls
     private void RoomEntered()
     {
