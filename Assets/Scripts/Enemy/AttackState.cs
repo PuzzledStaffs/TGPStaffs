@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
 public class AttackState : State
 {
     public StateManager manager;
-    NavMeshAgent agent;
+    protected NavMeshAgent agent;
     public GameObject player;
     public float cooldown;
     float maxCooldown;  
@@ -16,7 +17,7 @@ public class AttackState : State
     
 
     // Start is called before the first frame update
-    void Start()
+   public virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
