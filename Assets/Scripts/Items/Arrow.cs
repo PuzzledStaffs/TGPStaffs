@@ -24,13 +24,16 @@ public class Arrow : MonoBehaviour
         var Diff = transform.position - EndPoint;
         Debug.Log("Diff: " + Diff.normalized);
 
-
+        if(Diff.magnitude < 2)
+        {
+            KillArrow();
+        }
 
     }
 
     public void KillArrow()
     {
-        GameObject.Destroy(this);
+        Destroy(this.gameObject);
     }
 
 
