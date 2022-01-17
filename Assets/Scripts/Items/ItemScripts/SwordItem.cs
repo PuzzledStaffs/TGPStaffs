@@ -16,8 +16,10 @@ public class SwordItem : Item
             col.GetComponent<IInteractable>()?.Interact();
             col.GetComponent<IHealth>()?.TakeDamage(ItemDamage);
             pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
+            pc.gameObject.GetComponent<PlayerController>().Sword.SetActive(true);
+            pc.gameObject.GetComponent<PlayerController>().Sword.GetComponent<Animator>().SetTrigger("SwordAttack");        
         }
-        Debug.Log("SWORD SLASH LEFT");
+
     }
 
 
