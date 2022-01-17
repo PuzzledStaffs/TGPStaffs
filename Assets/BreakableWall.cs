@@ -11,5 +11,5 @@ public class BreakableWall : MonoBehaviour,IHealth
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider>().enabled = false;
     }
-    public bool isDead(int health) { return false; }
+    public bool isDead() { return false; }
 }
