@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
 
     public bool ButtonHeld = false;
 
+
+    [Header("Weapon Models")]
+    public GameObject Sword;
+
+
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
