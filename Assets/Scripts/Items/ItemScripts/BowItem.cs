@@ -5,17 +5,38 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Bow Item")]
 public class BowItem : Item
 {
-    public override void LeftClickAction()
+    float CurrentRange;
+    public float MaxRange;
+    public float BowSpeedMultiplier;
+    bool PlayOnce = true;
+    public AudioClip ReleaseSound;
+
+    public override void LeftClickAction(PlayerController pc)
     {
-        base.LeftClickAction();
-        Debug.Log("BOW FIRE LEFT!");
+        if (PlayOnce)
+        {
+            pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
+            PlayOnce = false;
+        }
+
+        if(CurrentRange < MaxRange)
+        {
+            CurrentRange += Time.deltaTime * BowSpeedMultiplier;
+        }
+
+
+        Debug.DrawRay(pc.transform.position, pc.m_model.transform.forward * CurrentRange, Color.red);
+        Debug.Log("BOW FIRE!");
+    }
+
+    public override void ReleaseAction(PlayerController pc)
+    {
+        CurrentRange = 0;
+        PlayOnce = true;
+        pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
+        Debug.Log("BOW RELEASE!");
     }
 
 
-    public override void RightClickAction()
-    {
-        base.RightClickAction();
-        Debug.Log("BOW FIRE RIGHT!");
-    }
 }
 
