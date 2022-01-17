@@ -233,7 +233,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transition: {fileID: 561256097}
-  transitionTime: 1
+  transitionTime: 3
 --- !u!1 &286728545
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,7 +732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 747136168}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalPosition: {x: 2.57, y: 8.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -784,7 +784,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.8820598, y: 1}
+    m_SensorSize: {x: 1.2268518, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -800,7 +800,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 791123462}
-  m_LocalRotation: {x: 0.5299045, y: 0.0073194983, z: -0.0045737894, w: 0.8480134}
+  m_LocalRotation: {x: 0.5299045, y: 0.007319457, z: -0.004573764, w: 0.8480134}
   m_LocalPosition: {x: -2.3, y: 10.852671, z: 1.4999981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -979,7 +979,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 987037854}
-  m_LocalRotation: {x: 0.5299045, y: 0.0073194983, z: -0.0045737894, w: 0.8480134}
+  m_LocalRotation: {x: 0.5299045, y: 0.007319457, z: -0.004573764, w: 0.8480134}
   m_LocalPosition: {x: -2.3, y: 10.852671, z: 1.4999981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1045,7 +1045,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133948418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -130, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 561256096}
@@ -1136,7 +1136,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.05660379, g: 0.0536668, b: 0.0536668, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
