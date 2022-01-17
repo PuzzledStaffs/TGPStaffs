@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IHealth
 {
   
-    int m_health = 50;
+    int m_health = 20;
     public StateManager manager;
     public FOV fieldOfView;
 
@@ -14,10 +14,11 @@ public class Enemy : MonoBehaviour, IHealth
         return m_health;
     }
 
-    public bool isDead(int health)
+    public bool isDead()
     {
-        if (health <= 0)
+        if (m_health <= 0)
         {
+            
             return true;
         }
         else 
@@ -31,9 +32,13 @@ public class Enemy : MonoBehaviour, IHealth
 
     public void TakeDamage(int damage)
     {
+        if (isDead())
+            return;
+
+        Debug.Log("Ouch");
         m_health -= damage;
 
-        if (isDead(m_health))
+        if (isDead())
         {
             StartCoroutine(DeathCoroutine());
         }
@@ -59,7 +64,7 @@ public class Enemy : MonoBehaviour, IHealth
     IEnumerator DeathCoroutine()
     {
         //TODO: Add death animation
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 }

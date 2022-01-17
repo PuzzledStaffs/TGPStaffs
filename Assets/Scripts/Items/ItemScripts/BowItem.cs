@@ -10,6 +10,7 @@ public class BowItem : Item
     public float BowSpeedMultiplier;
     bool PlayOnce = true;
     public AudioClip ReleaseSound;
+    public GameObject Arrow;
 
     public override void LeftClickAction(PlayerController pc)
     {
@@ -31,6 +32,8 @@ public class BowItem : Item
 
     public override void ReleaseAction(PlayerController pc)
     {
+        GameObject arrow = Instantiate(Arrow, pc.transform.position, Quaternion.identity);
+        arrow.GetComponent<Arrow>().bowParent = this;
         CurrentRange = 0;
         PlayOnce = true;
         pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);

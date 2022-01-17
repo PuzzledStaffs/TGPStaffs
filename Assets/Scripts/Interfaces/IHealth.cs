@@ -6,6 +6,6 @@ public interface IHealth
 {
     public int GetHealth();
     public void TakeDamage(int damage);
-    public bool isDead(int health);
+    public bool isDead();
 
 }
