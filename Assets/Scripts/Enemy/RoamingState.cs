@@ -13,16 +13,16 @@ public class RoamingState : State
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        //for continous movement
         agent.autoBraking = false;
-
+        agent.isStopped = false;
         GotoNextPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Choose the next destination point when the agent gets
-        // close to the current one.
+        //Set desitination to the next point just before getting to current point
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             GotoNextPoint();
@@ -31,15 +31,17 @@ public class RoamingState : State
 
     void GotoNextPoint()
     {
-        // Returns if no points have been set up
+        //checks if there are any points.
         if (points.Length == 0)
+        {
+            Debug.Log("No points!");
             return;
+        }
 
-        // Set the agent to go to the currently selected destination.
-        agent.destination = points[destinationPoint].position;
+        //Set the next point as the destination
+        agent.SetDestination(points[destinationPoint].position);
 
-        // Choose the next point in the array as the destination,
-        // cycling to the start if necessary.
+        //Update the next point, cycles if it reaches the end
         destinationPoint = (destinationPoint + 1) % points.Length;
 
     }
