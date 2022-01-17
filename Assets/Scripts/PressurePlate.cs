@@ -37,5 +37,7 @@ public class PressurePlate : MonoBehaviour
     private void RemoveList(Collider collider)
     {
         m_onPlate.Remove(collider);
+        if (m_onPlate.Count == 0)
+            m_plateUnpressed.Invoke();
     }
 }
