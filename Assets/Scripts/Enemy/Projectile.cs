@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Dont work
       //  player = GetComponentInParent<FOV>().target;
       //  attack = GetComponentInParent<RangedAttack>();
     }
@@ -16,9 +17,9 @@ public class Projectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Hit");
         if (collision.collider.CompareTag("Player"))
         {
+            //if it hits the player, take damage
             player.GetComponent<PlayerController>().TakeDamage(attack.damage);
             Debug.Log("Hit player");
 
