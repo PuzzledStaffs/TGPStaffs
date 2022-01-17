@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e270cddbe73053f47ba6a1575322b0b1, type: 3}
   m_Name: BombItem
   m_EditorClassIdentifier: 
-  name: Item Name
+  name: Bomb
   ItemIcon: {fileID: 0}
-  ItemDamage: 10
+  ItemDamage: 999
   CombatType: 0
   MaxCooldown: 0.5
   ItemSound: {fileID: 0}
