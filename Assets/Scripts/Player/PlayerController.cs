@@ -27,6 +27,12 @@ public class PlayerController : MonoBehaviour
 
     public bool m_buttonHeld = false;
 
+    [Header("Alt Interact")]
+    public GameObject m_grabbedBox;
+    [ReadOnly]
+    public float m_boxLerpTime = 0.0f;
+    public Vector3 m_boxLerpStart;
+    public Vector3 m_boxLerpEnd;
 
     [Header("Weapon Models")]
     public GameObject Sword;
@@ -46,12 +52,27 @@ public class PlayerController : MonoBehaviour
     {
         if (!m_movementFrozen)
         {
-            // Gravity is handled by Rigidbody
-            m_rigidbody.velocity = new Vector3(m_moveDir.x * m_speed, m_rigidbody.velocity.y, m_moveDir.y * m_speed);
+            if (m_grabbedBox != null)
+            {
+                if (transform.position != m_boxLerpEnd)
+                {
+                    //m_boxLerpTime += Time.deltaTime * 5.0f;
+                    //transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, Mathf.Clamp(m_boxLerpTime, 0.0f, 1.0f));
+                    transform.position = Vector3.MoveTowards(transform.position, m_boxLerpEnd, Time.deltaTime * 2.0f); ;
+                } else
+                {
 
-            // Rotates model to face the direction of movement
-            if (m_moveDir.x != 0 || m_moveDir.y != 0)
-                m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+                }
+            }
+            else
+            {
+                // Gravity is handled by Rigidbody
+                m_rigidbody.velocity = new Vector3(m_moveDir.x * m_speed, m_rigidbody.velocity.y, m_moveDir.y * m_speed);
+
+                // Rotates model to face the direction of movement
+                if (m_moveDir.x != 0 || m_moveDir.y != 0)
+                    m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+            }
         }
 
         if (m_weaponWheelController.isWheelOpen)
@@ -156,8 +177,20 @@ public class PlayerController : MonoBehaviour
 
                 foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(1.0f, 1.0f, 1.0f) / 2, m_model.transform.rotation))
                 {
-                    if (col.CompareTag("Player"))
-                        continue;
+                    if (col.CompareTag("Box"))
+                    {
+                        m_grabbedBox = col.gameObject;
+                        Vector3 direction = m_grabbedBox.transform.position - transform.position;
+                        direction.Normalize();
+                        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
+                        else
+                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
+                        m_boxLerpStart = transform.position;
+                        m_boxLerpTime = 0.0f;
+                        m_buttonHeld = true;
+                        break;
+                    }
                 }
                 break;
             // Button is being held
@@ -166,7 +199,10 @@ public class PlayerController : MonoBehaviour
             // Button was released
             case InputActionPhase.Canceled:
                 if (m_buttonHeld)
+                {
                     m_buttonHeld = false;
+                    m_grabbedBox = null;
+                }
                 break;
             case InputActionPhase.Disabled:
             case InputActionPhase.Waiting:

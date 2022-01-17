@@ -2567,7 +2567,7 @@ MonoBehaviour:
   m_pointerPos: {x: 0, y: 0}
   m_weaponWheelController: {fileID: 4102920911238438543}
   m_buttonHeld: 0
-  Sword: {fileID: 0}
+  Sword: {fileID: 885141920432786998}
 --- !u!114 &551475353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2697,6 +2697,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f15156a6-433f-43fd-b191-94e02fd270e4
     m_ActionName: Player/PointerPosition[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 551475354}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnAltInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2f12e357-1019-45ad-9b99-70dbf53317a4
+    m_ActionName: Player/Alt Interact[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard And Mouse
   m_DefaultActionMap: Player
@@ -3356,6 +3372,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+--- !u!1 &885141920432786998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7581642846456257995, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+  m_PrefabInstance: {fileID: 7313775550321660925}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &505378766890226828 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7096748682058942321, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
