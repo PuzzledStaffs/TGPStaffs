@@ -33,6 +33,12 @@ public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExi
         desiredScale = new Vector2(originalScale.x, originalScale.y);
     }
 
+    private void OnEnable()
+    {
+        if (rect != null)
+            rect.localScale = originalScale;
+    }
+
     public void Update()
     {
         //make the button interactable bool be represented by the itemblocked boolean
@@ -68,7 +74,6 @@ public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExi
         {
             SelectionImage.SetActive(false);
             desiredScale = new Vector2(originalScale.x, originalScale.y);
-
         }
     }
 }

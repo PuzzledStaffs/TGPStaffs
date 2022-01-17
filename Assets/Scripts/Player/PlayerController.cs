@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHealth
 {
     [Header("Components"), SerializeField]
     private Rigidbody m_rigidbody;
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
+    int m_health = 100;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -25,10 +27,21 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     WeaponWheelController m_weaponWheelController;
 
+    public bool ButtonHeld = false;
+
+
+    [Header("Weapon Models")]
+    public GameObject Sword;
+
+    [Header("Animations")]
+    public Animator animator;
+
+
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.visible = false;
         m_respawnPosition = transform.position;
     }
 
@@ -42,6 +55,20 @@ public class PlayerController : MonoBehaviour
             // Rotates model to face the direction of movement
             if (m_moveDir.x != 0 || m_moveDir.y != 0)
                 m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+            Debug.Log(m_rigidbody.velocity.magnitude);
+            float currentSpeed = m_rigidbody.velocity.magnitude / 10;
+            animator.SetFloat("Speed", currentSpeed);
+        }
+
+        if (m_weaponWheelController.isWheelOpen)
+        {
+            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+            if (direction.x != 0 && direction.y != 0)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x);
+                angle += Mathf.PI;
+                m_weaponWheelController.Pulse(angle);
+            }
         }
     }
 
@@ -85,16 +112,32 @@ public class PlayerController : MonoBehaviour
         {
             // Button was pressed
             case InputActionPhase.Started:
-                // Gets all objects with a collider in a box (halfExtents = scale / 2) in front of the player
-                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(1.0f, 1.0f, 1.0f) / 2, m_model.transform.rotation))
-                    // If the collider also has a IInteractable script, interact with it
-                    col.GetComponent<IInteractable>()?.Interact();
-
+                if (m_weaponWheelController.isWheelOpen)
+                {
+                    m_weaponWheelController.SelectItem(m_weaponWheelController.currentIndex);
+                    break;
+                }
+                
+                if (!m_weaponWheelController.CurrentItem.ItemHold)
+                {
+                    m_weaponWheelController.LeftClickAction();
+                }
+                else
+                {
+                    ButtonHeld = true;
+                }
                 break;
             // Button is being held
             case InputActionPhase.Performed:
+                break;
             // Button was released
             case InputActionPhase.Canceled:
+                if (ButtonHeld)
+                {
+                    ButtonHeld = false;
+                    m_weaponWheelController.HoldActionCooldown();
+                }
+                break;
             case InputActionPhase.Disabled:
             case InputActionPhase.Waiting:
             default:
@@ -137,5 +180,54 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = m_respawnPosition;
     }
+
+    public int GetHealth()
+    {
+        int health = m_health;
+    
+        return health;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        m_health -= damage;
+
+        if (isDead())
+        {
+            StartCoroutine(DeathCoroutine());
+        }
+
+    }
+    public bool isDead()
+    {
+        if (m_health <= 0)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+
+        }
+    }
+
+
+    IEnumerator DeathCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        Restart();
+    }
+
+
+    public void Restart()
+    {
+        Debug.Log("Player dead");
+        //TODO: Change this to appropriate scene or add other code
+        SceneManager.LoadScene("IzzyScene");
+    }
+
+
+
+
     #endregion
 }

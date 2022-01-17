@@ -6,14 +6,19 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Sword Item")]
 public class SwordItem : Item
 {
-    public override void LeftClickAction()
+    public override void LeftClickAction(PlayerController pc)
     {
-        Debug.Log("SWORD SLASH LEFT");
-    }
-
-
-    public override void RightClickAction()
-    {
-        Debug.Log("SWORD SLASH RIGHT");
+        // Gets all objects with a collider in a box (halfExtents = scale / 2) in front of the player
+        foreach (Collider col in Physics.OverlapBox(pc.transform.position + pc.m_model.transform.forward, new Vector3(10.0f, 10.0f, 10.0f) / 2, pc.m_model.transform.rotation))
+        {
+            if (col.CompareTag("Player"))
+                continue;
+            col.GetComponent<IInteractable>()?.Interact();
+            col.GetComponent<IHealth>()?.TakeDamage(ItemDamage); 
+        }
+        pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
+        pc.FreezeMovement();
+        pc.Sword.SetActive(true);
+        pc.Sword.GetComponent<Animator>().SetTrigger("SwordAttack");
     }
 }
