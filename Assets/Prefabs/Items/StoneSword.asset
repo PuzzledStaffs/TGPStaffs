@@ -16,6 +16,7 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: ab41c48a530f6cd4fb8ec5c99fcc9846, type: 3}
   ItemDamage: 0
   CombatType: 0
-  Cooldown: 3
-  ItemSound: {fileID: 0}
+  MaxCooldown: 2
+  ItemSound: {fileID: 8300000, guid: 03465edbfaf488f42b44c540c71a03bf, type: 3}
   CanUse: 1
+  ItemHold: 0
