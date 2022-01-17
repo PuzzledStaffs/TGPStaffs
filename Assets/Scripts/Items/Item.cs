@@ -18,11 +18,6 @@ public class Item : ScriptableObject
     {
 
     }
-
-    public virtual void RightClickAction()
-    {
-
-    } 
     public virtual void ReleaseAction(PlayerController pc)
     {
 
