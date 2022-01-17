@@ -186,15 +186,15 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_health -= damage;
 
-        if (isDead(m_health))
+        if (isDead())
         {
             StartCoroutine(DeathCoroutine());
         }
 
     }
-    public bool isDead(int health)
+    public bool isDead()
     {
-        if (health <= 0)
+        if (m_health <= 0)
         {
             return true;
         }
@@ -208,14 +208,15 @@ public class PlayerController : MonoBehaviour, IHealth
 
     IEnumerator DeathCoroutine()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(1);
         Restart();
     }
 
 
     public void Restart()
     {
-        //TODO: Change this to appropriate scene
+        Debug.Log("Player dead");
+        //TODO: Change this to appropriate scene or add other code
         SceneManager.LoadScene("IzzyScene");
     }
 
