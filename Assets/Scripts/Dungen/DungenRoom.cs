@@ -10,8 +10,10 @@ public class DungenRoom : MonoBehaviour
     [SerializeField] private bool m_PlayerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
-    public List<GameObject> m_Enamys;
+    public List<GameObject> m_Enemies;
     [SerializeField] List<Trap> m_traps;
+
+    public List<GameObject> floor;
 
     private void Start()
     {

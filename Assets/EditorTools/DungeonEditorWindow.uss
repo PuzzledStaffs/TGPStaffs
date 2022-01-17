@@ -1,0 +1,30 @@
+.slot {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    margin: 5px;
+}
+
+.slot_row {
+    flex-direction: row;
+}
+
+.object {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 10px;
+    top: 510px;
+}
+
+.br {
+    width: 30px;
+    height: 30px;
+}
+
+.tile {
+    width: 30px;
+    height: 30px;
+    background-color: rgb(255, 255, 255);
+    margin: 5px;
+}

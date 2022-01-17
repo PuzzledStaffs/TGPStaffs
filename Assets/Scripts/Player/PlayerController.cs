@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public bool m_buttonHeld = false;
 
     [Header("Alt Interact")]
+    public bool m_altButtonHeld = false;
     public GameObject m_grabbedBox;
     [ReadOnly]
     public float m_boxLerpTime = 0.0f;
@@ -64,7 +65,8 @@ public class PlayerController : MonoBehaviour, IHealth
                     //m_boxLerpTime += Time.deltaTime * 5.0f;
                     //transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, Mathf.Clamp(m_boxLerpTime, 0.0f, 1.0f));
                     transform.position = Vector3.MoveTowards(transform.position, m_boxLerpEnd, Time.deltaTime * 2.0f); ;
-                } else
+                }
+                else
                 {
 
                 }
@@ -77,12 +79,10 @@ public class PlayerController : MonoBehaviour, IHealth
                 // Rotates model to face the direction of movement
                 if (m_moveDir.x != 0 || m_moveDir.y != 0)
                     m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
-                    // Rotates model to face the direction of movement
-            if (m_moveDir.x != 0 || m_moveDir.y != 0)
-                m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
-            Debug.Log(m_rigidbody.velocity.magnitude);
-            float currentSpeed = m_rigidbody.velocity.magnitude / 10;
-            animator.SetFloat("Speed", currentSpeed);
+
+                //Debug.Log(m_rigidbody.velocity.magnitude);
+                float currentSpeed = m_rigidbody.velocity.magnitude / 10;
+                animator.SetFloat("Speed", currentSpeed);
             }
         }
 
@@ -139,7 +139,7 @@ public class PlayerController : MonoBehaviour, IHealth
             // Button was pressed
             case InputActionPhase.Started:
                 // Prevents the player from using items whilst interacting
-                if (m_buttonHeld)
+                if (m_altButtonHeld)
                     break;
 
                 if (m_weaponWheelController.isWheelOpen)
@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour, IHealth
                             m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
                         m_boxLerpStart = transform.position;
                         m_boxLerpTime = 0.0f;
-                        m_buttonHeld = true;
+                        m_altButtonHeld = true;
                         break;
                     }
                 }
@@ -209,9 +209,9 @@ public class PlayerController : MonoBehaviour, IHealth
                 break;
             // Button was released
             case InputActionPhase.Canceled:
-                if (m_buttonHeld)
+                if (m_altButtonHeld)
                 {
-                    m_buttonHeld = false;
+                    m_altButtonHeld = false;
                     m_grabbedBox = null;
                 }
                 break;
@@ -234,7 +234,7 @@ public class PlayerController : MonoBehaviour, IHealth
             // Button was pressed
             case InputActionPhase.Started:
                 // Prevents the player from opening the weapon wheel whilst interacting or using an item
-                if (m_buttonHeld)
+                if (m_buttonHeld || m_altButtonHeld)
                     break;
 
                 m_weaponWheelController.ToggleWheel();
@@ -265,7 +265,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public int GetHealth()
     {
         int health = m_health;
-    
+
         return health;
     }
 
@@ -279,19 +279,19 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
     public bool isDead()
     {
         if (m_health <= 0)
         {
             return true;
         }
-        else 
+        else
         {
             return false;
 
         }
     }
-
 
     IEnumerator DeathCoroutine()
     {
@@ -299,16 +299,11 @@ public class PlayerController : MonoBehaviour, IHealth
         Restart();
     }
 
-
     public void Restart()
     {
         Debug.Log("Player dead");
         //TODO: Change this to appropriate scene or add other code
         SceneManager.LoadScene("IzzyScene");
     }
-
-
-
-
     #endregion
 }
