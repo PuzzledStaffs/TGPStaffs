@@ -339,7 +339,8 @@ MonoBehaviour:
   player: {fileID: 1129571081}
   cooldown: 5
   animationTime: 2
-  damage: 1
+  damage: 100
+  distance: 0
 --- !u!114 &932135634
 MonoBehaviour:
   m_ObjectHideFlags: 0
