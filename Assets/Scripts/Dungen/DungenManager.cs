@@ -7,7 +7,7 @@ public class DungenManager : MonoBehaviour
     [SerializeField] Camera m_DungenCam;
     [SerializeField] float m_cameraSpeed;
     private Rigidbody m_CameraRB;
-
+    public int m_KeysCollected { get; protected set; }
 
     private void Awake()
     {
@@ -26,4 +26,25 @@ public class DungenManager : MonoBehaviour
         m_CameraRB.velocity = Vector3.zero;
         m_DungenCam.transform.position = TargetLocation;
     }
+
+    public void AddKey()
+    {
+        m_KeysCollected++;
+        //UpdateUI
+    }
+
+    public bool UseKey()
+    {
+        if(m_KeysCollected > 0)
+        {
+            m_KeysCollected--;
+            //UpdateUI
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
 }
