@@ -62,7 +62,8 @@ public class DungenRoom : MonoBehaviour
         m_Camera.m_Locked = true;
         foreach(Trap trap in m_traps)
         {
-            trap.EnterRoomEnabled();
+            if(trap != null)
+                trap.EnterRoomEnabled();
         }
     }
 
@@ -75,9 +76,13 @@ public class DungenRoom : MonoBehaviour
     private void RoomExited()
     {
         //Called when the camra finishes moving
+        
         foreach (Trap trap in m_traps)
         {
-            trap.ExitRoomDisabled();
+            if (trap != null)
+            {
+                trap.ExitRoomDisabled();
+            }
         }
     }
 
