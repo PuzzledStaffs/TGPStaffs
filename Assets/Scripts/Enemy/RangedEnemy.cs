@@ -14,7 +14,10 @@ public class RangedEnemy : Enemy
     // Update is called once per frame
     void Update()
     {
-        
+        if (fieldOfView.inFOV)
+        {
+            manager.ChangeState(State.StateType.ATTACK);
+        }
     }
 
 }

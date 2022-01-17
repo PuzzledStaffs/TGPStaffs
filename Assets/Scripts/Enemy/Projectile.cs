@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    public GameObject player;
+    public RangedAttack attack;
     // Start is called before the first frame update
     void Start()
     {
-        
+      //  player = GetComponentInParent<FOV>().target;
+      //  attack = GetComponentInParent<RangedAttack>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        Debug.Log("Hit");
+        if (collision.collider.CompareTag("Player"))
+        {
+            player.GetComponent<PlayerController>().TakeDamage(attack.damage);
+            Debug.Log("Hit player");
+
+            Destroy(this);
+        }
     }
 }

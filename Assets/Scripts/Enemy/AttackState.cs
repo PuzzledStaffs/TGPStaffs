@@ -10,7 +10,7 @@ public class AttackState : State
     protected NavMeshAgent agent;
     public GameObject player;
     public float cooldown;
-    float maxCooldown;  
+    public float maxCooldown;  
     public float animationTime;
     public int damage;
     public float distance;   
@@ -24,8 +24,6 @@ public class AttackState : State
         //slows enemy down to stop from overshooting
         agent.autoBraking = true;
 
-        //set cooldown variables
-        maxCooldown = cooldown;
         cooldown = 0;
     }
 
