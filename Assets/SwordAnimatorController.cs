@@ -21,6 +21,7 @@ public class SwordAnimatorController : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         animator.gameObject.SetActive(false);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().UnFreezeMovement();
 
     }
 
