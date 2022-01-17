@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DungenManager : MonoBehaviour
 {
     [SerializeField] Camera m_DungenCam;
     [SerializeField] float m_cameraSpeed;
+    [SerializeField] TextMeshProUGUI m_KeyCountText;
     private Rigidbody m_CameraRB;
     public int m_KeysCollected { get; protected set; }
-
+    [SerializeField] int m_StartingKeys;
     private void Awake()
     {
         m_CameraRB = m_DungenCam.transform.GetComponent<Rigidbody>();
+        UpdateKeyUI();
     }
 
     public IEnumerator MoveCameraCoroutine(Vector3 TargetLocation)
@@ -29,16 +33,16 @@ public class DungenManager : MonoBehaviour
 
     public void AddKey()
     {
-        m_KeysCollected++;
-        //UpdateUI
+        m_KeysCollected++;        
+        UpdateKeyUI();
     }
 
     public bool UseKey()
     {
         if(m_KeysCollected > 0)
         {
-            m_KeysCollected--;
-            //UpdateUI
+            m_KeysCollected--;            
+            UpdateKeyUI();
             return true;
         }
         else
@@ -47,4 +51,9 @@ public class DungenManager : MonoBehaviour
         }
     }
 
+
+    private void UpdateKeyUI()
+    {
+        m_KeyCountText.text = "x" + m_KeysCollected.ToString();
+    }
 }
