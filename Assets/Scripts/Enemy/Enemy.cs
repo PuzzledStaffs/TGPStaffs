@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IHealth
 {
@@ -8,6 +9,7 @@ public class Enemy : MonoBehaviour, IHealth
     int m_health = 20;
     public StateManager manager;
     public FOV fieldOfView;
+    public Animator animator;
 
     public int GetHealth()
     {
@@ -32,16 +34,19 @@ public class Enemy : MonoBehaviour, IHealth
 
     public void TakeDamage(int damage)
     {
-        if (isDead())
-            return;
+        if (isDead()) { return; }
+
+        
 
         Debug.Log("Ouch");
         m_health -= damage;
+        animator.SetTrigger("TakeDamage");
 
         if (isDead())
         {
             StartCoroutine(DeathCoroutine());
         }
+        StartCoroutine(TakeDamageCoroutine());
 
     }
 
@@ -55,6 +60,17 @@ public class Enemy : MonoBehaviour, IHealth
     void Update()
     {
 
+        if (isDead())
+        {
+            GetComponent<NavMeshAgent>().isStopped = true;
+            GetComponent<NavMeshAgent>().speed = 0;
+        }
+
+
+
+
+        Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
+        animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
         if (fieldOfView.inFOV)
         {
             manager.ChangeState(State.StateType.ATTACK);
@@ -64,7 +80,25 @@ public class Enemy : MonoBehaviour, IHealth
     IEnumerator DeathCoroutine()
     {
         //TODO: Add death animation
-        yield return new WaitForSeconds(1);
+        RandomDeathAnim();
+        animator.SetBool("Dead", true);
+        
+        yield return new WaitForSeconds(2.6f);
         Destroy(gameObject);
+
+    }
+
+    void RandomDeathAnim()
+    {
+        int random = Random.Range(0, 2);
+        animator.SetInteger("DeathAnim", random);
+        Debug.Log(random);
+    }
+
+    IEnumerator TakeDamageCoroutine()
+    {
+        GetComponent<NavMeshAgent>().isStopped = true;
+        yield return new WaitForSeconds(1f);
+        GetComponent<NavMeshAgent>().isStopped = false;
     }
 }

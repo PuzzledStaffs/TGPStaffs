@@ -6,9 +6,14 @@ public class FOV : MonoBehaviour
 {
     public float maxAngle;
     public float radius;
-    public GameObject target;
+    GameObject target;
     public bool inFOV = false;
 
+
+    private void Start()
+    {
+        target = GameObject.FindGameObjectWithTag("Player");
+    }
     //Draws Debug lines
     public void OnDrawGizmos()
     {
