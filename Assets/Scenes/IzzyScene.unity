@@ -160,10 +160,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 551475354, guid: 05da39efd3961194582d17a558e84807, type: 3}
-      propertyPath: Sword
-      value: 
-      objectReference: {fileID: 2038128378}
     - target: {fileID: 5685329753367600117, guid: 05da39efd3961194582d17a558e84807, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -210,10 +206,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
       propertyPath: m_Name
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
-      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -763,11 +755,6 @@ Transform:
   m_Father: {fileID: 933016139}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2038128378 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 885141920432786998, guid: 05da39efd3961194582d17a558e84807, type: 3}
-  m_PrefabInstance: {fileID: 593734954}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2100972445
 GameObject:
   m_ObjectHideFlags: 0
