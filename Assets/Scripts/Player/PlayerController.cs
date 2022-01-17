@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour, IHealth
             // Rotates model to face the direction of movement
             if (m_moveDir.x != 0 || m_moveDir.y != 0)
                 m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
-            Debug.Log(m_rigidbody.velocity.magnitude);
             float currentSpeed = m_rigidbody.velocity.magnitude / 10;
             animator.SetFloat("Speed", currentSpeed);
         }
