@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IHealth
 {
     [Header("Components"), SerializeField]
     private Rigidbody m_rigidbody;
@@ -11,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
+    int m_health = 100;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -36,6 +38,9 @@ public class PlayerController : MonoBehaviour
 
     [Header("Weapon Models")]
     public GameObject Sword;
+
+    [Header("Animations")]
+    public Animator animator;
 
 
 
@@ -72,6 +77,12 @@ public class PlayerController : MonoBehaviour
                 // Rotates model to face the direction of movement
                 if (m_moveDir.x != 0 || m_moveDir.y != 0)
                     m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+                    // Rotates model to face the direction of movement
+            if (m_moveDir.x != 0 || m_moveDir.y != 0)
+                m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+            Debug.Log(m_rigidbody.velocity.magnitude);
+            float currentSpeed = m_rigidbody.velocity.magnitude / 10;
+            animator.SetFloat("Speed", currentSpeed);
             }
         }
 
@@ -250,5 +261,54 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = m_respawnPosition;
     }
+
+    public int GetHealth()
+    {
+        int health = m_health;
+    
+        return health;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        m_health -= damage;
+
+        if (isDead())
+        {
+            StartCoroutine(DeathCoroutine());
+        }
+
+    }
+    public bool isDead()
+    {
+        if (m_health <= 0)
+        {
+            return true;
+        }
+        else 
+        {
+            return false;
+
+        }
+    }
+
+
+    IEnumerator DeathCoroutine()
+    {
+        yield return new WaitForSeconds(1);
+        Restart();
+    }
+
+
+    public void Restart()
+    {
+        Debug.Log("Player dead");
+        //TODO: Change this to appropriate scene or add other code
+        SceneManager.LoadScene("IzzyScene");
+    }
+
+
+
+
     #endregion
 }

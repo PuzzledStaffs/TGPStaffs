@@ -11,6 +11,7 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
     public List<GameObject> m_Enamys;
+    [SerializeField] List<Trap> m_traps;
 
     private void Start()
     {
@@ -51,6 +52,7 @@ public class DungenRoom : MonoBehaviour
         }
     }
     #endregion
+
     #region RoomJoiningControls
     private void RoomEntered()
     {
@@ -58,6 +60,11 @@ public class DungenRoom : MonoBehaviour
         m_Camera.m_CurrentRoomType = m_RoomType;
         m_Camera.m_roomOragin = m_origin.transform.position;
         m_Camera.m_Locked = true;
+        foreach(Trap trap in m_traps)
+        {
+            if(trap != null)
+                trap.EnterRoomEnabled();
+        }
     }
 
     private void UnFrezeRoom()
@@ -69,7 +76,14 @@ public class DungenRoom : MonoBehaviour
     private void RoomExited()
     {
         //Called when the camra finishes moving
-
+        
+        foreach (Trap trap in m_traps)
+        {
+            if (trap != null)
+            {
+                trap.ExitRoomDisabled();
+            }
+        }
     }
 
     private void FrezzeExatingRoom()
