@@ -12,11 +12,9 @@ public class DungeonRoomEditor : Editor
 
         DrawDefaultInspector();
 
-        GUILayout.BeginArea(new Rect(0.0f, 0.0f, 100, 100));
-        if (GUILayout.Button("Build Object"))
+        if (GUILayout.Button("Reset Floor (Not Undoable)"))
         {
-
+            myTarget.ResetFloor();
         }
-        GUILayout.EndArea();
     }
 }

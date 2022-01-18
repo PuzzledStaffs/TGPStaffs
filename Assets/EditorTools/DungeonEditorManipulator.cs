@@ -5,10 +5,11 @@ using UnityEngine.UIElements;
 
 public class DungeonEditorManipulator : PointerManipulator
 {
-    public DungeonEditorManipulator(VisualElement target)
+    public DungeonEditorManipulator(VisualElement target, VisualElement parent)
     {
         this.target = target;
         root = target.parent;
+        target.transform.position = parent.transform.position;
     }
 
     protected override void RegisterCallbacksOnTarget()
