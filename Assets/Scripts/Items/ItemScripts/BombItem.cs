@@ -13,6 +13,7 @@ public class BombItem : Item
     {
         //Create bomb - Instantiate it
         GameObject newBomb = Instantiate(bombItem, pc.m_model.transform.position+ new Vector3(0f,0.2f,0f) + pc.m_model.transform.forward, Quaternion.identity);
+        newBomb.GetComponent<Bomb>().BombParent = this;
 
         //The add force to the bomb rigidbody
         newBomb.GetComponent<Rigidbody>().AddForce(pc.m_model.transform.forward * moveForce, ForceMode.Impulse);
