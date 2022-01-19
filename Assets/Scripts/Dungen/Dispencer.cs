@@ -9,7 +9,7 @@ public class Dispencer : Trap
     [SerializeField][Min(1)] private int m_MaxiumInstances;
     List<GameObject> m_spawnedThings = new List<GameObject>();
     [SerializeField] TextMeshProUGUI m_TopText;
-    [SerializeField] [Tooltip("The despencer will drop only the maximun instances, any more and it will not spawn now overriding the oldest")]
+    [SerializeField] [Tooltip("The despencer will drop only the maximun instances, any more and it will not spawn")]
     private bool m_NoReset;
 
     private void Start()
