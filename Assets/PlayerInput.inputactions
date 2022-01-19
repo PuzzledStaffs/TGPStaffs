@@ -19,7 +19,15 @@
                     "id": "0e420aa0-99df-48f6-b011-fa5186086a7b",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Hold,Press"
+                },
+                {
+                    "name": "Alt Interact",
+                    "type": "Button",
+                    "id": "2f12e357-1019-45ad-9b99-70dbf53317a4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Hold,Press"
                 },
                 {
                     "name": "ToggleWeaponWheel",
@@ -168,6 +176,28 @@
                     "processors": "",
                     "groups": "Keyboard And Mouse",
                     "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2767fb6-2026-4c98-813a-4717731a9d74",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard And Mouse",
+                    "action": "Alt Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34e28d58-3fe0-4829-a509-e6264c0b4340",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Alt Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

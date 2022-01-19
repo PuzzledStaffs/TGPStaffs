@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LavaTrap : MonoBehaviour
+public class LavaTrap : Trap
 {
     [SerializeField] private bool m_AmBrigde;
     [SerializeField] private Material m_lavaMat;
@@ -20,6 +20,15 @@ public class LavaTrap : MonoBehaviour
         {
             BecomeLava();
         }
+    }
+
+    public override void EnterRoomEnabled()
+    {
+       
+    }
+    public override void ExitRoomDisabled()
+    {
+        
     }
 
     private void OnTriggerEnter(Collider other)
