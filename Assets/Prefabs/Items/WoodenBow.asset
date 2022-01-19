@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WoodenBow
   m_EditorClassIdentifier: 
   name: Wooden Bow
-  ItemIcon: {fileID: 21300000, guid: efcaa3ba66f5cab4eac67934853aceb7, type: 3}
+  ItemIcon: {fileID: 21300000, guid: 2662772b1a21cee4ba0fb8d54250eb72, type: 3}
   ItemDamage: 100
   CombatType: 0
   MaxCooldown: 4
