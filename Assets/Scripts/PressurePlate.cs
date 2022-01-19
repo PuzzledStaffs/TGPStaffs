@@ -21,7 +21,7 @@ public class PressurePlate : MonoBehaviour
             m_onPlate.Add(other);
             other.GetComponentInParent<KickCube>().m_OnRemoveSelf += RemoveList;
         }
-        if (m_onPlate.Count > 0)
+        if (m_onPlate.Count == 1)
             m_platePressed.Invoke();
     }
 
