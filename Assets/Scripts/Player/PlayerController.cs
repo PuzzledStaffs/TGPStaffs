@@ -303,6 +303,8 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         Debug.Log("Player dead");
         //TODO: Change this to appropriate scene or add other code
+        // Play death animation
+        // Reload Scene
         SceneManager.LoadScene("IzzyScene");
     }
     #endregion

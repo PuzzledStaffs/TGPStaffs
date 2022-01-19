@@ -1536,6 +1536,10 @@ PrefabInstance:
       propertyPath: m_toRoomCameraMove
       value: 
       objectReference: {fileID: 154948666}
+    - target: {fileID: 7221188154774901808, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_Camera
       value: 
