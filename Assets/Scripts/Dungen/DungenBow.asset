@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Item Name
   ItemIcon: {fileID: 0}
-  ItemDamage: 0
+  ItemDamage: 84
   CombatType: 0
   MaxCooldown: 0.5
   ItemSound: {fileID: 0}
   CanUse: 1
   ItemHold: 0
-  CurrentRange: 1000
+  CurrentRange: 10
   ArrowSpeed: 10
   MaxRange: 10
   BowSpeedMultiplier: 0
