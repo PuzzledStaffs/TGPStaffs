@@ -113,6 +113,8 @@ public class DungenRoom : MonoBehaviour
             DestroyImmediate(lava.GetChild(0).gameObject);
         while (lava.GetComponent<BoxCollider>() != null)
             DestroyImmediate(lava.GetComponent<BoxCollider>());
+        lava.GetComponent<MeshFilter>().sharedMesh = null;
+        lava.GetComponent<MeshCollider>().sharedMesh = null;
 
         Transform pit = transform.Find("Floor").Find("Pit");
         while (pit.childCount > 0)
@@ -177,9 +179,6 @@ public class DungenRoom : MonoBehaviour
 
         if (lava.childCount > 0)
         {
-            //StaticBatchingUtility.Combine(lava.gameObject);
-            //lava.GetComponent<MeshCollider>().sharedMesh = lava.transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
-            //lava.GetComponent<MeshCollider>().sharedMesh.Optimize();
             foreach (BoxCollider col in lava.GetComponentsInChildren<BoxCollider>())
             {
                 BoxCollider box = lava.gameObject.AddComponent<BoxCollider>();
@@ -189,6 +188,7 @@ public class DungenRoom : MonoBehaviour
                     col.size.z * col.gameObject.transform.localScale.z);
                 box.isTrigger = true;
             }
+            CombineMesh(lava);
         }
 
         if (pit.childCount > 0)
@@ -266,16 +266,16 @@ public class DungenRoom : MonoBehaviour
 
         // If Up, and Left, and not Up Left Corner
         if (matrix[0][1] && matrix[1][0] && !matrix[0][0])
-            model.Find("up left base").gameObject.SetActive(true);
+            model.Find("up left corner base").gameObject.SetActive(true);
         // If Up, and Right, and not Up Right Corner
         if (matrix[0][1] && matrix[1][2] && !matrix[0][2])
-            model.Find("up right base").gameObject.SetActive(true);
+            model.Find("up right corner base").gameObject.SetActive(true);
         // If Down, and Left, and not Down Left Corner
         if (matrix[2][1] && matrix[1][0] && !matrix[2][0])
-            model.Find("down left base").gameObject.SetActive(true);
+            model.Find("down left corner base").gameObject.SetActive(true);
         // If Down, and Right, and not Down Right Corner
         if (matrix[2][1] && matrix[1][2] && !matrix[2][2])
-            model.Find("down right base").gameObject.SetActive(true);
+            model.Find("down right corner base").gameObject.SetActive(true);
 
         // If not Up, and not Left, and not Up Left Corner
         if (!matrix[0][1] && !matrix[1][0] && !matrix[0][0])
@@ -320,28 +320,52 @@ public class DungenRoom : MonoBehaviour
 
         // If Up, and not Left, and not Up Left Corner
         if (matrix[0][1] && !matrix[1][0] && !matrix[0][0])
+        {
             model.Find("left up").gameObject.SetActive(true);
+            model.Find("left up base").gameObject.SetActive(true);
+        }
         // If Up, and not Right, and not Up Right Corner
         if (matrix[0][1] && !matrix[1][2] && !matrix[0][2])
+        {
             model.Find("right up").gameObject.SetActive(true);
+            model.Find("right up base").gameObject.SetActive(true);
+        }
         // If Down, and not Left, and not Down Left Corner
         if (matrix[2][1] && !matrix[1][0] && !matrix[2][0])
+        {
             model.Find("left down").gameObject.SetActive(true);
+            model.Find("left down base").gameObject.SetActive(true);
+        }
         // If Down, and not Right, and not Down Right Corner
         if (matrix[2][1] && !matrix[1][2] && !matrix[2][2])
+        {
             model.Find("right down").gameObject.SetActive(true);
+            model.Find("right down base").gameObject.SetActive(true);
+        }
         // If not Up, and Left, and not Up Left Corner
         if (!matrix[0][1] && matrix[1][0] && !matrix[0][0])
+        {
             model.Find("up left").gameObject.SetActive(true);
+            model.Find("up left base").gameObject.SetActive(true);
+        }
         // If not Up, and Right, and not Up Right Corner
         if (!matrix[0][1] && matrix[1][2] && !matrix[0][2])
+        {
             model.Find("up right").gameObject.SetActive(true);
+            model.Find("up right base").gameObject.SetActive(true);
+        }
         // If not Down, and Left, and not Down Left Corner
         if (!matrix[2][1] && matrix[1][0] && !matrix[2][0])
+        {
             model.Find("down left").gameObject.SetActive(true);
+            model.Find("down left base").gameObject.SetActive(true);
+        }
         // If not Down, and Right, and not Down Right Corner
         if (!matrix[2][1] && matrix[1][2] && !matrix[2][2])
+        {
             model.Find("down right").gameObject.SetActive(true);
+            model.Find("down right base").gameObject.SetActive(true);
+        }
 
         // If not Up, and not Left, but Up Left Corner
         if (!matrix[0][1] && !matrix[1][0] && matrix[0][0])
