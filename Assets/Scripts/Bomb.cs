@@ -10,7 +10,7 @@ public class Bomb : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
 
-        foreach (Collider col in Physics.OverlapBox(transform.position, new Vector3(1.0f, 1.0f, 1.0f) * 3))
+        foreach (Collider col in Physics.OverlapBox(transform.position, new Vector3(1.0f, 1.0f, 1.0f) * 1.5f))
         {
             if(col.tag == "Enemy")
             {

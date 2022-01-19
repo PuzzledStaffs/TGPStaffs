@@ -2,14 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakableWall : MonoBehaviour,IHealth
+public class BreakableWall : MonoBehaviour, IHealth
 {
-    public int GetHealth() { return 0; }
-    public void TakeDamage(int damage) 
-    {           
-        //gameObject.SetActive(false);
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
+    int m_health = 999;
+
+    public int GetHealth()
+    {
+        return m_health;
     }
-    public bool isDead() { return false; }
+    public void TakeDamage(int damage)
+    {
+        m_health -= damage;
+    }
+    public bool isDead()
+    {
+        if (m_health <= 0)
+        {
+
+            return true;
+        }
+        else
+        {
+            return false;
+
+        }
+    }
+    void Update()
+    {
+        if (isDead())
+        {
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+    }
 }
