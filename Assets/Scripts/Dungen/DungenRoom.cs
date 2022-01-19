@@ -135,6 +135,9 @@ public class DungenRoom : MonoBehaviour
         Transform lava = transform.Find("Floor").Find("Lava");
         Transform pit = transform.Find("Floor").Find("Pit");
 
+        float xOffset = m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
+        float yOffset = m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
+
         // Loop through all tiles and create them
         for (int y = 0; y < map.Length; y++)
             for (int x = 0; x < map[y].Length; x++)
@@ -145,28 +148,28 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(tilePrefab);
                             tile.transform.SetParent(tiles);
-                            tile.transform.localPosition = new Vector3(y - 4.5f, tile.transform.localPosition.y, x - 9.5f);
+                            tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
                     case DungeonEditorWindow.TileType.Lava:
                         {
                             GameObject tile = Instantiate(lavaTilePrefab);
                             tile.transform.SetParent(lava);
-                            tile.transform.localPosition = new Vector3(y - 4.5f, tile.transform.localPosition.y, x - 9.5f);
+                            tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
                     case DungeonEditorWindow.TileType.Box:
                         {
                             GameObject tile = Instantiate(boxTilePrefab);
                             tile.transform.SetParent(tiles);
-                            tile.transform.localPosition = new Vector3(y - 4.5f, tile.transform.localPosition.y, x - 9.5f);
+                            tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
                     case DungeonEditorWindow.TileType.Pit:
                         {
                             GameObject tile = Instantiate(pitTilePrefab);
                             tile.transform.SetParent(pit);
-                            tile.transform.localPosition = new Vector3(y - 4.5f, tile.transform.localPosition.y, x - 9.5f);
+                            tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             OrganiseTile(map, x, y, tile.transform.Find("Model"));
                             tile.transform.localRotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
                             break;
