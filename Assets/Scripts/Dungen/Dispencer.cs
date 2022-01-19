@@ -6,7 +6,7 @@ using UnityEngine;
 public class Dispencer : Trap
 {
     [SerializeField] private GameObject m_spawnedObject;
-    [SerializeField][Min(1)] private int m_MaxiumInstances;
+    [SerializeField][Range(1,99)] private int m_MaxiumInstances = 1;
     List<GameObject> m_spawnedThings = new List<GameObject>();
     [SerializeField] TextMeshProUGUI m_TopText;
     [SerializeField] [Tooltip("The despencer will drop only the maximun instances, any more and it will not spawn")]
