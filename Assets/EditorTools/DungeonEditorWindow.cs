@@ -64,6 +64,11 @@ public class DungeonEditorWindow : EditorWindow
 
         root.Q<Button>("save").clicked += () =>
         {
+            if (Selection.activeGameObject == null)
+            {
+                Debug.LogError("Select a Dungeon Room.");
+                return;
+            }
             DungenRoom room = Selection.activeGameObject.GetComponent<DungenRoom>();
             if (room == null)
                 Debug.LogError(Selection.activeGameObject.name + " does not have a Dungeon Room component.");
