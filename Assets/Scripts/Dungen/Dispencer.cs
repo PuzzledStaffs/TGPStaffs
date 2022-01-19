@@ -31,14 +31,13 @@ public class Dispencer : Trap
         //Spawn Item
         if(m_spawnedThings.Count < m_MaxiumInstances)
         {
-            m_spawnedThings.Add(Instantiate(m_spawnedObject, transform.forward/2 + transform.position, transform.rotation));
-            
+            SpawnObject();
         }
         else if(!m_NoReset)
         {       
             Destroy(m_spawnedThings[0]);
             m_spawnedThings.RemoveAt(0);
-            m_spawnedThings.Add(Instantiate(m_spawnedObject, transform.forward / 2 + transform.position, transform.rotation));
+            SpawnObject();
         }
 
         //Update Top Text
@@ -55,5 +54,10 @@ public class Dispencer : Trap
         {
             m_TopText.color = Color.white;
         }
+    }
+
+    private void SpawnObject()
+    {
+        m_spawnedThings.Add(Instantiate(m_spawnedObject, transform.forward  + transform.position, transform.rotation));
     }
 }
