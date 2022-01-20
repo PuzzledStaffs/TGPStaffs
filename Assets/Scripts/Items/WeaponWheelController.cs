@@ -59,7 +59,7 @@ public class WeaponWheelController : MonoBehaviour
 
     private void Update()
     {
-        if (pc.ButtonHeld)
+        if (pc.m_buttonHeld)
         {
             LeftClickHoldAction();
         }
