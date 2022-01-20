@@ -6,11 +6,12 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Sword Item")]
 public class SwordItem : Item
 {
-    IHealth.Damage damage;
+
     public float SwordRange;
 
     public override void LeftClickAction(PlayerController pc)
     {
+        IHealth.Damage damage = new IHealth.Damage();
         damage.type = IHealth.DamageType.SWORD;
         damage.damageAmount = ItemDamage;
         // Gets all objects with a collider in a box (halfExtents = scale / 2) in front of the player

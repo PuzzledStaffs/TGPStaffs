@@ -14,15 +14,13 @@ public class AttackState : State
     public float animationTime;
     public int damage;
     public float distance;
-    IHealth.Damage damageStruct;  
     
 
     // Start is called before the first frame update
    public virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        damageStruct.damageAmount = damage;
-        damageStruct.type = IHealth.DamageType.ENEMY;
+
         //slows enemy down to stop from overshooting
         agent.autoBraking = true;
 
@@ -80,7 +78,11 @@ public class AttackState : State
             //if its the player, then take damage
             //Make sure player object tag is set to "Player"
             if (hitCollider.CompareTag("Player"))
-            { 
+            {
+                IHealth.Damage damageStruct = new IHealth.Damage();
+                damageStruct.damageAmount = damage;
+                damageStruct.type = IHealth.DamageType.ENEMY;
+
                 //Take Damage
                 IHealth health = player.GetComponent<IHealth>();
                 health.TakeDamage(damageStruct);

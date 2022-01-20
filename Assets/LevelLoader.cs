@@ -14,10 +14,7 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    LoadNextLevel();
-        //}
+      
     }
 
     private void OnTriggerEnter(Collider other)
@@ -28,10 +25,10 @@ public class LevelLoader : MonoBehaviour
 
     public void LoadNextLevel()
     {
-       StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+       StartCoroutine(LoadLevelCoroutine(SceneManager.GetActiveScene().buildIndex + 1));
     }
 
-    IEnumerator LoadLevel(int levelIndex)
+    IEnumerator LoadLevelCoroutine(int levelIndex)
     {
         transition.SetTrigger("Start");
 

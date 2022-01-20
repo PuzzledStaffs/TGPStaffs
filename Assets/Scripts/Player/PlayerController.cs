@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
@@ -46,6 +47,9 @@ public class PlayerController : MonoBehaviour, IHealth
     public Animator animator;
 
 
+    [Header("UI")]
+    public Slider PowerBar;
+    public GameObject PowerBarSlider;
 
     void Start()
     {
@@ -139,8 +143,8 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnPointerMove(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Pointer Move");
-        Debug.Log(ctx.ReadValue<Vector2>());
+        //Debug.Log("Pointer Move");
+        //Debug.Log(ctx.ReadValue<Vector2>());
         m_pointerPos = ctx.ReadValue<Vector2>();
     }
 
