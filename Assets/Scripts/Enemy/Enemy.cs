@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour, IHealth
 
     }
 
-    public void TakeDamage(IHealth.Damage damage)
+    public virtual void TakeDamage(IHealth.Damage damage)
     {
         if (isDead())
             return;
@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour, IHealth
         }      
     }
 
-    IEnumerator DeathCoroutine()
+    public IEnumerator DeathCoroutine()
     {
         //TODO: Add death animation
         RandomDeathAnim();
