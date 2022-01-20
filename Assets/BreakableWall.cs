@@ -5,7 +5,7 @@ using UnityEngine;
 public class BreakableWall : MonoBehaviour,IHealth
 {
     public int GetHealth() { return 0; }
-    public void TakeDamage(int damage) 
+    public void TakeDamage(IHealth.Damage damage) 
     {           
         //gameObject.SetActive(false);
         gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -13,3 +13,4 @@ public class BreakableWall : MonoBehaviour,IHealth
     }
     public bool isDead() { return false; }
 }
+        

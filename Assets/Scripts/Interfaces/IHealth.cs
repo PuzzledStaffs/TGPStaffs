@@ -9,6 +9,7 @@ public interface IHealth
         SWORD,
         BOW,
         ENEMY,
+        ENVIRONMENT,
     }
 
     public struct Damage

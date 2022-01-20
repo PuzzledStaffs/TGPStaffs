@@ -12,16 +12,19 @@ public class Bomb : MonoBehaviour
 
         foreach (Collider col in Physics.OverlapBox(transform.position, new Vector3(1.0f, 1.0f, 1.0f) * 3))
         {
+            IHealth.Damage damage;
+            damage.damageAmount = itemDamage;
+            damage.type = IHealth.DamageType.ENVIRONMENT;
             if(col.tag == "Enemy")
             {
                 col.gameObject.GetComponent<IInteractable>()?.Interact();
-                col.gameObject.GetComponent<IHealth>()?.TakeDamage(BombParent.ItemDamage);
+                col.gameObject.GetComponent<IHealth>()?.TakeDamage(damage);
             }
 
 
 
             Debug.Log(col.name);
-            col.GetComponent<IHealth>()?.TakeDamage(itemDamage);
+            col.GetComponent<IHealth>()?.TakeDamage(damage);
         }
 
         Destroy(gameObject);

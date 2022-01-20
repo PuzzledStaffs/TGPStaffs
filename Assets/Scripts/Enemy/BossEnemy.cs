@@ -13,6 +13,7 @@ public class BossEnemy : Enemy
     {
         m_health = 100;
         maxHealth = m_health;
+        fieldOfView = GetComponent<FOV>();
     }
 
     // Update is called once per frame
@@ -24,11 +25,11 @@ public class BossEnemy : Enemy
         }
 
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
-        animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
+        //animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
 
-        if (this.fieldOfView.inFOV)
+
+        if (fieldOfView.inFOV == true)
         {
-            Debug.Log("Player");
             if (phaseSwitch)
             {
                 Debug.Log("ranged");
