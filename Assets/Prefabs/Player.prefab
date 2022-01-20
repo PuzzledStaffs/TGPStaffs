@@ -4095,12 +4095,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5685329753367600117}
+  - component: {fileID: 7563269711354560822}
   - component: {fileID: 6226419016548846355}
   - component: {fileID: 4015323359008386662}
   - component: {fileID: 551475354}
   - component: {fileID: 551475353}
-  - component: {fileID: 7364746783365619928}
   - component: {fileID: 3050296412220420482}
+  - component: {fileID: 2076878424400982424}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -4124,6 +4125,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7563269711354560822
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303376395991135469}
+  m_Material: {fileID: 13400000, guid: 5838021fb608333488d3f7783a979f69, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.25, z: 0}
 --- !u!65 &6226419016548846355
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4133,7 +4148,7 @@ BoxCollider:
   m_GameObject: {fileID: 7303376395991135469}
   m_Material: {fileID: 13400000, guid: 5838021fb608333488d3f7783a979f69, type: 2}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 0.85, y: 2, z: 0.85}
   m_Center: {x: 0, y: 1, z: 0}
@@ -4173,8 +4188,13 @@ MonoBehaviour:
   m_speed: 5
   m_pointerPos: {x: 0, y: 0}
   m_weaponWheelController: {fileID: 4102920911238438543}
-  spawnPoint: {fileID: 0}
-  ButtonHeld: 0
+  spawnPoint: {fileID: 6624037440784206670}
+  m_buttonHeld: 0
+  m_altButtonHeld: 0
+  m_grabbedBox: {fileID: 0}
+  m_boxLerpTime: 0
+  m_boxLerpStart: {x: 0, y: 0, z: 0}
+  m_boxLerpEnd: {x: 0, y: 0, z: 0}
   Sword: {fileID: 4501776720252160402}
   animator: {fileID: 3050296412220420482}
 --- !u!114 &551475353
@@ -4306,12 +4326,47 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: f15156a6-433f-43fd-b191-94e02fd270e4
     m_ActionName: Player/PointerPosition[/Mouse/position]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 551475354}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnAltInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2f12e357-1019-45ad-9b99-70dbf53317a4
+    m_ActionName: Player/Alt Interact[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard And Mouse
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!82 &7364746783365619928
+--- !u!95 &3050296412220420482
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7303376395991135469}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b846b3704e4c2e641b387a6b453d0eeb, type: 3}
+  m_Controller: {fileID: 9100000, guid: 1dcee7492e9db204c8d832a266643bdb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!82 &2076878424400982424
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4407,25 +4462,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!95 &3050296412220420482
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7303376395991135469}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: b846b3704e4c2e641b387a6b453d0eeb, type: 3}
-  m_Controller: {fileID: 9100000, guid: 1dcee7492e9db204c8d832a266643bdb, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7473803619505775243
 GameObject:
   m_ObjectHideFlags: 0

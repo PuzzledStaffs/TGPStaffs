@@ -37,6 +37,7 @@ public class BowItem : Item
         if(CurrentRange > 2)
         {
             GameObject arrow = Instantiate(Arrow, pc.spawnPoint.position, pc.spawnPoint.rotation);
+
             arrow.GetComponent<Arrow>().bowParent = this;
             arrow.GetComponent<Arrow>().pc = pc;
             arrow.GetComponent<Arrow>().EndPoint = pc.transform.position + pc.m_model.transform.forward * CurrentRange;
