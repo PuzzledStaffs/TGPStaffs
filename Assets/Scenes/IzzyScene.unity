@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d377c26e37771438057e007d9e9006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_health: 20
   manager: {fileID: 932135638}
   fieldOfView: {fileID: 932135635}
   animator: {fileID: 0}
@@ -804,7 +805,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1731191229}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.000000048473, z: -1.03}
+  m_LocalPosition: {x: 0, y: -0.000000048473, z: 0.05}
   m_LocalScale: {x: 0.2264746, y: -0.065224, z: 0.65206}
   m_Children: []
   m_Father: {fileID: 1757563263}
@@ -918,9 +919,9 @@ GameObject:
   - component: {fileID: 1757563259}
   - component: {fileID: 1757563258}
   - component: {fileID: 1757563257}
+  - component: {fileID: 1757563254}
   - component: {fileID: 1757563256}
   - component: {fileID: 1757563255}
-  - component: {fileID: 1757563254}
   - component: {fileID: 1757563264}
   m_Layer: 0
   m_Name: r
@@ -928,7 +929,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1757563254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -938,9 +939,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1757563253}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba25702e8b1bc3241a38f7dd519ea030, type: 3}
+  m_Script: {fileID: 11500000, guid: 53d377c26e37771438057e007d9e9006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_health: 20
   manager: {fileID: 1757563259}
   fieldOfView: {fileID: 1757563258}
   animator: {fileID: 0}
@@ -961,7 +963,7 @@ MonoBehaviour:
   cooldown: 0
   maxCooldown: 2
   animationTime: 1
-  damage: 50
+  damage: 10
   distance: 5
   range: 5
   projectile: {fileID: 1731191229}

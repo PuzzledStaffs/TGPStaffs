@@ -9,6 +9,7 @@ public class State : MonoBehaviour
         IDLE,
         ROAM,
         ATTACK,
+        R_ATTACK,
     };
 
     protected StateType type;

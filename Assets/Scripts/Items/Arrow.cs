@@ -40,10 +40,15 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player") { return; }
+        if (collision.transform.tag == "Player") 
+        return;
 
+        Damage damage = new Damage();
+        damage.damageAmount = bowParent.ItemDamage;
+        damage.type = IHealth.DamageType.BOW;
         collision.gameObject.GetComponent<IInteractable>()?.Interact();
-        collision.gameObject.GetComponent<IHealth>()?.TakeDamage(bowParent.ItemDamage);
+        collision.gameObject.GetComponent<IHealth>()?.TakeDamage(damage);
         KillArrow();
+
     }
 }
