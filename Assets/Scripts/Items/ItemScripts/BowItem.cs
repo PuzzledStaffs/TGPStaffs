@@ -5,12 +5,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Bow Item")]
 public class BowItem : Item
 {
-    float CurrentRange;
+    public float CurrentRange;
+    public float ArrowSpeed;
     public float MaxRange;
     public float BowSpeedMultiplier;
     bool PlayOnce = true;
     public AudioClip ReleaseSound;
     public GameObject Arrow;
+    public Transform spawnPoint;
 
     public override void LeftClickAction(PlayerController pc)
     {
@@ -32,12 +34,18 @@ public class BowItem : Item
 
     public override void ReleaseAction(PlayerController pc)
     {
-        GameObject arrow = Instantiate(Arrow, pc.transform.position, Quaternion.identity);
-        arrow.GetComponent<Arrow>().bowParent = this;
-        CurrentRange = 0;
-        PlayOnce = true;
-        pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
-        Debug.Log("BOW RELEASE!");
+        if(CurrentRange > 2)
+        {
+            GameObject arrow = Instantiate(Arrow, pc.spawnPoint.position, pc.spawnPoint.rotation);
+
+            arrow.GetComponent<Arrow>().bowParent = this;
+            arrow.GetComponent<Arrow>().pc = pc;
+            arrow.GetComponent<Arrow>().EndPoint = pc.transform.position + pc.m_model.transform.forward * CurrentRange;
+            CurrentRange = 0;
+            PlayOnce = true;
+            pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
+            Debug.Log("BOW RELEASE!");
+        }
     }
 
 

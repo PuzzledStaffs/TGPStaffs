@@ -25,13 +25,6 @@ public class DungeonEditorWindow : EditorWindow
 
     public void CreateGUI()
     {
-        map = new TileType[height][];
-        for (int y = 0; y < height; y++)
-        {
-            map[y] = new TileType[width];
-            for (int x = 0; x < width; x++)
-                map[y][x] = TileType.Normal;
-        }
         buttons = new List<List<Button>>();
 
         // Each editor window contains a root VisualElement object
@@ -48,22 +41,15 @@ public class DungeonEditorWindow : EditorWindow
 
         tileSelect = rootVisualElement.Q<RadioButtonGroup>("tileSelect");
 
-        VisualElement grid = rootVisualElement.Q<VisualElement>("slots");
-        for (int h = 0; h < height; h++)
-        {
-            buttons.Add(new List<Button>());
-            VisualElement row = grid.Q<VisualElement>("slot_row" + (h + 1));
-            for (int w = 0; w < width; w++)
-            {
-                int tempH = h;
-                int tempW = w;
-                buttons[h].Add(row.Q<Button>("slot" + (w + 1)));
-                buttons[h][w].clicked += () => { SetTile(tempW, tempH); };
-            }
-        }
+        GenerateGrid();
 
         root.Q<Button>("save").clicked += () =>
         {
+            if (Selection.activeGameObject == null)
+            {
+                Debug.LogError("Select a Dungeon Room.");
+                return;
+            }
             DungenRoom room = Selection.activeGameObject.GetComponent<DungenRoom>();
             if (room == null)
                 Debug.LogError(Selection.activeGameObject.name + " does not have a Dungeon Room component.");
@@ -75,10 +61,69 @@ public class DungeonEditorWindow : EditorWindow
         root.Q<Button>("load").clicked += () =>
         {
         };
+
+        root.Q<DropdownField>("roomSize").RegisterValueChangedCallback(e =>
+        {
+            switch (e.newValue.ToLower())
+            {
+                case "normal":
+                    width = 20;
+                    height = 10;
+                    break;
+                case "big":
+                    width = 20*2;
+                    height = 10*2;
+                    break;
+                default:
+                    width = 1;
+                    height = 1;
+                    break;
+            }
+            GenerateGrid();
+        });
         /*DungeonEditorManipulator keymanip1 = new DungeonEditorManipulator(rootVisualElement.Q<VisualElement>("key1"), rootVisualElement.Q<VisualElement>("key1Slot"));
         DungeonEditorManipulator keymanip2 = new DungeonEditorManipulator(rootVisualElement.Q<VisualElement>("key2"), rootVisualElement.Q<VisualElement>("key2Slot"));
         DungeonEditorManipulator keymanip3 = new DungeonEditorManipulator(rootVisualElement.Q<VisualElement>("key3"), rootVisualElement.Q<VisualElement>("key3Slot"));
         */
+    }
+
+    public void GenerateGrid()
+    {
+        buttons.Clear();
+
+        map = new TileType[height][];
+        for (int y = 0; y < height; y++)
+        {
+            map[y] = new TileType[width];
+            for (int x = 0; x < width; x++)
+                map[y][x] = TileType.Normal;
+        }
+
+        VisualElement grid = rootVisualElement.Q<VisualElement>("slots");
+
+        if (grid.childCount > 0)
+            grid.Clear();
+
+        for (int h = 0; h < height; h++)
+        {
+            buttons.Add(new List<Button>());
+            VisualElement row = new VisualElement();
+            row.name = "slot_row" + (h + 1);
+            row.AddToClassList("slot_row");
+            grid.Add(row);
+            for (int w = 0; w < width; w++)
+            {
+                int tempH = h;
+                int tempW = w;
+                Button slot = new Button();
+                slot.name = "slot" + (w + 1);
+                slot.AddToClassList("slot");
+                row.Add(slot);
+                buttons[h].Add(slot);
+                //buttons[h].Add(row.Q<Button>("slot" + (w + 1)));
+                buttons[h][w].clicked += () => { SetTile(tempW, tempH); };
+            }
+        }
     }
 
     public void SetTile(int x, int y)

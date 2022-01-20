@@ -29,8 +29,8 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         m_dungenManager = GameObject.FindObjectOfType<DungenManager>();
         m_doorRenderer = transform.GetComponent<Renderer>();
         m_DoorColider = transform.GetComponent<BoxCollider>();
-        
-        if(m_locked)
+
+        if (m_locked && m_toRoomCameraMove != null && m_toRoomExitPoint != null)
         {
             ShowLocks();
         }
@@ -42,10 +42,12 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         if (m_ClosedOnStart || m_locked)
         {
             CloseDoor();
+            
         }
-        else if (m_toRoomCameraMove == null && m_toRoomExitPoint == null)
+        else if (m_toRoomCameraMove == null || m_toRoomExitPoint == null)
         {
             CloseDoor();
+            
         }
         else
         {
@@ -79,7 +81,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
 
     public void Interact()
     {
-        if (m_locked)
+        if (m_locked && m_toRoomCameraMove != null && m_toRoomExitPoint != null)
         {
             if (m_dungenManager.UseKey())
             {
@@ -92,23 +94,23 @@ public class DungenDoor : MonoBehaviour ,IInteractable
 
     #region Door Controls
 
-    public DoorStates OpenDoor()
+    public void OpenDoor()
     {
         if (m_toRoomCameraMove != null && m_toRoomExitPoint != null && !m_locked)
         {
             m_doorActive = true;
             m_doorRenderer.material = m_DoorOpen;
             m_DoorColider.isTrigger = true;
-            return DoorStates.OPENED;
+          
         }
         else if (m_locked)
         {
-            return DoorStates.LOCKED;
+            return;
         }
         else
         {
             Debug.LogWarning("Door: " + transform.parent.name + " " + gameObject.name + "Is missing a destination");
-            return DoorStates.UNIVALIBLE;
+            return;
         }
     }
 

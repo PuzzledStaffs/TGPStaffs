@@ -12,7 +12,7 @@ public class DungeonRoomEditor : Editor
 
         DrawDefaultInspector();
 
-        if (GUILayout.Button("Reset Floor (Not Undoable)"))
+        if (GUILayout.Button("DELETE Floor"))
         {
             myTarget.ResetFloor();
         }
