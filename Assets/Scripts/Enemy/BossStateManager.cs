@@ -2,14 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StateManager : MonoBehaviour
+public class BossStateManager : StateManager
 {
-    public Enemy e;
-    public IdleState idle;
-    public AttackState attack;
-    public RoamingState roam;
+    public State rangedAttack;
 
-    public virtual void ChangeState(State.StateType type)
+    public override void ChangeState(State.StateType type)
     {
         switch (type)
         {
@@ -17,16 +14,25 @@ public class StateManager : MonoBehaviour
                 roam.enabled = false;
                 attack.enabled = false;
                 idle.enabled = true;
+                rangedAttack.enabled = false;
                 break;
             case State.StateType.ROAM:
                 roam.enabled = true;
                 attack.enabled = false;
                 idle.enabled = false;
+                rangedAttack.enabled = false;
                 break;
             case State.StateType.ATTACK:
                 roam.enabled = false;
                 attack.enabled = true;
                 idle.enabled = false;
+                rangedAttack.enabled = false;
+                break;
+            case State.StateType.R_ATTACK:
+                roam.enabled = false;
+                attack.enabled = false;
+                idle.enabled = false;
+                rangedAttack.enabled = true;
                 break;
         }
     }

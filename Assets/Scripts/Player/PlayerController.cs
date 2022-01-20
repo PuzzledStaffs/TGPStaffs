@@ -270,9 +270,9 @@ public class PlayerController : MonoBehaviour, IHealth
         return health;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(IHealth.Damage damage)
     {
-        m_health -= damage;
+        m_health -= damage.damageAmount;
 
         if (isDead())
         {
