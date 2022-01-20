@@ -27,10 +27,9 @@ public class BreakableWall : MonoBehaviour
 
         }
     }
-    void Update()
-    {
-        if (isDead())
-    public int GetHealth() { return 0; }
+
+
+
     public void TakeDamage(IHealth.Damage damage) 
     {
         //gameObject.SetActive(false);
