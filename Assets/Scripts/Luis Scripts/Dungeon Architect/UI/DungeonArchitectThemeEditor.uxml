@@ -1,0 +1,4 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <Style src="DungeonArchitectThemeEditor.uss" />
+    <DungeonThemeView focusable="true" style="width: auto; height: 100%;" />
+</ui:UXML>

@@ -1,5 +1,6 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="DungeonEditorWindow.uss" />
+    <Style src="/Assets/Scripts/Luis Scripts/Dungeon Architect/UI/DungeonArchitectThemeEditor.uss" />
     <ui:DropdownField label="Room Size" index="0" choices="Normal, Big" name="roomSize" style="width: 374px;" />
     <ui:RadioButtonGroup label="Tile Select" value="0" choices="Normal, Lava, Box Floor, Pit" name="tileSelect" style="flex-direction: column;" />
     <ui:Slider picking-mode="Ignore" label="Room Key Spawn Percentage" value="42" high-value="100" name="RoomKeyPercent" style="max-height: 50%;" />
