@@ -13,7 +13,7 @@ public class AttackState : State
     public float maxCooldown;  
     public float animationTime;
     public int damage;
-    public float distance;   
+    public float distance;
     
 
     // Start is called before the first frame update
@@ -79,11 +79,13 @@ public class AttackState : State
             //Make sure player object tag is set to "Player"
             if (hitCollider.CompareTag("Player"))
             {
-                Debug.Log("hit");
+                IHealth.Damage damageStruct = new IHealth.Damage();
+                damageStruct.damageAmount = damage;
+                damageStruct.type = IHealth.DamageType.ENEMY;
 
                 //Take Damage
                 IHealth health = player.GetComponent<IHealth>();
-                health.TakeDamage(damage);
+                health.TakeDamage(damageStruct);
                 
             }
         }
