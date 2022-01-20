@@ -6,7 +6,6 @@ public class Projectile : MonoBehaviour
 {
     public GameObject player;
     public RangedAttack attack;
-    IHealth.Damage damage;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +20,7 @@ public class Projectile : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
+            IHealth.Damage damage = new IHealth.Damage();
             damage.damageAmount = attack.damage;
             damage.type = IHealth.DamageType.ENEMY;
             //if it hits the player, take damage

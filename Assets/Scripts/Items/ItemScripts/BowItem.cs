@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Items/Bow Item")]
 public class BowItem : Item
 {
+    float StartingRange = 4;
     public float CurrentRange;
     public float ArrowSpeed;
     public float MaxRange;
@@ -14,8 +15,16 @@ public class BowItem : Item
     public GameObject Arrow;
     public Transform spawnPoint;
 
+    private void Awake()
+    {
+        CurrentRange = StartingRange;
+    }
+
+
+
     public override void LeftClickAction(PlayerController pc)
     {
+        pc.PowerBarSlider.SetActive(true);
         if (PlayOnce)
         {
             pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
@@ -25,6 +34,7 @@ public class BowItem : Item
         if(CurrentRange < MaxRange)
         {
             CurrentRange += Time.deltaTime * BowSpeedMultiplier;
+            pc.PowerBar.value = CurrentRange -StartingRange;
         }
 
 
@@ -34,18 +44,16 @@ public class BowItem : Item
 
     public override void ReleaseAction(PlayerController pc)
     {
-        if(CurrentRange > 2)
-        {
-            GameObject arrow = Instantiate(Arrow, pc.spawnPoint.position, pc.spawnPoint.rotation);
-
-            arrow.GetComponent<Arrow>().bowParent = this;
-            arrow.GetComponent<Arrow>().pc = pc;
-            arrow.GetComponent<Arrow>().EndPoint = pc.transform.position + pc.m_model.transform.forward * CurrentRange;
-            CurrentRange = 0;
-            PlayOnce = true;
-            pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
-            Debug.Log("BOW RELEASE!");
-        }
+        pc.PowerBar.value = 0;
+        pc.PowerBarSlider.SetActive(false);
+        GameObject arrow = Instantiate(Arrow, pc.spawnPoint.position, pc.spawnPoint.rotation);
+        arrow.GetComponent<Arrow>().bowParent = this;
+        arrow.GetComponent<Arrow>().pc = pc;
+        arrow.GetComponent<Arrow>().EndPoint = pc.transform.position + pc.m_model.transform.forward * CurrentRange;
+        CurrentRange = StartingRange;
+        PlayOnce = true;
+        pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
+        Debug.Log("BOW RELEASE!");
     }
 
 

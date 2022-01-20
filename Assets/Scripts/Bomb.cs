@@ -15,13 +15,13 @@ public class Bomb : MonoBehaviour
             if(col.tag == "Enemy")
             {
                 col.gameObject.GetComponent<IInteractable>()?.Interact();
-                col.gameObject.GetComponent<IHealth>()?.TakeDamage(BombParent.ItemDamage);
+                col.gameObject.GetComponent<IHealth>()?.TakeDamage(new IHealth.Damage(IHealth.DamageType.BOMB, BombParent.ItemDamage));
             }
 
 
 
             Debug.Log(col.name);
-            col.GetComponent<IHealth>()?.TakeDamage(itemDamage);
+            col.GetComponent<IHealth>()?.TakeDamage(new IHealth.Damage(IHealth.DamageType.BOMB, itemDamage));
         }
 
         Destroy(gameObject);
