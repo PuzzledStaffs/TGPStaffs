@@ -5,8 +5,8 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour, IHealth
 {
-  
-    int m_health = 20;
+    [SerializeField]
+    protected int m_health = 20;
     public StateManager manager;
     public FOV fieldOfView;
     public Animator animator;
@@ -32,14 +32,13 @@ public class Enemy : MonoBehaviour, IHealth
 
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(IHealth.Damage damage)
     {
         if (isDead()) { return; }
 
         
 
-        Debug.Log("Ouch");
-        m_health -= damage;
+        m_health -= damage.damageAmount;
         animator.SetTrigger("TakeDamage");
 
         if (isDead())
@@ -84,7 +83,7 @@ public class Enemy : MonoBehaviour, IHealth
         animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
-        Destroy(gameObject);
+        Destroy(this.gameObject);
 
     }
 

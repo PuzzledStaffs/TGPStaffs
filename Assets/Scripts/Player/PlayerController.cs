@@ -6,9 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
-    [Header("Components"), SerializeField]
-    private Rigidbody m_rigidbody;
+    [Header("Components")]
     public GameObject m_model;
+    private Rigidbody m_rigidbody;
+    private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
@@ -48,6 +49,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Start()
     {
+        m_rigidbody = GetComponent<Rigidbody>();
+        m_playerInput = GetComponent<PlayerInput>();
+
         Cursor.lockState = CursorLockMode.Locked;
 #if !UNITY_EDITOR
         Cursor.visible = false;
@@ -89,7 +93,16 @@ public class PlayerController : MonoBehaviour, IHealth
 
         if (m_weaponWheelController.isWheelOpen)
         {
-            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+            Debug.Log(m_playerInput.currentControlScheme);
+            Vector2 direction = m_pointerPos;
+            switch (m_playerInput.currentControlScheme.ToString().ToLower())
+            {
+                case "controller":
+                    break;
+                default:
+                    direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+                    break;
+            }
             if (direction.x != 0 && direction.y != 0)
             {
                 float angle = Mathf.Atan2(direction.y, direction.x);
@@ -126,6 +139,8 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnPointerMove(InputAction.CallbackContext ctx)
     {
+        Debug.Log("Pointer Move");
+        Debug.Log(ctx.ReadValue<Vector2>());
         m_pointerPos = ctx.ReadValue<Vector2>();
     }
 
@@ -270,9 +285,9 @@ public class PlayerController : MonoBehaviour, IHealth
         return health;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(IHealth.Damage damage)
     {
-        m_health -= damage;
+        m_health -= damage.damageAmount;
 
         if (isDead())
         {
