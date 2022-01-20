@@ -12,6 +12,7 @@ public class DungenManager : MonoBehaviour
     private Rigidbody m_CameraRB;
     public int m_KeysCollected { get; protected set; }
     [SerializeField] int m_StartingKeys;
+
     private void Awake()
     {
         m_CameraRB = m_DungenCam.transform.GetComponent<Rigidbody>();
