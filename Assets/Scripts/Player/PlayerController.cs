@@ -143,8 +143,8 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnPointerMove(InputAction.CallbackContext ctx)
     {
-        Debug.Log("Pointer Move");
-        Debug.Log(ctx.ReadValue<Vector2>());
+        //Debug.Log("Pointer Move");
+        //Debug.Log(ctx.ReadValue<Vector2>());
         m_pointerPos = ctx.ReadValue<Vector2>();
     }
 
