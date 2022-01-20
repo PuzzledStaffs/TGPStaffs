@@ -30,9 +30,15 @@ public class BreakableWall : MonoBehaviour
     void Update()
     {
         if (isDead())
+    public int GetHealth() { return 0; }
+    public void TakeDamage(IHealth.Damage damage) 
+    {
+        //gameObject.SetActive(false);
+        if (damage.type == IHealth.DamageType.BOMB)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
+   
 }
