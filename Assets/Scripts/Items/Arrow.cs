@@ -9,6 +9,13 @@ public class Arrow : MonoBehaviour
     public Vector3 EndPoint;
  
 
+
+    private void Start()
+    {
+        StartCoroutine(EnableCollider());
+    }
+
+
     void Update()
     {
         Debug.Log("Enpoint: " + EndPoint);
@@ -25,11 +32,17 @@ public class Arrow : MonoBehaviour
         var Diff = transform.position - EndPoint;
         Debug.Log("Diff: " + Diff.normalized);
 
-        if(Diff.magnitude < 2)
+        if(Diff.magnitude < 1)
         {
             KillArrow();
         }
 
+    }
+
+    IEnumerator EnableCollider()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<BoxCollider>().enabled = true;
     }
 
     public void KillArrow()
