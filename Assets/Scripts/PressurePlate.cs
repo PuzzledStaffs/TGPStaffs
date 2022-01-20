@@ -19,7 +19,7 @@ public class PressurePlate : MonoBehaviour
         else if (other.tag == "KickBox")
         {
             m_onPlate.Add(other);
-            other.GetComponentInParent<KickCube>().m_OnRemoveSelf += RemoveList;
+           other.GetComponentInParent<KickCube>().m_OnRemoveSelf += RemoveList;
         }
         if (m_onPlate.Count == 1)
             m_platePressed.Invoke();

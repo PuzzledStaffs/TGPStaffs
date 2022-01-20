@@ -4,17 +4,25 @@ using UnityEngine;
 
 public interface IHealth
 {
-    enum  DamageType
+    public enum  DamageType
     { 
         SWORD,
         BOW,
         ENEMY,
+        BOMB,
+        ENVIRONMENT
     }
 
     public struct Damage
     {
         public DamageType type;
         public int damageAmount;
+
+        public Damage(DamageType type, int damage)
+        {
+            this.type = type;
+            damageAmount =damage;
+        }
     }
 
     public int GetHealth();
