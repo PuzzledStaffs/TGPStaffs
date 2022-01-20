@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BombItem
   m_EditorClassIdentifier: 
   name: Bomb
-  ItemIcon: {fileID: 0}
+  ItemIcon: {fileID: 21300000, guid: 4c2d3cd91f7662b478da1d4a24d3bed5, type: 3}
   ItemDamage: 999
   CombatType: 0
   MaxCooldown: 0.5

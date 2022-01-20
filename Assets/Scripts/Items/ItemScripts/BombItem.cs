@@ -12,7 +12,7 @@ public class BombItem : Item
     public override void LeftClickAction(PlayerController pc)
     {
         //Create bomb - Instantiate it
-        GameObject newBomb = Instantiate(bombItem, pc.m_model.transform.position+ new Vector3(0f,0.2f,0f) + pc.m_model.transform.forward, Quaternion.identity);
+        GameObject newBomb = Instantiate(bombItem, pc.m_model.transform.position+ new Vector3(0f,0.6f,0f) + pc.m_model.transform.forward, Quaternion.identity);
         newBomb.GetComponent<Bomb>().BombParent = this;
 
         //The add force to the bomb rigidbody

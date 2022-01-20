@@ -15,7 +15,7 @@ public class Arrow : MonoBehaviour
         if(transform.position != EndPoint)
         {
             float speed = (bowParent.ArrowSpeed + bowParent.CurrentRange) * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, EndPoint, speed);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(EndPoint.x,transform.position.y,EndPoint.z), speed);
         }
         else if(transform.position == EndPoint)
         {
@@ -41,11 +41,10 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        IHealth.Damage damage = new IHealth.Damage();
-        damage.damageAmount = bowParent.ItemDamage;
-        damage.type = IHealth.DamageType.BOW;
+        if (collision.transform.tag == "Player") { return; }
 
         collision.gameObject.GetComponent<IInteractable>()?.Interact();
-        collision.gameObject.GetComponent<IHealth>()?.TakeDamage(damage);
+        collision.gameObject.GetComponent<IHealth>()?.TakeDamage(bowParent.ItemDamage);
+        KillArrow();
     }
 }
