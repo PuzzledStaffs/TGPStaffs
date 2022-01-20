@@ -200,7 +200,7 @@ public class DungenRoom : MonoBehaviour
             {
                 BoxCollider box = pit.gameObject.AddComponent<BoxCollider>();
                 box.center = -(col.center - col.gameObject.transform.localPosition);
-                box.center -= new Vector3(0.0f, 2.0f, 0.0f);
+                box.center += new Vector3(0.0f, 2 * col.center.y, 0.0f);
                 box.size = new Vector3(col.size.x * col.gameObject.transform.localScale.x,
                     col.size.y * col.gameObject.transform.localScale.y,
                     col.size.z * col.gameObject.transform.localScale.z);
