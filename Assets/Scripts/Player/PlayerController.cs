@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
@@ -45,6 +46,9 @@ public class PlayerController : MonoBehaviour, IHealth
     public Animator animator;
 
 
+    [Header("UI")]
+    public Slider PowerBar;
+    public GameObject PowerBarSlider;
 
     void Start()
     {
