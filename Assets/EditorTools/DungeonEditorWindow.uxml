@@ -2,6 +2,9 @@
     <Style src="DungeonEditorWindow.uss" />
     <ui:DropdownField label="Room Size" index="0" choices="Normal, Big" name="roomSize" style="width: 374px;" />
     <ui:RadioButtonGroup label="Tile Select" value="0" choices="Normal, Lava, Box Floor, Pit" name="tileSelect" style="flex-direction: column;" />
+    <ui:Slider picking-mode="Ignore" label="Room Key Spawn Percentage" value="42" high-value="100" name="RoomKeyPercent" style="max-height: 50%;" />
+    <ui:Slider picking-mode="Ignore" label="Room Item Spawn Percentage" value="42" high-value="100" name="RoomItemPercent" />
+    <ui:Slider picking-mode="Ignore" label="Room Enemy Spawn Percentage" value="42" high-value="100" name="RoomEnemiesPercent" />
     <ui:Button text="Save" display-tooltip-when-elided="true" name="save" style="width: 136px;" />
     <ui:Button text="Load" display-tooltip-when-elided="true" name="load" style="display: none;" />
     <ui:VisualElement name="br" class="br" />

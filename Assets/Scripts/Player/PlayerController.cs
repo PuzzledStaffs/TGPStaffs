@@ -44,6 +44,9 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Animations")]
     public Animator animator;
 
+    public Material Grass;
+    [SerializeField] float RadiusOfTrample;
+
 
 
     void Start()
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+        Grass?.SetVector("_GrassTrample", new Vector4(transform.position.x, transform.position.y + 2f, transform.position.z, RadiusOfTrample));
         if (!m_movementFrozen)
         {
             if (m_grabbedBox != null)

@@ -8,6 +8,9 @@ public class DungeonEditorWindow : EditorWindow
 {
     public int width = 20, height = 10;
     private RadioButtonGroup tileSelect;
+    private Slider EnemySpawnPercentage;
+    private Slider ItemSpawnPercentage;
+    private Slider KeySpawnPercentage;
     private List<List<Button>> buttons;
     private TileType[][] map;
 
@@ -40,6 +43,13 @@ public class DungeonEditorWindow : EditorWindow
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/EditorTools/DungeonEditorWindow.uss");
 
         tileSelect = rootVisualElement.Q<RadioButtonGroup>("tileSelect");
+        EnemySpawnPercentage = rootVisualElement.Q<Slider>("RoomEnemiesPercent");
+        ItemSpawnPercentage = rootVisualElement.Q<Slider>("RoomItemPercent");
+        KeySpawnPercentage = rootVisualElement.Q<Slider>("RoomKeyPercent");
+
+        EnemySpawnPercentage.value = 0;
+        ItemSpawnPercentage.value = 0;
+        KeySpawnPercentage.value = 0;
 
         GenerateGrid();
 
@@ -55,6 +65,7 @@ public class DungeonEditorWindow : EditorWindow
                 Debug.LogError(Selection.activeGameObject.name + " does not have a Dungeon Room component.");
             else
             {
+                room.GenerateMislanious(map, (int)KeySpawnPercentage.value, (int)EnemySpawnPercentage.value, (int)ItemSpawnPercentage.value);
                 room.GenerateRoom(map);
             }
         };

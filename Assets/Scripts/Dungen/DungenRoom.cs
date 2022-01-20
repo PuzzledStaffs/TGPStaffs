@@ -13,6 +13,8 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsOut;
     public List<GameObject> m_Enemies;
     [SerializeField] List<Trap> m_traps;
+    [SerializeField] GameObject Enemytospawn;
+
 
     private void Start()
     {
@@ -97,6 +99,10 @@ public class DungenRoom : MonoBehaviour
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
 
     }
+    #endregion
+
+    #region
+
     #endregion
 
 #if UNITY_EDITOR
@@ -212,6 +218,46 @@ public class DungenRoom : MonoBehaviour
                 box.isTrigger = true;
             }
             CombineMesh(pit);
+        }
+    }
+
+    public void GenerateMislanious(DungeonEditorWindow.TileType[][] map, int KeyValue, int EnemyValue, int ItemValue)
+    {
+        ResetMislanious();
+        float xOffset = m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
+        float yOffset = m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
+        for (int x = 0; x < map.Length; x++)
+        {
+            for (int y = 0; y < map[x].Length; y++)
+            {
+                if (map[x][y] != DungeonEditorWindow.TileType.Normal) continue;
+
+                if(UnityEngine.Random.Range(0, 100) < KeyValue)
+                {
+
+                }
+                if (UnityEngine.Random.Range(0, 100) < EnemyValue)
+                {
+                    GameObject enemy = GameObject.CreatePrimitive(PrimitiveType.Capsule);
+                    enemy.transform.SetParent(this.gameObject.transform);
+                    enemy.transform.localPosition = new Vector3(x + xOffset, this.gameObject.transform.position.y + 0.2f, y + yOffset);
+
+                    m_Enemies.Add(enemy);
+                }
+                if (UnityEngine.Random.Range(0, 100) < ItemValue)
+                {
+
+                }
+
+            }
+        }
+    }
+
+    private void ResetMislanious()
+    {
+        foreach (GameObject Enemy in m_Enemies)
+        {
+            DestroyImmediate(Enemy);
         }
     }
 
