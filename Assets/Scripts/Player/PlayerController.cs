@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, IHealth
     Vector2 m_pointerPos;
     [SerializeField]
     WeaponWheelController m_weaponWheelController;
+    public Transform spawnPoint;
 
     public bool ButtonHeld = false;
 
@@ -221,8 +222,12 @@ public class PlayerController : MonoBehaviour, IHealth
     public void Restart()
     {
         Debug.Log("Player dead");
+
+        /* /// Commented out so as not to randomly respawn people to the test scene
+         * code works
         //TODO: Change this to appropriate scene or add other code
         SceneManager.LoadScene("IzzyScene");
+        */
     }
 
 

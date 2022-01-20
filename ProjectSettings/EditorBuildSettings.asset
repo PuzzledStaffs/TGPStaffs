@@ -11,7 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/AlexScene.unity
     guid: a25a8205974b50e4ca9e689c24c200bc
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/Dungen.unity
     guid: f9329ba223e887a47b4ec529569ed46e
   - enabled: 0
@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ScenetoMoveto.unity
     guid: 1d652c12d1db27f49ab432023e15aef4
+  - enabled: 1
+    path: Assets/Scenes/Overworld.unity
+    guid: b2ea7bee2f6f51a459d82d5ccc0c3b11
   m_configObjects: {}
