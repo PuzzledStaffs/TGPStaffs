@@ -16,6 +16,10 @@ public class DungenRoom : MonoBehaviour
 
     private void Start()
     {
+        if(m_Camera == null)
+        {
+            m_Camera = GameObject.FindGameObjectWithTag("MainCamara")?.GetComponent<DungonCamaraControler>();
+        }
         if (m_PlayerStartingRoom)
         {
             RoomEntered();
