@@ -47,7 +47,6 @@ public class BowItem : Item
 
     public override void ReleaseAction(PlayerController pc)
     {
-<<<<<<< HEAD
         pc.PowerBar.gameObject.SetActive(false);
         pc.BowLineRenderer.SetPosition(1, new Vector3(0, 0, 0));
         pc.PowerBar.value = 0;
@@ -59,7 +58,6 @@ public class BowItem : Item
         PlayOnce = true;
         pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
         Debug.Log("BOW RELEASE!");
-=======
         if(CurrentRange > 2)
         {
             GameObject arrow = Instantiate(Arrow, pc.transform.position + new Vector3(0.0f,1.0f,0.0f), pc.m_model.transform.rotation);
@@ -71,9 +69,6 @@ public class BowItem : Item
             pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
             Debug.Log("BOW RELEASE!");
         }
->>>>>>> main
     }
-
-
 }
 
