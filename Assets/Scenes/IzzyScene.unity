@@ -173,6 +173,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 551475354, guid: 05da39efd3961194582d17a558e84807, type: 3}
+      propertyPath: spawnPoint
+      value: 
+      objectReference: {fileID: 1046546475}
     - target: {fileID: 5685329753367600117, guid: 05da39efd3961194582d17a558e84807, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -426,6 +430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAngle: 45
   radius: 10
+  target: {fileID: 0}
   inFOV: 0
 --- !u!114 &932135636
 MonoBehaviour:
@@ -620,6 +625,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6303ad93fd74a14fa96f137a89f7ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1046546475 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6624037440784206670, guid: 05da39efd3961194582d17a558e84807, type: 3}
+  m_PrefabInstance: {fileID: 593734954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1129571081 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
@@ -918,7 +928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1757563254
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,6 +1008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAngle: 90
   radius: 20
+  target: {fileID: 1129571081}
   inFOV: 0
 --- !u!114 &1757563259
 MonoBehaviour:
