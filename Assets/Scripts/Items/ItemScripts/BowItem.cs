@@ -60,10 +60,10 @@ public class BowItem : Item
         Debug.Log("BOW RELEASE!");
         if(CurrentRange > 2)
         {
-            GameObject arrow = Instantiate(Arrow, pc.transform.position + new Vector3(0.0f,1.0f,0.0f), pc.m_model.transform.rotation);
-            arrow.GetComponent<Arrow>().bowParent = this;
-            arrow.GetComponent<Arrow>().pc = pc;
-            arrow.GetComponent<Arrow>().EndPoint = pc.transform.position + pc.m_model.transform.forward * CurrentRange;
+            GameObject arrow2 = Instantiate(Arrow, pc.transform.position + new Vector3(0.0f,1.0f,0.0f), pc.m_model.transform.rotation);
+            arrow2.GetComponent<Arrow>().bowParent = this;
+            arrow2.GetComponent<Arrow>().pc = pc;
+            arrow2.GetComponent<Arrow>().EndPoint = pc.transform.position + pc.m_model.transform.forward * CurrentRange;
             CurrentRange = 0;
             PlayOnce = true;
             pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
