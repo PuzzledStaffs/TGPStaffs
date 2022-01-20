@@ -201,7 +201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_PlayerStartingRoom
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7861863119877961950, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_doorsIn.Array.size
