@@ -10,13 +10,21 @@ public class DungenManager : MonoBehaviour
     //[SerializeField] float m_cameraSpeed;
     float m_cameraTransitionTime = 1.0f;
     [SerializeField] TextMeshProUGUI m_KeyCountText;
+    [SerializeField] private Canvas m_keyCanvas;
     private Rigidbody m_CameraRB;
     public int m_KeysCollected { get; protected set; }
     [SerializeField] int m_StartingKeys;
+
+
     private void Awake()
     {
         m_CameraRB = m_DungenCam.transform.GetComponent<Rigidbody>();
+        m_KeysCollected = m_StartingKeys;
         UpdateKeyUI();
+        if (m_KeysCollected == 0)
+        {
+            m_keyCanvas.enabled = false;
+        }
     }
 
     public IEnumerator MoveCameraCoroutine(Vector3 TargetLocation)
@@ -61,5 +69,13 @@ public class DungenManager : MonoBehaviour
     private void UpdateKeyUI()
     {
         m_KeyCountText.text = "x" + m_KeysCollected.ToString();
+        if(m_KeysCollected > 0)
+        {
+            m_keyCanvas.enabled = true;
+        }
+        else
+        {
+            m_keyCanvas.enabled = false;
+        }
     }
 }
