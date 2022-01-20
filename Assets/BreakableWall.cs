@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BreakableWall : MonoBehaviour, IHealth
+public class BreakableWall : MonoBehaviour
 {
     int m_health = 999;
 

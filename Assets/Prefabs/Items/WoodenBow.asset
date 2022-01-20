@@ -20,9 +20,10 @@ MonoBehaviour:
   ItemSound: {fileID: 8300000, guid: 2b62c8410a710b24e8ab6be9c8bb67c2, type: 3}
   CanUse: 0
   ItemHold: 1
-  CurrentRange: 0
+  CurrentRange: 4
   ArrowSpeed: 10
   MaxRange: 10
-  BowSpeedMultiplier: 3
+  BowSpeedMultiplier: 4
   ReleaseSound: {fileID: 8300000, guid: fd62c2212e4843440a7d349801edf1d3, type: 3}
   Arrow: {fileID: 8247497913766278947, guid: a9754b1fe9d699e47a840996e0331959, type: 3}
+  spawnPoint: {fileID: 0}

@@ -49,7 +49,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("UI")]
     public Slider PowerBar;
-    public GameObject PowerBarSlider;
+    public LineRenderer BowLineRenderer;
 
     void Start()
     {
@@ -67,6 +67,12 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         if (!m_movementFrozen)
         {
+
+            float width = BowLineRenderer.startWidth;
+            BowLineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
+
+
+
             if (m_grabbedBox != null)
             {
                 if (transform.position != m_boxLerpEnd)
