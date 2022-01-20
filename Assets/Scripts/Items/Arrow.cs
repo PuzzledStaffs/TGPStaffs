@@ -24,13 +24,16 @@ public class Arrow : MonoBehaviour
             float speed = (bowParent.ArrowSpeed + bowParent.CurrentRange) * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(EndPoint.x,transform.position.y,EndPoint.z), speed);
         }
-        else if(transform.position == EndPoint)
+        else if(transform.position == EndPoint + new Vector3(0,1,0))
         {
             KillArrow();
         }
 
+
+        
         var Diff = transform.position - EndPoint;
-        Debug.Log("Diff: " + Diff.normalized);
+
+
 
         if(Diff.magnitude < 1)
         {
