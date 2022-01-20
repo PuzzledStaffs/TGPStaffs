@@ -7,6 +7,7 @@ public class Arrow : MonoBehaviour
     public BowItem bowParent;
     public PlayerController pc;
     public Vector3 EndPoint;
+    IHealth.Damage damage;
 
     void Update()
     {
@@ -40,7 +41,9 @@ public class Arrow : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        damage.damageAmount = bowParent.ItemDamage;
+        damage.type = IHealth.DamageType.BOW;
         collision.gameObject.GetComponent<IInteractable>()?.Interact();
-        collision.gameObject.GetComponent<IHealth>()?.TakeDamage(bowParent.ItemDamage);
+        collision.gameObject.GetComponent<IHealth>()?.TakeDamage(damage);
     }
 }
