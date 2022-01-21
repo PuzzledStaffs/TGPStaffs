@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour, IHealth
 
 
     [Header("UI")]
-    public Slider PowerBar;
     public LineRenderer BowLineRenderer;
 
     void Start()
