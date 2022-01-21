@@ -6,7 +6,7 @@ using UnityEngine;
 public class DungenRoom : MonoBehaviour
 {
     [SerializeField] private DungonCamaraControler m_Camera;
-    [SerializeField] private RoomType m_RoomType;
+    [SerializeField] public RoomType m_RoomType;
     [SerializeField] private GameObject m_origin;
     [SerializeField] private bool m_PlayerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
@@ -131,6 +131,7 @@ public class DungenRoom : MonoBehaviour
         while (box.GetComponent<BoxCollider>() != null)
             DestroyImmediate(box.GetComponent<BoxCollider>());
         box.GetComponent<MeshFilter>().sharedMesh = null;
+        box.GetComponent<MeshCollider>().sharedMesh = null;
     }
 
     /// <summary>
@@ -157,6 +158,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(tilePrefab);
                             tile.transform.SetParent(tiles);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
@@ -164,6 +166,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(lavaTilePrefab);
                             tile.transform.SetParent(lava);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
@@ -171,6 +174,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(boxTilePrefab);
                             tile.transform.SetParent(boxTiles);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
@@ -178,6 +182,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(pitTilePrefab);
                             tile.transform.SetParent(pit);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             OrganiseTile(map, x, y, tile.transform.Find("Model"));
                             tile.transform.localRotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
@@ -220,7 +225,7 @@ public class DungenRoom : MonoBehaviour
 
         if (boxTiles.childCount > 0)
         {
-            foreach (BoxCollider col in boxTiles.GetComponentsInChildren<BoxCollider>())
+            /*foreach (BoxCollider col in boxTiles.GetComponentsInChildren<BoxCollider>())
             {
                 BoxCollider box = boxTiles.gameObject.AddComponent<BoxCollider>();
                 box.center = -(col.center - col.gameObject.transform.localPosition);
@@ -230,7 +235,7 @@ public class DungenRoom : MonoBehaviour
                     col.size.z * col.gameObject.transform.localScale.z);
                 box.material = frictionless;
             }
-            CombineMesh(boxTiles);
+            CombineMesh(boxTiles);*/
         }
     }
 

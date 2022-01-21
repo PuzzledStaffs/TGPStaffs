@@ -31,10 +31,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Alt Interact")]
     public bool m_altButtonHeld = false;
-    public Rigidbody m_grabbedBox;
-    [ReadOnly]
-    public float m_boxLerpTime = 0.0f;
-    public Vector3 m_boxLerpStart;
+    public Box m_grabbedBox;
     public Vector3 m_boxLerpEnd;
 
     [Header("Weapon Models")]
@@ -56,16 +53,30 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+        if (m_weaponWheelController.isWheelOpen)
+        {
+            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+            if (direction.x != 0 && direction.y != 0)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x);
+                angle += Mathf.PI;
+                m_weaponWheelController.Pulse(angle);
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
         if (!m_movementFrozen)
         {
             if (m_grabbedBox != null)
             {
-                if (transform.position != m_boxLerpEnd)
+                if (m_grabbedBox.m_moving)
                 {
                     //m_boxLerpTime += Time.deltaTime * 5.0f;
                     //transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, Mathf.Clamp(m_boxLerpTime, 0.0f, 1.0f));
-                    m_boxLerpEnd.y = transform.position.y;
-                    transform.position = Vector3.MoveTowards(transform.position, m_boxLerpEnd, Time.deltaTime * 2.0f); ;
+                    //m_boxLerpEnd.y = transform.position.y;
+                    //transform.position = Vector3.MoveTowards(transform.position, m_boxLerpEnd, Time.deltaTime * 2.0f);
                 }
                 else
                 {
@@ -82,20 +93,21 @@ public class PlayerController : MonoBehaviour, IHealth
                             mov.x = 0;
                             mov.y = mov.y >= 0 ? 1 : -1;
                         }
+                        float temp = mov.y;
+                        mov.y = mov.x;
+                        mov.x = -temp;
 
-                        Vector3 oldPos = m_grabbedBox.transform.position;
-
-                        Debug.Log(mov);
-                        m_grabbedBox.velocity = new Vector3(mov.x * 5, 0.0f, mov.y * 5);
-
-                        if (oldPos != m_grabbedBox.transform.position)
+                        if (m_grabbedBox.GetTile(m_grabbedBox.transform.localPosition + new Vector3(mov.x, 0.0f, mov.y)))
                         {
-                            Vector3 direction = m_grabbedBox.transform.position - transform.position;
+                            m_grabbedBox.Move(mov);
+
+                            /*Vector3 direction = m_grabbedBox.transform.position - transform.position;
                             direction.Normalize();
                             if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
-                                m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
+                                m_boxLerpEnd = new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
                             else
-                                m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
+                                m_boxLerpEnd = new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
+                            m_boxLerpEnd += m_grabbedBox.transform.localPosition + new Vector3(mov.x, 0.0f, mov.y);*/
                         }
                     }
                 }
@@ -109,20 +121,8 @@ public class PlayerController : MonoBehaviour, IHealth
                 if (m_moveDir.x != 0 || m_moveDir.y != 0)
                     m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
 
-                //Debug.Log(m_rigidbody.velocity.magnitude);
                 float currentSpeed = m_rigidbody.velocity.magnitude / 10;
                 animator.SetFloat("Speed", currentSpeed);
-            }
-        }
-
-        if (m_weaponWheelController.isWheelOpen)
-        {
-            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
-            if (direction.x != 0 && direction.y != 0)
-            {
-                float angle = Mathf.Atan2(direction.y, direction.x);
-                angle += Mathf.PI;
-                m_weaponWheelController.Pulse(angle);
             }
         }
     }
@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 {
                     if (col.CompareTag("Box"))
                     {
-                        m_grabbedBox = col.GetComponent<Rigidbody>();
+                        m_grabbedBox = col.GetComponent<Box>();
                         Vector3 direction = m_grabbedBox.transform.position - transform.position;
                         direction.Normalize();
                         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
@@ -227,8 +227,6 @@ public class PlayerController : MonoBehaviour, IHealth
                         else
                             m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
                         m_boxLerpEnd.y = transform.position.y;
-                        m_boxLerpStart = transform.position;
-                        m_boxLerpTime = 0.0f;
                         m_altButtonHeld = true;
                         break;
                     }
