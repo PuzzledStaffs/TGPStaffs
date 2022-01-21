@@ -40,8 +40,9 @@ public class PlayerController : MonoBehaviour, IHealth
     public Vector3 m_boxLerpStart;
     public Vector3 m_boxLerpEnd;
 
-    [Header("Weapon Models")]
+    [Header("Weapon Models & Stuff")]
     public GameObject Sword;
+    public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
 
     [Header("Animations")]
     public Animator animator;

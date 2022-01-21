@@ -51,7 +51,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: fb5bf1b556815cb43b6f7ee39558129c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -77,7 +77,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 0.2
+    widthMultiplier: 0.9
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -95,17 +95,17 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
-      key2: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 0.26407897, g: 0.745283, b: 0.10898005, a: 1}
+      key1: {r: 1, g: 0.8746814, b: 0, a: 1}
+      key2: {r: 0.7830189, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
-      ctime2: 0
+      ctime1: 32382
+      ctime2: 65150
       ctime3: 0
       ctime4: 0
       ctime5: 0
@@ -120,12 +120,12 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 1
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 0
@@ -5024,6 +5024,8 @@ MonoBehaviour:
   m_boxLerpStart: {x: 0, y: 0, z: 0}
   m_boxLerpEnd: {x: 0, y: 0, z: 0}
   Sword: {fileID: 4501776720252160402}
+  SwordTrailParticle: {fileID: 6291214135650488599}
+  SecondarySwordTrail: {fileID: 6291214136538339839}
   animator: {fileID: 3050296412220420482}
   BowLineRenderer: {fileID: 303525582}
 --- !u!114 &551475353
@@ -6290,6 +6292,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8326148762475515881}
     m_Modifications:
+    - target: {fileID: 695584075, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: m_Name
+      value: MainSwordTrail
+      objectReference: {fileID: 0}
+    - target: {fileID: 695584078, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695584078, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695584078, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695584078, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695584078, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 695584078, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2120240547, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+      propertyPath: m_Name
+      value: SecondarySwordTrail
+      objectReference: {fileID: 0}
     - target: {fileID: 7096748682058942321, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -6340,13 +6374,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+--- !u!1 &4501776720252160402 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7581642846456257995, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+  m_PrefabInstance: {fileID: 6291214136301376601}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3833221614513722152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7096748682058942321, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
   m_PrefabInstance: {fileID: 6291214136301376601}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &4501776720252160402 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7581642846456257995, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+--- !u!198 &6291214135650488599 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 695584078, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
+  m_PrefabInstance: {fileID: 6291214136301376601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6291214136538339839 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2120240550, guid: 7198e94d51b553e42aef764415cf9f13, type: 3}
   m_PrefabInstance: {fileID: 6291214136301376601}
   m_PrefabAsset: {fileID: 0}
