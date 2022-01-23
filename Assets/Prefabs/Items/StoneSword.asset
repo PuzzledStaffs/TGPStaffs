@@ -20,3 +20,4 @@ MonoBehaviour:
   ItemSound: {fileID: 8300000, guid: 03465edbfaf488f42b44c540c71a03bf, type: 3}
   CanUse: 1
   ItemHold: 0
+  SwordRange: 1

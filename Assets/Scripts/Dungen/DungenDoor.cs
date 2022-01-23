@@ -92,23 +92,23 @@ public class DungenDoor : MonoBehaviour ,IInteractable
 
     #region Door Controls
 
-    public DoorStates OpenDoor()
+    public void OpenDoor()
     {
         if (m_toRoomCameraMove != null && m_toRoomExitPoint != null && !m_locked)
         {
             m_doorActive = true;
             m_doorRenderer.material = m_DoorOpen;
             m_DoorColider.isTrigger = true;
-            return DoorStates.OPENED;
+          
         }
         else if (m_locked)
         {
-            return DoorStates.LOCKED;
+            return;
         }
         else
         {
             Debug.LogWarning("Door: " + transform.parent.name + " " + gameObject.name + "Is missing a destination");
-            return DoorStates.UNIVALIBLE;
+            return;
         }
     }
 

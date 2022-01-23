@@ -22,6 +22,11 @@ public class DungenRoom : MonoBehaviour
             m_Camera.transform.position = m_origin.transform.position;
             UnFrezeRoom();
         }
+        else
+        {
+            FrezzeExatingRoom();
+            RoomExited();
+        }
     }
 
     #region Event joining

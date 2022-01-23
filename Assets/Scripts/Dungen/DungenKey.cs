@@ -6,9 +6,9 @@ public class DungenKey : Trap
 {
 
    private DungenManager m_dungenManager;
-    private Animator m_animator;
+   private Animator m_animator;
 
-    private void Start()
+    private void Awake()
     {
         m_dungenManager = FindObjectOfType<DungenManager>();
         m_animator = GetComponent<Animator>();
@@ -29,7 +29,7 @@ public class DungenKey : Trap
         if(other.tag == "Player")
         {
             m_dungenManager.AddKey();
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
