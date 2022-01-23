@@ -13,9 +13,9 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsOut;
 
     List<GameObject> m_Enemies;
-    [SerializeField] GameObject m_EneamyPerent;
+    [SerializeField] private GameObject m_EneamyPerent;
     Trap[] m_traps;
-    [SerializeField] GameObject m_TrapPernet;
+    [SerializeField] private GameObject m_TrapPernet;
 
     private void Awake()
     {
