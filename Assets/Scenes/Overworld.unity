@@ -10684,6 +10684,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 551475354, guid: 05da39efd3961194582d17a558e84807, type: 3}
+      propertyPath: Grass
+      value: 
+      objectReference: {fileID: 2100000, guid: a48947fb84ca4914e827a54cd8051401, type: 2}
+    - target: {fileID: 551475354, guid: 05da39efd3961194582d17a558e84807, type: 3}
+      propertyPath: RadiusOfTrample
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4102920911238438543, guid: 05da39efd3961194582d17a558e84807, type: 3}
       propertyPath: pc
       value: 
@@ -19033,7 +19041,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e60b26abf19792543af9d8361b520d9c, type: 2}
+  - {fileID: 2100000, guid: a48947fb84ca4914e827a54cd8051401, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

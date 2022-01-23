@@ -3,28 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
 public class AttackState : State
 {
     public StateManager manager;
-    NavMeshAgent agent;
+    protected NavMeshAgent agent;
     public GameObject player;
     public float cooldown;
-    float maxCooldown;  
+    public float maxCooldown;  
     public float animationTime;
     public int damage;
     public float distance;   
     
 
     // Start is called before the first frame update
-    void Start()
+   public virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
         //slows enemy down to stop from overshooting
         agent.autoBraking = true;
 
-        //set cooldown variables
-        maxCooldown = cooldown;
         cooldown = 0;
     }
 
