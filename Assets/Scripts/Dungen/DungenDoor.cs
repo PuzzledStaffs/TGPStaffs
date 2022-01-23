@@ -5,15 +5,25 @@ using UnityEngine;
 
 public class DungenDoor : MonoBehaviour ,IInteractable
 {
-    [SerializeField][Tooltip("This is the ExitPoint item on the door prefab, this is where the player go")] private GameObject m_toRoomExitPoint;
-    [SerializeField][Tooltip("This is where the camara gose to")] private GameObject m_toRoomCameraMove;
+    [Header("Door Oriatation and locating")]
+    [SerializeField] public DoorLoaction m_doorLoaction;
+    [Tooltip("This is the ExitPoint item on the door prefab, this is where the player go")] private GameObject m_toRoomExitPoint;
+    [Tooltip("This is where the camara gose to")] private GameObject m_toRoomCameraMove;
+    [SerializeField] public GameObject m_ownExitPoint;
+    [SerializeField] public GameObject m_ownCamraNode;
+
     private DungenManager m_dungenManager;
+
     [Header("Door Closed Controls")]
     private Renderer m_doorRenderer;
     private BoxCollider m_DoorColider;
+
+    [Header("Door Cosmetics")]
     [SerializeField] Material m_DoorClosed;
     [SerializeField] Material m_DoorOpen;
     [SerializeField] List<GameObject> m_locks;
+
+    [Header("Door Controles")]
     [SerializeField] public bool m_locked;
     public bool m_doorActive { get; protected set; }
     [SerializeField] private bool m_ClosedOnStart = false;
@@ -30,6 +40,18 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         m_doorRenderer = transform.GetComponent<Renderer>();
         m_DoorColider = transform.GetComponent<BoxCollider>();
 
+        CheckDoorSet();
+    }
+
+    public void UpdateExit(GameObject ExitPoint, GameObject CameraNode)
+    {
+        m_toRoomExitPoint = ExitPoint;
+        m_toRoomCameraMove = CameraNode;
+        CheckDoorSet();
+    }
+
+    private void CheckDoorSet()
+    {
         if (m_locked && m_toRoomCameraMove != null && m_toRoomExitPoint != null)
         {
             ShowLocks();
@@ -42,12 +64,12 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         if (m_ClosedOnStart || m_locked)
         {
             CloseDoor();
-            
+
         }
         else if (m_toRoomCameraMove == null || m_toRoomExitPoint == null)
         {
             CloseDoor();
-            
+
         }
         else
         {
@@ -147,5 +169,12 @@ public enum DoorStates
     OPENED,
     LOCKED,
     UNIVALIBLE
+}
 
+public enum DoorLoaction
+{
+    NORTH,
+    EAST,
+    SOUTH,
+    WEST
 }

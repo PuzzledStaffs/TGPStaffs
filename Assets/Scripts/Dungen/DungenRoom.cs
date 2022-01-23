@@ -11,11 +11,47 @@ public class DungenRoom : MonoBehaviour
     [SerializeField] private bool m_PlayerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
-    public List<GameObject> m_Enemies;
-    [SerializeField] List<Trap> m_traps;
+
+    List<GameObject> m_Enemies;
+    [SerializeField] GameObject m_EneamyPerent;
+    Trap[] m_traps;
+    [SerializeField] GameObject m_TrapPernet;
+
+    private void Awake()
+    {
+        m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
+        //Get relivent enaemy script
+    }
 
     private void Start()
     {
+        if(m_Camera == null)
+        {
+            m_Camera = Camera.main.GetComponent<DungonCamaraControler>();
+        }
+
+        //Set door
+        foreach(DungenDoor door in m_doorsIn)
+        {
+            
+            switch(door.m_doorLoaction)
+            {
+                case DoorLoaction.NORTH:
+                    m_doorsOut[1].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+                case DoorLoaction.EAST:
+                    m_doorsOut[2].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+                case DoorLoaction.SOUTH:
+                    m_doorsOut[0].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+                case DoorLoaction.WEST:
+                    m_doorsOut[3].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+            }
+            
+        }
+
         if (m_PlayerStartingRoom)
         {
             RoomEntered();
@@ -56,12 +92,14 @@ public class DungenRoom : MonoBehaviour
             door.OnEnterRoom -= RoomEntered;
             door.OnUnFreezeEntered -= UnFrezeRoom;
         }
+
         foreach (DungenDoor door in m_doorsOut)
         {
             door.OnExitRoom -= RoomExited;
             door.OnFrezzeExited -= FrezzeExatingRoom;
         }
     }
+    
     #endregion
 
     #region RoomJoiningControls
@@ -104,6 +142,9 @@ public class DungenRoom : MonoBehaviour
     }
     #endregion
 
+
+
+    #region Floor Generation
 #if UNITY_EDITOR
     public GameObject tilePrefab;
     public GameObject lavaTilePrefab;
@@ -394,4 +435,7 @@ public class DungenRoom : MonoBehaviour
         }
     }
 #endif
+    #endregion
 }
+
+
