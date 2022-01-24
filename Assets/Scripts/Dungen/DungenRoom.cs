@@ -13,8 +13,8 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
 
-    Enemy[] m_Enemies;
-    IdleState[] m_EnemiesIdle;
+    List<Enemy> m_Enemies;
+    List<IdleState> m_EnemiesIdle;
     [SerializeField] private GameObject m_EneamyPerent;
     Trap[] m_traps;
     [SerializeField] private GameObject m_TrapPernet;
@@ -25,9 +25,9 @@ public class DungenRoom : MonoBehaviour
     private void Awake()
     {
         m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
-        m_Enemies = m_EneamyPerent.GetComponentsInChildren<Enemy>();
-        m_EnemiesIdle = m_EneamyPerent.GetComponentsInChildren<IdleState>();
-        m_enemyCount = m_Enemies.Length;
+        m_Enemies = new List<Enemy>(m_EneamyPerent.GetComponentsInChildren<Enemy>());
+        m_EnemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
+        m_enemyCount = m_Enemies.Count;
     }
 
     private void Start()
@@ -163,9 +163,11 @@ public class DungenRoom : MonoBehaviour
     }
     #endregion
 
-    private void EnameyDie()
+    private void EnameyDie(GameObject enemy)
     {
         m_enemyCount--;
+        m_Enemies.Remove(enemy.GetComponent<Enemy>());
+        m_EnemiesIdle.Remove(enemy.GetComponent<IdleState>());
         if(m_enemyCount <= 0)
         {
             m_roomCleard?.Invoke();

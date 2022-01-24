@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    int m_health = 100;
+    [SerializeField] int m_health = 100;
     public Action m_Death;
+    public Scene currentScene;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -374,15 +375,19 @@ public class PlayerController : MonoBehaviour, IHealth
 
     IEnumerator DeathCoroutine()
     {
-        yield return new WaitForSeconds(1);
-        Restart();
+        m_playerInput.enabled = false;
+        animator.SetBool("Dead", true);
+        yield return new WaitForSeconds(3.6f);
+        Destroy(this.gameObject);
+        m_Death?.Invoke();
+        //Restart();
     }
 
     public void Restart()
     {
         //Debug.Log("Player dead");
 
-        m_Death?.Invoke();
+        
 
         /* /// Commented out so as not to randomly respawn people to the test scene
          * code works
