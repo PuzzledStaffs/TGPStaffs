@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour, IHealth
 
     public IEnumerator DeathCoroutine()
     {
-        //TODO: Add death animation
+        this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
         animator.SetBool("Dead", true);
         
