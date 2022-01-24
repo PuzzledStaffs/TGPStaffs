@@ -32,7 +32,10 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Alt Interact")]
     public bool m_altButtonHeld = false;
     public Box m_grabbedBox;
+    public Vector3 m_boxLerpDirection;
+    public Vector3 m_boxLerpStart;
     public Vector3 m_boxLerpEnd;
+    public float m_boxLerpTime;
 
     [Header("Weapon Models")]
     public GameObject Sword;
@@ -73,10 +76,16 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 if (m_grabbedBox.m_moving)
                 {
-                    //m_boxLerpTime += Time.deltaTime * 5.0f;
-                    //transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, Mathf.Clamp(m_boxLerpTime, 0.0f, 1.0f));
-                    //m_boxLerpEnd.y = transform.position.y;
-                    //transform.position = Vector3.MoveTowards(transform.position, m_boxLerpEnd, Time.deltaTime * 2.0f);
+                    if (m_boxLerpTime < 1.0f)
+                    {
+                        m_boxLerpEnd.y = transform.position.y;
+                        transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, m_boxLerpTime);
+                        m_boxLerpTime += Time.deltaTime * 2.0f;
+                    }
+                    else
+                    {
+                        transform.position = m_boxLerpEnd;
+                    }
                 }
                 else
                 {
@@ -93,40 +102,21 @@ public class PlayerController : MonoBehaviour, IHealth
                             mov.x = 0;
                             mov.y = mov.y >= 0 ? 1 : -1;
                         }
-                        /*float temp = mov.y;
-                        mov.y = mov.x;
-                        mov.x = -temp;*/
 
-                        Debug.Log(mov);
+                        //Swap mov around as a tile's local x is actually the grid y pos and local z grid x pos
+                        mov = new Vector2(mov.y, mov.x);
                         Vector3 mov3 = new Vector3(mov.x, 0.0f, mov.y);
                         if (m_grabbedBox.GetTile(mov3))
                         {
-                            m_grabbedBox.Move(mov3);
-
-                            /*Vector3 direction = m_grabbedBox.transform.position - transform.position;
-                            direction.Normalize();
-
-                            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                            if (m_boxLerpDirection.x == 0 && m_boxLerpDirection.x == mov3.z ||
+                                m_boxLerpDirection.z == 0 && m_boxLerpDirection.z == mov3.x)
                             {
-                                direction.x = direction.x >= 0 ? 1 : -1;
-                                direction.y = 0;
+                                m_grabbedBox.Move(mov3);
+                                m_boxLerpStart = transform.position;
+                                m_boxLerpEnd = m_grabbedBox.m_boxLerpEnd + m_boxLerpDirection;
+                                m_boxLerpEnd.y = transform.position.y;
+                                m_boxLerpTime = 0.0f;
                             }
-                            else
-                            {
-                                direction.x = 0;
-                                direction.y = direction.y >= 0 ? 1 : -1;
-                            }
-
-                            Debug.Log("");
-                            Debug.Log(mov);
-                            Debug.Log(direction);
-
-                            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
-                                m_boxLerpEnd = new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
-                            else
-                                m_boxLerpEnd = new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
-                            */
-                            //m_boxLerpEnd = m_grabbedBox.transform.localPosition + new Vector3(mov.x, 0.0f, mov.y);
                         }
                     }
                 }
@@ -239,13 +229,26 @@ public class PlayerController : MonoBehaviour, IHealth
                     if (col.CompareTag("Box"))
                     {
                         m_grabbedBox = col.GetComponent<Box>();
-                        Vector3 direction = m_grabbedBox.transform.position - transform.position;
-                        direction.Normalize();
-                        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+                        m_boxLerpDirection = m_grabbedBox.transform.position - transform.position;
+                        m_boxLerpDirection.y = 0.0f;
+                        m_boxLerpDirection.Normalize();
+                        if (Mathf.Abs(m_boxLerpDirection.x) > Mathf.Abs(m_boxLerpDirection.z))
+                        {
+                            m_boxLerpDirection.x = m_boxLerpDirection.x >= 0 ? -1 : 1;
+                            m_boxLerpDirection.z = 0;
+                        }
+                        else
+                        {
+                            m_boxLerpDirection.x = 0;
+                            m_boxLerpDirection.z = m_boxLerpDirection.z >= 0 ? -1 : 1;
+                        }
+                        /*if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
                             m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
                         else
-                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
+                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);*/
+                        m_boxLerpEnd = m_grabbedBox.transform.position + m_boxLerpDirection;
                         m_boxLerpEnd.y = transform.position.y;
+                        transform.position = m_boxLerpEnd;
                         m_altButtonHeld = true;
                         break;
                     }

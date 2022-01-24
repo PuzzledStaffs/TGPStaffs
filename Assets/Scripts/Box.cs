@@ -9,7 +9,7 @@ public class Box : MonoBehaviour
 
     Transform m_tiles;
     float xOffset;
-    float yOffset;
+    float zOffset;
 
     public float m_boxLerpTime;
     public Vector3 m_boxLerpStart;
@@ -21,7 +21,7 @@ public class Box : MonoBehaviour
     {
         m_tiles = m_myRoom.transform.Find("Floor").Find("Box Tiles");
         xOffset = m_myRoom.m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
-        yOffset = m_myRoom.m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
+        zOffset = m_myRoom.m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
         m_boxLerpStart = transform.position;
         m_boxLerpEnd = transform.position;
         m_boxLerpTime = 0.0f;
@@ -48,17 +48,17 @@ public class Box : MonoBehaviour
                 transform.position = m_boxLerpEnd;
                 m_moving = false;
             }
-
         }
     }
 
     public bool GetTile(Vector3 offset)
     {
         Vector3 localOffset = transform.InverseTransformDirection(offset);
-        int pX = Mathf.RoundToInt(transform.localPosition.x + localOffset.x - xOffset), pZ = Mathf.RoundToInt(transform.localPosition.z + localOffset.z - yOffset);
+        // Keep in mind pX is grid y and pZ is grid x
+        int pX = Mathf.RoundToInt(transform.localPosition.x - localOffset.x - xOffset), pZ = Mathf.RoundToInt(transform.localPosition.z + localOffset.z - zOffset);
         foreach (Transform tr in m_tiles)
         {
-            int tX = Mathf.RoundToInt(tr.localPosition.x - xOffset), tZ = Mathf.RoundToInt(tr.localPosition.z - yOffset);
+            int tX = Mathf.RoundToInt(tr.localPosition.x - xOffset), tZ = Mathf.RoundToInt(tr.localPosition.z - zOffset);
             if (pX == tX && pZ == tZ)
                 return true;
         }
@@ -68,7 +68,8 @@ public class Box : MonoBehaviour
     public void Move(Vector3 mov)
     {
         m_boxLerpStart = transform.position;
-        m_boxLerpEnd = new Vector3(transform.position.x + mov.x, transform.position.y, transform.position.z + mov.z);
+        // x and y are swapped beause localPosition weirdness, mov.x needs to be inverted
+        m_boxLerpEnd = new Vector3(transform.position.x + mov.z, transform.position.y, transform.position.z + mov.x);
         m_boxLerpTime = 0.0f;
         m_moving = true;
     }
