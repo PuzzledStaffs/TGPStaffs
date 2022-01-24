@@ -6,6 +6,6 @@ public class EntranceDoor : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Dungen");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Dungen1.1");
     }
 }
