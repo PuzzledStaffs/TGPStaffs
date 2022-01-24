@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public GameObject player;
     public RangedAttack attack;
 
     // Start is called before the first frame update
     void Start()
     {
+  
         //Dont work
       //  player = GetComponentInParent<FOV>().target;
       //  attack = GetComponentInParent<RangedAttack>();
@@ -24,7 +24,7 @@ public class Projectile : MonoBehaviour
             damage.damageAmount = attack.damage;
             damage.type = IHealth.DamageType.ENEMY;
             //if it hits the player, take damage
-            player.GetComponent<PlayerController>().TakeDamage(damage);
+            attack.player.GetComponent<PlayerController>().TakeDamage(damage);
 
             Destroy(this.gameObject);
         }
