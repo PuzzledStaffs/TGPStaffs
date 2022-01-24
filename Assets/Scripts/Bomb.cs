@@ -14,7 +14,7 @@ public class Bomb : MonoBehaviour
         {
             IHealth.Damage damage;
             damage.damageAmount = itemDamage;
-            damage.type = IHealth.DamageType.ENVIRONMENT;
+            damage.type = IHealth.DamageType.BOMB;
             if(col.tag == "Enemy")
             {
                 col.gameObject.GetComponent<IInteractable>()?.Interact();
