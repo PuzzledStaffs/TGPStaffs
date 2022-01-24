@@ -9,7 +9,7 @@ public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExi
 {
     public Item WheelItem;
     public Image WheelIcon, LockIconImage;
-    [SerializeField] bool ItemBlocked = false;
+    public bool ItemBlocked = false;
     public Sprite LockIcon;
     public GameObject SelectionImage;
     public WeaponWheelController weaponController;

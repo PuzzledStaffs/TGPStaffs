@@ -66,9 +66,7 @@ public class Enemy : MonoBehaviour, IHealth
         }
 
 
-
-
-        Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
+        //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
         animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
         if (fieldOfView.inFOV)
         {
@@ -78,7 +76,7 @@ public class Enemy : MonoBehaviour, IHealth
 
     public IEnumerator DeathCoroutine()
     {
-        //TODO: Add death animation
+        this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
         animator.SetBool("Dead", true);
         

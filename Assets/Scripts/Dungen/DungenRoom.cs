@@ -6,31 +6,68 @@ using UnityEngine;
 public class DungenRoom : MonoBehaviour
 {
     [SerializeField] private DungonCamaraControler m_Camera;
-    [SerializeField] private RoomType m_RoomType;
+    [SerializeField] public RoomType m_RoomType;
     [SerializeField] private GameObject m_origin;
     [SerializeField] private bool m_PlayerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
-    public List<GameObject> m_Enemies;
-    [SerializeField] List<Trap> m_traps;
+
+    Enemy[] m_Enemies;
+    [SerializeField] private GameObject m_EneamyPerent;
+    Trap[] m_traps;
+    [SerializeField] private GameObject m_TrapPernet;
+
+    private void Awake()
+    {
+        m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
+        m_Enemies = m_EneamyPerent.GetComponentsInChildren<Enemy>();
+    }
 
     private void Start()
     {
         if(m_Camera == null)
         {
-            m_Camera = GameObject.FindGameObjectWithTag("MainCamara")?.GetComponent<DungonCamaraControler>();
+            m_Camera = Camera.main.GetComponent<DungonCamaraControler>();
         }
+
+        //Set door
+        foreach(DungenDoor door in m_doorsIn)
+        {
+            
+            switch(door.m_doorLoaction)
+            {
+                case DoorLoaction.NORTH:
+                    m_doorsOut[1].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+                case DoorLoaction.EAST:
+                    m_doorsOut[2].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+                case DoorLoaction.SOUTH:
+                    m_doorsOut[0].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+                case DoorLoaction.WEST:
+                    m_doorsOut[3].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
+                    break;
+            }
+            
+        }
+
         if (m_PlayerStartingRoom)
         {
             RoomEntered();
             m_Camera.transform.position = m_origin.transform.position;
-            UnFrezeRoom();
+            
         }
         else
         {
             FrezzeExatingRoom();
             RoomExited();
         }
+    }
+
+    public void StartRoom()
+    {
+        UnFrezeRoom();
     }
 
     #region Event joining
@@ -55,12 +92,14 @@ public class DungenRoom : MonoBehaviour
             door.OnEnterRoom -= RoomEntered;
             door.OnUnFreezeEntered -= UnFrezeRoom;
         }
+
         foreach (DungenDoor door in m_doorsOut)
         {
             door.OnExitRoom -= RoomExited;
             door.OnFrezzeExited -= FrezzeExatingRoom;
         }
     }
+    
     #endregion
 
     #region RoomJoiningControls
@@ -81,6 +120,10 @@ public class DungenRoom : MonoBehaviour
     {
         //Called after camra has finished moving and player unlocked
         m_Camera.m_Locked = false;
+        foreach(Enemy enemy in m_Enemies)
+        {
+
+        }
     }
 
     private void RoomExited()
@@ -99,15 +142,22 @@ public class DungenRoom : MonoBehaviour
     private void FrezzeExatingRoom()
     {
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
+        foreach (Enemy enemy in m_Enemies)
+        {
 
+        }
     }
     #endregion
 
+
+
+    #region Floor Generation
 #if UNITY_EDITOR
     public GameObject tilePrefab;
     public GameObject lavaTilePrefab;
     public GameObject boxTilePrefab;
     public GameObject pitTilePrefab;
+    public PhysicMaterial frictionless;
 
     public void ResetFloor()
     {
@@ -132,6 +182,14 @@ public class DungenRoom : MonoBehaviour
             DestroyImmediate(pit.GetComponent<BoxCollider>());
         pit.GetComponent<MeshFilter>().sharedMesh = null;
         pit.GetComponent<MeshCollider>().sharedMesh = null;
+
+        Transform box = transform.Find("Floor").Find("Box Tiles");
+        while (box.childCount > 0)
+            DestroyImmediate(box.GetChild(0).gameObject);
+        while (box.GetComponent<BoxCollider>() != null)
+            DestroyImmediate(box.GetComponent<BoxCollider>());
+        box.GetComponent<MeshFilter>().sharedMesh = null;
+        box.GetComponent<MeshCollider>().sharedMesh = null;
     }
 
     /// <summary>
@@ -143,6 +201,7 @@ public class DungenRoom : MonoBehaviour
         Transform tiles = transform.Find("Floor").Find("Tiles");
         Transform lava = transform.Find("Floor").Find("Lava");
         Transform pit = transform.Find("Floor").Find("Pit");
+        Transform boxTiles = transform.Find("Floor").Find("Box Tiles");
 
         float xOffset = m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
         float yOffset = m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
@@ -157,6 +216,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(tilePrefab);
                             tile.transform.SetParent(tiles);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
@@ -164,13 +224,15 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(lavaTilePrefab);
                             tile.transform.SetParent(lava);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
                     case DungeonEditorWindow.TileType.Box:
                         {
                             GameObject tile = Instantiate(boxTilePrefab);
-                            tile.transform.SetParent(tiles);
+                            tile.transform.SetParent(boxTiles);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
@@ -178,6 +240,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(pitTilePrefab);
                             tile.transform.SetParent(pit);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             OrganiseTile(map, x, y, tile.transform.Find("Model"));
                             tile.transform.localRotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
@@ -216,6 +279,21 @@ public class DungenRoom : MonoBehaviour
                 box.isTrigger = true;
             }
             CombineMesh(pit);
+        }
+
+        if (boxTiles.childCount > 0)
+        {
+            /*foreach (BoxCollider col in boxTiles.GetComponentsInChildren<BoxCollider>())
+            {
+                BoxCollider box = boxTiles.gameObject.AddComponent<BoxCollider>();
+                box.center = -(col.center - col.gameObject.transform.localPosition);
+                box.center += new Vector3(0.0f, 2 * col.center.y, 0.0f);
+                box.size = new Vector3(col.size.x * col.gameObject.transform.localScale.x,
+                    col.size.y * col.gameObject.transform.localScale.y,
+                    col.size.z * col.gameObject.transform.localScale.z);
+                box.material = frictionless;
+            }
+            CombineMesh(boxTiles);*/
         }
     }
 
@@ -393,4 +471,7 @@ public class DungenRoom : MonoBehaviour
         }
     }
 #endif
+    #endregion
 }
+
+

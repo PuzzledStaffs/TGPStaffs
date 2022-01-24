@@ -8,7 +8,7 @@ public class IdleState : State
     public float timer;
     float maxTime;
     public StateManager stateManager;
-    public bool isAlive = true;
+    public bool isIdle = true;
     NavMeshAgent agent;
 
     // Start is called before the first frame update
@@ -23,22 +23,19 @@ public class IdleState : State
     void Update()
     {
         agent.isStopped = true;
-
-        if (!isAlive)
-        {
-            return;
-        }
-
         timer -= Time.deltaTime;
 
         if (timer <= 0)
         {
-            agent.isStopped = false;
+            if (!isIdle)
+            {
+                agent.isStopped = false;
+                timer = maxTime;
+
+                stateManager.ChangeState(StateType.ROAM);
+            }
             timer = maxTime;
-      
-            stateManager.ChangeState(StateType.ROAM);
         }
-       // stateManager.ChangeState(StateType.ROAM);
     }
 
 
