@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public WeaponWheelController m_weaponWheelController;
     public Transform spawnPoint;
 
+
     public bool m_buttonHeld = false;
 
     [Header("Alt Interact")]
@@ -65,6 +66,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+        
         if (!m_movementFrozen)
         {
 
