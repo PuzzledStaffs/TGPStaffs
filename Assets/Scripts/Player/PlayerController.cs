@@ -26,8 +26,8 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Weapon Wheel")]
     [SerializeField, ReadOnly]
     Vector2 m_pointerPos;
-    [SerializeField]
-    WeaponWheelController m_weaponWheelController;
+   // [SerializeField]
+    public WeaponWheelController m_weaponWheelController;
     public Transform spawnPoint;
 
     public bool m_buttonHeld = false;
@@ -148,9 +148,7 @@ public class PlayerController : MonoBehaviour, IHealth
     /// Unity Input Action callback for movement
     /// </summary>
     public void OnPointerMove(InputAction.CallbackContext ctx)
-    {
-        Debug.Log("Pointer Move");
-        Debug.Log(ctx.ReadValue<Vector2>());
+    {     
         m_pointerPos = ctx.ReadValue<Vector2>();
     }
 
