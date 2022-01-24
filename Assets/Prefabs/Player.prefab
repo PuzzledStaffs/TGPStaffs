@@ -1810,7 +1810,7 @@ MonoBehaviour:
   - {fileID: 3295380775556177055}
   - {fileID: 8995961080992631457}
   ItemUnlockedUI: {fileID: 849784045}
-  ItemSelectedIcon: {fileID: 0}
+  ItemSelectedIcon: {fileID: 6995655864563986674}
 --- !u!1 &1981050936752868659
 GameObject:
   m_ObjectHideFlags: 0
@@ -5346,6 +5346,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_model: {fileID: 2168555488193596589}
   m_respawnPosition: {x: 0, y: 0, z: 0}
+  currentScene:
+    m_Handle: 0
   m_moveDir: {x: 0, y: 0}
   m_movementFrozen: 0
   m_speed: 5
@@ -5355,9 +5357,10 @@ MonoBehaviour:
   m_buttonHeld: 0
   m_altButtonHeld: 0
   m_grabbedBox: {fileID: 0}
-  m_boxLerpTime: 0
+  m_boxLerpDirection: {x: 0, y: 0, z: 0}
   m_boxLerpStart: {x: 0, y: 0, z: 0}
   m_boxLerpEnd: {x: 0, y: 0, z: 0}
+  m_boxLerpTime: 0
   Sword: {fileID: 4501776720252160402}
   SwordTrailParticle: {fileID: 6291214135650488599}
   SecondarySwordTrail: {fileID: 6291214136538339839}
