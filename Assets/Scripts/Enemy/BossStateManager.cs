@@ -6,6 +6,11 @@ public class BossStateManager : StateManager
 {
     public State rangedAttack;
 
+    private void Start()
+    {
+        
+    }
+
     public override void ChangeState(State.StateType type)
     {
         switch (type)
