@@ -12,7 +12,7 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
 
-    List<GameObject> m_Enemies;
+    List<Enemy> m_Enemies;
     [SerializeField] private GameObject m_EneamyPerent;
     Trap[] m_traps;
     [SerializeField] private GameObject m_TrapPernet;
@@ -20,7 +20,7 @@ public class DungenRoom : MonoBehaviour
     private void Awake()
     {
         m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
-        //Get relivent enaemy script
+        m_Enemies = m_EneamyPerent.GetComponentsInChildren<Enemy>();
     }
 
     private void Start()
