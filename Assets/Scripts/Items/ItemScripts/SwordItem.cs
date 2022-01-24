@@ -8,7 +8,7 @@ public class SwordItem : Item
 {
 
     public float SwordRange;
-
+    public Color MainSwordTrailColor, SecondarySwordTrailColor;
     public override void LeftClickAction(PlayerController pc)
     {
         IHealth.Damage damage = new IHealth.Damage();
@@ -24,6 +24,9 @@ public class SwordItem : Item
         }
         pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
         pc.FreezeMovement();
+        pc.SwordTrailParticle.startColor = MainSwordTrailColor;
+        pc.SecondarySwordTrail.startColor = SecondarySwordTrailColor;
+
         pc.Sword.SetActive(true);
         pc.Sword.GetComponent<Animator>().SetTrigger("SwordAttack");
     }
