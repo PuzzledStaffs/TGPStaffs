@@ -66,9 +66,7 @@ public class Enemy : MonoBehaviour, IHealth
         }
 
 
-
-
-        Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
+        //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
         animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
         if (fieldOfView.inFOV)
         {

@@ -29,8 +29,9 @@ public class RangedAttack : AttackState
         agent.isStopped = true;
         if (cooldown <= 0)
         {
-            GameObject attack = Instantiate(projectile, transform.position, transform.rotation);
+            GameObject attack = Instantiate(projectile, transform.position + new Vector3(0,1.7f,0), transform.rotation);
             attack.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * velocity, ForceMode.Impulse);
+            attack.transform.rotation = (projectile.transform.rotation);
             cooldown = maxCooldown;
         }
     }
