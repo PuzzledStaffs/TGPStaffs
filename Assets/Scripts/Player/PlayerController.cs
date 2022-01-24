@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    int m_health = 100;
+    [SerializeField] int m_health = 100;
     public Action m_Death;
     public Scene currentScene;
 
@@ -372,6 +372,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     IEnumerator DeathCoroutine()
     {
+        m_playerInput.enabled = false;
         animator.SetBool("Dead", true);
         yield return new WaitForSeconds(3.6f);
         Destroy(this.gameObject);

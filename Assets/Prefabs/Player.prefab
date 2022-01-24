@@ -5346,6 +5346,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_model: {fileID: 2168555488193596589}
   m_respawnPosition: {x: 0, y: 0, z: 0}
+  m_health: 5
   currentScene:
     m_Handle: 0
   m_moveDir: {x: 0, y: 0}
