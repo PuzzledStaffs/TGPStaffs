@@ -41,7 +41,7 @@ public class AttackState : State
 
 
         //If enemy is too close, it will stop to attack
-        if (distance < 3.0f)
+        if (distance < 2.0f)
         {
             agent.isStopped = true;
         }
