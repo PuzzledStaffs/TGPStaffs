@@ -9,7 +9,6 @@ TagManager:
   - Enemy
   - KickBox
   - Arrow
-
   layers:
   - Default
   - TransparentFX

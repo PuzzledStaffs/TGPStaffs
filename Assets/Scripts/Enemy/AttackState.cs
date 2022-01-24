@@ -41,7 +41,7 @@ public class AttackState : State
 
 
         //If enemy is too close, it will stop to attack
-        if (distance < 3.0f)
+        if (distance < 2.0f)
         {
             agent.isStopped = true;
         }
@@ -82,6 +82,7 @@ public class AttackState : State
                 IHealth.Damage damageStruct = new IHealth.Damage();
                 damageStruct.damageAmount = damage;
                 damageStruct.type = IHealth.DamageType.ENEMY;
+                yield return new WaitForSeconds(1);
 
                 //Take Damage
                 IHealth health = player.GetComponent<IHealth>();

@@ -18,25 +18,17 @@ public class Arrow : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Enpoint: " + EndPoint);
-        if(transform.position != EndPoint)
+        var Distance = Vector3.Distance(transform.position, EndPoint);
+        Debug.LogWarning("Distance: " + Distance);
+        if (Distance > 1.6f)
         {
             float speed = (bowParent.ArrowSpeed + bowParent.CurrentRange) * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(EndPoint.x,transform.position.y,EndPoint.z), speed);
         }
-        else if(transform.position == EndPoint)
+        else if(Distance <= 1.6f)
         {
             KillArrow();
         }
-
-        var Diff = transform.position - EndPoint;
-        Debug.Log("Diff: " + Diff.normalized);
-
-        if(Diff.magnitude < 1)
-        {
-            KillArrow();
-        }
-
     }
 
     IEnumerator EnableCollider()

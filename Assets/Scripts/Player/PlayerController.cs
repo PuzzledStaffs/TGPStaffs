@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,7 +15,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    int m_health = 100;
+    [SerializeField] int m_health = 100;
+    public Action m_Death;
+    public Scene currentScene;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -26,32 +29,33 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Weapon Wheel")]
     [SerializeField, ReadOnly]
     Vector2 m_pointerPos;
-    [SerializeField]
-    WeaponWheelController m_weaponWheelController;
+   // [SerializeField]
+    public WeaponWheelController m_weaponWheelController;
     public Transform spawnPoint;
+
 
     public bool m_buttonHeld = false;
 
     [Header("Alt Interact")]
     public bool m_altButtonHeld = false;
-    public GameObject m_grabbedBox;
-    [ReadOnly]
-    public float m_boxLerpTime = 0.0f;
+    public Box m_grabbedBox;
+    public Vector3 m_boxLerpDirection;
     public Vector3 m_boxLerpStart;
     public Vector3 m_boxLerpEnd;
+    public float m_boxLerpTime;
 
-    [Header("Weapon Models")]
+    [Header("Weapon Models & Stuff")]
     public GameObject Sword;
+    public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
 
     [Header("Animations")]
     public Animator animator;
 
 
     [Header("UI")]
-    public Slider PowerBar;
     public LineRenderer BowLineRenderer;
 
-    void Start()
+    void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
@@ -65,45 +69,8 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
-        if (!m_movementFrozen)
-        {
-
-            float width = BowLineRenderer.startWidth;
-            BowLineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
-
-
-
-            if (m_grabbedBox != null)
-            {
-                if (transform.position != m_boxLerpEnd)
-                {
-                    //m_boxLerpTime += Time.deltaTime * 5.0f;
-                    //transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, Mathf.Clamp(m_boxLerpTime, 0.0f, 1.0f));
-                    transform.position = Vector3.MoveTowards(transform.position, m_boxLerpEnd, Time.deltaTime * 2.0f); ;
-                }
-                else
-                {
-
-                }
-            }
-            else
-            {
-                // Gravity is handled by Rigidbody
-                m_rigidbody.velocity = new Vector3(m_moveDir.x * m_speed, m_rigidbody.velocity.y, m_moveDir.y * m_speed);
-
-                // Rotates model to face the direction of movement
-                if (m_moveDir.x != 0 || m_moveDir.y != 0)
-                    m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
-
-                //Debug.Log(m_rigidbody.velocity.magnitude);
-                float currentSpeed = m_rigidbody.velocity.magnitude / 10;
-                animator.SetFloat("Speed", currentSpeed);
-            }
-        }
-
         if (m_weaponWheelController.isWheelOpen)
         {
-            Debug.Log(m_playerInput.currentControlScheme);
             Vector2 direction = m_pointerPos;
             switch (m_playerInput.currentControlScheme.ToString().ToLower())
             {
@@ -118,6 +85,80 @@ public class PlayerController : MonoBehaviour, IHealth
                 float angle = Mathf.Atan2(direction.y, direction.x);
                 angle += Mathf.PI;
                 m_weaponWheelController.Pulse(angle);
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
+        if (!m_movementFrozen)
+        {
+
+            float width = BowLineRenderer.startWidth;
+            BowLineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
+
+
+
+            if (m_grabbedBox != null)
+            {
+                if (m_grabbedBox.m_moving)
+                {
+                    if (m_boxLerpTime < 1.0f)
+                    {
+                        m_boxLerpEnd.y = transform.position.y;
+                        transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, m_boxLerpTime);
+                        m_boxLerpTime += Time.deltaTime * 2.0f;
+                    }
+                    else
+                    {
+                        transform.position = m_boxLerpEnd;
+                    }
+                }
+                else
+                {
+                    Vector2 mov = m_moveDir;
+                    if (mov.x != 0.0f || mov.y != 0.0f)
+                    {
+                        if (Mathf.Abs(mov.x) > Mathf.Abs(mov.y))
+                        {
+                            mov.x = mov.x >= 0 ? 1 : -1;
+                            mov.y = 0;
+                        }
+                        else
+                        {
+                            mov.x = 0;
+                            mov.y = mov.y >= 0 ? 1 : -1;
+                        }
+
+                        //Swap mov around as a tile's local x is actually the grid y pos and local z grid x pos
+                        mov = new Vector2(mov.y, mov.x);
+                        Vector3 mov3 = new Vector3(mov.x, 0.0f, mov.y);
+                        if (m_grabbedBox.GetTile(mov3))
+                        {
+                            if (m_boxLerpDirection.x == 0 && m_boxLerpDirection.x == mov3.z ||
+                                m_boxLerpDirection.z == 0 && m_boxLerpDirection.z == mov3.x)
+                            {
+                                m_grabbedBox.Move(mov3);
+                                m_boxLerpStart = transform.position;
+                                m_boxLerpEnd = m_grabbedBox.m_boxLerpEnd + m_boxLerpDirection;
+                                m_boxLerpEnd.y = transform.position.y;
+                                m_boxLerpTime = 0.0f;
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                // Gravity is handled by Rigidbody
+                m_rigidbody.velocity = new Vector3(m_moveDir.x * m_speed, m_rigidbody.velocity.y, m_moveDir.y * m_speed);
+
+                // Rotates model to face the direction of movement
+                if (m_moveDir.x != 0 || m_moveDir.y != 0)
+                    m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
+
+                float currentSpeed = m_rigidbody.velocity.magnitude / 10;
+                animator.SetFloat("Speed", currentSpeed);
             }
         }
     }
@@ -148,9 +189,7 @@ public class PlayerController : MonoBehaviour, IHealth
     /// Unity Input Action callback for movement
     /// </summary>
     public void OnPointerMove(InputAction.CallbackContext ctx)
-    {
-        //Debug.Log("Pointer Move");
-        //Debug.Log(ctx.ReadValue<Vector2>());
+    {     
         m_pointerPos = ctx.ReadValue<Vector2>();
     }
 
@@ -216,15 +255,27 @@ public class PlayerController : MonoBehaviour, IHealth
                 {
                     if (col.CompareTag("Box"))
                     {
-                        m_grabbedBox = col.gameObject;
-                        Vector3 direction = m_grabbedBox.transform.position - transform.position;
-                        direction.Normalize();
-                        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+                        m_grabbedBox = col.GetComponent<Box>();
+                        m_boxLerpDirection = m_grabbedBox.transform.position - transform.position;
+                        m_boxLerpDirection.y = 0.0f;
+                        m_boxLerpDirection.Normalize();
+                        if (Mathf.Abs(m_boxLerpDirection.x) > Mathf.Abs(m_boxLerpDirection.z))
+                        {
+                            m_boxLerpDirection.x = m_boxLerpDirection.x >= 0 ? -1 : 1;
+                            m_boxLerpDirection.z = 0;
+                        }
+                        else
+                        {
+                            m_boxLerpDirection.x = 0;
+                            m_boxLerpDirection.z = m_boxLerpDirection.z >= 0 ? -1 : 1;
+                        }
+                        /*if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
                             m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
                         else
-                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
-                        m_boxLerpStart = transform.position;
-                        m_boxLerpTime = 0.0f;
+                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);*/
+                        m_boxLerpEnd = m_grabbedBox.transform.position + m_boxLerpDirection;
+                        m_boxLerpEnd.y = transform.position.y;
+                        transform.position = m_boxLerpEnd;
                         m_altButtonHeld = true;
                         break;
                     }
@@ -321,13 +372,19 @@ public class PlayerController : MonoBehaviour, IHealth
 
     IEnumerator DeathCoroutine()
     {
-        yield return new WaitForSeconds(1);
-        Restart();
+        m_playerInput.enabled = false;
+        animator.SetBool("Dead", true);
+        yield return new WaitForSeconds(3.6f);
+        Destroy(this.gameObject);
+        m_Death?.Invoke();
+        //Restart();
     }
 
     public void Restart()
     {
-        Debug.Log("Player dead");
+        //Debug.Log("Player dead");
+
+        
 
         /* /// Commented out so as not to randomly respawn people to the test scene
          * code works
