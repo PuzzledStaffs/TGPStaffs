@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("UI")]
     public LineRenderer BowLineRenderer;
 
-    void Start()
+    void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
