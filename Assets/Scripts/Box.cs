@@ -22,11 +22,11 @@ public class Box : MonoBehaviour
         m_tiles = m_myRoom.transform.Find("Floor").Find("Box Tiles");
         xOffset = m_myRoom.m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
         yOffset = m_myRoom.m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
-        m_boxLerpStart = transform.localPosition;
-        m_boxLerpEnd = transform.localPosition;
+        m_boxLerpStart = transform.position;
+        m_boxLerpEnd = transform.position;
         m_boxLerpTime = 0.0f;
         m_moving = false;
-        if (!GetTile(transform.localPosition))
+        if (!GetTile(new Vector3()))
         {
             Debug.LogError("Box is not on a tile");
             gameObject.SetActive(false);
@@ -40,21 +40,22 @@ public class Box : MonoBehaviour
         {
             if (m_boxLerpTime < 1.0f)
             {
-                m_boxLerpEnd.y = transform.localPosition.y;
-                transform.localPosition = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, m_boxLerpTime);
+                m_boxLerpEnd.y = transform.position.y;
+                transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, m_boxLerpTime);
                 m_boxLerpTime += Time.deltaTime * 2.0f;
             } else
             {
-                transform.localPosition = m_boxLerpEnd;
+                transform.position = m_boxLerpEnd;
                 m_moving = false;
             }
 
         }
     }
 
-    public bool GetTile(Vector3 pos)
+    public bool GetTile(Vector3 offset)
     {
-        int pX = Mathf.RoundToInt(pos.x - xOffset), pZ = Mathf.RoundToInt(pos.z - yOffset);
+        Vector3 localOffset = transform.InverseTransformDirection(offset);
+        int pX = Mathf.RoundToInt(transform.localPosition.x + localOffset.x - xOffset), pZ = Mathf.RoundToInt(transform.localPosition.z + localOffset.z - yOffset);
         foreach (Transform tr in m_tiles)
         {
             int tX = Mathf.RoundToInt(tr.localPosition.x - xOffset), tZ = Mathf.RoundToInt(tr.localPosition.z - yOffset);
@@ -64,10 +65,10 @@ public class Box : MonoBehaviour
         return false;
     }
 
-    public void Move(Vector2 mov)
+    public void Move(Vector3 mov)
     {
-        m_boxLerpStart = transform.localPosition;
-        m_boxLerpEnd = new Vector3(transform.localPosition.x + mov.x, transform.localPosition.y, transform.localPosition.z + mov.y);
+        m_boxLerpStart = transform.position;
+        m_boxLerpEnd = new Vector3(transform.position.x + mov.x, transform.position.y, transform.position.z + mov.z);
         m_boxLerpTime = 0.0f;
         m_moving = true;
     }

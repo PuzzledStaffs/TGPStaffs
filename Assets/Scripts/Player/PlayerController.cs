@@ -93,21 +93,40 @@ public class PlayerController : MonoBehaviour, IHealth
                             mov.x = 0;
                             mov.y = mov.y >= 0 ? 1 : -1;
                         }
-                        float temp = mov.y;
+                        /*float temp = mov.y;
                         mov.y = mov.x;
-                        mov.x = -temp;
+                        mov.x = -temp;*/
 
-                        if (m_grabbedBox.GetTile(m_grabbedBox.transform.localPosition + new Vector3(mov.x, 0.0f, mov.y)))
+                        Debug.Log(mov);
+                        Vector3 mov3 = new Vector3(mov.x, 0.0f, mov.y);
+                        if (m_grabbedBox.GetTile(mov3))
                         {
-                            m_grabbedBox.Move(mov);
+                            m_grabbedBox.Move(mov3);
 
                             /*Vector3 direction = m_grabbedBox.transform.position - transform.position;
                             direction.Normalize();
+
+                            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                            {
+                                direction.x = direction.x >= 0 ? 1 : -1;
+                                direction.y = 0;
+                            }
+                            else
+                            {
+                                direction.x = 0;
+                                direction.y = direction.y >= 0 ? 1 : -1;
+                            }
+
+                            Debug.Log("");
+                            Debug.Log(mov);
+                            Debug.Log(direction);
+
                             if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
                                 m_boxLerpEnd = new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
                             else
                                 m_boxLerpEnd = new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
-                            m_boxLerpEnd += m_grabbedBox.transform.localPosition + new Vector3(mov.x, 0.0f, mov.y);*/
+                            */
+                            //m_boxLerpEnd = m_grabbedBox.transform.localPosition + new Vector3(mov.x, 0.0f, mov.y);
                         }
                     }
                 }
