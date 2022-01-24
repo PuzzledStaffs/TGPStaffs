@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Box
   - SwordItem
+  - Enemy
+  - KickBox
+  - Arrow
   layers:
   - Default
   - TransparentFX

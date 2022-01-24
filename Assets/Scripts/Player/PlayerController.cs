@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
-    [Header("Components"), SerializeField]
-    private Rigidbody m_rigidbody;
+    [Header("Components")]
     public GameObject m_model;
+    private Rigidbody m_rigidbody;
+    private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
@@ -24,8 +26,9 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Weapon Wheel")]
     [SerializeField, ReadOnly]
     Vector2 m_pointerPos;
-    [SerializeField]
-    WeaponWheelController m_weaponWheelController;
+   // [SerializeField]
+    public WeaponWheelController m_weaponWheelController;
+    public Transform spawnPoint;
 
     public bool m_buttonHeld = false;
 
@@ -37,16 +40,22 @@ public class PlayerController : MonoBehaviour, IHealth
     public Vector3 m_boxLerpEnd;
     public float m_boxLerpTime;
 
-    [Header("Weapon Models")]
+    [Header("Weapon Models & Stuff")]
     public GameObject Sword;
+    public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
 
     [Header("Animations")]
     public Animator animator;
 
 
+    [Header("UI")]
+    public LineRenderer BowLineRenderer;
 
     void Start()
     {
+        m_rigidbody = GetComponent<Rigidbody>();
+        m_playerInput = GetComponent<PlayerInput>();
+
         Cursor.lockState = CursorLockMode.Locked;
 #if !UNITY_EDITOR
         Cursor.visible = false;
@@ -58,7 +67,15 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         if (m_weaponWheelController.isWheelOpen)
         {
-            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+            Vector2 direction = m_pointerPos;
+            switch (m_playerInput.currentControlScheme.ToString().ToLower())
+            {
+                case "controller":
+                    break;
+                default:
+                    direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+                    break;
+            }
             if (direction.x != 0 && direction.y != 0)
             {
                 float angle = Mathf.Atan2(direction.y, direction.x);
@@ -72,6 +89,12 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         if (!m_movementFrozen)
         {
+
+            float width = BowLineRenderer.startWidth;
+            BowLineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
+
+
+
             if (m_grabbedBox != null)
             {
                 if (m_grabbedBox.m_moving)
@@ -162,7 +185,7 @@ public class PlayerController : MonoBehaviour, IHealth
     /// Unity Input Action callback for movement
     /// </summary>
     public void OnPointerMove(InputAction.CallbackContext ctx)
-    {
+    {     
         m_pointerPos = ctx.ReadValue<Vector2>();
     }
 
@@ -319,9 +342,9 @@ public class PlayerController : MonoBehaviour, IHealth
         return health;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(IHealth.Damage damage)
     {
-        m_health -= damage;
+        m_health -= damage.damageAmount;
 
         if (isDead())
         {
@@ -352,10 +375,14 @@ public class PlayerController : MonoBehaviour, IHealth
     public void Restart()
     {
         Debug.Log("Player dead");
+
+        /* /// Commented out so as not to randomly respawn people to the test scene
+         * code works
         //TODO: Change this to appropriate scene or add other code
         // Play death animation
         // Reload Scene
         SceneManager.LoadScene("IzzyScene");
+        */
     }
     #endregion
 }

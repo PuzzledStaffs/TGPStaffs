@@ -21,6 +21,9 @@ public class WeaponWheelController : MonoBehaviour
     public int currentIndex = 0;
     public int selectedIndex = 0;
 
+    public WeaponButtonInfo[] Buttons;
+    public ItemUnlockedUI ItemUnlockedUI;
+
     private void Start()
     {
         buttons = new List<Button>();

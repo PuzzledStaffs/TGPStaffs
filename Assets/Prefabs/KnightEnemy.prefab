@@ -999,12 +999,11 @@ GameObject:
   - component: {fileID: 5516742853000973421}
   - component: {fileID: 5516742853000973418}
   - component: {fileID: 5516742853000973419}
-  - component: {fileID: 5516742853000973416}
   - component: {fileID: 5516742853000973410}
   - component: {fileID: 5516742853000973413}
   m_Layer: 0
   m_Name: KnightEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1035,8 +1034,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.75, y: 2.5, z: 0.75}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &5516742853000973423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,7 +1050,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   e: {fileID: 5516742853000973419}
   idle: {fileID: 5516742853000973421}
-  attack: {fileID: 5516742853000973416}
+  attack: {fileID: 0}
   roam: {fileID: 5516742853000973420}
 --- !u!114 &5516742853000973420
 MonoBehaviour:
@@ -1099,6 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAngle: 45
   radius: 10
+  target: {fileID: 0}
   inFOV: 0
 --- !u!114 &5516742853000973419
 MonoBehaviour:
@@ -1112,27 +1112,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d377c26e37771438057e007d9e9006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_health: 20
   manager: {fileID: 5516742853000973423}
   fieldOfView: {fileID: 5516742853000973418}
   animator: {fileID: 5516742853000973413}
---- !u!114 &5516742853000973416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5516742853000973417}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1855ad7ab7bebb43b8f1391148da8ea, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  manager: {fileID: 5516742853000973423}
-  player: {fileID: 0}
-  cooldown: 5
-  animationTime: 2
-  damage: 100
-  distance: 0
 --- !u!195 &5516742853000973410
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1152,7 +1135,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 1
-  m_BaseOffset: 0.5
+  m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!95 &5516742853000973413
