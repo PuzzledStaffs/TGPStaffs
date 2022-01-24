@@ -3572,7 +3572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23432172dedb8e468af0debbda8c874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WheelItem: {fileID: 11400000, guid: b37193148d3c6794cb35ed8bcf95358c, type: 2}
+  WheelItem: {fileID: 11400000, guid: ff9b31f6ac6d7564f8e47a0c3128a89a, type: 2}
   WheelIcon: {fileID: 7848752254040882688}
   LockIconImage: {fileID: 3991566868421195125}
   ItemBlocked: 0
