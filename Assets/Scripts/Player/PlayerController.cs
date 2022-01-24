@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
     int m_health = 100;
+    public Action m_Death;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -375,7 +377,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void Restart()
     {
-        Debug.Log("Player dead");
+        //Debug.Log("Player dead");
+
+        m_Death?.Invoke();
 
         /* /// Commented out so as not to randomly respawn people to the test scene
          * code works
