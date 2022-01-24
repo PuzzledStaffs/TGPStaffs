@@ -1310,7 +1310,7 @@ MonoBehaviour:
   manager: {fileID: 5516742853000973423}
   player: {fileID: 0}
   cooldown: 5
-  maxCooldown: 0
+  maxCooldown: 2
   animationTime: 2
   damage: 1
   distance: 10
