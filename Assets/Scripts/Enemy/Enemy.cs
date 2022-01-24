@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour, IHealth
     public StateManager manager;
     public FOV fieldOfView;
     public Animator animator;
-    public Action m_deadEvent; 
+    public Action<GameObject> m_deadEvent; 
 
     public int GetHealth()
     {
@@ -80,7 +80,7 @@ public class Enemy : MonoBehaviour, IHealth
     {
         this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
-        m_deadEvent?.Invoke();
+        m_deadEvent?.Invoke(gameObject);
         animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
