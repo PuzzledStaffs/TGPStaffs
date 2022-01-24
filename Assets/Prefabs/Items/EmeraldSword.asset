@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6c9f63861dad47448c5cbfb6fd92d7b, type: 3}
-  m_Name: StoneSword
+  m_Name: EmeraldSword
   m_EditorClassIdentifier: 
-  name: Stone Sword
-  ItemIcon: {fileID: 21300000, guid: d239a8c3ea415be459bb9b8242245f80, type: 3}
-  ItemDamage: 10
+  name: Emerald Sword
+  ItemIcon: {fileID: 21300000, guid: 7ce25ff0fd0ce7e449dfec3a1d363e60, type: 3}
+  ItemDamage: 15
   CombatType: 0
   MaxCooldown: 0.75
   ItemSound: {fileID: 8300000, guid: 03465edbfaf488f42b44c540c71a03bf, type: 3}
   CanUse: 1
   ItemHold: 0
   SwordRange: 1
-  MainSwordTrailColor: {r: 0, g: 0.932251, b: 1, a: 1}
-  SecondarySwordTrailColor: {r: 0.00965023, g: 0, b: 1, a: 1}
+  MainSwordTrailColor: {r: 0, g: 1, b: 0.29917955, a: 1}
+  SecondarySwordTrailColor: {r: 0, g: 0, b: 0, a: 1}
