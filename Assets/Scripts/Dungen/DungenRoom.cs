@@ -12,7 +12,7 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
 
-    List<Enemy> m_Enemies;
+    Enemy[] m_Enemies;
     [SerializeField] private GameObject m_EneamyPerent;
     Trap[] m_traps;
     [SerializeField] private GameObject m_TrapPernet;
@@ -120,6 +120,10 @@ public class DungenRoom : MonoBehaviour
     {
         //Called after camra has finished moving and player unlocked
         m_Camera.m_Locked = false;
+        foreach(Enemy enemy in m_Enemies)
+        {
+
+        }
     }
 
     private void RoomExited()
@@ -138,7 +142,10 @@ public class DungenRoom : MonoBehaviour
     private void FrezzeExatingRoom()
     {
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
+        foreach (Enemy enemy in m_Enemies)
+        {
 
+        }
     }
     #endregion
 
