@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class DungenRoom : MonoBehaviour
 {
@@ -13,14 +14,20 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsOut;
 
     Enemy[] m_Enemies;
+    IdleState[] m_EnemiesIdle;
     [SerializeField] private GameObject m_EneamyPerent;
     Trap[] m_traps;
     [SerializeField] private GameObject m_TrapPernet;
+
+    public UnityEvent m_roomCleard;
+    int m_enemyCount;
 
     private void Awake()
     {
         m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
         m_Enemies = m_EneamyPerent.GetComponentsInChildren<Enemy>();
+        m_EnemiesIdle = m_EneamyPerent.GetComponentsInChildren<IdleState>();
+        m_enemyCount = m_Enemies.Length;
     }
 
     private void Start()
@@ -29,9 +36,16 @@ public class DungenRoom : MonoBehaviour
         {
             m_Camera = Camera.main.GetComponent<DungonCamaraControler>();
         }
-
+        foreach (IdleState enemy in m_EnemiesIdle)
+        {
+            enemy.isIdle = true;
+        }
+        foreach (Enemy enemy in m_Enemies)
+        {
+            enemy.m_deadEvent += EnameyDie;
+        }
         //Set door
-        foreach(DungenDoor door in m_doorsIn)
+        foreach (DungenDoor door in m_doorsIn)
         {
             
             switch(door.m_doorLoaction)
@@ -120,9 +134,9 @@ public class DungenRoom : MonoBehaviour
     {
         //Called after camra has finished moving and player unlocked
         m_Camera.m_Locked = false;
-        foreach(Enemy enemy in m_Enemies)
+        foreach (IdleState enemy in m_EnemiesIdle)
         {
-
+            enemy.isIdle = false;
         }
     }
 
@@ -144,12 +158,19 @@ public class DungenRoom : MonoBehaviour
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
         foreach (Enemy enemy in m_Enemies)
         {
-
+            enemy.GetComponent<StateManager>().ChangeState(State.StateType.IDLE);
         }
     }
     #endregion
 
-
+    private void EnameyDie()
+    {
+        m_enemyCount--;
+        if(m_enemyCount <= 0)
+        {
+            m_roomCleard?.Invoke();
+        }
+    }
 
     #region Floor Generation
 #if UNITY_EDITOR

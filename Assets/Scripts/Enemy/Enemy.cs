@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class Enemy : MonoBehaviour, IHealth
     public StateManager manager;
     public FOV fieldOfView;
     public Animator animator;
+    public Action m_deadEvent; 
 
     public int GetHealth()
     {
@@ -78,6 +80,7 @@ public class Enemy : MonoBehaviour, IHealth
     {
         this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
+        m_deadEvent?.Invoke();
         animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
@@ -87,7 +90,7 @@ public class Enemy : MonoBehaviour, IHealth
 
     void RandomDeathAnim()
     {
-        int random = Random.Range(0, 2);
+        int random = UnityEngine.Random.Range(0, 2);
         animator.SetInteger("DeathAnim", random);
         Debug.Log(random);
     }
