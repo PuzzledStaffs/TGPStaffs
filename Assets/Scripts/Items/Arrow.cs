@@ -9,27 +9,43 @@ public class Arrow : MonoBehaviour
     public Vector3 EndPoint;
  
 
+
+    private void Start()
+    {
+        StartCoroutine(EnableCollider());
+    }
+
+
     void Update()
     {
         Debug.Log("Enpoint: " + EndPoint);
         if(transform.position != EndPoint)
         {
             float speed = (bowParent.ArrowSpeed + bowParent.CurrentRange) * Time.deltaTime;
-            transform.position = Vector3.MoveTowards(transform.position, EndPoint, speed);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(EndPoint.x,transform.position.y,EndPoint.z), speed);
         }
-        else if(transform.position == EndPoint)
+        else if(transform.position == EndPoint + new Vector3(0,1,0))
         {
             KillArrow();
         }
 
+
+        
         var Diff = transform.position - EndPoint;
-        Debug.Log("Diff: " + Diff.normalized);
 
-        if(Diff.magnitude < 2)
+
+
+        if(Diff.magnitude < 1)
         {
             KillArrow();
         }
 
+    }
+
+    IEnumerator EnableCollider()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<BoxCollider>().enabled = true;
     }
 
     public void KillArrow()
@@ -47,5 +63,6 @@ public class Arrow : MonoBehaviour
 
         collision.gameObject.GetComponent<IInteractable>()?.Interact();
         collision.gameObject.GetComponent<IHealth>()?.TakeDamage(damage);
+        KillArrow();
     }
 }

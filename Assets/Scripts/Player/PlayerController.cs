@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
@@ -46,6 +47,9 @@ public class PlayerController : MonoBehaviour, IHealth
     public Animator animator;
 
 
+    [Header("UI")]
+    public Slider PowerBar;
+    public LineRenderer BowLineRenderer;
 
     void Start()
     {
@@ -63,6 +67,12 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         if (!m_movementFrozen)
         {
+
+            float width = BowLineRenderer.startWidth;
+            BowLineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
+
+
+
             if (m_grabbedBox != null)
             {
                 if (transform.position != m_boxLerpEnd)

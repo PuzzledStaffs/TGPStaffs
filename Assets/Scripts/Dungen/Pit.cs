@@ -11,6 +11,7 @@ public class Pit : MonoBehaviour
         damage.type = IHealth.DamageType.ENVIRONMENT;
         if (other.tag == "Player")
         {
+            
             other.transform.GetComponent<PlayerController>().Respawn();
             other.transform.GetComponent<PlayerController>().TakeDamage(damage);
         }
