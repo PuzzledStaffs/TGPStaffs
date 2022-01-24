@@ -6,7 +6,7 @@ using UnityEngine;
 public class DungenRoom : MonoBehaviour
 {
     [SerializeField] private DungonCamaraControler m_Camera;
-    [SerializeField] private RoomType m_RoomType;
+    [SerializeField] public RoomType m_RoomType;
     [SerializeField] private GameObject m_origin;
     [SerializeField] private bool m_PlayerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
@@ -157,6 +157,7 @@ public class DungenRoom : MonoBehaviour
     public GameObject lavaTilePrefab;
     public GameObject boxTilePrefab;
     public GameObject pitTilePrefab;
+    public PhysicMaterial frictionless;
 
     public void ResetFloor()
     {
@@ -181,6 +182,14 @@ public class DungenRoom : MonoBehaviour
             DestroyImmediate(pit.GetComponent<BoxCollider>());
         pit.GetComponent<MeshFilter>().sharedMesh = null;
         pit.GetComponent<MeshCollider>().sharedMesh = null;
+
+        Transform box = transform.Find("Floor").Find("Box Tiles");
+        while (box.childCount > 0)
+            DestroyImmediate(box.GetChild(0).gameObject);
+        while (box.GetComponent<BoxCollider>() != null)
+            DestroyImmediate(box.GetComponent<BoxCollider>());
+        box.GetComponent<MeshFilter>().sharedMesh = null;
+        box.GetComponent<MeshCollider>().sharedMesh = null;
     }
 
     /// <summary>
@@ -192,6 +201,7 @@ public class DungenRoom : MonoBehaviour
         Transform tiles = transform.Find("Floor").Find("Tiles");
         Transform lava = transform.Find("Floor").Find("Lava");
         Transform pit = transform.Find("Floor").Find("Pit");
+        Transform boxTiles = transform.Find("Floor").Find("Box Tiles");
 
         float xOffset = m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
         float yOffset = m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
@@ -206,6 +216,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(tilePrefab);
                             tile.transform.SetParent(tiles);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
@@ -213,13 +224,15 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(lavaTilePrefab);
                             tile.transform.SetParent(lava);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
                     case DungeonEditorWindow.TileType.Box:
                         {
                             GameObject tile = Instantiate(boxTilePrefab);
-                            tile.transform.SetParent(tiles);
+                            tile.transform.SetParent(boxTiles);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             break;
                         }
@@ -227,6 +240,7 @@ public class DungenRoom : MonoBehaviour
                         {
                             GameObject tile = Instantiate(pitTilePrefab);
                             tile.transform.SetParent(pit);
+                            tile.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                             tile.transform.localPosition = new Vector3(y + xOffset, tile.transform.localPosition.y, x + yOffset);
                             OrganiseTile(map, x, y, tile.transform.Find("Model"));
                             tile.transform.localRotation = Quaternion.Euler(0.0f, 90.0f, 0.0f);
@@ -265,6 +279,21 @@ public class DungenRoom : MonoBehaviour
                 box.isTrigger = true;
             }
             CombineMesh(pit);
+        }
+
+        if (boxTiles.childCount > 0)
+        {
+            /*foreach (BoxCollider col in boxTiles.GetComponentsInChildren<BoxCollider>())
+            {
+                BoxCollider box = boxTiles.gameObject.AddComponent<BoxCollider>();
+                box.center = -(col.center - col.gameObject.transform.localPosition);
+                box.center += new Vector3(0.0f, 2 * col.center.y, 0.0f);
+                box.size = new Vector3(col.size.x * col.gameObject.transform.localScale.x,
+                    col.size.y * col.gameObject.transform.localScale.y,
+                    col.size.z * col.gameObject.transform.localScale.z);
+                box.material = frictionless;
+            }
+            CombineMesh(boxTiles);*/
         }
     }
 
