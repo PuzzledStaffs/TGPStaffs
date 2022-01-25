@@ -6,40 +6,33 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    public static bool GamePaused = false;
+    public static bool m_gamePaused = false;
+    public GameObject m_pauseMenu;
 
-    public GameObject pauseMenu;
-
-    // Update is called once per frame
-    void Update()
+    public void Toggle()
     {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    if (GamePaused)
-        //    {
-        //        ResumeGame();
-
-        //    }
-        //    else
-        //    {
-        //        PauseGame();
-        //    }
-        //}
-
+        if (m_gamePaused)
+            ResumeGame();
+        else
+            PauseGame();
     }
 
-    private void PauseGame()
+    private void ResumeGame()
     {
-        pauseMenu.SetActive(false);
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        m_pauseMenu.SetActive(false);
         Time.timeScale = 1f;
-        GamePaused = false;
+        m_gamePaused = false;
     }
 
-    public void ResumeGame()
+    public void PauseGame()
     {
-        pauseMenu.SetActive(true);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
+        m_pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        GamePaused = true;
+        m_gamePaused = true;
     }
 
     public void BackToMainMenu()
