@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Weapon Wheel")]
     [SerializeField, ReadOnly]
     Vector2 m_pointerPos;
-   // [SerializeField]
+    // [SerializeField]
     public WeaponWheelController m_weaponWheelController;
     public Transform spawnPoint;
 
@@ -93,11 +93,8 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         if (!m_movementFrozen)
         {
-
             float width = BowLineRenderer.startWidth;
             BowLineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
-
-
 
             if (m_grabbedBox != null)
             {
@@ -133,10 +130,19 @@ public class PlayerController : MonoBehaviour, IHealth
                         //Swap mov around as a tile's local x is actually the grid y pos and local z grid x pos
                         mov = new Vector2(mov.y, mov.x);
                         Vector3 mov3 = new Vector3(mov.x, 0.0f, mov.y);
-                        if (m_grabbedBox.GetTile(mov3))
+                        if (m_grabbedBox.IsValidTile(mov3))
                         {
-                            if (m_boxLerpDirection.x == 0 && m_boxLerpDirection.x == mov3.z ||
-                                m_boxLerpDirection.z == 0 && m_boxLerpDirection.z == mov3.x)
+                            bool valid = true;
+                            foreach (Box box in m_grabbedBox.transform.parent.GetComponentsInChildren<Box>())
+                                if (box.Occupies(m_grabbedBox.GetTileX(mov3), m_grabbedBox.GetTileY(mov3)))
+                                {
+                                    valid = false;
+                                    break;
+                                }
+
+                            if (valid &&
+                                (m_boxLerpDirection.x == 0 && m_boxLerpDirection.x == mov3.z ||
+                                    m_boxLerpDirection.z == 0 && m_boxLerpDirection.z == mov3.x))
                             {
                                 m_grabbedBox.Move(mov3);
                                 m_boxLerpStart = transform.position;
@@ -189,7 +195,7 @@ public class PlayerController : MonoBehaviour, IHealth
     /// Unity Input Action callback for movement
     /// </summary>
     public void OnPointerMove(InputAction.CallbackContext ctx)
-    {     
+    {
         m_pointerPos = ctx.ReadValue<Vector2>();
     }
 
@@ -251,7 +257,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 if (m_buttonHeld || m_weaponWheelController.isWheelOpen)
                     break;
 
-                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(1.0f, 1.0f, 1.0f) / 2, m_model.transform.rotation))
+                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(0.5f, 0.5f, 0.5f) / 2, m_model.transform.rotation))
                 {
                     if (col.CompareTag("Box"))
                     {
@@ -269,10 +275,7 @@ public class PlayerController : MonoBehaviour, IHealth
                             m_boxLerpDirection.x = 0;
                             m_boxLerpDirection.z = m_boxLerpDirection.z >= 0 ? -1 : 1;
                         }
-                        /*if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
-                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
-                        else
-                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);*/
+
                         m_boxLerpEnd = m_grabbedBox.transform.position + m_boxLerpDirection;
                         m_boxLerpEnd.y = transform.position.y;
                         transform.position = m_boxLerpEnd;
