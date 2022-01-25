@@ -5441,46 +5441,6 @@ MonoBehaviour:
     m_ActionId: 2dd9ae26-1670-422b-828c-37ec53931a13
     m_ActionName: Player/WeaponWheel[/Keyboard/tab]
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3e2a9089-5bb8-4708-949e-756a3a50713c
-    m_ActionName: UI/Navigate
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ef972b00-f7aa-4b2f-a361-365edd7155e5
-    m_ActionName: UI/Submit[/Keyboard/enter]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ff7f2469-e91f-4ad0-91a7-7c388563ddc3
-    m_ActionName: UI/Cancel[/Keyboard/escape]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 09c2b95d-8992-4f72-89e8-9902864a841c
-    m_ActionName: UI/Point
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3166521f-5405-4c2c-a09b-187fc0f8f102
-    m_ActionName: UI/Click
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 4dcb223e-c0f5-46db-a425-f11228e46101
-    m_ActionName: UI/ScrollWheel
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 2d20f598-1d37-4259-9a7c-2665c3d10060
-    m_ActionName: UI/MiddleClick
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: c4f5b7f5-2e6d-4e5c-934d-10020a2a7a43
-    m_ActionName: UI/RightClick
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 628e7a77-fca1-4a3e-88fc-b6a7a3c67e1a
-    m_ActionName: UI/TrackedDevicePosition
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 952b2a9b-b7d7-4438-9b91-a2cf8b8a0940
-    m_ActionName: UI/TrackedDeviceOrientation
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 551475354}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
@@ -5512,9 +5472,13 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 2f12e357-1019-45ad-9b99-70dbf53317a4
     m_ActionName: Player/Alt Interact[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 17765bfc-8257-4ec5-9791-d731d0c4aa7f
+    m_ActionName: Player/Pause[/Keyboard/escape]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard And Mouse
-  m_DefaultActionMap: Player
+  m_DefaultActionMap: 399e18a1-9e77-47ba-9dae-00f64cadd887
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!95 &3050296412220420482

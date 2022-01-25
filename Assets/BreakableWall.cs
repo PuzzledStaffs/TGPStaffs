@@ -8,7 +8,7 @@ public class BreakableWall : MonoBehaviour, IHealth
     public void TakeDamage(IHealth.Damage damage)
     {
         if (damage.type == IHealth.DamageType.BOMB)
-        {//gameObject.SetActive(false);
+        {
             gameObject.GetComponent<MeshRenderer>().enabled = false;
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }

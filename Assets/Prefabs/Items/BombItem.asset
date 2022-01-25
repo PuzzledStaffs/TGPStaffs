@@ -20,5 +20,6 @@ MonoBehaviour:
   ItemSound: {fileID: 0}
   CanUse: 1
   ItemHold: 0
-  bombItem: {fileID: 8587875842583300380, guid: a9357974655a48140a40fb2d603dc39a, type: 3}
-  moveForce: 10
+  m_bombItem: {fileID: 8587875842583300380, guid: a9357974655a48140a40fb2d603dc39a, type: 3}
+  m_moveForce: 10
+  m_radius: 3
