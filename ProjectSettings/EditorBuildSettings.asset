@@ -20,4 +20,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Dunges/Dungen1.1.unity
     guid: ff354d74a5a742147840ecd29e58ee58
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 1d5f14bf74b0ebd4fb714d2b87d7c1a3, type: 2}

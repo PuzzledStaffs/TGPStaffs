@@ -198,6 +198,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnUse(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
@@ -241,6 +244,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnAltInteract(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
@@ -300,6 +306,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnToggleWeaponWheel(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
