@@ -29,11 +29,8 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Weapon Wheel")]
     [SerializeField, ReadOnly]
     Vector2 m_pointerPos;
-    // [SerializeField]
     public WeaponWheelController m_weaponWheelController;
     public Transform spawnPoint;
-
-
     public bool m_buttonHeld = false;
 
     [Header("Alt Interact")]
@@ -51,7 +48,6 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Animations")]
     public Animator animator;
 
-
     [Header("UI")]
     public LineRenderer BowLineRenderer;
 
@@ -61,9 +57,7 @@ public class PlayerController : MonoBehaviour, IHealth
         m_playerInput = GetComponent<PlayerInput>();
 
         Cursor.lockState = CursorLockMode.Locked;
-#if !UNITY_EDITOR
         Cursor.visible = false;
-#endif
         m_respawnPosition = transform.position;
     }
 
@@ -204,6 +198,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnUse(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
@@ -240,7 +237,6 @@ public class PlayerController : MonoBehaviour, IHealth
             default:
                 break;
         }
-
     }
 
     /// <summary>
@@ -248,6 +244,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnAltInteract(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
@@ -300,7 +299,6 @@ public class PlayerController : MonoBehaviour, IHealth
             default:
                 break;
         }
-
     }
 
     /// <summary>
@@ -308,6 +306,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnToggleWeaponWheel(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
