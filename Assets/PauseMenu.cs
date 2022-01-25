@@ -17,7 +17,7 @@ public class PauseMenu : MonoBehaviour
             PauseGame();
     }
 
-    private void ResumeGame()
+    public void ResumeGame()
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
