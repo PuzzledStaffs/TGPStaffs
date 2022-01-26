@@ -130,7 +130,7 @@ public class DungenRoom : MonoBehaviour
         }
     }
 
-    private void UnFrezeRoom()
+    public void UnFrezeRoom()
     {
         //Called after camra has finished moving and player unlocked
         m_Camera.m_Locked = false;
@@ -153,12 +153,18 @@ public class DungenRoom : MonoBehaviour
         }
     }
 
-    private void FrezzeExatingRoom()
+    public void FrezzeExatingRoom()
     {
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
         foreach (Enemy enemy in m_Enemies)
         {
             enemy.GetComponent<StateManager>().ChangeState(State.StateType.IDLE);
+            
+        }
+
+        foreach (IdleState enemy in m_EnemiesIdle)
+        {
+            enemy.isIdle = true;
         }
     }
     #endregion
