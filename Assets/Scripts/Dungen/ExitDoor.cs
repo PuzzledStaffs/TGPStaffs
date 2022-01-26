@@ -13,4 +13,51 @@ public class ExitDoor : DungenDoor
         SceneManager.LoadScene(ExitScene);
         yield return new WaitForEndOfFrame();
     }
+
+    protected override void CheckDoorSet()
+    {
+        if (m_locked)
+        {
+            ShowLocks();
+        }
+        else
+        {
+            HideLocks();
+        }
+
+        if (m_ClosedOnStart || m_locked)
+        {
+            CloseDoor();
+
+        }       
+        else
+        {
+            OpenDoor();
+        }
+    }
+
+    public override void Interact()
+    {
+        if (m_dungenManager.UseKey())
+        {
+            m_locked = false;
+            HideLocks();
+            OpenDoor();
+        }
+    }
+
+    public override void OpenDoor()
+    {
+        if (!m_locked)
+        {
+            m_doorActive = true;
+            m_doorRenderer.material = m_DoorOpen;
+            m_DoorColider.isTrigger = true;
+
+        }
+        else if (m_locked)
+        {
+            return;
+        }
+    }
 }
