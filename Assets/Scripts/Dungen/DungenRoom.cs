@@ -77,6 +77,10 @@ public class DungenRoom : MonoBehaviour
             FrezzeExatingRoom();
             RoomExited();
         }
+        if (m_enemyCount <= 0)
+        {
+            m_roomCleard?.Invoke();
+        }
     }
 
     public void StartRoom()
