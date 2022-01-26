@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour, IHealth
         return m_health;
     }
 
-    public bool isDead()
+    public bool IsDead()
     {
         if (m_health <= 0)
         {
@@ -36,14 +36,14 @@ public class Enemy : MonoBehaviour, IHealth
 
     public virtual void TakeDamage(IHealth.Damage damage)
     {
-        if (isDead()) { return; }
+        if (IsDead()) { return; }
 
         
 
         m_health -= damage.damageAmount;
         animator.SetTrigger("TakeDamage");
 
-        if (isDead())
+        if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
         }
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour, IHealth
     void Update()
     {
 
-        if (isDead())
+        if (IsDead())
         {
             GetComponent<NavMeshAgent>().isStopped = true;
             GetComponent<NavMeshAgent>().speed = 0;
