@@ -7,6 +7,7 @@ public class BombItem : Item
 {
     public GameObject bombItem;
     public float moveForce;
+    public GameObject ExplosionPrefab;
 
 
     public override void LeftClickAction(PlayerController pc)
@@ -20,8 +21,7 @@ public class BombItem : Item
 
         newBomb.GetComponent<Rigidbody>().AddForce(pc.m_model.transform.up * 2);
 
-        newBomb.GetComponent<Bomb>().StartCoroutine(newBomb.GetComponent<Bomb>().ExplodeCoroutine(ItemDamage));
-        
+        newBomb.GetComponent<Bomb>().StartCoroutine(newBomb.GetComponent<Bomb>().ExplodeCoroutine(ItemDamage));       
         //DO this in the facing direction of the player
         //pc.m_model.transform.forward - facing direction of player
 
