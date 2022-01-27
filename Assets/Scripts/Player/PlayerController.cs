@@ -143,12 +143,16 @@ public class PlayerController : MonoBehaviour, IHealth
         }
     }
 
-    public void SetHealth(int Health)
+    public void AddHealth(int Health)
     {
-        m_health += Health;
-        HealthText.text = "x " + m_health.ToString();
+        SetHealth(m_health + Health);
     }
 
+    public void SetHealth(int Health)
+    {
+        m_health = Health;
+        HealthText.text = "x " + m_health.ToString();
+    }
 
     void FixedUpdate()
     {

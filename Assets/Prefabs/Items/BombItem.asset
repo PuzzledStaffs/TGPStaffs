@@ -24,3 +24,4 @@ MonoBehaviour:
   m_moveForce: 10
   m_radius: 3
   m_ExplosionPrefab: {fileID: 2453638331243843887, guid: dffc008c1b8805843a6acf6639288537, type: 3}
+  ExplosionSound: {fileID: 8300000, guid: 1fd1bde36cc2543458fec845f5c287dd, type: 3}
