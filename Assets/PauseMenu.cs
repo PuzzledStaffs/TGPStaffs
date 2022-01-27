@@ -21,6 +21,7 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
+        Debug.Log("Resume the game");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         m_pauseMenu.SetActive(false);
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        Debug.Log("Main menu the game");
         SceneManager.LoadScene("MainMenu");
     }
 
