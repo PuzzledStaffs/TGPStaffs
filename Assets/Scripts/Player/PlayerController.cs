@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
@@ -15,9 +16,12 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    [SerializeField] int m_health = 100;
     public Action m_Death;
     public Scene currentScene;
+
+    [SerializeField]
+    int m_health = 5;
+    public TextMeshProUGUI HealthText;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -61,6 +65,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
+        HealthText.text = "X " + m_health.ToString();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -382,8 +387,8 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
-
-        if (IsDead())
+        HealthText.text = "X " + m_health.ToString();
+        if (isDead())
         {
             StartCoroutine(DeathCoroutine());
         }
