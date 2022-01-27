@@ -61,6 +61,10 @@ public class PlayerController : MonoBehaviour, IHealth
     private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
+    [Header("For The Grass")]
+    public Material Grass;
+    [SerializeField] float RadiusOfTrample;
+
     void Awake()
     {
         m_rigidbody = GetComponent<Rigidbody>();
@@ -74,6 +78,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+        Grass?.SetVector("_GrassTrample", new Vector4(transform.position.x, transform.position.y + 2f, transform.position.z, RadiusOfTrample));
         if (m_weaponWheelController.isWheelOpen)
         {
             Vector2 direction = m_pointerPos;
