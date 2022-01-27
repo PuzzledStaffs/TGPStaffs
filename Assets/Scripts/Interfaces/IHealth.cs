@@ -27,7 +27,7 @@ public interface IHealth
 
     public int GetHealth();
     public void TakeDamage(Damage damage);
-    public bool isDead();
+    public bool IsDead();
 
 }
 

@@ -22,7 +22,7 @@ public class TargetToShoot : MonoBehaviour, IHealth
         return 0;
     }
 
-    public bool isDead()
+    public bool IsDead()
     {
         return false;
     }
