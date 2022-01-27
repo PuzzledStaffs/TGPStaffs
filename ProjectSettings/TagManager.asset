@@ -9,7 +9,9 @@ TagManager:
   - Enemy
   - KickBox
   - Arrow
-
+  - Wheel8
+  - SignCanvas
+  - SignText
   layers:
   - Default
   - TransparentFX

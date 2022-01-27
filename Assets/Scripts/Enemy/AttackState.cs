@@ -13,11 +13,13 @@ public class AttackState : State
     public float maxCooldown;  
     public float animationTime;
     public int damage;
-    public float distance;   
-    
+    public float distance;
+    public Animator animator;
+    bool m_HasAttacked = false;
+
 
     // Start is called before the first frame update
-   public virtual void Start()
+    public virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
@@ -41,7 +43,7 @@ public class AttackState : State
 
 
         //If enemy is too close, it will stop to attack
-        if (distance < 3.0f)
+        if (distance < 2.0f)
         {
             agent.isStopped = true;
         }
@@ -52,10 +54,10 @@ public class AttackState : State
 
 
         //if the cooldown has finished, attack
-        if (cooldown <= 0) 
+        if (cooldown <= 0 && !m_HasAttacked) 
         {
             StartCoroutine(OnAttack());
-            cooldown = maxCooldown;
+            m_HasAttacked = true;
         }
 
         //If the AI can't see the player, stop attacking
@@ -69,6 +71,7 @@ public class AttackState : State
     IEnumerator OnAttack()
     {
         //TODO: Play animation
+        animator.SetTrigger("Attack");
         yield return new WaitForSeconds(animationTime / 2);
 
         //If an object is nearby, check if its the player
@@ -79,13 +82,19 @@ public class AttackState : State
             //Make sure player object tag is set to "Player"
             if (hitCollider.CompareTag("Player"))
             {
-                Debug.Log("hit");
+                Debug.Log("Attacking Player");
+                
+                IHealth.Damage damageStruct = new IHealth.Damage();
+                damageStruct.damageAmount = damage;
+                damageStruct.type = IHealth.DamageType.ENEMY;
 
                 //Take Damage
                 IHealth health = player.GetComponent<IHealth>();
-                health.TakeDamage(damage);
+                health.TakeDamage(damageStruct);
                 
             }
         }
+        cooldown = maxCooldown;
+        m_HasAttacked = false;
     }
 }

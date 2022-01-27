@@ -1,18 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
-    [Header("Components"), SerializeField]
-    private Rigidbody m_rigidbody;
+    [Header("Components")]
     public GameObject m_model;
+    private Rigidbody m_rigidbody;
+    private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    int m_health = 100;
+    [SerializeField] int m_health = 100;
+    public Action m_Death;
+    public Scene currentScene;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -24,22 +29,25 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Weapon Wheel")]
     [SerializeField, ReadOnly]
     Vector2 m_pointerPos;
-    [SerializeField]
-    WeaponWheelController m_weaponWheelController;
+    public WeaponWheelController m_weaponWheelController;
     public Transform spawnPoint;
-
     public bool m_buttonHeld = false;
 
     [Header("Alt Interact")]
     public bool m_altButtonHeld = false;
-    public GameObject m_grabbedBox;
-    [ReadOnly]
-    public float m_boxLerpTime = 0.0f;
+    public Box m_grabbedBox;
+    public Vector3 m_boxLerpDirection;
     public Vector3 m_boxLerpStart;
     public Vector3 m_boxLerpEnd;
+    public float m_boxLerpTime;
 
-    [Header("Weapon Models")]
+    [Header("Weapon Models & Stuff")]
     public GameObject Sword;
+    public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
+
+    [Header("SFX")]
+    public AudioClip m_damageSound;
+    public AudioClip m_deathSound;
 
     [Header("Animations")]
     public Animator animator;
@@ -47,33 +55,128 @@ public class PlayerController : MonoBehaviour, IHealth
     public Material Grass;
     [SerializeField] float RadiusOfTrample;
 
+    [Header("Player UI")]
+    public TMPro.TextMeshProUGUI m_gameOverText;
+    private float m_deathLerpTime = 0.0f;
+    public LineRenderer BowLineRenderer;
 
-
-    void Start()
+    void Awake()
     {
+        m_rigidbody = GetComponent<Rigidbody>();
+        m_playerInput = GetComponent<PlayerInput>();
+
         Cursor.lockState = CursorLockMode.Locked;
-#if !UNITY_EDITOR
         Cursor.visible = false;
-#endif
         m_respawnPosition = transform.position;
     }
 
     void Update()
     {
         Grass?.SetVector("_GrassTrample", new Vector4(transform.position.x, transform.position.y + 2f, transform.position.z, RadiusOfTrample));
+        if (m_weaponWheelController.isWheelOpen)
+        {
+            Vector2 direction = m_pointerPos;
+            switch (m_playerInput.currentControlScheme.ToString().ToLower())
+            {
+                case "controller":
+                    break;
+                default:
+                    direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
+                    break;
+            }
+            if (direction.x != 0 && direction.y != 0)
+            {
+                float angle = Mathf.Atan2(direction.y, direction.x);
+                angle += Mathf.PI;
+                m_weaponWheelController.Pulse(angle);
+            }
+        }
+
+        if (IsDead())
+        {
+            if (m_deathLerpTime < 1.0f)
+            {
+                Color c = m_gameOverText.color;
+                c.a = m_deathLerpTime;
+                m_gameOverText.color = c;
+
+                m_deathLerpTime += Time.deltaTime / 2.0f;
+            }
+            else
+            {
+                if (m_gameOverText.color.a < 1.0f)
+                {
+                    Color c = m_gameOverText.color;
+                    c.a = 1.0f;
+                    m_gameOverText.color = c;
+                }
+            }
+        }
+    }
+
+    void FixedUpdate()
+    {
         if (!m_movementFrozen)
         {
+            float width = BowLineRenderer.startWidth;
+            BowLineRenderer.material.mainTextureScale = new Vector2(1f / width, 1.0f);
+
             if (m_grabbedBox != null)
             {
-                if (transform.position != m_boxLerpEnd)
+                if (m_grabbedBox.m_moving)
                 {
-                    //m_boxLerpTime += Time.deltaTime * 5.0f;
-                    //transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, Mathf.Clamp(m_boxLerpTime, 0.0f, 1.0f));
-                    transform.position = Vector3.MoveTowards(transform.position, m_boxLerpEnd, Time.deltaTime * 2.0f); ;
+                    if (m_boxLerpTime < 1.0f)
+                    {
+                        m_boxLerpEnd.y = transform.position.y;
+                        transform.position = Vector3.Lerp(m_boxLerpStart, m_boxLerpEnd, m_boxLerpTime);
+                        m_boxLerpTime += Time.deltaTime * 2.0f;
+                    }
+                    else
+                    {
+                        transform.position = m_boxLerpEnd;
+                    }
                 }
                 else
                 {
+                    Vector2 mov = m_moveDir;
+                    if (mov.x != 0.0f || mov.y != 0.0f)
+                    {
+                        if (Mathf.Abs(mov.x) > Mathf.Abs(mov.y))
+                        {
+                            mov.x = mov.x >= 0 ? 1 : -1;
+                            mov.y = 0;
+                        }
+                        else
+                        {
+                            mov.x = 0;
+                            mov.y = mov.y >= 0 ? 1 : -1;
+                        }
 
+                        //Swap mov around as a tile's local x is actually the grid y pos and local z grid x pos
+                        mov = new Vector2(mov.y, mov.x);
+                        Vector3 mov3 = new Vector3(mov.x, 0.0f, mov.y);
+                        if (m_grabbedBox.IsValidTile(mov3))
+                        {
+                            bool valid = true;
+                            foreach (Box box in m_grabbedBox.transform.parent.GetComponentsInChildren<Box>())
+                                if (box.Occupies(m_grabbedBox.GetTileX(mov3), m_grabbedBox.GetTileY(mov3)))
+                                {
+                                    valid = false;
+                                    break;
+                                }
+
+                            if (valid &&
+                                (m_boxLerpDirection.x == 0 && m_boxLerpDirection.x == mov3.z ||
+                                    m_boxLerpDirection.z == 0 && m_boxLerpDirection.z == mov3.x))
+                            {
+                                m_grabbedBox.Move(mov3);
+                                m_boxLerpStart = transform.position;
+                                m_boxLerpEnd = m_grabbedBox.m_boxLerpEnd + m_boxLerpDirection;
+                                m_boxLerpEnd.y = transform.position.y;
+                                m_boxLerpTime = 0.0f;
+                            }
+                        }
+                    }
                 }
             }
             else
@@ -85,20 +188,8 @@ public class PlayerController : MonoBehaviour, IHealth
                 if (m_moveDir.x != 0 || m_moveDir.y != 0)
                     m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
 
-                //Debug.Log(m_rigidbody.velocity.magnitude);
                 float currentSpeed = m_rigidbody.velocity.magnitude / 10;
                 animator.SetFloat("Speed", currentSpeed);
-            }
-        }
-
-        if (m_weaponWheelController.isWheelOpen)
-        {
-            Vector2 direction = new Vector2(m_pointerPos.x - Screen.width / 2, m_pointerPos.y - Screen.height / 2);
-            if (direction.x != 0 && direction.y != 0)
-            {
-                float angle = Mathf.Atan2(direction.y, direction.x);
-                angle += Mathf.PI;
-                m_weaponWheelController.Pulse(angle);
             }
         }
     }
@@ -138,6 +229,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnUse(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
@@ -174,7 +268,6 @@ public class PlayerController : MonoBehaviour, IHealth
             default:
                 break;
         }
-
     }
 
     /// <summary>
@@ -182,6 +275,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnAltInteract(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
@@ -191,19 +287,28 @@ public class PlayerController : MonoBehaviour, IHealth
                 if (m_buttonHeld || m_weaponWheelController.isWheelOpen)
                     break;
 
-                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(1.0f, 1.0f, 1.0f) / 2, m_model.transform.rotation))
+                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(0.5f, 0.5f, 0.5f) / 2, m_model.transform.rotation))
                 {
                     if (col.CompareTag("Box"))
                     {
-                        m_grabbedBox = col.gameObject;
-                        Vector3 direction = m_grabbedBox.transform.position - transform.position;
-                        direction.Normalize();
-                        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
-                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(direction.x >= 0 ? -1 : 1, 0.0f, 0.0f);
+                        m_grabbedBox = col.GetComponent<Box>();
+                        m_boxLerpDirection = m_grabbedBox.transform.position - transform.position;
+                        m_boxLerpDirection.y = 0.0f;
+                        m_boxLerpDirection.Normalize();
+                        if (Mathf.Abs(m_boxLerpDirection.x) > Mathf.Abs(m_boxLerpDirection.z))
+                        {
+                            m_boxLerpDirection.x = m_boxLerpDirection.x >= 0 ? -1 : 1;
+                            m_boxLerpDirection.z = 0;
+                        }
                         else
-                            m_boxLerpEnd = m_grabbedBox.transform.position + new Vector3(0.0f, 0.0f, direction.z >= 0 ? -1 : 1);
-                        m_boxLerpStart = transform.position;
-                        m_boxLerpTime = 0.0f;
+                        {
+                            m_boxLerpDirection.x = 0;
+                            m_boxLerpDirection.z = m_boxLerpDirection.z >= 0 ? -1 : 1;
+                        }
+
+                        m_boxLerpEnd = m_grabbedBox.transform.position + m_boxLerpDirection;
+                        m_boxLerpEnd.y = transform.position.y;
+                        transform.position = m_boxLerpEnd;
                         m_altButtonHeld = true;
                         break;
                     }
@@ -225,7 +330,6 @@ public class PlayerController : MonoBehaviour, IHealth
             default:
                 break;
         }
-
     }
 
     /// <summary>
@@ -233,6 +337,9 @@ public class PlayerController : MonoBehaviour, IHealth
     /// </summary>
     public void OnToggleWeaponWheel(InputAction.CallbackContext ctx)
     {
+        if (PauseMenu.m_gamePaused)
+            return;
+
         // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
         switch (ctx.phase)
         {
@@ -274,39 +381,38 @@ public class PlayerController : MonoBehaviour, IHealth
         return health;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(IHealth.Damage damage)
     {
-        m_health -= damage;
+        m_health -= damage.damageAmount;
+        GetComponent<AudioSource>().PlayOneShot(m_damageSound);
 
-        if (isDead())
+        if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
         }
 
     }
 
-    public bool isDead()
+    public bool IsDead()
     {
-        if (m_health <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-
-        }
+        return m_health <= 0;
     }
 
     IEnumerator DeathCoroutine()
     {
-        yield return new WaitForSeconds(1);
-        Restart();
+        m_playerInput.enabled = false;
+        animator.SetBool("Dead", true);
+        GetComponent<AudioSource>().PlayOneShot(m_deathSound);
+        yield return new WaitForSeconds(3.6f);
+        m_Death?.Invoke();
+        // Do not destroy this object
     }
 
     public void Restart()
     {
-        Debug.Log("Player dead");
+        //Debug.Log("Player dead");
+
+
 
         /* /// Commented out so as not to randomly respawn people to the test scene
          * code works

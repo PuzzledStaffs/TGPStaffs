@@ -141,7 +141,7 @@ Transform:
   m_GameObject: {fileID: 9162364829834096145}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_Children:
   - {fileID: 8489923574924355110}
   - {fileID: 2691173844920452184}
@@ -224,8 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8d4ab40c8b6a5a4e80b945150f40874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_toRoomExitPoint: {fileID: 0}
-  m_toRoomCameraMove: {fileID: 0}
+  m_doorLoaction: 0
+  m_ownExitPoint: {fileID: 3070366299541737315}
+  m_ownCamraNode: {fileID: 0}
   m_DoorClosed: {fileID: 2100000, guid: c86c06721a5b67f498126badcb3d5d48, type: 2}
   m_DoorOpen: {fileID: 2100000, guid: c86c06721a5b67f498126badcb3d5d48, type: 2}
   m_locks:

@@ -14,12 +14,14 @@ public class ArrowShooter : Trap
     [SerializeField] float m_shotIntervall = 1;
     public override void EnterRoomEnabled()
     {
-        m_ShootingCoroutine = StartCoroutine(ShootingCoroutine());
+        if(m_timedShots)
+            m_ShootingCoroutine = StartCoroutine(ShootingCoroutine());
     }
 
     public override void ExitRoomDisabled()
     {
-        StopCoroutine(m_ShootingCoroutine);
+        if (m_timedShots)
+            StopCoroutine(m_ShootingCoroutine);
     }
 
     private IEnumerator ShootingCoroutine()

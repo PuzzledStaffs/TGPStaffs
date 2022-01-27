@@ -21,6 +21,10 @@ public class WeaponWheelController : MonoBehaviour
     public int currentIndex = 0;
     public int selectedIndex = 0;
 
+    public WeaponButtonInfo[] Buttons;
+    public ItemUnlockedUI ItemUnlockedUI;
+    public Image ItemSelectedIcon;
+
     private void Start()
     {
         buttons = new List<Button>();
@@ -59,6 +63,8 @@ public class WeaponWheelController : MonoBehaviour
 
     private void Update()
     {
+        ItemSelectedIcon.sprite = CurrentItem.ItemIcon;
+
         if (pc.m_buttonHeld)
         {
             LeftClickHoldAction();
@@ -120,17 +126,20 @@ public class WeaponWheelController : MonoBehaviour
 
     public void SelectItem(WeaponButtonInfo weaponScript)
     {
-        Item itemSelected = weaponScript.WheelItem;
-        if (itemSelected == CurrentItem)
+        if (!weaponScript.ItemBlocked)
         {
-            Debug.Log("Item Already Selected: " + itemSelected.name);
+            Item itemSelected = weaponScript.WheelItem;
+            if (itemSelected == CurrentItem)
+            {
+                Debug.Log("Item Already Selected: " + itemSelected.name);
+            }
+            else
+            {
+                CurrentItem = itemSelected;
+                Debug.Log("Item Selected: " + itemSelected.name);
+            }
+            ToggleWheel();
         }
-        else
-        {
-            CurrentItem = itemSelected;
-            Debug.Log("Item Selected: " + itemSelected.name);
-        }
-        ToggleWheel();
     }
 
     public void SelectItem(int index)

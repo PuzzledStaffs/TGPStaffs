@@ -9,19 +9,7 @@ public class StateManager : MonoBehaviour
     public AttackState attack;
     public RoamingState roam;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void ChangeState(State.StateType type)
+    public virtual void ChangeState(State.StateType type)
     {
         switch (type)
         {

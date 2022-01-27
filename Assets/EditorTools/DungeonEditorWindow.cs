@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 using System.Collections.Generic;
-
+#if UNITY_EDITOR
 public class DungeonEditorWindow : EditorWindow
 {
     public int width = 20, height = 10;
@@ -162,3 +162,4 @@ public class DungeonEditorWindow : EditorWindow
         }
     }
 }
+#endif

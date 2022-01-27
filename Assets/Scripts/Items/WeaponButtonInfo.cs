@@ -8,8 +8,8 @@ using TMPro;
 public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Item WheelItem;
-    public Image WheelIcon;
-    [SerializeField] bool ItemBlocked = false;
+    public Image WheelIcon, LockIconImage;
+    public bool ItemBlocked = false;
     public Sprite LockIcon;
     public GameObject SelectionImage;
     public WeaponWheelController weaponController;
@@ -49,10 +49,12 @@ public class WeaponButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExi
         //IF the button is blocked change the icon
         if (ItemBlocked)
         {
-            WheelIcon.sprite = LockIcon;
+            LockIconImage.gameObject.SetActive(true);
+            LockIconImage.sprite = LockIcon;
         }
         else
         {
+            LockIconImage.gameObject.SetActive(false);
             WheelIcon.sprite = WheelItem.ItemIcon;
         }
     }

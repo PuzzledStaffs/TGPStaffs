@@ -13,16 +13,17 @@ MonoBehaviour:
   m_Name: WoodenBow
   m_EditorClassIdentifier: 
   name: Wooden Bow
-  ItemIcon: {fileID: 21300000, guid: efcaa3ba66f5cab4eac67934853aceb7, type: 3}
+  ItemIcon: {fileID: 21300000, guid: 2662772b1a21cee4ba0fb8d54250eb72, type: 3}
   ItemDamage: 100
   CombatType: 0
   MaxCooldown: 4
   ItemSound: {fileID: 8300000, guid: 2b62c8410a710b24e8ab6be9c8bb67c2, type: 3}
   CanUse: 0
   ItemHold: 1
-  CurrentRange: 0
+  CurrentRange: 4
   ArrowSpeed: 10
   MaxRange: 10
-  BowSpeedMultiplier: 3
+  BowSpeedMultiplier: 4
   ReleaseSound: {fileID: 8300000, guid: fd62c2212e4843440a7d349801edf1d3, type: 3}
   Arrow: {fileID: 8247497913766278947, guid: a9754b1fe9d699e47a840996e0331959, type: 3}
+  spawnPoint: {fileID: 0}

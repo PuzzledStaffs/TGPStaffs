@@ -1260,9 +1260,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef101681bf4b2542a721ae219f5395c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
+  timer: 2
   stateManager: {fileID: 5516742853000973423}
-  isAlive: 1
+  isIdle: 1
 --- !u!114 &5516742853000973418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1276,7 +1276,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngle: 45
-  radius: 10
+  radius: 5
+  target: {fileID: 0}
   inFOV: 0
 --- !u!114 &5516742853000973419
 MonoBehaviour:
@@ -1290,6 +1291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d377c26e37771438057e007d9e9006, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_health: 20
   manager: {fileID: 5516742853000973423}
   fieldOfView: {fileID: 5516742853000973418}
   animator: {fileID: 5516742853000973413}
@@ -1307,10 +1309,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 5516742853000973423}
   player: {fileID: 0}
-  cooldown: 5
-  animationTime: 2
-  damage: 100
-  distance: 0
+  cooldown: 0
+  maxCooldown: 5
+  animationTime: 3.8
+  damage: 1
+  distance: 10
+  animator: {fileID: 5516742853000973413}
 --- !u!195 &5516742853000973410
 NavMeshAgent:
   m_ObjectHideFlags: 0
