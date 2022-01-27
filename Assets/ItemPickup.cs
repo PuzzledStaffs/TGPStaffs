@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class ItemPickup : MonoBehaviour
 {
     public Item ItemToGive;
-    public UnityEvent m_pickedUp;
+    //public UnityEvent m_pickedUp;
     public GameObject CollectParticle;
     public AudioClip CollectionSound;
     public int ItemID;
@@ -65,7 +65,7 @@ public class ItemPickup : MonoBehaviour
             }
             other.GetComponent<AudioSource>().PlayOneShot(CollectionSound);
             WeaponWheel.ItemUnlockedUI.ItemUnlocked();
-            m_pickedUp?.Invoke();
+            //m_pickedUp?.Invoke();
             Instantiate(CollectParticle, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
