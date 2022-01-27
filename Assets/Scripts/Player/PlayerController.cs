@@ -15,7 +15,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    int m_health = 100;
+
+    [SerializeField]
+    int m_health = 5;
     public TextMeshProUGUI HealthText;
 
     [Header("Movement")]
@@ -58,7 +60,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
-        HealthText.text = m_health.ToString() + "X";
+        HealthText.text = "X " + m_health.ToString();
 
         Cursor.lockState = CursorLockMode.Locked;
 #if !UNITY_EDITOR
@@ -301,7 +303,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public void TakeDamage(IHealth.Damage damage)
     {
         m_health -= damage.damageAmount;
-
+        HealthText.text = "X " + m_health.ToString();
         if (isDead())
         {
             StartCoroutine(DeathCoroutine());
