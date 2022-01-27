@@ -8,6 +8,8 @@ public class PauseMenu : MonoBehaviour
 {
     public static bool m_gamePaused = false;
     public GameObject m_pauseMenu;
+    public Action m_pause;
+    public Action m_unPause;
 
     public void Toggle()
     {
@@ -23,6 +25,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         m_pauseMenu.SetActive(false);
         Time.timeScale = 1f;
+        m_unPause?.Invoke();
         m_gamePaused = false;
     }
 
@@ -32,6 +35,7 @@ public class PauseMenu : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         m_pauseMenu.SetActive(true);
         Time.timeScale = 0f;
+        m_pause?.Invoke();
         m_gamePaused = true;
     }
 
