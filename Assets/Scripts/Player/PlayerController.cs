@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerController : MonoBehaviour, IHealth
 {
@@ -15,9 +16,13 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    [SerializeField] int m_health = 100;
     public Action m_Death;
     public Scene currentScene;
+
+    [SerializeField]
+    int m_health = 5;
+
+    public TextMeshProUGUI HealthText;
 
     [Header("Movement")]
     [SerializeField, ReadOnly]
@@ -61,6 +66,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
+        HealthText.text = "x " + m_health.ToString() ;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -90,6 +96,8 @@ public class PlayerController : MonoBehaviour, IHealth
 
         if (IsDead())
         {
+            if (!m_gameOverText.gameObject.activeSelf)
+                m_gameOverText.gameObject.SetActive(true);
             if (m_deathLerpTime < 1.0f)
             {
                 Color c = m_gameOverText.color;
@@ -109,6 +117,13 @@ public class PlayerController : MonoBehaviour, IHealth
             }
         }
     }
+
+    public void SetHealth(int Health)
+    {
+        m_health += Health;
+        HealthText.text = "x " + m_health.ToString();
+    }
+
 
     void FixedUpdate()
     {
@@ -382,7 +397,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
-
+        HealthText.text = "x " + m_health.ToString();
         if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
