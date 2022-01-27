@@ -90,6 +90,8 @@ public class PlayerController : MonoBehaviour, IHealth
 
         if (IsDead())
         {
+            if (!m_gameOverText.gameObject.activeSelf)
+                m_gameOverText.gameObject.SetActive(true);
             if (m_deathLerpTime < 1.0f)
             {
                 Color c = m_gameOverText.color;
