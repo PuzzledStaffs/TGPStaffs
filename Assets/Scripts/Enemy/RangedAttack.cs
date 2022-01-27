@@ -6,7 +6,8 @@ public class RangedAttack : AttackState
 {
     public int range;
     public GameObject projectile;
-    public int velocity;
+    public GameObject model;
+    public float m_velocity;
 
 
     // Start is called before the first frame update
@@ -29,10 +30,12 @@ public class RangedAttack : AttackState
         agent.isStopped = true;
         if (cooldown <= 0)
         {
-            GameObject attack = Instantiate(projectile, transform.position + new Vector3(0,1.7f,0), transform.rotation);
-            attack.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * velocity, ForceMode.Impulse);
-            attack.transform.rotation = (projectile.transform.rotation);
             cooldown = maxCooldown;
+            GameObject attack = Instantiate(projectile, transform.position + new Vector3(0,3.0f,0), transform.rotation);
+
+            attack.GetComponent<Projectile>().m_damageAmount = damage;
+            attack.GetComponent<Projectile>().velocity = m_velocity;
+            attack.GetComponent<Projectile>().attack = model;
         }
     }
 
