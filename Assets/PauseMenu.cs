@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static bool m_gamePaused = false;
     public GameObject m_pauseMenu;
 
+
     public void Toggle()
     {
         if (m_gamePaused)

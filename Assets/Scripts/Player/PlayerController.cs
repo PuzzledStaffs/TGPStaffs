@@ -168,6 +168,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_movementFrozen = true;
         m_rigidbody.velocity = new Vector3(0, m_rigidbody.velocity.y, 0);
+        animator.SetFloat("Speed", 0);
     }
 
     public void UnFreezeMovement()
