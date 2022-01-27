@@ -6,7 +6,7 @@ using UnityEngine;
 public class DungenRoom : MonoBehaviour
 {
     [SerializeField] private DungonCamaraControler m_Camera;
-    [SerializeField] private RoomType m_RoomType;
+    public RoomType m_RoomType;
     [SerializeField] private GameObject m_origin;
     [SerializeField] private bool m_PlayerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
