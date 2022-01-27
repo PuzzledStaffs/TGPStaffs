@@ -136,7 +136,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Gold doors are the Exit, I gess ill see you in the next one.
+      value: Ahead is the Exit, you can tell because it's Gold. I hope this was worth
+        what you did to Bob.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -573,7 +574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: So, you finaly made it to your first text, walk on and meet bob.
+      value: Welcome to your first Dungeon. Enter the next room and meet Bob.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -4579,8 +4580,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Oh, so you killed bob, what a shame I liked him. You see the red switch
-        up ahead give it a wack like you have done with the signs and bob.
+      value: You actually killed Bob? That's such a shame, I liked him.  Oh well,
+        go on and give that red switch a whack, just like you have with these signs
+        and poor Bob.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -4645,8 +4647,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: I guess the switch took it better than bob. Oh look is bobs mother and
-        father, kill them too
+      value: Looks like that switch handled your sword better than Bob. Oh look,
+        Bob's Mother and Father are here. I bet you're going to kill them too.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -12284,8 +12286,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: '*Under Pressure, pushing down on me pushing down on you* is a pressure
-        plate'
+      value: Behind me is a pressure plate. Ignore your urges to whack it and stand
+        on it instead.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -15377,8 +15379,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: This Door is locked, unless you have already unlocked it but how am
-        i meant to know I am a sign. You need a key to unlock it.
+      value: This door is locked, you'll need to find a key to unlock it. After you
+        have, give it a whack as it seems that's your specialty.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -15891,7 +15893,7 @@ PrefabInstance:
       objectReference: {fileID: 746325754}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Oh look its bob, maybe you have to kill him to get out of this room
+      value: Unfortunately, you must kill Bob to proceed.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signTextText
