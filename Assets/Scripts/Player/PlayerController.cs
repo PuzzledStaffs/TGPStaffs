@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
-        HealthText.text = m_health.ToString() + "X";
+        HealthText.text = m_health.ToString() + "x ";
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -387,7 +387,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
-        HealthText.text = "X " + m_health.ToString();
+        HealthText.text = "x " + m_health.ToString();
         if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
