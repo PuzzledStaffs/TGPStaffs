@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class FOV : MonoBehaviour
@@ -43,7 +44,6 @@ public class FOV : MonoBehaviour
         //detection line
         Gizmos.DrawLine(transform.position, ((target.transform.position - transform.position).normalized * radius) + transform.position);
     }
-
     private void FixedUpdate()
     {
         //calculate the distance between this and the target

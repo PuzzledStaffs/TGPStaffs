@@ -1309,11 +1309,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manager: {fileID: 5516742853000973423}
   player: {fileID: 0}
-  cooldown: 5
-  maxCooldown: 0
-  animationTime: 2
+  cooldown: 0
+  maxCooldown: 5
+  animationTime: 3.8
   damage: 1
   distance: 10
+  animator: {fileID: 5516742853000973413}
 --- !u!195 &5516742853000973410
 NavMeshAgent:
   m_ObjectHideFlags: 0

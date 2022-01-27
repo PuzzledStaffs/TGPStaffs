@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,14 @@ public class Enemy : MonoBehaviour, IHealth
     public StateManager manager;
     public FOV fieldOfView;
     public Animator animator;
+    public Action<GameObject> m_deadEvent; 
 
     public int GetHealth()
     {
         return m_health;
     }
 
-    public bool isDead()
+    public bool IsDead()
     {
         if (m_health <= 0)
         {
@@ -34,14 +36,14 @@ public class Enemy : MonoBehaviour, IHealth
 
     public virtual void TakeDamage(IHealth.Damage damage)
     {
-        if (isDead()) { return; }
+        if (IsDead()) { return; }
 
         
 
         m_health -= damage.damageAmount;
         animator.SetTrigger("TakeDamage");
 
-        if (isDead())
+        if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
         }
@@ -59,7 +61,7 @@ public class Enemy : MonoBehaviour, IHealth
     void Update()
     {
 
-        if (isDead())
+        if (IsDead())
         {
             GetComponent<NavMeshAgent>().isStopped = true;
             GetComponent<NavMeshAgent>().speed = 0;
@@ -76,8 +78,9 @@ public class Enemy : MonoBehaviour, IHealth
 
     public IEnumerator DeathCoroutine()
     {
-        //TODO: Add death animation
+        this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
+        m_deadEvent?.Invoke(gameObject);
         animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
@@ -87,7 +90,7 @@ public class Enemy : MonoBehaviour, IHealth
 
     void RandomDeathAnim()
     {
-        int random = Random.Range(0, 2);
+        int random = UnityEngine.Random.Range(0, 2);
         animator.SetInteger("DeathAnim", random);
         Debug.Log(random);
     }

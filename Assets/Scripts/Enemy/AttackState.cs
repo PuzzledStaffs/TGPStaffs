@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,10 +15,12 @@ public class AttackState : State
     public float animationTime;
     public int damage;
     public float distance;
-    
+    public Animator animator;
+    bool m_HasAttacked = false;
+
 
     // Start is called before the first frame update
-   public virtual void Start()
+    public virtual void Start()
     {
         agent = GetComponent<NavMeshAgent>();
 
@@ -25,6 +28,12 @@ public class AttackState : State
         agent.autoBraking = true;
 
         cooldown = 0;
+    }
+
+    public  void OnEnable()
+    {
+        if(player == null)
+            player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
@@ -41,7 +50,7 @@ public class AttackState : State
 
 
         //If enemy is too close, it will stop to attack
-        if (distance < 3.0f)
+        if (distance < 2.0f)
         {
             agent.isStopped = true;
         }
@@ -52,10 +61,10 @@ public class AttackState : State
 
 
         //if the cooldown has finished, attack
-        if (cooldown <= 0) 
+        if (cooldown <= 0 && !m_HasAttacked) 
         {
             StartCoroutine(OnAttack());
-            cooldown = maxCooldown;
+            m_HasAttacked = true;
         }
 
         //If the AI can't see the player, stop attacking
@@ -69,6 +78,7 @@ public class AttackState : State
     IEnumerator OnAttack()
     {
         //TODO: Play animation
+        animator.SetTrigger("Attack");
         yield return new WaitForSeconds(animationTime / 2);
 
         //If an object is nearby, check if its the player
@@ -79,6 +89,8 @@ public class AttackState : State
             //Make sure player object tag is set to "Player"
             if (hitCollider.CompareTag("Player"))
             {
+                Debug.Log("Attacking Player");
+                
                 IHealth.Damage damageStruct = new IHealth.Damage();
                 damageStruct.damageAmount = damage;
                 damageStruct.type = IHealth.DamageType.ENEMY;
@@ -89,5 +101,7 @@ public class AttackState : State
                 
             }
         }
+        cooldown = maxCooldown;
+        m_HasAttacked = false;
     }
 }

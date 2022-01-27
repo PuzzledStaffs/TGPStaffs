@@ -45,7 +45,7 @@ public class BossEnemy : Enemy
 
     public override void TakeDamage(IHealth.Damage damage)
     {
-        if (isDead())
+        if (IsDead())
             return;
         if (phaseSwitch && damage.type == IHealth.DamageType.BOW)
         {
@@ -57,7 +57,7 @@ public class BossEnemy : Enemy
             animator.SetTrigger("TakeDamage");
         }
 
-        if (isDead())
+        if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
         }
