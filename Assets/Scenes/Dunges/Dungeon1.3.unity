@@ -4257,8 +4257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Well this is the end of the bomb dungeon. I know I am sad to, I'm sure
-        we will meet again some sunny day
+      value: I hope you've had an Explosively fun time.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -7842,7 +7841,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 2889239414654348241, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
-      propertyPath: m_locked
+      propertyPath: m_ClosedOnStart
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3298410037059549542, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
@@ -8282,7 +8281,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6286991769643087678, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_ClosedOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7221188154774901808, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_Mesh
@@ -11547,7 +11546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: This is a bomb, it gose boom (Now with particals!!!)
+      value: Go ahead and pick up that Bomb, you'll be needing it.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894265, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_RootOrder
@@ -13573,7 +13572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Hold right click to push/pull the box
+      value: Hold Right Click to push or pull a box.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
