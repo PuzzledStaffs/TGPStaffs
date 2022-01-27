@@ -5108,6 +5108,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemToGive: {fileID: 11400000, guid: ff9b31f6ac6d7564f8e47a0c3128a89a, type: 2}
+  m_pickedUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &3300349785750944652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5167,6 +5170,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Amount: 50
   Speed: 1.5
+  Axis: 1
 --- !u!1001 &7314878565382104024
 PrefabInstance:
   m_ObjectHideFlags: 0
