@@ -5113,6 +5113,7 @@ MonoBehaviour:
       m_Calls: []
   CollectParticle: {fileID: 4778128939460442851, guid: f32b8e432a63e4140b63253ad7ede138, type: 3}
   CollectionSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
+  ItemID: 4
 --- !u!65 &3300349785750944652
 BoxCollider:
   m_ObjectHideFlags: 0
