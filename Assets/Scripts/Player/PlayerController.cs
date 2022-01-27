@@ -45,10 +45,16 @@ public class PlayerController : MonoBehaviour, IHealth
     public GameObject Sword;
     public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
 
+    [Header("SFX")]
+    public AudioClip m_damageSound;
+    public AudioClip m_deathSound;
+
     [Header("Animations")]
     public Animator animator;
 
-    [Header("UI")]
+    [Header("Player UI")]
+    public TMPro.TextMeshProUGUI m_gameOverText;
+    private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
     void Awake()
@@ -79,6 +85,27 @@ public class PlayerController : MonoBehaviour, IHealth
                 float angle = Mathf.Atan2(direction.y, direction.x);
                 angle += Mathf.PI;
                 m_weaponWheelController.Pulse(angle);
+            }
+        }
+
+        if (IsDead())
+        {
+            if (m_deathLerpTime < 1.0f)
+            {
+                Color c = m_gameOverText.color;
+                c.a = m_deathLerpTime;
+                m_gameOverText.color = c;
+
+                m_deathLerpTime += Time.deltaTime / 2.0f;
+            }
+            else
+            {
+                if (m_gameOverText.color.a < 1.0f)
+                {
+                    Color c = m_gameOverText.color;
+                    c.a = 1.0f;
+                    m_gameOverText.color = c;
+                }
             }
         }
     }
@@ -354,42 +381,35 @@ public class PlayerController : MonoBehaviour, IHealth
     public void TakeDamage(IHealth.Damage damage)
     {
         m_health -= damage.damageAmount;
+        GetComponent<AudioSource>().PlayOneShot(m_damageSound);
 
-        if (isDead())
+        if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
         }
 
     }
 
-    public bool isDead()
+    public bool IsDead()
     {
-        if (m_health <= 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-
-        }
+        return m_health <= 0;
     }
 
     IEnumerator DeathCoroutine()
     {
         m_playerInput.enabled = false;
         animator.SetBool("Dead", true);
+        GetComponent<AudioSource>().PlayOneShot(m_deathSound);
         yield return new WaitForSeconds(3.6f);
-        Destroy(this.gameObject);
         m_Death?.Invoke();
-        //Restart();
+        // Do not destroy this object
     }
 
     public void Restart()
     {
         //Debug.Log("Player dead");
 
-        
+
 
         /* /// Commented out so as not to randomly respawn people to the test scene
          * code works
