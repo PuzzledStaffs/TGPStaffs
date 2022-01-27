@@ -13,6 +13,7 @@ TagManager:
   - SignCanvas
   - SignText
   - PersistentPrefs
+  - HealthUI
   layers:
   - Default
   - TransparentFX
