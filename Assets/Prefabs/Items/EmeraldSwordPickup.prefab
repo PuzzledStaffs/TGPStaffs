@@ -5108,6 +5108,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemToGive: {fileID: 11400000, guid: ff9b31f6ac6d7564f8e47a0c3128a89a, type: 2}
+  m_pickedUp:
+    m_PersistentCalls:
+      m_Calls: []
+  CollectParticle: {fileID: 4778128939460442851, guid: f32b8e432a63e4140b63253ad7ede138, type: 3}
+  CollectionSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
 --- !u!65 &3300349785750944652
 BoxCollider:
   m_ObjectHideFlags: 0
