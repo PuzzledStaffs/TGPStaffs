@@ -94,8 +94,8 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void OnDestroy()
     {
-        if (!IsDead() && prefs != null)
-            prefs.m_currentHealth = m_health;
+        if (prefs != null)
+            prefs.m_currentHealth = IsDead() ? 5 : m_health;
     }
 
     void Update()
@@ -141,17 +141,6 @@ public class PlayerController : MonoBehaviour, IHealth
                 }
             }
         }
-    }
-
-    public void AddHealth(int Health)
-    {
-        SetHealth(m_health + Health);
-    }
-
-    public void SetHealth(int Health)
-    {
-        m_health = Health;
-        HealthText.text = "x " + m_health.ToString();
     }
 
     void FixedUpdate()
@@ -420,6 +409,17 @@ public class PlayerController : MonoBehaviour, IHealth
         int health = m_health;
 
         return health;
+    }
+
+    public void AddHealth(int Health)
+    {
+        SetHealth(m_health + Health);
+    }
+
+    public void SetHealth(int Health)
+    {
+        m_health = Health;
+        HealthText.text = "x " + m_health.ToString();
     }
 
     public void TakeDamage(IHealth.Damage damage)
