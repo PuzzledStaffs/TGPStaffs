@@ -89,7 +89,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
 
     protected virtual IEnumerator MoveRoomCoroutine(Collider other)
     {
-        other.GetComponent<PlayerController>().enabled = false;
+        other.GetComponent<PlayerController>().FreezeMovement();
         other.GetComponent<Rigidbody>().velocity = Vector3.zero;
         OnEnterRoom?.Invoke();
         OnFrezzeExited?.Invoke();
@@ -98,7 +98,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         yield return StartCoroutine(m_dungenManager.MoveCameraCoroutine(m_toRoomCameraMove.transform.position));
         OnUnFreezeEntered?.Invoke();
         OnExitRoom?.Invoke();
-        other.GetComponent<PlayerController>().enabled = true;
+        other.GetComponent<PlayerController>().UnFreezeMovement();
     }
 
     public virtual void Interact()

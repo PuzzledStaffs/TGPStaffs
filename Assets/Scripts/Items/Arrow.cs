@@ -7,6 +7,7 @@ public class Arrow : MonoBehaviour
     public BowItem bowParent;
     public PlayerController pc;
     public Vector3 EndPoint;
+    public GameObject ImpactParticle;
  
 
 
@@ -39,6 +40,7 @@ public class Arrow : MonoBehaviour
 
     public void KillArrow()
     {
+        Instantiate(ImpactParticle, transform.position, Quaternion.identity);
         Destroy(this.gameObject);
     }
 
