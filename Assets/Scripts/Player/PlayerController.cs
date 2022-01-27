@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [SerializeField]
     int m_health = 5;
+
     public TextMeshProUGUI HealthText;
 
     [Header("Movement")]
@@ -114,6 +115,13 @@ public class PlayerController : MonoBehaviour, IHealth
             }
         }
     }
+
+    public void SetHealth(int Health)
+    {
+        m_health += Health;
+        HealthText.text = "x " + m_health.ToString();
+    }
+
 
     void FixedUpdate()
     {
