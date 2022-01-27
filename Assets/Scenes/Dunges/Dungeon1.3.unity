@@ -4257,8 +4257,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Well this is the end of the bomb dungeon. I know I am sad to, I'm sure
-        we will meet again some sunny day
+      value: I hope you've had an Explosively fun time.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -11547,7 +11546,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: This is a bomb, it gose boom (Now with particals!!!)
+      value: Go ahead and pick up that Bomb, you'll be needing it.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894265, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_RootOrder
@@ -13573,7 +13572,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Hold hold click to push/pull the box
+      value: Hold Right Click to push or pull a box.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom

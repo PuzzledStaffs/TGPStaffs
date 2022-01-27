@@ -2124,8 +2124,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Well you made it this far not longer to go, take a rest and heal up
-        a bit
+      value: You've made it this far, take a rest and heal up.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -4858,7 +4857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: This is where the boss would go if we had one
+      value: <Boss Room Placeholder>
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -11985,7 +11984,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: Dungen 1:5 is a Mob dungeon, Celar each room to progress, die to restart!
+      value: You must clear each room of enemies to progress in this Dungeon.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
