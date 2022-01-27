@@ -4648,7 +4648,7 @@ PrefabInstance:
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
       value: Looks like that switch handled your sword better than Bob. Oh look,
-        Bob's Mother and Father are here. I bet you're going to kill them too.
+        Bob's mother and father are here. I bet you're going to kill them too.
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
