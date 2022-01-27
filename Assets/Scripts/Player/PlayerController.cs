@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [SerializeField]
     int m_health = 5;
+
     public TextMeshProUGUI HealthText;
 
     [Header("Movement")]
@@ -95,6 +96,8 @@ public class PlayerController : MonoBehaviour, IHealth
 
         if (IsDead())
         {
+            if (!m_gameOverText.gameObject.activeSelf)
+                m_gameOverText.gameObject.SetActive(true);
             if (m_deathLerpTime < 1.0f)
             {
                 Color c = m_gameOverText.color;
@@ -114,6 +117,13 @@ public class PlayerController : MonoBehaviour, IHealth
             }
         }
     }
+
+    public void SetHealth(int Health)
+    {
+        m_health += Health;
+        HealthText.text = "x " + m_health.ToString();
+    }
+
 
     void FixedUpdate()
     {
