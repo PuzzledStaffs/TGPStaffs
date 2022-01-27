@@ -13,6 +13,6 @@ public class BreakableWall : MonoBehaviour, IHealth
             gameObject.GetComponent<BoxCollider>().enabled = false;
         }
     }
-    public bool isDead() { return false; }
+    public bool IsDead() { return false; }
 }
         

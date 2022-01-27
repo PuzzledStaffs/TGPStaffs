@@ -20,6 +20,7 @@ public class Bomb : MonoBehaviour
         }
 
         Destroy(gameObject);
+        Instantiate(m_bombParent.m_ExplosionPrefab, transform.position, Quaternion.identity);
     }
 
 #if UNITY_EDITOR

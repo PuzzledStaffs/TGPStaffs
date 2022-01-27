@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -15,6 +17,7 @@ public class DungenManager : MonoBehaviour
     private Rigidbody m_CameraRB;
     public int m_KeysCollected { get; protected set; }
     [SerializeField] int m_StartingKeys;
+    [SerializeField] public Light m_playerLight;
     [Header("restart")]
     [SerializeField] PlayerController m_player;
     //[SerializeField] string m_scene;
@@ -37,6 +40,7 @@ public class DungenManager : MonoBehaviour
         m_animator = GetComponent<Animator>();
         m_welcomeCanvas.enabled = false;
         m_player.m_Death += PlayerDeath;
+        m_playerLight = gameObject.GetComponentInChildren<Light>();
     }
 
     private void Start()
@@ -45,6 +49,11 @@ public class DungenManager : MonoBehaviour
         m_TitalText.text = m_dungenEnterText;
         m_welcomeCanvas.enabled = true;
         m_animator.SetTrigger("Start");
+    }
+
+    public void Update()
+    {
+        m_playerLight.transform.position = m_player.transform.position + new Vector3(0, 5, 0);
     }
 
     public void JoinAnimationEnd()
