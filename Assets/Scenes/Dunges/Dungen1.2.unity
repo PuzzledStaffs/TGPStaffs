@@ -469,6 +469,34 @@ PrefabInstance:
       propertyPath: m_Name
       value: BowPickup
       objectReference: {fileID: 0}
+    - target: {fileID: 6589999410195528495, guid: 2990a61de5750114099673df89369341, type: 3}
+      propertyPath: m_pickedUp.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589999410195528495, guid: 2990a61de5750114099673df89369341, type: 3}
+      propertyPath: m_pickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589999410195528495, guid: 2990a61de5750114099673df89369341, type: 3}
+      propertyPath: m_pickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1564568976}
+    - target: {fileID: 6589999410195528495, guid: 2990a61de5750114099673df89369341, type: 3}
+      propertyPath: m_pickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589999410195528495, guid: 2990a61de5750114099673df89369341, type: 3}
+      propertyPath: m_pickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589999410195528495, guid: 2990a61de5750114099673df89369341, type: 3}
+      propertyPath: m_pickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DungenDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6589999410195528495, guid: 2990a61de5750114099673df89369341, type: 3}
+      propertyPath: m_pickedUp.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2990a61de5750114099673df89369341, type: 3}
 --- !u!1001 &451173147
@@ -1084,6 +1112,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 525689396}
+    - target: {fileID: 6286991769643087678, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
+      propertyPath: m_ClosedOnStart
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6946548259324411585, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_Mesh
       value: 
