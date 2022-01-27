@@ -21,13 +21,21 @@ public class DungenRoom : MonoBehaviour
 
     public UnityEvent m_roomCleard;
     int m_enemyCount;
+    PauseMenu m_pauseMenu;
+    bool m_playerInRoom;
 
     private void Awake()
     {
+        if (m_PlayerStartingRoom)        
+            m_playerInRoom = true;      
+        else
+            m_playerInRoom = false;
+
         m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
         m_Enemies = new List<Enemy>(m_EneamyPerent.GetComponentsInChildren<Enemy>());
         m_EnemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
         m_enemyCount = m_Enemies.Count;
+        
     }
 
     private void Start()
@@ -66,6 +74,10 @@ public class DungenRoom : MonoBehaviour
             
         }
 
+        m_pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
+        m_pauseMenu.m_pause += FrezzeExatingRoom;
+        m_pauseMenu.m_unPause += UnFrezeRoom;
+
         if (m_PlayerStartingRoom)
         {
             RoomEntered();
@@ -76,6 +88,10 @@ public class DungenRoom : MonoBehaviour
         {
             FrezzeExatingRoom();
             RoomExited();
+        }
+        if (m_enemyCount <= 0)
+        {
+            m_roomCleard?.Invoke();
         }
     }
 
@@ -123,49 +139,57 @@ public class DungenRoom : MonoBehaviour
         m_Camera.m_CurrentRoomType = m_RoomType;
         m_Camera.m_roomOragin = m_origin.transform.position;
         m_Camera.m_Locked = true;
-        foreach (Trap trap in m_traps)
-        {
-            if (trap != null)
-                trap.EnterRoomEnabled();
-        }
+        
+        m_playerInRoom = true;
     }
 
     public void UnFrezeRoom()
     {
-        //Called after camra has finished moving and player unlocked
-        m_Camera.m_Locked = false;
-        foreach (IdleState enemy in m_EnemiesIdle)
+        if (m_playerInRoom)
         {
-            enemy.isIdle = false;
+            //Called after camra has finished moving and player unlocked
+            m_Camera.m_Locked = false;
+            foreach (IdleState enemy in m_EnemiesIdle)
+            {
+                enemy.isIdle = false;
+            }
+            foreach (Trap trap in m_traps)
+            {
+                if (trap != null)
+                    trap.EnterRoomEnabled();
+            }
         }
     }
 
     private void RoomExited()
     {
         //Called when the camra finishes moving
-
-        foreach (Trap trap in m_traps)
-        {
-            if (trap != null)
-            {
-                trap.ExitRoomDisabled();
-            }
-        }
+        m_playerInRoom = false;
+        
     }
 
     public void FrezzeExatingRoom()
     {
-        //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
-        foreach (Enemy enemy in m_Enemies)
-        {
-            enemy.GetComponent<StateManager>().ChangeState(State.StateType.IDLE);
-            
-        }
+       
+            //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
+            foreach (Enemy enemy in m_Enemies)
+            {
+                enemy.GetComponent<StateManager>().ChangeState(State.StateType.IDLE);
 
-        foreach (IdleState enemy in m_EnemiesIdle)
-        {
-            enemy.isIdle = true;
-        }
+            }
+
+            foreach (IdleState enemy in m_EnemiesIdle)
+            {
+                enemy.isIdle = true;
+            }
+            foreach (Trap trap in m_traps)
+            {
+                if (trap != null)
+                {
+                    trap.ExitRoomDisabled();
+                }
+            }
+      
     }
     #endregion
 

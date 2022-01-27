@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -27,6 +28,12 @@ public class AttackState : State
         agent.autoBraking = true;
 
         cooldown = 0;
+    }
+
+    public  void OnEnable()
+    {
+        if(player == null)
+            player = GameObject.FindWithTag("Player");
     }
 
     // Update is called once per frame
