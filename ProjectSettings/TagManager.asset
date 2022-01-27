@@ -12,6 +12,7 @@ TagManager:
   - Wheel8
   - SignCanvas
   - SignText
+  - PersistentPrefs
   layers:
   - Default
   - TransparentFX

@@ -14,11 +14,15 @@ public class ItemPickup : MonoBehaviour
             Debug.Log("Collision with player");
             WeaponWheelController WeaponWheel = other.GetComponent<PlayerController>().m_weaponWheelController;
 
+            int i = 0;
             foreach(WeaponButtonInfo button in WeaponWheel.Buttons)
             {
+                i++;
                 if(button.WheelItem == ItemToGive)
                 {
                     button.ItemBlocked = false;
+                    FindObjectOfType<PersistentPrefs>().UnlockItem(i);
+                    break;
                 }
             }
             WeaponWheel.ItemUnlockedUI.ItemUnlocked();

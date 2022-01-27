@@ -62,15 +62,34 @@ public class PlayerController : MonoBehaviour, IHealth
     private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
+    private static PersistentPrefs prefs;
+
     void Awake()
     {
+        if (prefs == null)
+            prefs = FindObjectOfType<PersistentPrefs>();
+
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
-        HealthText.text = "x " + m_health.ToString() ;
+        HealthText.text = "x " + m_health.ToString();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         m_respawnPosition = transform.position;
+
+        if (prefs != null)
+        {
+            SetHealth(prefs.m_currentHealth);
+            m_weaponWheelController.WeaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item1Unlocked;
+            m_weaponWheelController.WeaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item2Unlocked;
+            m_weaponWheelController.WeaponWheel.transform.GetChild(2).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item3Unlocked;
+            m_weaponWheelController.WeaponWheel.transform.GetChild(3).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item4Unlocked;
+            m_weaponWheelController.WeaponWheel.transform.GetChild(4).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item5Unlocked;
+            m_weaponWheelController.WeaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item6Unlocked;
+            m_weaponWheelController.WeaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item7Unlocked;
+            m_weaponWheelController.WeaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !prefs.m_item8Unlocked;
+            prefs.m_scene = gameObject.scene.name;
+        }
     }
 
     void Update()
