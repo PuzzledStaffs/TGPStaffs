@@ -388,7 +388,7 @@ public class PlayerController : MonoBehaviour, IHealth
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
         HealthText.text = "X " + m_health.ToString();
-        if (isDead())
+        if (IsDead())
         {
             StartCoroutine(DeathCoroutine());
         }
