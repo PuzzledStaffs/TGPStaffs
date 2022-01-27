@@ -431,7 +431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6589999410195528492, guid: 2990a61de5750114099673df89369341, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.13
+      value: 0.66
       objectReference: {fileID: 0}
     - target: {fileID: 6589999410195528492, guid: 2990a61de5750114099673df89369341, type: 3}
       propertyPath: m_LocalPosition.z
@@ -721,6 +721,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
   m_PrefabInstance: {fileID: 1238301726}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &541335129 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 551475354, guid: 05da39efd3961194582d17a558e84807, type: 3}
+  m_PrefabInstance: {fileID: 1238301726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 541335125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1077a413b8f908a4084041dd3d97e6b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &550479964
 GameObject:
   m_ObjectHideFlags: 0
@@ -7292,6 +7303,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9024133131068660373, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
+      propertyPath: m_player
+      value: 
+      objectReference: {fileID: 541335129}
     - target: {fileID: 9024133131068660373, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
       propertyPath: m_DungenCam
       value: 
