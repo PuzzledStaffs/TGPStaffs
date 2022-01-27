@@ -159,7 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Amount: 50
   Speed: 1.5
-  Axis: 0
 --- !u!1 &6589999410195528494
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,6 +211,8 @@ MonoBehaviour:
   m_pickedUp:
     m_PersistentCalls:
       m_Calls: []
+  CollectParticle: {fileID: 4778128939460442851, guid: f32b8e432a63e4140b63253ad7ede138, type: 3}
+  CollectionSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
 --- !u!65 &6589999410195528493
 BoxCollider:
   m_ObjectHideFlags: 0

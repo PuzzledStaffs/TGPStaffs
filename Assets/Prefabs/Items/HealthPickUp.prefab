@@ -5040,6 +5040,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeartsToGive: 1
+  CollectParticle: {fileID: 4778128939460442851, guid: f32b8e432a63e4140b63253ad7ede138, type: 3}
+  CollectSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
 --- !u!54 &5354844824122538820
 Rigidbody:
   m_ObjectHideFlags: 0
