@@ -7,26 +7,26 @@ public class DungenDoor : MonoBehaviour ,IInteractable
 {
     [Header("Door Oriatation and locating")]
     [SerializeField] public DoorLoaction m_doorLoaction;
-    [Tooltip("This is the ExitPoint item on the door prefab, this is where the player go")] private GameObject m_toRoomExitPoint;
-    [Tooltip("This is where the camara gose to")] private GameObject m_toRoomCameraMove;
+    [Tooltip("This is the ExitPoint item on the door prefab, this is where the player go")] protected GameObject m_toRoomExitPoint;
+    [Tooltip("This is where the camara gose to")] protected GameObject m_toRoomCameraMove;
     [SerializeField] public GameObject m_ownExitPoint;
     [SerializeField] public GameObject m_ownCamraNode;
 
-    private DungenManager m_dungenManager;
+    protected DungenManager m_dungenManager;
 
     [Header("Door Closed Controls")]
-    private Renderer m_doorRenderer;
-    private BoxCollider m_DoorColider;
+    protected Renderer m_doorRenderer;
+    protected BoxCollider m_DoorColider;
 
     [Header("Door Cosmetics")]
     [SerializeField] Material m_DoorClosed;
-    [SerializeField] Material m_DoorOpen;
+    [SerializeField] protected Material m_DoorOpen;
     [SerializeField] List<GameObject> m_locks;
 
     [Header("Door Controles")]
     [SerializeField] public bool m_locked;
     public bool m_doorActive { get; protected set; }
-    [SerializeField] private bool m_ClosedOnStart = false;
+    [SerializeField] protected bool m_ClosedOnStart = false;
 
     public event Action OnEnterRoom;
     public event Action OnExitRoom;
@@ -50,7 +50,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         CheckDoorSet();
     }
 
-    private void CheckDoorSet()
+    protected virtual void CheckDoorSet()
     {
         if (m_locked && m_toRoomCameraMove != null && m_toRoomExitPoint != null)
         {
@@ -101,7 +101,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         other.GetComponent<PlayerController>().enabled = true;
     }
 
-    public void Interact()
+    public virtual void Interact()
     {
         if (m_locked && m_toRoomCameraMove != null && m_toRoomExitPoint != null)
         {
@@ -116,7 +116,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
 
     #region Door Controls
 
-    public void OpenDoor()
+    public virtual void OpenDoor()
     {
         if (m_toRoomCameraMove != null && m_toRoomExitPoint != null && !m_locked)
         {
@@ -146,7 +146,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
     #endregion
 
     #region LockedControls
-    private void ShowLocks()
+    protected void ShowLocks()
     {
         foreach (GameObject lockModel in m_locks)
         {
@@ -154,7 +154,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         }
     }
 
-    private void HideLocks()
+    protected void HideLocks()
     {
         foreach (GameObject lockModel in m_locks)
         {

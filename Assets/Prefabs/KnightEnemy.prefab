@@ -1008,7 +1008,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5516742853000973411
 Transform:
   m_ObjectHideFlags: 0
@@ -1104,6 +1104,7 @@ MonoBehaviour:
   animationTime: 2
   damage: 1
   distance: 5
+  animator: {fileID: 5516742853000973413}
   range: 5
   projectile: {fileID: 3789550298258551688, guid: 8ba1066874f46e546a75c20c89ac9fa1, type: 3}
   model: {fileID: 5516742852548737888}
