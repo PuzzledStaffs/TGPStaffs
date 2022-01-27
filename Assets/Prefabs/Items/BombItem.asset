@@ -23,3 +23,4 @@ MonoBehaviour:
   m_bombItem: {fileID: 8587875842583300380, guid: a9357974655a48140a40fb2d603dc39a, type: 3}
   m_moveForce: 10
   m_radius: 3
+  m_ExplosionPrefab: {fileID: 2453638331243843887, guid: dffc008c1b8805843a6acf6639288537, type: 3}

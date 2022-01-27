@@ -725,6 +725,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Amount: 50
   Speed: 1.5
+  Axis: 1
 --- !u!1 &6171032524547463978
 GameObject:
   m_ObjectHideFlags: 0
@@ -834,6 +835,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemToGive: {fileID: 11400000, guid: 7ba13518f5989ad49b9e9dd0f6a4994d, type: 2}
+  m_pickedUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!65 &6589999410195528493
 BoxCollider:
   m_ObjectHideFlags: 0

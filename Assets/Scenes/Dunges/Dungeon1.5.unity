@@ -2607,18 +2607,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 9024133130922288853, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
-      propertyPath: m_UiScaleMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024133130922288853, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
-      propertyPath: m_ReferenceResolution.x
-      value: 1920
-      objectReference: {fileID: 0}
-    - target: {fileID: 9024133130922288853, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
-      propertyPath: m_ReferenceResolution.y
-      value: 1080
-      objectReference: {fileID: 0}
     - target: {fileID: 9024133131068660372, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2675,10 +2663,6 @@ PrefabInstance:
       propertyPath: m_startingRoom
       value: 
       objectReference: {fileID: 2009448036}
-    - target: {fileID: 9024133131068660373, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
-      propertyPath: m_dungenEnterText
-      value: Dungeon 1:5
-      objectReference: {fileID: 0}
     - target: {fileID: 9024133131068660459, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
       propertyPath: m_Name
       value: DungenManager
