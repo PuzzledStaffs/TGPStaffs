@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
-        HealthText.text = m_health.ToString() + "x ";
+        HealthText.text = "x " + m_health.ToString() ;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
