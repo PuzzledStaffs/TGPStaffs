@@ -11,6 +11,7 @@ public class HealthPickup : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            GameObject.FindGameObjectWithTag("HealthUI").GetComponent<Animator>().SetTrigger("HealthGained");
             other.GetComponent<PlayerController>().SetHealth(HeartsToGive);
             Instantiate(CollectParticle, transform.position, Quaternion.identity);
             other.GetComponent<AudioSource>().PlayOneShot(CollectSound);

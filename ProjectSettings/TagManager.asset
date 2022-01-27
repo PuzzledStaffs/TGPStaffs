@@ -12,6 +12,7 @@ TagManager:
   - Wheel8
   - SignCanvas
   - SignText
+  - HealthUI
   layers:
   - Default
   - TransparentFX

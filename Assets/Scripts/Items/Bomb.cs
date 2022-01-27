@@ -20,6 +20,7 @@ public class Bomb : MonoBehaviour
         }
 
         Destroy(gameObject);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<AudioSource>().PlayOneShot(m_bombParent.ExplosionSound);
         Instantiate(m_bombParent.m_ExplosionPrefab, transform.position, Quaternion.identity);
     }
 
