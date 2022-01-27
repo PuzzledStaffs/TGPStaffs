@@ -8132,7 +8132,7 @@ PrefabInstance:
     - target: {fileID: 7570526163280932576, guid: f2f71ca82b738e740a2652229ed96a95, type: 3}
       propertyPath: m_platePressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1874582827}
+      objectReference: {fileID: 669507520}
     - target: {fileID: 7570526163280932576, guid: f2f71ca82b738e740a2652229ed96a95, type: 3}
       propertyPath: m_plateUnpressed.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
@@ -8140,7 +8140,7 @@ PrefabInstance:
     - target: {fileID: 7570526163280932576, guid: f2f71ca82b738e740a2652229ed96a95, type: 3}
       propertyPath: m_plateUnpressed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1874582827}
+      objectReference: {fileID: 669507520}
     - target: {fileID: 7570526163280932576, guid: f2f71ca82b738e740a2652229ed96a95, type: 3}
       propertyPath: m_platePressed.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -13370,17 +13370,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.01, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1874582827 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6286991769643087678, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
-  m_PrefabInstance: {fileID: 991280657}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d8bf16201164794f858c4a1c076aa49, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1875990300
 PrefabInstance:
   m_ObjectHideFlags: 0
