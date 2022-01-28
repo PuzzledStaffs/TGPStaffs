@@ -1114,7 +1114,7 @@ PrefabInstance:
       objectReference: {fileID: 525689396}
     - target: {fileID: 6286991769643087678, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_ClosedOnStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6946548259324411585, guid: 88fffd47da154814d906f5f234d684d3, type: 3}
       propertyPath: m_Mesh
