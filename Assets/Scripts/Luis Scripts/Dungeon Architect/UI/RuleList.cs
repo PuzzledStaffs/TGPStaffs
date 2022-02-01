@@ -12,36 +12,68 @@ public class RuleList : VisualElement
     public Button UpArrow;
     public Button DownArrow;
     public ListView list;
+    Rule[] rules;
+    //Rule CurrentSelectedRule;
     //List<string> items;
     public new class UxmlFactory : UxmlFactory<RuleList, RuleList.UxmlTraits> { };
 
+     
+
     public RuleList()
     {
-        DownArrow = this.Query<Button>("ScrollDownButton");
-        UpArrow = this.Query<Button>("ScrollUpButton");
-        subtractbutton = this.Query<Button>("DeleteButton");
-        plusbutton = this.Query<Button>("AddButton");
+        GetAllRules(out rules);
+
+    
+
+    }
+
+    public void SetupList()
+    {
+        VisualElement ButtonGroup = this.Q<VisualElement>("Control-Button-Group");
+        DownArrow = ButtonGroup.Query<Button>("ScrollDownButton");
+        UpArrow = ButtonGroup.Query<Button>("ScrollUpButton");
+        subtractbutton = ButtonGroup.Query<Button>("DeleteButton");
+        plusbutton = ButtonGroup.Query<Button>("AddButton");
         list = this.Query<ListView>("RuleList");
 
-        
-        
-       List<string> items = new List<string>();
 
+
+
+
+        plusbutton.clicked += AddItem;
+
+        subtractbutton.clicked += SubtractItem;
         Func<VisualElement> MakeItem = () => new Label();
-        Action<VisualElement, int> bindItem = (e, i) => (e as Label).text = items[i];
+        Action<VisualElement, int> bindItem = (e, i) => (e as Label).text = rules[i].name;
         const int ItemHeight = 16;
-
-        list.itemHeight = ItemHeight;
-        list.itemsSource = items;
-        list.makeItem = MakeItem;
-        list.bindItem = bindItem;
-
-
     }
 
     private void AddItem()
     {
-       
+       Rule ScripObject = ScriptableObject.CreateInstance<Rule>();
+        AssetDatabase.CreateAsset(ScripObject, "Assets/ScriptableObjects/RulesFolder");
+        AssetDatabase.SaveAssets();
+        GetAllRules(out rules);
+    }
+
+    private void SubtractItem()
+    {
+        Rule currentRule = list.selectedItem as Rule;
+        string path = AssetDatabase.GetAssetPath(currentRule);
+        AssetDatabase.DeleteAsset(path);
+        GetAllRules(out rules);
+    }
+
+    public void GetAllRules(out Rule[] rules)
+    {
+        string[] GUIDS = AssetDatabase.FindAssets($"t:{typeof(Rule)}", new[] { "Assets/ScriptableObjects/RulesFolder" });
+
+        rules = new Rule[GUIDS.Length];
+        for (int i = 0; i < GUIDS.Length; i++)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(GUIDS[i]);
+            rules[i] = AssetDatabase.LoadAssetAtPath<Rule>(path);
+        }
     }
 
 }

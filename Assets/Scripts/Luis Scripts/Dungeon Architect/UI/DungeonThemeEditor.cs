@@ -11,6 +11,7 @@ public class DungeonThemeEditor : EditorWindow
     DungeonThemeSceneView DungeonPreview;
     InspectorView inspector;
     DungeonThemeView DungeonThemeGrid;
+    RuleList RL;
 
     [MenuItem("Dungeon/Dungeon Layout Editor")]
     public static void ShowGUI()
@@ -32,6 +33,8 @@ public class DungeonThemeEditor : EditorWindow
         DungeonPreview = root.Q<DungeonThemeSceneView>();
         inspector = root.Q<InspectorView>();
         DungeonThemeGrid = root.Q<DungeonThemeView>();
+        RL = root.Q<RuleList>();
+        RL.SetupList();
 
         //DungeonThemeGrid.OnNodeSelected = OnNodeSelectionChanged;
     }

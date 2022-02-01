@@ -1,12 +1,12 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <RuleList focusable="true">
-        <ui:Label text="Rules List" display-tooltip-when-elided="true" name="ruleslistlabel" />
-        <ui:VisualElement name="Buttons" style="flex-direction: row-reverse;">
-            <ui:Button text="v" display-tooltip-when-elided="true" name="ScrollDownButton" />
-            <ui:Button text="^" display-tooltip-when-elided="true" name="ScrollUpButton" />
-            <ui:Button text="X" display-tooltip-when-elided="true" name="DeleteButton" />
+    <RuleList>
+        <ui:Label text="Rule List" display-tooltip-when-elided="true" />
+        <ui:VisualElement name="Control-Button-Group" style="flex-direction: row-reverse;">
+            <ui:Button text="Down" display-tooltip-when-elided="true" name="ScrollDownButton" />
+            <ui:Button text="Up" display-tooltip-when-elided="true" name="ScrollUpButton" />
             <ui:Button text="+" display-tooltip-when-elided="true" name="AddButton" />
+            <ui:Button text="-" display-tooltip-when-elided="true" name="DeleteButton" />
         </ui:VisualElement>
+        <ui:ListView focusable="true" name="RuleList" />
     </RuleList>
-    <ui:ListView focusable="true" name="RuleList" />
 </ui:UXML>
