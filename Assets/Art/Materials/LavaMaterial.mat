@@ -48,7 +48,7 @@ Material:
     - Power: 0.5
     - PowerMax: 1
     - PowerMin: 0
-    - Speed: 0.25
+    - Speed: 0
     - Transparency: 1.5
     - Transparency2: 1.84
     m_Colors:

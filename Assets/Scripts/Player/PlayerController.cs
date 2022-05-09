@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IHealth
 {
     [Header("Components")]
     public GameObject m_model;
-    private Rigidbody m_rigidbody;
+    public  Rigidbody m_rigidbody;
     private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
