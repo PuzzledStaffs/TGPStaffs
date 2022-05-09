@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class Sign : MonoBehaviour, IInteractable
 {
-    [SerializeField] private string m_signText;
+    [SerializeField] [TextArea] private string m_signText;
     private TextMeshProUGUI m_signTextText;
     private Canvas m_canvas;
     public DungenRoom m_currentDungenRoom;
