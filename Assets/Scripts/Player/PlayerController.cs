@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IHealth
 {
     [Header("Components")]
     public GameObject m_model;
-    private Rigidbody m_rigidbody;
+    public  Rigidbody m_rigidbody;
     private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
@@ -63,6 +63,10 @@ public class PlayerController : MonoBehaviour, IHealth
     private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
+    [Header("Currency")]
+    public int m_coins;
+
+
     [SerializeField] float m_AltInteractArea;
 
     void Awake()
@@ -86,6 +90,8 @@ public class PlayerController : MonoBehaviour, IHealth
         m_weaponWheelController.WeaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item7Unlocked;
         m_weaponWheelController.WeaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item8Unlocked;
         PersistentPrefs.m_currentSaveFile.scene = gameObject.scene.name;
+
+        m_coins = PlayerPrefs.GetInt("Coins", 0);
     }
 
     void OnDestroy()
@@ -430,10 +436,6 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void TakeDamage(IHealth.Damage damage)
     {
-        //Kockback and other feedback stuff
-        animator.SetTrigger("Hit");
-        StartCoroutine(PlayerHitFeedback(1.0f));
-
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
         HealthText.text = "x " + m_health.ToString();
@@ -443,6 +445,21 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
+    public void ApplyKnockack(Vector3 direction)
+    {
+        //Kockback and other feedback stuff
+        //m_rigidbody.AddForce(new Vector3(0,5.0f,-100.0f), ForceMode.Impulse);
+
+        Vector3 dir = direction - transform.position;
+        dir = dir.normalized;
+        m_rigidbody.AddForce(dir * 100.0f, ForceMode.Impulse);
+
+        animator.SetTrigger("Hit");
+        StartCoroutine(PlayerHitFeedback(1.0f));
+    }
+
+
 
     IEnumerator PlayerHitFeedback(float time)
     {
@@ -484,6 +501,12 @@ public class PlayerController : MonoBehaviour, IHealth
     }
     #endregion
 
+
+    public void AddCoint(int coins)
+    {
+        m_coins += coins;
+        PlayerPrefs.SetInt("Coins", m_coins);
+    }
 
     public void OnDrawGizmos()
     {

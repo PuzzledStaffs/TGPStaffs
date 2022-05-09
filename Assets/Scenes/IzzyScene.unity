@@ -322,6 +322,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05da39efd3961194582d17a558e84807, type: 3}
 --- !u!1 &619206435
@@ -512,9 +516,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 20
-  manager: {fileID: 932135638}
-  fieldOfView: {fileID: 932135635}
-  animator: {fileID: 0}
+  m_manager: {fileID: 0}
+  m_fieldOfView: {fileID: 0}
+  m_animator: {fileID: 0}
 --- !u!114 &932135635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -558,11 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add1f4820efbc5e4e9500af1204c2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-  - {fileID: 933016139}
-  - {fileID: 373166831}
-  - {fileID: 1645489327}
-  - {fileID: 1840298731}
+  m_points: []
 --- !u!114 &932135638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -575,10 +575,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3ad8abca8b16d4bbfda7f70072ad2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  e: {fileID: 932135634}
-  idle: {fileID: 932135636}
-  attack: {fileID: 932135633}
-  roam: {fileID: 932135637}
+  m_enemy: {fileID: 0}
+  m_idle: {fileID: 0}
+  m_attack: {fileID: 0}
+  m_roam: {fileID: 0}
 --- !u!65 &932135639
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -791,7 +791,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973417, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973418, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
       propertyPath: target
@@ -820,7 +820,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973411, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.191408
+      value: -14.03
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973411, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: m_LocalPosition.y
@@ -864,7 +864,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973417, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: radius
@@ -877,6 +877,10 @@ PrefabInstance:
     - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: maxAngle
       value: 360
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973420, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: points.Array.size
@@ -1097,9 +1101,9 @@ MonoBehaviour:
   damage: 0
   distance: 0
   animator: {fileID: 0}
-  range: 0
-  projectile: {fileID: 0}
-  model: {fileID: 0}
+  m_range: 0
+  m_projectile: {fileID: 0}
+  m_model: {fileID: 0}
   m_velocity: 0
 --- !u!114 &2033753990
 MonoBehaviour:
@@ -1113,7 +1117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add1f4820efbc5e4e9500af1204c2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: []
+  m_points: []
 --- !u!114 &2033753991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1157,10 +1161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32dbb3c42b168054191b283a20fefb6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  e: {fileID: 2033753994}
-  idle: {fileID: 2033753991}
-  attack: {fileID: 2033753988}
-  roam: {fileID: 2033753990}
+  m_enemy: {fileID: 0}
+  m_idle: {fileID: 0}
+  m_attack: {fileID: 0}
+  m_roam: {fileID: 0}
   rangedAttack: {fileID: 2033753989}
 --- !u!114 &2033753994
 MonoBehaviour:
@@ -1175,9 +1179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 20
-  manager: {fileID: 2033753993}
-  fieldOfView: {fileID: 2033753992}
-  animator: {fileID: 2033753987}
+  m_manager: {fileID: 0}
+  m_fieldOfView: {fileID: 0}
+  m_animator: {fileID: 0}
 --- !u!1 &2100972445
 GameObject:
   m_ObjectHideFlags: 0
