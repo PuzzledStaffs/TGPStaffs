@@ -60,6 +60,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "MouseLook",
+                    "type": "PassThrough",
+                    "id": "824bf78c-b0fc-4189-b511-50f0525a65d3",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -258,6 +266,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "AltInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a32ff3c-0df7-476a-92f7-77530c952c3f",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
