@@ -22,7 +22,7 @@ public class DungenManager : MonoBehaviour
     [SerializeField] PlayerController m_player;
     //[SerializeField] string m_scene;
     [Header("Room Start Info")]
-    [SerializeField] DungenRoom m_startingRoom;
+    public DungenRoom m_startingRoom;
     [SerializeField] string m_dungenEnterText;
     [SerializeField] Canvas m_welcomeCanvas;
     [SerializeField] TextMeshProUGUI m_TitalText;
