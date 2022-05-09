@@ -127,6 +127,11 @@ namespace TGP.DungeonEditor
 			return null;
 		}
 
+		public static void ExportKeyData(Dictionary<Color, GUID> KeyData)
+        {
+
+        }
+
 		public static bool ExportImage(DungeonPLayout img, TextureType type, TextureExtension extension)
 		{
 			string path = EditorUtility.SaveFilePanel(

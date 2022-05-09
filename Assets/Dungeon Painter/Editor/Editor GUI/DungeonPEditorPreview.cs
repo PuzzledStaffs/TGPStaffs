@@ -30,8 +30,10 @@ namespace TGP.DungeonEditor
 
 			GUILayout.EndArea();
 
-			//Make sure the textures are loaded
-			img.LoadAllTexsFromMaps();
+				//Make sure the textures are loaded
+				img.LoadAllTexsFromMaps();
+
+
 
 			float ratio = (float)img.Width / (float)img.Height;
 			EditorGUI.DrawTextureTransparent(new Rect(5, 150, Screen.width - 10, (Screen.width - 10) * ratio), img.GetFinalImage(true), ScaleMode.ScaleToFit, 0);

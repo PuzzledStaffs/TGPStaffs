@@ -60,6 +60,8 @@ namespace TGP.DungeonEditor
 
         #region Other Stuff
         public bool dirty = false;
+
+        public Dictionary<Color, GUID> KeyData;
         #endregion
 
         public DungeonPLayout() { }
@@ -70,8 +72,9 @@ namespace TGP.DungeonEditor
             Height = h;
 
             layers = new List<DungeonPLayer>();
+            KeyData = new Dictionary<Color, GUID>();
             DungeonPLayer newLayer = new DungeonPLayer(this);
-            ; layers.Add(newLayer);
+            layers.Add(newLayer);
 
             EditorUtility.SetDirty(this);
             dirty = true;

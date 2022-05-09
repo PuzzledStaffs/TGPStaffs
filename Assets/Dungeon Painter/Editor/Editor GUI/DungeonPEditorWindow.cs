@@ -231,7 +231,13 @@ namespace TGP.DungeonEditor
 
 			DungeonPDrawer.DrawLayerPanel(window.position);
 
+			DungeonPDrawer.DrawInspectorKeys(window.position);
+
+			
+
 			e.Use();    // Release event handler
 		}
+
+		
 	}
 }

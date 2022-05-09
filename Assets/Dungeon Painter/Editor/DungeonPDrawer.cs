@@ -107,6 +107,17 @@ namespace TGP.DungeonEditor
 			}
 		}
 
+		public static void DrawInspectorKeys(Rect window)
+        {
+			EditorGUI.DrawRect(new Rect(window.width - 60, window.height, 60, window.height),toolbarColor);
+
+
+			if (GUI.Button(new Rect(window.width - 50,50,50,50), "Test"))
+			{
+				//https://answers.unity.com/questions/460727/how-to-serialize-dictionary-with-unity-serializati.html LOOOOOOK HERE
+			}
+		}
+
 		// Draw the settings toolbar
 		public static void DrawToolbar(Rect window, Vector2 mousePos)
 		{
@@ -146,20 +157,21 @@ namespace TGP.DungeonEditor
 			GUI.backgroundColor = Color.white;
 			if (CurrentImg.tool == DPTool.PaintBrush)
 				GUI.backgroundColor = new Color(0.7f, 0.7f, 0.7f);
-			if (GUI.Button(new Rect(320, 4, 60, 30), "Paint"))
+			if (GUI.Button(new Rect(450, 4, 60, 30), "Paint")) // 450, 4, 60, 30
 			{
 				CurrentImg.tool = DPTool.PaintBrush;
 			}
 			GUI.backgroundColor = Color.white;
 			if (CurrentImg.tool == DPTool.BoxBrush)
 				GUI.backgroundColor = new Color(0.7f, 0.7f, 0.7f);
-			if (GUI.Button(new Rect(450, 4, 60, 30), "Box Fill"))
+			if (GUI.Button(new Rect(320, 4, 60, 30), "Save color as key"))//320, 4, 60, 30
 			{
 				EditorUtility.DisplayDialog(
 					"In Development",
 					"This feature is currently being developed.",
 					"Get it done please");
 				//tool = UPATool.BoxBrush;
+
 			}
 			GUI.backgroundColor = Color.white;
 			if (CurrentImg.tool == DPTool.Eraser)
