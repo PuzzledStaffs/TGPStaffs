@@ -6469,6 +6469,7 @@ MonoBehaviour:
   playerKnockbackUI: {fileID: 849784043}
   m_gameOverText: {fileID: 5539810956458964389}
   BowLineRenderer: {fileID: 303525582}
+  m_AltInteractArea: 3
 --- !u!114 &551475353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6590,6 +6591,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 17765bfc-8257-4ec5-9791-d731d0c4aa7f
     m_ActionName: Player/Pause[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 551475354}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnAltInteract
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 36132f4c-1e13-4db7-b6b9-c0074ac26690
+    m_ActionName: Player/AltInteract[/Keyboard/e,/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard And Mouse
   m_DefaultActionMap: Player

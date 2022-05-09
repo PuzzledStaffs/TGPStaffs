@@ -5,7 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 
-public class Sign : MonoBehaviour, IInteractable
+public class Sign : MonoBehaviour, IAltInteractable
 {
     [SerializeField] [TextArea] private string m_signText;
     private TextMeshProUGUI m_signTextText;
@@ -30,7 +30,7 @@ public class Sign : MonoBehaviour, IInteractable
         m_signHelpUI.enabled = false;
     }
 
-    public virtual void Interact()
+    public virtual void AltInteract()
     {
         if (!m_reading)
         {

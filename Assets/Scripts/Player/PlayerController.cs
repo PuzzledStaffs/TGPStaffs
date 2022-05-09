@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour, IHealth
     private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
+    [SerializeField] float m_AltInteractArea;
+
     void Awake()
     {
 
@@ -385,6 +387,17 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
+    public void OnAltInteract()
+    {
+        Collider[]colliders = Physics.OverlapSphere(transform.position, m_AltInteractArea);
+
+        foreach(Collider hitObject in colliders)
+        {
+            hitObject.GetComponent<IAltInteractable>()?.AltInteract();
+        }    
+    }
+
     #endregion
 
     #region Player Health And Death
@@ -470,4 +483,11 @@ public class PlayerController : MonoBehaviour, IHealth
         */
     }
     #endregion
+
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, m_AltInteractArea);
+    }
 }
