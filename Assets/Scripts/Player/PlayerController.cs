@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Animations")]
     public Animator animator;
+    public GameObject playerKnockbackUI;
 
     [Header("Player UI")]
     public TMPro.TextMeshProUGUI m_gameOverText;
@@ -424,6 +425,10 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void TakeDamage(IHealth.Damage damage)
     {
+        //Kockback and other feedback stuff
+        animator.SetTrigger("Hit");
+        StartCoroutine(PlayerHitFeedback(1.0f));
+
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
         HealthText.text = "x " + m_health.ToString();
@@ -433,6 +438,15 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
+    IEnumerator PlayerHitFeedback(float time)
+    {
+        playerKnockbackUI.SetActive(true);
+        yield return new WaitForSeconds(time);
+        playerKnockbackUI.SetActive(false);
+    }
+
+
 
     public bool IsDead()
     {
