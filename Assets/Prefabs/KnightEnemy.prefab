@@ -1106,7 +1106,7 @@ MonoBehaviour:
   distance: 5
   animator: {fileID: 5516742853000973413}
   range: 5
-  projectile: {fileID: 3789550298258551688, guid: 8ba1066874f46e546a75c20c89ac9fa1, type: 3}
+  projectile: {fileID: 5315872203750749436, guid: 708e8215981e20946822d96edee4352e, type: 3}
   model: {fileID: 5516742852548737888}
   m_velocity: 10
 --- !u!114 &5516742853000973418
