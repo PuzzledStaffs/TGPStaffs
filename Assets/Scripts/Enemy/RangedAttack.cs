@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class RangedAttack : AttackState
 {
-    public int range;
-    public GameObject projectile;
-    public GameObject model;
+    public int m_range;
+    public GameObject m_projectile;
+    public GameObject m_model;
     public float m_velocity;
 
 
@@ -31,11 +31,11 @@ public class RangedAttack : AttackState
         if (cooldown <= 0)
         {
             cooldown = maxCooldown;
-            GameObject attack = Instantiate(projectile, transform.position + new Vector3(0, 1.0f,0), transform.rotation);
+            GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 1.0f,0), transform.rotation);
 
             attack.GetComponent<Projectile>().m_damageAmount = damage;
             attack.GetComponent<Projectile>().velocity = m_velocity;
-            attack.GetComponent<Projectile>().attack = model;
+            attack.GetComponent<Projectile>().attack = m_model;
         }
     }
 

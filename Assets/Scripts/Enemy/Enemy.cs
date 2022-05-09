@@ -8,9 +8,9 @@ public class Enemy : MonoBehaviour, IHealth
 {
     [SerializeField]
     protected int m_health = 20;
-    public StateManager manager;
-    public FOV fieldOfView;
-    public Animator animator;
+    public StateManager m_manager;
+    public FOV m_fieldOfView;
+    public Animator m_animator;
     public Action<GameObject> m_deadEvent; 
 
     public int GetHealth()
@@ -30,8 +30,6 @@ public class Enemy : MonoBehaviour, IHealth
             return false;
 
         }
-
-
     }
 
     public virtual void TakeDamage(IHealth.Damage damage)
@@ -39,7 +37,7 @@ public class Enemy : MonoBehaviour, IHealth
         if (IsDead()) { return; }
 
         m_health -= damage.damageAmount;
-        animator.SetTrigger("TakeDamage");
+        m_animator.SetTrigger("TakeDamage");
 
         if (IsDead())
         {
@@ -60,10 +58,10 @@ public class Enemy : MonoBehaviour, IHealth
     {
 
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
-        animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
-        if (fieldOfView.inFOV)
+        m_animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
+        if (m_fieldOfView.inFOV)
         {
-            manager.ChangeState(State.StateType.ATTACK);
+            m_manager.ChangeState(State.StateType.ATTACK);
         }      
     }
 
@@ -74,7 +72,7 @@ public class Enemy : MonoBehaviour, IHealth
         this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
         m_deadEvent?.Invoke(gameObject);
-        animator.SetBool("Dead", true);
+        m_animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
         Destroy(this.gameObject);
@@ -84,7 +82,7 @@ public class Enemy : MonoBehaviour, IHealth
     void RandomDeathAnim()
     {
         int random = UnityEngine.Random.Range(0, 2);
-        animator.SetInteger("DeathAnim", random);
+        m_animator.SetInteger("DeathAnim", random);
         Debug.Log(random);
     }
 
