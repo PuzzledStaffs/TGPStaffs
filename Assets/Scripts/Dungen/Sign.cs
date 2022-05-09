@@ -26,7 +26,7 @@ public class Sign : MonoBehaviour, IInteractable
 
 
         m_reading = false;
-        m_canvas.enabled = false;
+        //m_canvas.enabled = false;
         m_signHelpUI.enabled = false;
     }
 

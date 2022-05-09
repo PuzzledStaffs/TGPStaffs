@@ -42,7 +42,8 @@ public class FOV : MonoBehaviour
         }
 
         //detection line
-        Gizmos.DrawLine(transform.position, ((target.transform.position - transform.position).normalized * radius) + transform.position);
+        if(target != null)
+            Gizmos.DrawLine(transform.position, ((target.transform.position - transform.position).normalized * radius) + transform.position);
     }
     private void FixedUpdate()
     {
