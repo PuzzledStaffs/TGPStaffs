@@ -491,7 +491,7 @@ public class PlayerController : MonoBehaviour, IHealth
     #endregion
 
 
-    public void AddCoint(int coins)
+    public void AddCoins(int coins)
     {
         m_coins += coins;
         PlayerPrefs.SetInt("Coins", m_coins);
