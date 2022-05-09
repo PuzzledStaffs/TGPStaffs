@@ -63,6 +63,12 @@ public class PlayerController : MonoBehaviour, IHealth
     private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
+    [Header("Currency")]
+    public int m_coins;
+
+
+    [SerializeField] float m_AltInteractArea;
+
     void Awake()
     {
 
@@ -84,6 +90,8 @@ public class PlayerController : MonoBehaviour, IHealth
         m_weaponWheelController.WeaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item7Unlocked;
         m_weaponWheelController.WeaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item8Unlocked;
         PersistentPrefs.m_currentSaveFile.scene = gameObject.scene.name;
+
+        m_coins = PlayerPrefs.GetInt("Coins", 0);
     }
 
     void OnDestroy()
@@ -385,6 +393,17 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
+    public void OnAltInteract()
+    {
+        Collider[]colliders = Physics.OverlapSphere(transform.position, m_AltInteractArea);
+
+        foreach(Collider hitObject in colliders)
+        {
+            hitObject.GetComponent<IAltInteractable>()?.AltInteract();
+        }    
+    }
+
     #endregion
 
     #region Player Health And Death
@@ -481,4 +500,17 @@ public class PlayerController : MonoBehaviour, IHealth
         */
     }
     #endregion
+
+
+    public void AddCoint(int coins)
+    {
+        m_coins += coins;
+        PlayerPrefs.SetInt("Coins", m_coins);
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, m_AltInteractArea);
+    }
 }

@@ -5,12 +5,13 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
 
-public class Sign : MonoBehaviour, IInteractable
+public class Sign : MonoBehaviour, IAltInteractable
 {
-    [SerializeField] private string m_signText;
+    [SerializeField] [TextArea] private string m_signText;
     private TextMeshProUGUI m_signTextText;
     private Canvas m_canvas;
     public DungenRoom m_currentDungenRoom;
+    [SerializeField] TextMeshProUGUI m_signHelpUI;
     private bool m_reading;
     private PlayerController m_playerController;
     private PlayerInput m_playerInput;
@@ -25,10 +26,11 @@ public class Sign : MonoBehaviour, IInteractable
 
 
         m_reading = false;
-        m_canvas.enabled = false;
+        //m_canvas.enabled = false;
+        m_signHelpUI.enabled = false;
     }
 
-    public virtual void Interact()
+    public virtual void AltInteract()
     {
         if (!m_reading)
         {
@@ -52,5 +54,16 @@ public class Sign : MonoBehaviour, IInteractable
                 m_currentDungenRoom.UnFrezeRoom();
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        m_signHelpUI.enabled = true;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        m_signHelpUI.enabled = false;
+
     }
 }

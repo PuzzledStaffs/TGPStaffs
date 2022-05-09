@@ -13,7 +13,7 @@ public class BossEnemy : Enemy
     {
         m_health = 100;
         maxHealth = m_health;
-        fieldOfView = GetComponent<FOV>();
+        m_fieldOfView = GetComponent<FOV>();
     }
 
     // Update is called once per frame
@@ -28,17 +28,17 @@ public class BossEnemy : Enemy
         //animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
 
 
-        if (fieldOfView.inFOV == true)
+        if (m_fieldOfView.inFOV == true)
         {
             if (phaseSwitch)
             {
                 Debug.Log("ranged");
-                manager.ChangeState(State.StateType.R_ATTACK);
+                m_manager.ChangeState(State.StateType.R_ATTACK);
             }
             else 
             {
                 Debug.Log("melee");
-                manager.ChangeState(State.StateType.ATTACK);
+                m_manager.ChangeState(State.StateType.ATTACK);
             }
         }
     }
@@ -54,7 +54,7 @@ public class BossEnemy : Enemy
         else
         {
             m_health -= damage.damageAmount;
-            animator.SetTrigger("TakeDamage");
+            m_animator.SetTrigger("TakeDamage");
         }
 
         if (IsDead())
