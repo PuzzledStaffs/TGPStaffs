@@ -41,12 +41,14 @@ public class DungenManager : MonoBehaviour
         m_welcomeCanvas.enabled = false;
         m_player.m_Death += PlayerDeath;
         m_playerLight = gameObject.GetComponentInChildren<Light>();
+
+        
     }
 
     private void Start()
     {
         GameObject.FindObjectOfType<PlayerController>().enabled = false;
-        m_TitalText.text = m_dungenEnterText;
+        //m_TitalText.text = m_dungenEnterText;
         m_welcomeCanvas.enabled = true;
         m_animator.SetTrigger("Start");
     }
@@ -54,6 +56,11 @@ public class DungenManager : MonoBehaviour
     public void Update()
     {
         m_playerLight.transform.position = m_player.transform.position + new Vector3(0, 5, 0);
+    }
+
+    public void SetTitalText(string text)
+    {
+        m_TitalText.text = text;
     }
 
     public void JoinAnimationEnd()

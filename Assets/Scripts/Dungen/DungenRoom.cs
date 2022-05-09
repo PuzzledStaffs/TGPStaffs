@@ -100,7 +100,10 @@ public class DungenRoom : MonoBehaviour
             m_playerInRoom = true;
             DungenManager manager = GameObject.FindWithTag("dungeonManager").GetComponent<DungenManager>();
             if (manager != null)
+            {
                 manager.m_startingRoom = this;
+                manager.SetTitalText(gameObject.scene.name.ToString());
+            }
         }
         else
             m_playerInRoom = false;
