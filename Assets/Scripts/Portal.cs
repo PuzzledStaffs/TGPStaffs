@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
@@ -9,7 +10,8 @@ public class Portal : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(SceneToGoTo);
+            SceneManager.LoadSceneAsync("DungeonBase");
+            SceneManager.LoadSceneAsync(SceneToGoTo,LoadSceneMode.Additive);
         }
     }
 }
