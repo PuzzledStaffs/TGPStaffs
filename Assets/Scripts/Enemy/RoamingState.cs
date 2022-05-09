@@ -2,28 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+#DEFINE MAX_VELOCITY 100
 
 public class RoamingState : State
 {
-    public Transform[] points;
-    int destinationPoint = 0;
-    NavMeshAgent agent;
+    public Transform[] m_points;
+    int m_destinationPoint = 0;
+    NavMeshAgent m_agent;
+    Vector3 m_center;
+    Vector3 m_velocity;
+
+    //https://gamedevelopment.tutsplus.com/tutorials/understanding-steering-behaviors-wander--gamedev-1624
+    //https://forum.unity.com/threads/wandering-around.76687/
+    //https://gamedev.stackexchange.com/questions/106737/wander-steering-behaviour-in-3d
+    
 
     // Start is called before the first frame update
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
+        m_agent = GetComponent<NavMeshAgent>();
         //for continous movement
-        agent.autoBraking = false;
-        agent.isStopped = false;
+        m_agent.autoBraking = false;
+        m_agent.isStopped = false;
         GotoNextPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         //Set desitination to the next point just before getting to current point
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+        if (!m_agent.pathPending && m_agent.remainingDistance < 0.5f)
         {
             GotoNextPoint();
         }
@@ -32,17 +41,17 @@ public class RoamingState : State
     void GotoNextPoint()
     {
         //checks if there are any points.
-        if (points.Length == 0)
+        if (m_points.Length == 0)
         {
             Debug.Log("No points!");
             return;
         }
 
         //Set the next point as the destination
-        agent.SetDestination(points[destinationPoint].position);
+        m_agent.SetDestination(m_points[m_destinationPoint].position);
 
         //Update the next point, cycles if it reaches the end
-        destinationPoint = (destinationPoint + 1) % points.Length;
+        m_destinationPoint = (m_destinationPoint + 1) % m_points.Length;
 
     }
 }
