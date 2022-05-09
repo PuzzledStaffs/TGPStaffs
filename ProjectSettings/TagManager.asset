@@ -14,7 +14,7 @@ TagManager:
   - SignText
   - PersistentPrefs
   - HealthUI
-  - dungeonManager
+  - PlayerHitFeedbackUI
   layers:
   - Default
   - TransparentFX
