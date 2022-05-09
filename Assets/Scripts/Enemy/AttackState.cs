@@ -71,7 +71,7 @@ public class AttackState : State
         }
 
         //If the AI can't see the player, stop attacking
-        if (!manager.e.fieldOfView.inFOV)
+        if (!manager.m_enemy.m_fieldOfView.inFOV)
         {
             manager.ChangeState(StateType.IDLE);
         }

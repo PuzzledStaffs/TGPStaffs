@@ -16,27 +16,27 @@ public class BossStateManager : StateManager
         switch (type)
         {
             case State.StateType.IDLE:
-                roam.enabled = false;
-                attack.enabled = false;
-                idle.enabled = true;
+                m_roam.enabled = false;
+                m_attack.enabled = false;
+                m_idle.enabled = true;
                 rangedAttack.enabled = false;
                 break;
             case State.StateType.ROAM:
-                roam.enabled = true;
-                attack.enabled = false;
-                idle.enabled = false;
+                m_roam.enabled = true;
+                m_attack.enabled = false;
+                m_idle.enabled = false;
                 rangedAttack.enabled = false;
                 break;
             case State.StateType.ATTACK:
-                roam.enabled = false;
-                attack.enabled = true;
-                idle.enabled = false;
+                m_roam.enabled = false;
+                m_attack.enabled = true;
+                m_idle.enabled = false;
                 rangedAttack.enabled = false;
                 break;
             case State.StateType.R_ATTACK:
-                roam.enabled = false;
-                attack.enabled = false;
-                idle.enabled = false;
+                m_roam.enabled = false;
+                m_attack.enabled = false;
+                m_idle.enabled = false;
                 rangedAttack.enabled = true;
                 break;
         }

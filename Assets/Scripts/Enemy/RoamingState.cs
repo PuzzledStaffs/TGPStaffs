@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-#DEFINE MAX_VELOCITY 100
+//#DEFINE MAX_VELOCITY 100
 
 public class RoamingState : State
 {

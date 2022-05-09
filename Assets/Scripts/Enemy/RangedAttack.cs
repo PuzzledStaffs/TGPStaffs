@@ -34,8 +34,8 @@ public class RangedAttack : AttackState
             GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 1.0f,0), transform.rotation);
 
             attack.GetComponent<Projectile>().m_damageAmount = damage;
-            attack.GetComponent<Projectile>().velocity = m_velocity;
-            attack.GetComponent<Projectile>().attack = m_model;
+            attack.GetComponent<Projectile>().m_velocity = m_velocity;
+            attack.GetComponent<Projectile>().m_attack = m_model;
         }
     }
 
