@@ -11,7 +11,9 @@ public class Enemy : MonoBehaviour, IHealth
     public StateManager manager;
     public FOV fieldOfView;
     public Animator animator;
-    public Action<GameObject> m_deadEvent; 
+    public Action<GameObject> m_deadEvent;
+    public RectTransform m_healthBar;
+    public RectTransform m_healthBarMask;
 
     public int GetHealth()
     {
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour, IHealth
         
 
         m_health -= damage.damageAmount;
+        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
         animator.SetTrigger("TakeDamage");
 
         if (IsDead())
@@ -67,6 +70,11 @@ public class Enemy : MonoBehaviour, IHealth
             GetComponent<NavMeshAgent>().speed = 0;
         }
 
+        m_healthBar.position = transform.position + Vector3.forward;
+        var lookPos = Camera.main.transform.position - m_healthBar.position;
+        lookPos.x = 0;
+        lookPos.z = 0;
+        m_healthBar.rotation = Quaternion.LookRotation(lookPos);
 
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
         animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
