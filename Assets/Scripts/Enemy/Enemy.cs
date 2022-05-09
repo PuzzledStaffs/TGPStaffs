@@ -38,8 +38,6 @@ public class Enemy : MonoBehaviour, IHealth
     {
         if (IsDead()) { return; }
 
-        
-
         m_health -= damage.damageAmount;
         animator.SetTrigger("TakeDamage");
 
@@ -61,13 +59,6 @@ public class Enemy : MonoBehaviour, IHealth
     void Update()
     {
 
-        if (IsDead())
-        {
-            GetComponent<NavMeshAgent>().isStopped = true;
-            GetComponent<NavMeshAgent>().speed = 0;
-        }
-
-
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
         animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
         if (fieldOfView.inFOV)
@@ -78,6 +69,8 @@ public class Enemy : MonoBehaviour, IHealth
 
     public IEnumerator DeathCoroutine()
     {
+        GetComponent<NavMeshAgent>().isStopped = true;
+        GetComponent<NavMeshAgent>().speed = 0;
         this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
         m_deadEvent?.Invoke(gameObject);
