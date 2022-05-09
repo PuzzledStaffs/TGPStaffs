@@ -31,7 +31,7 @@ public class RangedAttack : AttackState
         if (cooldown <= 0)
         {
             cooldown = maxCooldown;
-            GameObject attack = Instantiate(projectile, transform.position + new Vector3(0,3.0f,0), transform.rotation);
+            GameObject attack = Instantiate(projectile, transform.position + new Vector3(0, 1.0f,0), transform.rotation);
 
             attack.GetComponent<Projectile>().m_damageAmount = damage;
             attack.GetComponent<Projectile>().velocity = m_velocity;
