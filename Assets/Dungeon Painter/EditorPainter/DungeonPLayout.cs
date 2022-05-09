@@ -23,7 +23,7 @@ namespace TGP.DungeonEditor
         public int Width; //Width Of the Dungeon
         public int Height; //Height of the Dungeon (2D space)
 
-        public List<DungeonPLayer> layers;
+       [SerializeField] public List<DungeonPLayer> layers;
         public int layercount
         {
             get { return layers.Count; }

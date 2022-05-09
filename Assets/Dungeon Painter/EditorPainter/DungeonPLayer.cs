@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace TGP.DungeonEditor
 {
+    [System.Serializable]
     public class DungeonPLayer
     {
         public enum BlendMode

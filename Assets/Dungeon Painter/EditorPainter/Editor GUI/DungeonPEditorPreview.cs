@@ -14,19 +14,19 @@ namespace TGP.DungeonEditor
 
 			GUILayout.BeginArea(new Rect(5, 53, Screen.width - 10, Screen.height));
 
-			if (GUILayout.Button("Open", GUILayout.Height(40)))
-			{
-				DungeonPEditorWindow.CurrentLayout = DungeonPSession.OpenImageByAsset(img);
-				if (DungeonPEditorWindow.window != null)
-				{
-					DungeonPEditorWindow.window.Repaint();
-				}
-			}
+			//if (GUILayout.Button("Open", GUILayout.Height(40)))
+			//{
+			//	DungeonPEditorWindow.CurrentLayout = DungeonPSession.OpenImageByAsset(img);
+			//	if (DungeonPEditorWindow.window != null)
+			//	{
+			//		DungeonPEditorWindow.window.Repaint();
+			//	}
+			//}
 
-			if (GUILayout.Button("Export", GUILayout.Height(40)))
-			{
-				DungeonPExportWindow.Init(img);
-			}
+			//if (GUILayout.Button("Export", GUILayout.Height(40)))
+			//{
+			//	DungeonPExportWindow.Init(img);
+			//}
 
 			
 

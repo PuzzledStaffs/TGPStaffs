@@ -120,6 +120,11 @@ namespace TGP.Utilites
         {
             _pairs.Remove(new ColorGameobjectTuple(color, gameObject));
         }
+
+        public bool Containscolor(Color color, GameObject gameObject)
+        {
+            return _pairs.Contains(new ColorGameobjectTuple(color, gameObject));
+        }
     }
 
 }
