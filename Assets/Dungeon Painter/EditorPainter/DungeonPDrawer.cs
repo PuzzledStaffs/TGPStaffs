@@ -171,7 +171,11 @@ namespace TGP.DungeonEditor
 				//	"This feature is currently being developed.",
 				//	"Get it done please");
 				//tool = UPATool.BoxBrush;
-				CurrentImg.KeyData.AddIndex(CurrentImg.selectedColor, null);
+				float R = (float)System.Math.Round(CurrentImg.selectedColor.r, 1);
+				float G = (float)System.Math.Round(CurrentImg.selectedColor.g, 1);
+				float B = (float)System.Math.Round(CurrentImg.selectedColor.b, 1);
+				
+				CurrentImg.KeyData.AddIndex(new Color(R, G, B, CurrentImg.selectedColor.a), null);
 
 			}
 			GUI.backgroundColor = Color.white;

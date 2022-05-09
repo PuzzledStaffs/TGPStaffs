@@ -198,7 +198,8 @@ namespace TGP.DungeonEditor
             if (!dirty && FinalLayout != null || !update && FinalLayout != null)
                 return FinalLayout;
 
-            FinalLayout = DungeonPDrawer.CalculateBlendedTex(layers);
+            //FinalLayout = DungeonPDrawer.CalculateBlendedTex(layers);
+            FinalLayout = layers[0].tex;
 
             FinalLayout.filterMode = FilterMode.Point;
             FinalLayout.Apply();

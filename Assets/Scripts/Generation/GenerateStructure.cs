@@ -6,7 +6,8 @@ public class GenerateStructure : MonoBehaviour
 {
     [SerializeField] DungeonPLayout ScriptableObject;
 
-    public List<GameObject[,]> ListOfGameObjectArray;
+    [SerializeField]
+    public List<GameObject[,]> ListOfGameObjectArray = new List<GameObject[,]>();
 
     private void Start()
     {
@@ -55,12 +56,17 @@ public class GenerateStructure : MonoBehaviour
             for (int z = 0; z < ScriptableObject.FinalLayout.height; z++)
             {
                 Color XZColor = ScriptableObject.FinalLayout.GetPixel(x, z);
+                float R = (float)System.Math.Round(XZColor.r, 1);
+                float G = (float)System.Math.Round(XZColor.g, 1);
+                float B = (float)System.Math.Round(XZColor.b, 1);
+                XZColor = new Color(R, G, B, XZColor.a);
                 if (ScriptableObject.KeyData.ContainsKey(XZColor))
                 {
                     GameObject Object;
                     if (ScriptableObject.KeyData.TryGetValue(XZColor, out Object))
                     {
                         Array2D[x, z] = Object;
+                        GameObject.Instantiate(Object, new Vector3(x, 0, z), Quaternion.identity);
                     }
                     else
                     {
@@ -74,6 +80,7 @@ public class GenerateStructure : MonoBehaviour
                 }
             }
         }
+        ListOfGameObjectArray.Add(Array2D);
 
 
 
