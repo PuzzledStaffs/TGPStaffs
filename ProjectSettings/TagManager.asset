@@ -12,6 +12,9 @@ TagManager:
   - Wheel8
   - SignCanvas
   - SignText
+  - PersistentPrefs
+  - HealthUI
+  - PlayerHitFeedbackUI
   layers:
   - Default
   - TransparentFX

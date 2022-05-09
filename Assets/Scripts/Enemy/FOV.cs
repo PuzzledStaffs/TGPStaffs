@@ -13,7 +13,7 @@ public class FOV : MonoBehaviour
 
     private void Start()
     {
-       // target = GameObject.FindGameObjectWithTag("Player");
+       target = GameObject.FindGameObjectWithTag("Player");
     }
     //Draws Debug lines
     public void OnDrawGizmos()
@@ -42,7 +42,8 @@ public class FOV : MonoBehaviour
         }
 
         //detection line
-        Gizmos.DrawLine(transform.position, ((target.transform.position - transform.position).normalized * radius) + transform.position);
+        if(target != null)
+            Gizmos.DrawLine(transform.position, ((target.transform.position - transform.position).normalized * radius) + transform.position);
     }
     private void FixedUpdate()
     {

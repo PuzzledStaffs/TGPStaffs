@@ -6,22 +6,22 @@ public class Projectile : MonoBehaviour
 {
     float m_timer = 0;
     public int m_damageAmount;
-    Rigidbody rb;
-    public float velocity;
-    public GameObject attack;
-    Vector3 moveDirection;
+    Rigidbody m_rigidBody;
+    public float m_velocity;
+    public GameObject m_attack;
+    Vector3 m_moveDirection;
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        moveDirection = attack.transform.forward;
+        m_rigidBody = GetComponent<Rigidbody>();
+        m_moveDirection = m_attack.transform.forward;
     }
     // Start is called before the first frame update
     void Update()
     {
         m_timer += Time.deltaTime;
 
-        rb.AddForce(moveDirection * velocity, ForceMode.Force);
+        m_rigidBody.AddForce(m_moveDirection * m_velocity, ForceMode.Force);
         if (m_timer >= 3)
         {
             Destroy(this.gameObject);

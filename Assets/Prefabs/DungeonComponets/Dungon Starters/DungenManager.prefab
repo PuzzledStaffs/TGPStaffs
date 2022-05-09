@@ -457,7 +457,7 @@ MonoBehaviour:
   m_playerLight: {fileID: 888253239}
   m_player: {fileID: 0}
   m_startingRoom: {fileID: 0}
-  m_dungenEnterText: Dungeon 1:3
+  m_dungenEnterText: Dungeon
   m_welcomeCanvas: {fileID: 9024133131116821806}
   m_TitalText: {fileID: 9024133130386573380}
 --- !u!95 &9024133131068660374

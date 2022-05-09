@@ -9,6 +9,7 @@ public class BombItem : Item
     public float m_moveForce;
     public float m_radius;
     public GameObject m_ExplosionPrefab;
+    public AudioClip ExplosionSound;
 
     public override void LeftClickAction(PlayerController pc)
     {

@@ -16,7 +16,7 @@ public class AttackState : State
     public int damage;
     public float distance;
     public Animator animator;
-    bool m_HasAttacked = false;
+   // bool m_HasAttacked = false;
 
 
     // Start is called before the first frame update
@@ -39,6 +39,7 @@ public class AttackState : State
     // Update is called once per frame
     void Update()
     {
+        
         //cooldown start
         cooldown -= Time.deltaTime;
 
@@ -61,14 +62,16 @@ public class AttackState : State
 
 
         //if the cooldown has finished, attack
-        if (cooldown <= 0 && !m_HasAttacked) 
+        if (cooldown <= 0) 
         {
+            
             StartCoroutine(OnAttack());
-            m_HasAttacked = true;
+            cooldown = maxCooldown;
+            // m_HasAttacked = true;
         }
 
         //If the AI can't see the player, stop attacking
-        if (!manager.e.fieldOfView.inFOV)
+        if (!manager.m_enemy.m_fieldOfView.inFOV)
         {
             manager.ChangeState(StateType.IDLE);
         }
@@ -77,9 +80,11 @@ public class AttackState : State
 
     IEnumerator OnAttack()
     {
-        //TODO: Play animation
+        animator.ResetTrigger("Attack");
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(animationTime / 2);
+
+       
 
         //If an object is nearby, check if its the player
         Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(1.0f, 1.0f, 1.0f), transform.rotation);
@@ -98,10 +103,11 @@ public class AttackState : State
                 //Take Damage
                 IHealth health = player.GetComponent<IHealth>();
                 health.TakeDamage(damageStruct);
+
                 
             }
         }
-        cooldown = maxCooldown;
-        m_HasAttacked = false;
+      
+        //m_HasAttacked = false;
     }
 }

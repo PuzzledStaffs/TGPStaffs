@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Timeline.Actions;
+//using UnityEditor.Timeline.Actions;
 using UnityEngine;
 using UnityEngine.Events;
 using TMPro;
@@ -40,6 +40,11 @@ public class DungonAccumulator : MonoBehaviour
     public void RemoveTo()
     {
         m_currentInputs--;
+        if(m_currentInputs < 0)
+        {
+            m_currentInputs = 0;
+        }
+
         m_Text.text = m_currentInputs.ToString();
         if (m_currentInputs < m_ExpectedInputs && m_active)
         {

@@ -5040,6 +5040,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HeartsToGive: 1
+  CollectParticle: {fileID: 4778128939460442851, guid: f32b8e432a63e4140b63253ad7ede138, type: 3}
+  CollectSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
 --- !u!54 &5354844824122538820
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5241,7 +5243,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 198108421688386642, guid: 122d7868d50e35c448a72d190d18c8ff, type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.87286127
+      value: 0.9515318
+      objectReference: {fileID: 0}
+    - target: {fileID: 198108421688386642, guid: 122d7868d50e35c448a72d190d18c8ff, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122d7868d50e35c448a72d190d18c8ff, type: 3}

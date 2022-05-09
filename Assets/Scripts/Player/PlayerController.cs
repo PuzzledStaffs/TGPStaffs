@@ -56,30 +56,51 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Animations")]
     public Animator animator;
+    public GameObject playerKnockbackUI;
 
     [Header("Player UI")]
     public TMPro.TextMeshProUGUI m_gameOverText;
     private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
-    [Header("For The Grass")]
-    public Material Grass;
-    [SerializeField] float RadiusOfTrample;
+    [Header("Currency")]
+    public int m_coins;
+
+
+    [SerializeField] float m_AltInteractArea;
 
     void Awake()
     {
+
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
-        HealthText.text = "x " + m_health.ToString() ;
+        HealthText.text = "x " + m_health.ToString();
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         m_respawnPosition = transform.position;
+
+        SetHealth(PersistentPrefs.m_currentSaveFile.currentHealth);
+        m_weaponWheelController.WeaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item1Unlocked;
+        m_weaponWheelController.WeaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item2Unlocked;
+        m_weaponWheelController.WeaponWheel.transform.GetChild(2).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item3Unlocked;
+        m_weaponWheelController.WeaponWheel.transform.GetChild(3).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item4Unlocked;
+        m_weaponWheelController.WeaponWheel.transform.GetChild(4).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item5Unlocked;
+        m_weaponWheelController.WeaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item6Unlocked;
+        m_weaponWheelController.WeaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item7Unlocked;
+        m_weaponWheelController.WeaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item8Unlocked;
+        PersistentPrefs.m_currentSaveFile.scene = gameObject.scene.name;
+
+        m_coins = PlayerPrefs.GetInt("Coins", 0);
+    }
+
+    void OnDestroy()
+    {
+        PersistentPrefs.m_currentSaveFile.currentHealth = IsDead() ? 5 : m_health;
     }
 
     void Update()
     {
-        Grass?.SetVector("_GrassTrample", new Vector4(transform.position.x, transform.position.y + 2f, transform.position.z, RadiusOfTrample));
         if (m_weaponWheelController.isWheelOpen)
         {
             Vector2 direction = m_pointerPos;
@@ -122,13 +143,6 @@ public class PlayerController : MonoBehaviour, IHealth
             }
         }
     }
-
-    public void SetHealth(int Health)
-    {
-        m_health += Health;
-        HealthText.text = "x " + m_health.ToString();
-    }
-
 
     void FixedUpdate()
     {
@@ -379,6 +393,17 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
+    public void OnAltInteract()
+    {
+        Collider[]colliders = Physics.OverlapSphere(transform.position, m_AltInteractArea);
+
+        foreach(Collider hitObject in colliders)
+        {
+            hitObject.GetComponent<IAltInteractable>()?.AltInteract();
+        }    
+    }
+
     #endregion
 
     #region Player Health And Death
@@ -398,8 +423,23 @@ public class PlayerController : MonoBehaviour, IHealth
         return health;
     }
 
+    public void AddHealth(int Health)
+    {
+        SetHealth(m_health + Health);
+    }
+
+    public void SetHealth(int Health)
+    {
+        m_health = Health;
+        HealthText.text = "x " + m_health.ToString();
+    }
+
     public void TakeDamage(IHealth.Damage damage)
     {
+        //Kockback and other feedback stuff
+        animator.SetTrigger("Hit");
+        StartCoroutine(PlayerHitFeedback(1.0f));
+
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
         HealthText.text = "x " + m_health.ToString();
@@ -409,6 +449,15 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
+    IEnumerator PlayerHitFeedback(float time)
+    {
+        playerKnockbackUI.SetActive(true);
+        yield return new WaitForSeconds(time);
+        playerKnockbackUI.SetActive(false);
+    }
+
+
 
     public bool IsDead()
     {
@@ -440,4 +489,17 @@ public class PlayerController : MonoBehaviour, IHealth
         */
     }
     #endregion
+
+
+    public void AddCoint(int coins)
+    {
+        m_coins += coins;
+        PlayerPrefs.SetInt("Coins", m_coins);
+    }
+
+    public void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, m_AltInteractArea);
+    }
 }
