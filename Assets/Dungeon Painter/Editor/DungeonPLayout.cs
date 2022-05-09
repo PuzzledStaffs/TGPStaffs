@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using TGP.Utilites;
 
 namespace TGP.DungeonEditor
 {
@@ -61,7 +62,7 @@ namespace TGP.DungeonEditor
         #region Other Stuff
         public bool dirty = false;
 
-        public Dictionary<Color, GUID> KeyData;
+       public ColorAndGameObjectDictonary KeyData;
         #endregion
 
         public DungeonPLayout() { }
@@ -72,7 +73,7 @@ namespace TGP.DungeonEditor
             Height = h;
 
             layers = new List<DungeonPLayer>();
-            KeyData = new Dictionary<Color, GUID>();
+            KeyData = new ColorAndGameObjectDictonary();
             DungeonPLayer newLayer = new DungeonPLayer(this);
             layers.Add(newLayer);
 

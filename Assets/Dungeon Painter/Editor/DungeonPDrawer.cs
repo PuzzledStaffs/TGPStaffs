@@ -164,13 +164,14 @@ namespace TGP.DungeonEditor
 			GUI.backgroundColor = Color.white;
 			if (CurrentImg.tool == DPTool.BoxBrush)
 				GUI.backgroundColor = new Color(0.7f, 0.7f, 0.7f);
-			if (GUI.Button(new Rect(320, 4, 60, 30), "Save color as key"))//320, 4, 60, 30
+			if (GUI.Button(new Rect(320, 4, 60, 30), "Save color"))//320, 4, 60, 30
 			{
-				EditorUtility.DisplayDialog(
-					"In Development",
-					"This feature is currently being developed.",
-					"Get it done please");
+				//EditorUtility.DisplayDialog(
+				//	"In Development",
+				//	"This feature is currently being developed.",
+				//	"Get it done please");
 				//tool = UPATool.BoxBrush;
+				CurrentImg.KeyData.AddIndex(CurrentImg.selectedColor, null);
 
 			}
 			GUI.backgroundColor = Color.white;
