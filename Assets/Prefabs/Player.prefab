@@ -6690,6 +6690,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_model: {fileID: 2168555488193596589}
+  m_rigidbody: {fileID: 0}
   m_respawnPosition: {x: 0, y: 0, z: 0}
   currentScene:
     m_Handle: 0
@@ -6718,7 +6719,7 @@ MonoBehaviour:
   m_gameOverText: {fileID: 5539810956458964389}
   BowLineRenderer: {fileID: 303525582}
   m_coins: 0
-  m_AltInteractArea: 3
+  m_AltInteractArea: 1.5
 --- !u!114 &551475353
 MonoBehaviour:
   m_ObjectHideFlags: 0

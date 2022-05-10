@@ -29,8 +29,6 @@ public class DungenRoom : MonoBehaviour
 
     private void Awake()
     {
-      
-
         m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
         m_Enemies = new List<Enemy>(m_EneamyPerent.GetComponentsInChildren<Enemy>());
         m_EnemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
@@ -193,6 +191,9 @@ public class DungenRoom : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Called To Frezze room
+    /// </summary>
     public void FrezzeExatingRoom()
     {
        
