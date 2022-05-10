@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Switch : MonoBehaviour, IInteractable
+public class Switch : MonoBehaviour, IAltInteractable
 {
     [Header("Prefab Variables")]
     public Material m_switchOffMaterial;
@@ -61,7 +61,7 @@ public class Switch : MonoBehaviour, IInteractable
         m_ButtonPushed = false;
     }
 
-    public void Interact()
+    public void AltInteract()
     {
         if (m_locked)
         {
