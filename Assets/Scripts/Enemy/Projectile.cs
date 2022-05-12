@@ -4,29 +4,29 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
+    private float m_lastSqMagnitude;
+    private Vector3 m_desiredVelocity;
     float m_timer = 0;
     public int m_damageAmount;
     Rigidbody m_rigidBody;
     public float m_velocity;
     public GameObject m_attack;
     Vector3 m_moveDirection;
+    public Vector3 m_target;
+ 
 
     private void Start()
     {
         m_rigidBody = GetComponent<Rigidbody>();
         m_moveDirection = m_attack.transform.forward;
+        m_lastSqMagnitude = Mathf.Infinity;
+        m_desiredVelocity = ((m_target + new Vector3(0, 1.0f, 0)) - transform.position).normalized * m_velocity;
+
     }
     // Start is called before the first frame update
-    void Update()
+    void FixedUpdate()
     {
-        m_timer += Time.deltaTime;
-
-        m_rigidBody.AddForce(m_moveDirection * m_velocity, ForceMode.Force);
-        if (m_timer >= 3)
-        {
-            Destroy(this.gameObject);
-        }
-
+        m_rigidBody.velocity = m_desiredVelocity;
     }
 
 

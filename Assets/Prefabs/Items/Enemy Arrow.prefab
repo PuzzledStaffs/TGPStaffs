@@ -9798,6 +9798,7 @@ GameObject:
   - component: {fileID: 7356288643055309795}
   - component: {fileID: 1652974455170233760}
   - component: {fileID: -4441986063248470351}
+  - component: {fileID: -8842590933823707223}
   m_Layer: 0
   m_Name: Enemy Arrow
   m_TagString: Arrow
@@ -9898,7 +9899,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &-4441986063248470351
 MonoBehaviour:
@@ -9913,8 +9914,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_damageAmount: 10
-  m_velocity: 5
+  m_velocity: 10
   m_attack: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
+  m_target: {x: 0, y: 0, z: 0}
+--- !u!114 &-8842590933823707223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5315872203750749436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1666db11796984f40927511f51f08698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DestroyAfter: 2
 --- !u!1 &6126808086374791102
 GameObject:
   m_ObjectHideFlags: 0
