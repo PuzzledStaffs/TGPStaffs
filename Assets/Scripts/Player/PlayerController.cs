@@ -81,14 +81,14 @@ public class PlayerController : MonoBehaviour, IHealth
         m_respawnPosition = transform.position;
 
         SetHealth(PersistentPrefs.m_currentSaveFile.currentHealth);
-        m_weaponWheelController.WeaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item1Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item2Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(2).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item3Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(3).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item4Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(4).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item5Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item6Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item7Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item8Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item1Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item2Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(2).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item3Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(3).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item4Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(4).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item5Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item6Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item7Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item8Unlocked;
         PersistentPrefs.m_currentSaveFile.scene = gameObject.scene.name;
 
         m_coins = PlayerPrefs.GetInt("Coins", 0);
@@ -274,11 +274,11 @@ public class PlayerController : MonoBehaviour, IHealth
 
                 if (m_weaponWheelController.isWheelOpen)
                 {
-                    m_weaponWheelController.SelectItem(m_weaponWheelController.currentIndex);
+                    m_weaponWheelController.SelectItem(m_weaponWheelController.m_currentIndex);
                     break;
                 }
 
-                if (!m_weaponWheelController.CurrentItem.ItemHold)
+                if (!m_weaponWheelController.m_CurrentItem.ItemHold)
                     m_weaponWheelController.LeftClickAction();
                 else
                     m_buttonHeld = true;
