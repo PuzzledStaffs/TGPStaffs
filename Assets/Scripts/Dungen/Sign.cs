@@ -40,7 +40,7 @@ public class Sign : MonoBehaviour, IAltInteractable
             m_playerController.enabled = false;
             if (m_currentDungenRoom != null)
             {
-                m_currentDungenRoom.FrezzeExatingRoom();
+                m_currentDungenRoom.FreezeExitingRoom();
             }
 
         }

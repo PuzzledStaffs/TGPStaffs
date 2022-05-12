@@ -43,13 +43,12 @@ public class DungenRoom : MonoBehaviour
         {
             m_Camera = Camera.main.GetComponent<DungonCamaraControler>();
         }
-        foreach (IdleState enemy in m_EnemiesIdle)
-        {
-            enemy.isIdle = true;
-        }
+       
         foreach (Enemy enemy in m_Enemies)
         {
             enemy.m_deadEvent += EnameyDie;
+            enemy.m_manager.m_idle.enabled = true;
+            enemy.m_fieldOfView.enabled = false;
         }
         //Set door
         foreach (DungenDoor door in m_doorsIn)
@@ -74,7 +73,7 @@ public class DungenRoom : MonoBehaviour
         }
 
         m_pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
-        m_pauseMenu.m_pause += FrezzeExatingRoom;
+        m_pauseMenu.m_pause += FreezeExitingRoom;
         m_pauseMenu.m_unPause += UnFrezeRoom;
 
         if (m_PlayerStartingRoom)
@@ -85,7 +84,7 @@ public class DungenRoom : MonoBehaviour
         }
         else
         {
-            FrezzeExatingRoom();
+            FreezeExitingRoom();
             RoomExited();
         }
         if (m_enemyCount <= 0)
@@ -134,7 +133,7 @@ public class DungenRoom : MonoBehaviour
         foreach (DungenDoor door in m_doorsOut)
         {
             door.OnExitRoom += RoomExited;
-            door.OnFrezzeExited += FrezzeExatingRoom;
+            door.OnFrezzeExited += FreezeExitingRoom;
         }
     }
 
@@ -149,7 +148,7 @@ public class DungenRoom : MonoBehaviour
         foreach (DungenDoor door in m_doorsOut)
         {
             door.OnExitRoom -= RoomExited;
-            door.OnFrezzeExited -= FrezzeExatingRoom;
+            door.OnFrezzeExited -= FreezeExitingRoom;
         }
     }
     
@@ -172,9 +171,12 @@ public class DungenRoom : MonoBehaviour
         {
             //Called after camra has finished moving and player unlocked
             m_Camera.m_Locked = false;
-            foreach (IdleState enemy in m_EnemiesIdle)
+            foreach (Enemy enemy in m_Enemies)
             {
-                enemy.isIdle = false;
+                enemy.m_manager.m_idle.isIdle = false;
+                enemy.m_manager.m_idle.enabled = false;
+
+                enemy.m_fieldOfView.enabled = true;
             }
             foreach (Trap trap in m_traps)
             {
@@ -194,27 +196,32 @@ public class DungenRoom : MonoBehaviour
     /// <summary>
     /// Called To Frezze room
     /// </summary>
-    public void FrezzeExatingRoom()
+    public void FreezeExitingRoom()
     {
-       
-            //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
-            foreach (Enemy enemy in m_Enemies)
-            {
-                enemy.GetComponent<StateManager>().ChangeState(State.StateType.IDLE);
 
-            }
+        //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
+        foreach (Enemy enemy in m_Enemies)
+        {
+            enemy.m_manager.m_attack.enabled = false;
+            enemy.m_manager.m_idle.isIdle = true;
+            enemy.m_manager.m_idle.enabled = true;
 
-            foreach (IdleState enemy in m_EnemiesIdle)
-            {
+            enemy.m_fieldOfView.enabled = false;
+        }
+
+
+        foreach (IdleState enemy in m_EnemiesIdle)
+        {
                 enemy.isIdle = true;
-            }
-            foreach (Trap trap in m_traps)
+        }
+
+        foreach (Trap trap in m_traps)
             {
-                if (trap != null)
+            if (trap != null)
                 {
-                    trap.ExitRoomDisabled();
+                trap.ExitRoomDisabled();
                 }
-            }
+        }
       
     }
     #endregion

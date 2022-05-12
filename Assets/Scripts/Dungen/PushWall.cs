@@ -2,17 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PushWall : MonoBehaviour
+public class PushWall : Trap
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] AnimationCurve m_wallTravelOut;
+    [SerializeField] Vector3 m_StartLocation;
+    [SerializeField] Vector3 m_EndLocation;
+    private float inter = 0;
+
+
+    public override void EnterRoomEnabled()
     {
-        
+        //Begin push pull sequence  
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void ExitRoomDisabled()
     {
-        
+        //End push pull sequence
+
+        //Reset position
+    }
+
+    private IEnumerator PushWallAction()
+    {        
+        yield return new WaitForFixedUpdate();
+        inter += 0.1f;
     }
 }
