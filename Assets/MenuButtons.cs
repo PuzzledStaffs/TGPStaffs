@@ -11,6 +11,7 @@ public class MenuButtons : MonoBehaviour
     public GameObject m_mainMenu;
     [FormerlySerializedAs("OptionsMenu")]
     public GameObject m_optionsMenu;
+    public GameObject m_newGame;
    
 
     public void StartButton()
@@ -41,5 +42,12 @@ public class MenuButtons : MonoBehaviour
         m_mainMenu.SetActive(false);
         m_optionsMenu.SetActive(true);
        
+    }
+    public void OpenNewGame()
+    {
+        Debug.Log("function called");
+        m_mainMenu.SetActive(false);
+        m_newGame.SetActive(true);
+
     }
 }
