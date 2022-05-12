@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class EwanSceneController : MonoBehaviour
 {
-    [SerializeField] PlayerController playerController;
+    [SerializeField] [FormerlySerializedAs("playerController")] PlayerController m_playerController;
+
 
     private void Start()
     {
-        playerController.m_Death += Respawn;
+        m_playerController.m_Death += Respawn;
 
 
     }
