@@ -159,7 +159,7 @@ public class DungenRoom : MonoBehaviour
     {
         //Called First when player enter room
         m_Camera.m_currentRoomType = m_RoomType;
-        m_Camera.m_roomOragin = m_origin.transform.position;
+        m_Camera.m_roomOrigin = m_origin.transform.position;
         m_Camera.m_locked = true;
         
         m_playerInRoom = true;

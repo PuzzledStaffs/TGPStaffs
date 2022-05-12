@@ -9,7 +9,8 @@ public class DungonCamaraControler : MonoBehaviour
     public bool m_locked;
     [FormerlySerializedAs("m_CurrentRoomType")]
     public RoomType m_currentRoomType;
-    public Vector3 m_roomOragin;
+    [FormerlySerializedAs("m_roomOragin")]
+    public Vector3 m_roomOrigin;
     [SerializeField] GameObject m_player;
     [FormerlySerializedAs("m_BigRoomCamLimit")]
     [SerializeField] private Vector2 m_bigRoomCamLimit;
@@ -33,25 +34,25 @@ public class DungonCamaraControler : MonoBehaviour
                 case RoomType.BIG:
                     Vector3 camaraPos = m_player.transform.position;                 
                     
-                    if(m_player.transform.position.x > m_roomOragin.x + m_bigRoomCamLimit.x)
+                    if(m_player.transform.position.x > m_roomOrigin.x + m_bigRoomCamLimit.x)
                     {
-                        camaraPos.x = m_roomOragin.x + m_bigRoomCamLimit.x;
+                        camaraPos.x = m_roomOrigin.x + m_bigRoomCamLimit.x;
                     }
-                    else if(m_player.transform.position.x < m_roomOragin.x - m_bigRoomCamLimit.x)
+                    else if(m_player.transform.position.x < m_roomOrigin.x - m_bigRoomCamLimit.x)
                     {
-                        camaraPos.x = m_roomOragin.x  - m_bigRoomCamLimit.x;
-                    }
-
-                    if (m_player.transform.position.z > m_roomOragin.z + m_bigRoomCamLimit.y)
-                    {
-                        camaraPos.z = m_roomOragin.z + m_bigRoomCamLimit.y;
-                    }
-                    else if (m_player.transform.position.z < m_roomOragin.z - m_bigRoomCamLimit.y)
-                    {
-                        camaraPos.z = m_roomOragin.z - m_bigRoomCamLimit.y;
+                        camaraPos.x = m_roomOrigin.x  - m_bigRoomCamLimit.x;
                     }
 
-                    camaraPos.y = m_roomOragin.y;
+                    if (m_player.transform.position.z > m_roomOrigin.z + m_bigRoomCamLimit.y)
+                    {
+                        camaraPos.z = m_roomOrigin.z + m_bigRoomCamLimit.y;
+                    }
+                    else if (m_player.transform.position.z < m_roomOrigin.z - m_bigRoomCamLimit.y)
+                    {
+                        camaraPos.z = m_roomOrigin.z - m_bigRoomCamLimit.y;
+                    }
+
+                    camaraPos.y = m_roomOrigin.y;
                     transform.position = camaraPos;
                     break;
             }
