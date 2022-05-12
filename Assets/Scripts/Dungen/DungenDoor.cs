@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungenDoor : MonoBehaviour ,IInteractable
+public class DungenDoor : MonoBehaviour ,IAltInteractable
 {
     [Header("Door Oriatation and locating")]
     [SerializeField][FormerlySerializedAs("m_doorLoaction")] public DoorLoaction m_doorLocation;
@@ -102,7 +102,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         other.GetComponent<PlayerController>().UnFreezeMovement();
     }
 
-    public virtual void Interact()
+    public virtual void AltInteract()
     {
         if (m_locked && m_toRoomCameraMove != null && m_toRoomExitPoint != null)
         {
@@ -114,6 +114,12 @@ public class DungenDoor : MonoBehaviour ,IInteractable
             }
         }
     }
+    
+    public bool CanInteract()
+    {
+        return m_locked;
+    }
+    
 
     #region Door Controls
 
@@ -162,6 +168,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
             lockModel.SetActive(false);
         }
     }
+
     #endregion
 }
 

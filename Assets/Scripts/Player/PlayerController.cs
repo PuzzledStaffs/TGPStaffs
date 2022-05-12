@@ -66,8 +66,9 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Currency")]
     public int m_coins;
 
-
-    [SerializeField] float m_AltInteractArea;
+    [Header("Alt Interact")]
+    [SerializeField] float m_altInteractArea;
+    [SerializeField] Canvas m_altInteractToolTip;
 
     void Awake()
     {
@@ -92,6 +93,8 @@ public class PlayerController : MonoBehaviour, IHealth
         PersistentPrefs.m_currentSaveFile.scene = gameObject.scene.name;
 
         m_coins = PlayerPrefs.GetInt("Coins", 0);
+
+        m_altInteractToolTip.enabled = false;
     }
 
     void OnDestroy()
@@ -142,6 +145,24 @@ public class PlayerController : MonoBehaviour, IHealth
                 }
             }
         }
+
+        bool interactInRange = false;
+        foreach(Collider coll in GetAnyInteract())
+        {
+
+            IAltInteractable interact = coll.GetComponent<IAltInteractable>();
+            if (interact != null)
+            {
+                if(interact.CanInteract())
+                {
+                    interactInRange = true;
+                }
+            }
+        }
+        m_altInteractToolTip.enabled = interactInRange;
+
+
+
     }
 
     void FixedUpdate()
@@ -318,7 +339,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 if (m_buttonHeld || m_weaponWheelController.isWheelOpen)
                     break;
 
-                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(0.5f, 0.5f, 0.5f) / 2, m_model.transform.rotation))
+                foreach (Collider col in GetAnyInteract())
                 {
                     if (col.CompareTag("Box"))
                     {
@@ -396,7 +417,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void OnAltInteract()
     {
-        Collider[]colliders = Physics.OverlapSphere(transform.position, m_AltInteractArea);
+        Collider[]colliders = Physics.OverlapSphere(transform.position, m_altInteractArea);
 
         foreach(Collider hitObject in colliders)
         {
@@ -511,6 +532,11 @@ public class PlayerController : MonoBehaviour, IHealth
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, m_AltInteractArea);
+        Gizmos.DrawWireSphere(transform.position, m_altInteractArea);
+    }
+
+    Collider[] GetAnyInteract()
+    {
+        return Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(0.5f, 0.5f, 0.5f) / 2, m_model.transform.rotation);
     }
 }

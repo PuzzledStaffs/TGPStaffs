@@ -94,4 +94,9 @@ public class Switch : MonoBehaviour, IAltInteractable
             lockObject.SetActive(show);
         }
     }
+
+    public bool CanInteract()
+    {
+        return true;
+    }
 }

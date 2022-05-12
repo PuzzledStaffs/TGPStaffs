@@ -38,7 +38,7 @@ public class ExitDoor : DungenDoor
         }
     }
 
-    public override void Interact()
+    public override void AltInteract()
     {
         if (m_dungenManager.UseKey())
         {
