@@ -1,14 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DungonCamaraControler : MonoBehaviour
 {
-    public bool m_Locked;
-    public RoomType m_CurrentRoomType;
-    public Vector3 m_roomOragin;
+    [FormerlySerializedAs("m_Locked")]
+    public bool m_locked;
+    [FormerlySerializedAs("m_CurrentRoomType")]
+    public RoomType m_currentRoomType;
+    [FormerlySerializedAs("m_roomOragin")]
+    public Vector3 m_roomOrigin;
     [SerializeField] GameObject m_player;
-    [SerializeField] private Vector2 m_BigRoomCamLimit;
+    [FormerlySerializedAs("m_BigRoomCamLimit")]
+    [SerializeField] private Vector2 m_bigRoomCamLimit;
 
     private void Start()
     {
@@ -20,34 +25,34 @@ public class DungonCamaraControler : MonoBehaviour
 
     void LateUpdate()
     {
-        if(!m_Locked)
+        if(!m_locked)
         {
-            switch(m_CurrentRoomType)
+            switch(m_currentRoomType)
             {
                 case RoomType.NORMAL:
                     break;
                 case RoomType.BIG:
                     Vector3 camaraPos = m_player.transform.position;                 
                     
-                    if(m_player.transform.position.x > m_roomOragin.x + m_BigRoomCamLimit.x)
+                    if(m_player.transform.position.x > m_roomOrigin.x + m_bigRoomCamLimit.x)
                     {
-                        camaraPos.x = m_roomOragin.x + m_BigRoomCamLimit.x;
+                        camaraPos.x = m_roomOrigin.x + m_bigRoomCamLimit.x;
                     }
-                    else if(m_player.transform.position.x < m_roomOragin.x - m_BigRoomCamLimit.x)
+                    else if(m_player.transform.position.x < m_roomOrigin.x - m_bigRoomCamLimit.x)
                     {
-                        camaraPos.x = m_roomOragin.x  - m_BigRoomCamLimit.x;
-                    }
-
-                    if (m_player.transform.position.z > m_roomOragin.z + m_BigRoomCamLimit.y)
-                    {
-                        camaraPos.z = m_roomOragin.z + m_BigRoomCamLimit.y;
-                    }
-                    else if (m_player.transform.position.z < m_roomOragin.z - m_BigRoomCamLimit.y)
-                    {
-                        camaraPos.z = m_roomOragin.z - m_BigRoomCamLimit.y;
+                        camaraPos.x = m_roomOrigin.x  - m_bigRoomCamLimit.x;
                     }
 
-                    camaraPos.y = m_roomOragin.y;
+                    if (m_player.transform.position.z > m_roomOrigin.z + m_bigRoomCamLimit.y)
+                    {
+                        camaraPos.z = m_roomOrigin.z + m_bigRoomCamLimit.y;
+                    }
+                    else if (m_player.transform.position.z < m_roomOrigin.z - m_bigRoomCamLimit.y)
+                    {
+                        camaraPos.z = m_roomOrigin.z - m_bigRoomCamLimit.y;
+                    }
+
+                    camaraPos.y = m_roomOrigin.y;
                     transform.position = camaraPos;
                     break;
             }

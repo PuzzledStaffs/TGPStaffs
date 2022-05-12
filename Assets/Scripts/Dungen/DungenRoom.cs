@@ -173,7 +173,7 @@ public class DungenRoom : MonoBehaviour
             m_camera.m_Locked = false;
             foreach (Enemy enemy in m_enemies)
             {
-                enemy.m_manager.m_idle.isIdle = false;
+                enemy.m_manager.m_idle.m_isIdle = false;
                 enemy.m_manager.m_idle.enabled = false;
 
                 enemy.m_fieldOfView.enabled = true;
@@ -203,7 +203,7 @@ public class DungenRoom : MonoBehaviour
         foreach (Enemy enemy in m_enemies)
         {
             enemy.m_manager.m_attack.enabled = false;
-            enemy.m_manager.m_idle.isIdle = true;
+            enemy.m_manager.m_idle.m_isIdle = true;
             enemy.m_manager.m_idle.enabled = true;
 
             enemy.m_fieldOfView.enabled = false;
