@@ -1498,10 +1498,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3ad8abca8b16d4bbfda7f70072ad2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  e: {fileID: 5516742853000973419}
-  idle: {fileID: 5516742853000973421}
-  attack: {fileID: 5516742853000973416}
-  roam: {fileID: 5516742853000973420}
+  m_enemy: {fileID: 5516742853000973419}
+  m_idle: {fileID: 5516742853000973421}
+  m_attack: {fileID: 5516742853000973416}
+  m_roam: {fileID: 5516742853000973420}
 --- !u!114 &5516742853000973420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1514,11 +1514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add1f4820efbc5e4e9500af1204c2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_points: []
 --- !u!114 &5516742853000973421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1550,6 +1546,22 @@ MonoBehaviour:
   radius: 5
   target: {fileID: 0}
   inFOV: 0
+--- !u!114 &5516742853000973419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5516742853000973417}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53d377c26e37771438057e007d9e9006, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 20
+  m_manager: {fileID: 5516742853000973423}
+  m_fieldOfView: {fileID: 5516742853000973418}
+  m_animator: {fileID: 5516742853000973413}
 --- !u!114 &5516742853000973416
 MonoBehaviour:
   m_ObjectHideFlags: 0

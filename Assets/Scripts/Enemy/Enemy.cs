@@ -8,12 +8,11 @@ public class Enemy : MonoBehaviour, IHealth
 {
     [SerializeField]
     protected int m_health = 20;
-    public StateManager manager;
-    public FOV fieldOfView;
-    public Animator animator;
+    public StateManager m_manager;
+    public FOV m_fieldOfView;
+    public Animator m_animator;
     public Action<GameObject> m_deadEvent;
-    public RectTransform m_healthBar;
-    public RectTransform m_healthBarMask;
+    [SerializeField] GameObject m_DeathDrop;
 
     public int GetHealth()
     {
@@ -32,19 +31,15 @@ public class Enemy : MonoBehaviour, IHealth
             return false;
 
         }
-
-
     }
 
     public virtual void TakeDamage(IHealth.Damage damage)
     {
         if (IsDead()) { return; }
 
-        
-
         m_health -= damage.damageAmount;
         m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
-        animator.SetTrigger("TakeDamage");
+        m_animator.SetTrigger("TakeDamage");
 
         if (IsDead())
         {
@@ -64,42 +59,40 @@ public class Enemy : MonoBehaviour, IHealth
     void Update()
     {
 
-        if (IsDead())
-        {
-            GetComponent<NavMeshAgent>().isStopped = true;
-            GetComponent<NavMeshAgent>().speed = 0;
-        }
-
         m_healthBar.position = transform.position + Vector3.forward;
-        var lookPos = Camera.main.transform.position - m_healthBar.position;
+        Vector3 lookPos = Camera.main.transform.position - m_healthBar.position;
         lookPos.x = 0;
         lookPos.z = 0;
         m_healthBar.rotation = Quaternion.LookRotation(lookPos);
 
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
-        animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
-        if (fieldOfView.inFOV)
+        m_animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
+        if (m_fieldOfView.inFOV)
         {
-            manager.ChangeState(State.StateType.ATTACK);
+            m_manager.ChangeState(State.StateType.ATTACK);
         }      
     }
 
     public IEnumerator DeathCoroutine()
     {
+        GetComponent<NavMeshAgent>().isStopped = true;
+        GetComponent<NavMeshAgent>().speed = 0;
         this.GetComponent<BoxCollider>().enabled = false;
         RandomDeathAnim();
         m_deadEvent?.Invoke(gameObject);
-        animator.SetBool("Dead", true);
+        m_animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
+        if(m_DeathDrop != null)
+            Instantiate(m_DeathDrop, transform.position,transform.rotation,transform.parent);
         Destroy(this.gameObject);
-
+        
     }
 
     void RandomDeathAnim()
     {
         int random = UnityEngine.Random.Range(0, 2);
-        animator.SetInteger("DeathAnim", random);
+        m_animator.SetInteger("DeathAnim", random);
         Debug.Log(random);
     }
 

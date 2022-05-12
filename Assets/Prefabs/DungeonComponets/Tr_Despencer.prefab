@@ -401,7 +401,7 @@ GameObject:
   - component: {fileID: 6687634231428540149}
   - component: {fileID: 6687634231428540148}
   m_Layer: 0
-  m_Name: Despencer
+  m_Name: Tr_Despencer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
