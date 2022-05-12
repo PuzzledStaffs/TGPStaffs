@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class MenuButtons : MonoBehaviour
-{  
-  
-    public GameObject MainMenu;
-    public GameObject OptionsMenu;
+{
+    [FormerlySerializedAs("MainMenu")]
+    public GameObject m_mainMenu;
+    [FormerlySerializedAs("OptionsMenu")]
+    public GameObject m_optionsMenu;
    
 
     public void StartButton()
@@ -29,15 +31,15 @@ public class MenuButtons : MonoBehaviour
 
     public void OpenMainMenu()
     {
-        OptionsMenu.SetActive(false);
-        MainMenu.SetActive(true);
+        m_optionsMenu.SetActive(false);
+        m_mainMenu.SetActive(true);
       
     }
 
     public void OpenOptions()
     {
-        MainMenu.SetActive(false);
-        OptionsMenu.SetActive(true);
+        m_mainMenu.SetActive(false);
+        m_optionsMenu.SetActive(true);
        
     }
 }

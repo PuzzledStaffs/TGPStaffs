@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class VolumeSlider : MonoBehaviour
 {
-    [SerializeField] private Slider slider;
+    [FormerlySerializedAs("slider")]
+    [SerializeField] private Slider m_slider;
 
 
     // Start is called before the first frame update
@@ -14,8 +16,8 @@ public class VolumeSlider : MonoBehaviour
     }
     private void Update()
     {
-        slider.onValueChanged.AddListener(val => SoundManager.instance.ChangeMasterVolume(val));
-        Debug.Log("Volume changed to" + slider.value);
+        m_slider.onValueChanged.AddListener(val => SoundManager.m_instance.ChangeMasterVolume(val));
+        Debug.Log("Volume changed to" + m_slider.value);
     }
 
 

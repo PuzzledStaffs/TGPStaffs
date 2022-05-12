@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class TargetToShoot : MonoBehaviour, IHealth
 {
-    public Material notShotMaterial;
-    public Material yesShotMaterial;
-    public float moveForce;
+    [FormerlySerializedAs("notShotMaterial")]
+    public Material m_notShotMaterial;
+    [FormerlySerializedAs("yesShotMaterial")]
+    public Material m_yesShotMaterial;
+    [FormerlySerializedAs("moveForce")]
+    public float m_moveForce;
 
     [Header("Components")]
-    private Renderer modelRenderer;
+    [FormerlySerializedAs("modelRenderer")]
+    private Renderer m_modelRenderer;
 
 
     void Start()
     {
-        modelRenderer = gameObject.GetComponent<Renderer>();
+        m_modelRenderer = gameObject.GetComponent<Renderer>();
     }
 
     public int GetHealth()
@@ -35,15 +40,15 @@ public class TargetToShoot : MonoBehaviour, IHealth
         }
         else if(damage.type==IHealth.DamageType.BOMB)
         {
-            gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * moveForce,ForceMode.Impulse);
+            gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * m_moveForce,ForceMode.Impulse);
         }
     }
 
     IEnumerator GetShotCoroutine()
     {
-        modelRenderer.material = yesShotMaterial;
+        m_modelRenderer.material = m_yesShotMaterial;
         yield return new WaitForSeconds(2);
-        modelRenderer.material = notShotMaterial;
+        m_modelRenderer.material = m_notShotMaterial;
     }
 
 
