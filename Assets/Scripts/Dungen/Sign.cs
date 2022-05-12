@@ -11,7 +11,7 @@ public class Sign : MonoBehaviour, IAltInteractable
     private TextMeshProUGUI m_signTextText;
     private Canvas m_canvas;
     public DungenRoom m_currentDungenRoom;
-    [SerializeField] TextMeshProUGUI m_signHelpUI;
+   
     private bool m_reading;
     private PlayerController m_playerController;
     private PlayerInput m_playerInput;
@@ -27,7 +27,7 @@ public class Sign : MonoBehaviour, IAltInteractable
 
         m_reading = false;
         //m_canvas.enabled = false;
-        m_signHelpUI.enabled = false;
+       
     }
 
     public virtual void AltInteract()
@@ -40,7 +40,7 @@ public class Sign : MonoBehaviour, IAltInteractable
             m_playerController.enabled = false;
             if (m_currentDungenRoom != null)
             {
-                m_currentDungenRoom.FrezzeExatingRoom();
+                m_currentDungenRoom.FreezeExitingRoom();
             }
 
         }
@@ -56,14 +56,5 @@ public class Sign : MonoBehaviour, IAltInteractable
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        m_signHelpUI.enabled = true;
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        m_signHelpUI.enabled = false;
-
-    }
+    
 }

@@ -6721,7 +6721,7 @@ MonoBehaviour:
   m_gameOverText: {fileID: 5539810956458964389}
   BowLineRenderer: {fileID: 303525582}
   m_coins: 0
-  m_AltInteractArea: 3
+  m_AltInteractArea: 1.5
 --- !u!114 &551475353
 MonoBehaviour:
   m_ObjectHideFlags: 0
