@@ -25,7 +25,7 @@ public class ExitDoor : DungenDoor
             HideLocks();
         }
 
-        if (m_ClosedOnStart || m_locked)
+        if (m_closedOnStart || m_locked)
         {
             CloseDoor();
 
@@ -51,8 +51,8 @@ public class ExitDoor : DungenDoor
         if (!m_locked)
         {
             m_doorActive = true;
-            m_doorRenderer.material = m_DoorOpen;
-            m_DoorColider.isTrigger = true;
+            m_doorRenderer.material = m_doorOpen;
+            m_doorCollider.isTrigger = true;
 
         }
         else if (m_locked)

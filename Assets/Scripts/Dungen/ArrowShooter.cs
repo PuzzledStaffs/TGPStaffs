@@ -1,17 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ArrowShooter : Trap
 {
-    [SerializeField] GameObject m_ThingToShoot;
+    [SerializeField] [FormerlySerializedAs("m_ThingToShoot")] GameObject m_thingToShoot;
     [SerializeField] BowItem m_dispencerBow;
     [SerializeField] GameObject m_shotDestination;
-    [SerializeField] GameObject m_shotOragin;
+    [SerializeField] [FormerlySerializedAs("m_shotOragin")]  GameObject m_shotOrigin;
     [Header("TimedShots")]
     [SerializeField][Tooltip("If true it will shoot an arrow ")] bool m_timedShots;
     private Coroutine m_ShootingCoroutine;
-    [SerializeField] float m_shotIntervall = 1;
+    [SerializeField] [FormerlySerializedAs("m_shotIntervall")] float m_shotInterval = 1;
     public override void EnterRoomEnabled()
     {
         if (m_timedShots)
@@ -36,13 +37,13 @@ public class ArrowShooter : Trap
     {
         while (true)
         {
-            yield return new WaitForSecondsRealtime(m_shotIntervall);
+            yield return new WaitForSecondsRealtime(m_shotInterval);
             Shoot();
         }
     }
     public void Shoot()
     {
-        GameObject arrow = Instantiate(m_ThingToShoot, m_shotOragin.transform.position, transform.rotation);
+        GameObject arrow = Instantiate(m_thingToShoot, m_shotOrigin.transform.position, transform.rotation);
         arrow.GetComponent<Arrow>().bowParent = m_dispencerBow;        
         arrow.GetComponent<Arrow>().EndPoint = m_shotDestination.transform.position;
     }

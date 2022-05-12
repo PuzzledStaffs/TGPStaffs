@@ -6,17 +6,18 @@ using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class DungenManager : MonoBehaviour
 {
-    [SerializeField] Camera m_DungenCam;
+    [SerializeField][FormerlySerializedAs("m_DungenCam")] Camera m_dungeonCam;
     //[SerializeField] float m_cameraSpeed;
     float m_cameraTransitionTime = 1.0f;
-    [SerializeField] TextMeshProUGUI m_KeyCountText;
+    [SerializeField][FormerlySerializedAs("m_KeyCountText")] TextMeshProUGUI m_keyCountText;
     [SerializeField] private Canvas m_keyCanvas;
-    private Rigidbody m_CameraRB;
-    public int m_KeysCollected { get; protected set; }
-    [SerializeField] int m_StartingKeys;
+    [FormerlySerializedAs("m_CameraRB")] private Rigidbody m_cameraRB;
+    public int m_keysCollected { get; protected set; }
+    [SerializeField][FormerlySerializedAs("m_StartingKeys")] int m_startingKeys;
     [SerializeField] public Light m_playerLight;
     [Header("restart")]
     [SerializeField] PlayerController m_player;
@@ -25,15 +26,15 @@ public class DungenManager : MonoBehaviour
     public DungenRoom m_startingRoom;
     [SerializeField] string m_dungenEnterText;
     [SerializeField] Canvas m_welcomeCanvas;
-    [SerializeField] TextMeshProUGUI m_TitalText;
+    [SerializeField][FormerlySerializedAs("m_TitalText")] TextMeshProUGUI m_titleText;
     private Animator m_animator;
 
     private void Awake()
     {
-        m_CameraRB = m_DungenCam.transform.GetComponent<Rigidbody>();
-        m_KeysCollected = m_StartingKeys;
+        m_cameraRB = m_dungeonCam.transform.GetComponent<Rigidbody>();
+        m_keysCollected = m_startingKeys;
         UpdateKeyUI();
-        if (m_KeysCollected == 0)
+        if (m_keysCollected == 0)
         {
             m_keyCanvas.enabled = false;
         }
@@ -60,7 +61,7 @@ public class DungenManager : MonoBehaviour
 
     public void SetTitalText(string text)
     {
-        m_TitalText.text = text;
+        m_titleText.text = text;
     }
 
     public void JoinAnimationEnd()
@@ -77,33 +78,33 @@ public class DungenManager : MonoBehaviour
 
     public IEnumerator MoveCameraCoroutine(Vector3 TargetLocation)
     {
-        Vector3 initialPosition = m_DungenCam.transform.position;
+        Vector3 initialPosition = m_dungeonCam.transform.position;
         //Vector3 toMove = TargetLocation - m_DungenCam.transform.position;
         float time = 0.0f;
         //while (Mathf.Pow(toMove.x, 2) + Mathf.Pow(toMove.z, 2) > 0.4) //Mathf.Pow(toMove.x, 2) + Mathf.Pow(toMoveCheck.z, 2) > 0.4
         while (time < m_cameraTransitionTime) //Mathf.Pow(toMove.x, 2) + Mathf.Pow(toMoveCheck.z, 2) > 0.4
         {
             //toMove = TargetLocation - m_DungenCam.transform.position;
-            m_DungenCam.transform.position = Vector3.Lerp(initialPosition, TargetLocation, time);
+            m_dungeonCam.transform.position = Vector3.Lerp(initialPosition, TargetLocation, time);
             //m_CameraRB.velocity = toMove.normalized * m_cameraSpeed;
             yield return new WaitForFixedUpdate();
             time += Time.fixedDeltaTime;
         }
-        m_CameraRB.velocity = Vector3.zero;
-        m_DungenCam.transform.position = TargetLocation;
+        m_cameraRB.velocity = Vector3.zero;
+        m_dungeonCam.transform.position = TargetLocation;
     }
 
     public void AddKey()
     {
-        m_KeysCollected++;        
+        m_keysCollected++;        
         UpdateKeyUI();
     }
 
     public bool UseKey()
     {
-        if(m_KeysCollected > 0)
+        if(m_keysCollected > 0)
         {
-            m_KeysCollected--;            
+            m_keysCollected--;            
             UpdateKeyUI();
             return true;
         }
@@ -116,8 +117,8 @@ public class DungenManager : MonoBehaviour
 
     private void UpdateKeyUI()
     {
-        m_KeyCountText.text = "x" + m_KeysCollected.ToString();
-        if(m_KeysCollected > 0)
+        m_keyCountText.text = "x" + m_keysCollected.ToString();
+        if(m_keysCollected > 0)
         {
             m_keyCanvas.enabled = true;
         }

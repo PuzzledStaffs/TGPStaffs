@@ -20,8 +20,8 @@ public class Box : MonoBehaviour
     void Start()
     {
         m_tiles = m_myRoom.transform.Find("Floor").Find("Box Tiles");
-        xOffset = m_myRoom.m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
-        yOffset = m_myRoom.m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
+        xOffset = m_myRoom.m_roomType == RoomType.NORMAL ? -4.5f : -9.0f;
+        yOffset = m_myRoom.m_roomType == RoomType.NORMAL ? -9.5f : -19.0f;
         m_boxLerpStart = transform.position;
         m_boxLerpEnd = transform.position;
         m_boxLerpTime = 0.0f;
