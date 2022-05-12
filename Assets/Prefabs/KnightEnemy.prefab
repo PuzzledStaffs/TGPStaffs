@@ -1049,10 +1049,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f3ad8abca8b16d4bbfda7f70072ad2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemy: {fileID: 5516742853000973419}
-  m_idle: {fileID: 5516742853000973421}
-  m_attack: {fileID: 7655011394470447518}
-  m_roam: {fileID: 5516742853000973420}
+  e: {fileID: 5516742853000973419}
+  idle: {fileID: 5516742853000973421}
+  attack: {fileID: 7655011394470447518}
+  roam: {fileID: 5516742853000973420}
 --- !u!114 &5516742853000973420
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1065,7 +1065,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: add1f4820efbc5e4e9500af1204c2e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_points: []
+  points:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &5516742853000973421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1101,9 +1105,9 @@ MonoBehaviour:
   damage: 1
   distance: 5
   animator: {fileID: 5516742853000973413}
-  m_range: 0
-  m_projectile: {fileID: 5315872203750749436, guid: 708e8215981e20946822d96edee4352e, type: 3}
-  m_model: {fileID: 5315872203750749436, guid: 708e8215981e20946822d96edee4352e, type: 3}
+  range: 5
+  projectile: {fileID: 5315872203750749436, guid: 708e8215981e20946822d96edee4352e, type: 3}
+  model: {fileID: 5516742852548737888}
   m_velocity: 10
 --- !u!114 &5516742853000973418
 MonoBehaviour:
@@ -1134,9 +1138,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 10
-  m_manager: {fileID: 0}
-  m_fieldOfView: {fileID: 0}
-  m_animator: {fileID: 0}
+  manager: {fileID: 5516742853000973423}
+  fieldOfView: {fileID: 5516742853000973418}
+  animator: {fileID: 5516742853000973413}
 --- !u!195 &5516742853000973410
 NavMeshAgent:
   m_ObjectHideFlags: 0

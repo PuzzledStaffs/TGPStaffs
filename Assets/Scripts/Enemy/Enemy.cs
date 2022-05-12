@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour, IHealth
         if (IsDead()) { return; }
 
         m_health -= damage.damageAmount;
-        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
         m_animator.SetTrigger("TakeDamage");
 
         if (IsDead())
@@ -58,12 +57,6 @@ public class Enemy : MonoBehaviour, IHealth
     // Update is called once per frame
     void Update()
     {
-
-        m_healthBar.position = transform.position + Vector3.forward;
-        Vector3 lookPos = Camera.main.transform.position - m_healthBar.position;
-        lookPos.x = 0;
-        lookPos.z = 0;
-        m_healthBar.rotation = Quaternion.LookRotation(lookPos);
 
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
         m_animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);

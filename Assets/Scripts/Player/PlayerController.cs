@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public float m_boxLerpTime;
 
     [Header("Weapon Models & Stuff")]
-    public GameObject Sword, Bow;
+    public GameObject Sword;
     public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
 
     [Header("SFX")]
