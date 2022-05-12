@@ -3724,8 +3724,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_StartLocation: {x: 0, y: 0, z: 0}
-  m_EndLocation: {x: 0, y: 0, z: 0}
+  m_StartLocation: {x: -6, y: 1.5, z: -3}
+  m_EndLocation: {x: -4, y: 1.5, z: -3}
 --- !u!1 &723956558
 GameObject:
   m_ObjectHideFlags: 0

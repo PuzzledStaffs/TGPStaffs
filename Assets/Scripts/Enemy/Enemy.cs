@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class Enemy : MonoBehaviour, IHealth
 {
@@ -12,7 +13,10 @@ public class Enemy : MonoBehaviour, IHealth
     public FOV m_fieldOfView;
     public Animator m_animator;
     public Action<GameObject> m_deadEvent;
-    [SerializeField] GameObject m_DeathDrop;
+    [FormerlySerializedAs("m_DeathDrop")]
+    [SerializeField] GameObject m_deathDrop;
+    [SerializeField] RectTransform m_healthBar;
+    [SerializeField] RectTransform m_healthBarMask;
 
     public int GetHealth()
     {
@@ -38,6 +42,7 @@ public class Enemy : MonoBehaviour, IHealth
         if (IsDead()) { return; }
 
         m_health -= damage.damageAmount;
+        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
         m_animator.SetTrigger("TakeDamage");
 
         if (IsDead())
@@ -48,19 +53,20 @@ public class Enemy : MonoBehaviour, IHealth
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
     {
 
+        m_healthBar.position = transform.position + Vector3.forward;
+        Vector3 lookPos = Camera.main.transform.position - m_healthBar.position;
+        lookPos.x = 0;
+        lookPos.z = 0;
+        m_healthBar.rotation = Quaternion.LookRotation(lookPos);
+
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
         m_animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
-        if (m_fieldOfView.inFOV)
+        if (m_fieldOfView.m_inFOV)
         {
             m_manager.ChangeState(State.StateType.ATTACK);
         }      
@@ -76,8 +82,8 @@ public class Enemy : MonoBehaviour, IHealth
         m_animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
-        if(m_DeathDrop != null)
-            Instantiate(m_DeathDrop, transform.position,transform.rotation,transform.parent);
+        if(m_deathDrop != null)
+            Instantiate(m_deathDrop, transform.position,transform.rotation,transform.parent);
         Destroy(this.gameObject);
         
     }

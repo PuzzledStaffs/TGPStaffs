@@ -9112,7 +9112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973417, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: m_Name
-      value: ZombieEnemy
+      value: Bob
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: radius
