@@ -460,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &684696779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -528,14 +528,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1855ad7ab7bebb43b8f1391148da8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 932135638}
-  player: {fileID: 1129571081}
-  cooldown: 5
-  maxCooldown: 0
-  animationTime: 2
-  damage: 100
-  distance: 0
-  animator: {fileID: 0}
+  m_manager: {fileID: 932135638}
+  m_player: {fileID: 1129571081}
+  m_cooldown: 5
+  m_maxCooldown: 0
+  m_animationTime: 2
+  m_damage: 100
+  m_distance: 0
+  m_animator: {fileID: 0}
 --- !u!114 &932135634
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +552,9 @@ MonoBehaviour:
   m_manager: {fileID: 0}
   m_fieldOfView: {fileID: 0}
   m_animator: {fileID: 0}
+  m_deathDrop: {fileID: 0}
+  m_healthBar: {fileID: 0}
+  m_healthBarMask: {fileID: 0}
 --- !u!114 &932135635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -564,10 +567,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 926384b362c216746a79f2ee54b09f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngle: 45
-  radius: 10
-  target: {fileID: 0}
-  inFOV: 0
+  m_maxAngle: 45
+  m_radius: 10
+  m_target: {fileID: 0}
+  m_inFOV: 0
 --- !u!114 &932135636
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,9 +583,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef101681bf4b2542a721ae219f5395c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 1
-  stateManager: {fileID: 932135638}
-  isIdle: 1
+  m_timer: 1
+  m_stateManager: {fileID: 932135638}
+  m_isIdle: 1
 --- !u!114 &932135637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -824,14 +827,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973417, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973418, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1129571081}
+    - target: {fileID: 5516742853000973418, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
+      propertyPath: m_target
+      value: 
+      objectReference: {fileID: 1129571081}
     - target: {fileID: 7655011394470447518, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
       propertyPath: player
+      value: 
+      objectReference: {fileID: 1129571081}
+    - target: {fileID: 7655011394470447518, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
+      propertyPath: m_player
       value: 
       objectReference: {fileID: 1129571081}
     - target: {fileID: 7655011394470447518, guid: db9e7ea8f05ba354cafaf2795d72ee73, type: 3}
@@ -897,7 +908,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973417, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: radius
@@ -908,6 +919,14 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1129571081}
     - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
+      propertyPath: m_radius
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
+      propertyPath: m_target
+      value: 
+      objectReference: {fileID: 1129571081}
+    - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: maxAngle
       value: 360
       objectReference: {fileID: 0}
@@ -915,12 +934,20 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5516742853000973418, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
+      propertyPath: m_maxAngle
+      value: 360
+      objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973420, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: points.Array.size
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973421, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
       propertyPath: isIdle
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5516742853000973421, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
+      propertyPath: m_isIdle
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5516742853000973421, guid: 959ee0f8393b24640acdaf6abe9994ab, type: 3}
@@ -1114,14 +1141,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1855ad7ab7bebb43b8f1391148da8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 2033753993}
-  player: {fileID: 1129571081}
-  cooldown: 0
-  maxCooldown: 0
-  animationTime: 0
-  damage: 0
-  distance: 0
-  animator: {fileID: 2033753987}
+  m_manager: {fileID: 2033753993}
+  m_player: {fileID: 1129571081}
+  m_cooldown: 0
+  m_maxCooldown: 0
+  m_animationTime: 0
+  m_damage: 0
+  m_distance: 0
+  m_animator: {fileID: 2033753987}
 --- !u!114 &2033753989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1134,14 +1161,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fbf5f20d55cb7429fd81d67fd5b65d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 0}
-  player: {fileID: 0}
-  cooldown: 0
-  maxCooldown: 0
-  animationTime: 0
-  damage: 0
-  distance: 0
-  animator: {fileID: 0}
+  m_manager: {fileID: 0}
+  m_player: {fileID: 0}
+  m_cooldown: 0
+  m_maxCooldown: 0
+  m_animationTime: 0
+  m_damage: 0
+  m_distance: 0
+  m_animator: {fileID: 0}
   m_range: 0
   m_projectile: {fileID: 0}
   m_model: {fileID: 0}
@@ -1171,9 +1198,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef101681bf4b2542a721ae219f5395c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
-  stateManager: {fileID: 2033753993}
-  isIdle: 1
+  m_timer: 0
+  m_stateManager: {fileID: 2033753993}
+  m_isIdle: 1
 --- !u!114 &2033753992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1186,10 +1213,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 926384b362c216746a79f2ee54b09f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngle: 0
-  radius: 0
-  target: {fileID: 1129571081}
-  inFOV: 0
+  m_maxAngle: 0
+  m_radius: 0
+  m_target: {fileID: 1129571081}
+  m_inFOV: 0
 --- !u!114 &2033753993
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,7 +1233,7 @@ MonoBehaviour:
   m_idle: {fileID: 0}
   m_attack: {fileID: 0}
   m_roam: {fileID: 0}
-  rangedAttack: {fileID: 2033753989}
+  m_rangedAttack: {fileID: 2033753989}
 --- !u!114 &2033753994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,6 +1250,9 @@ MonoBehaviour:
   m_manager: {fileID: 0}
   m_fieldOfView: {fileID: 0}
   m_animator: {fileID: 0}
+  m_deathDrop: {fileID: 0}
+  m_healthBar: {fileID: 0}
+  m_healthBarMask: {fileID: 0}
 --- !u!1 &2100972445
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class State : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class State : MonoBehaviour
         R_ATTACK,
     };
 
-    protected StateType type;
+    [FormerlySerializedAs("type")]
+    protected StateType m_type;
 
 }

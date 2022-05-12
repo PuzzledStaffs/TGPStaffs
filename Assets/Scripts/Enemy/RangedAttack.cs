@@ -20,7 +20,7 @@ public class RangedAttack : AttackState
     // Update is called once per frame
     void Update()
     {
-        cooldown -= Time.deltaTime;
+        m_cooldown -= Time.deltaTime;
         Attack();
     }
 
@@ -28,20 +28,20 @@ public class RangedAttack : AttackState
     {
    
         //rotate to player
-        Vector3 direction = (player.transform.position - transform.position).normalized;
+        Vector3 direction = (m_player.transform.position - transform.position).normalized;
         Quaternion lookTowards = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookTowards, Time.deltaTime * 5.0f);
 
         //Stops the enemy from moving
-        agent.isStopped = true;
-        if (cooldown <= 0)
+        m_agent.isStopped = true;
+        if (m_cooldown <= 0)
         {
             Debug.Log("update");
-            cooldown = maxCooldown;
+            m_cooldown = m_maxCooldown;
             GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 1.0f, 0), transform.rotation);
 
             attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
-            attack.GetComponent<Projectile>().m_damageAmount = damage;
+            attack.GetComponent<Projectile>().m_damageAmount = m_damage;
             //attack.GetComponent<Projectile>().m_velocity = m_velocity;
             attack.GetComponent<Projectile>().m_attack = m_model;
         }
