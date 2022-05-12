@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour, IHealth
     public Animator m_animator;
     public Action<GameObject> m_deadEvent;
     [SerializeField] GameObject m_DeathDrop;
+    [SerializeField] RectTransform m_healthBar;
+    [SerializeField] RectTransform m_healthBarMask;
 
     public int GetHealth()
     {

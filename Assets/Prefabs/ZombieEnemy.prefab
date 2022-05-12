@@ -1291,6 +1291,8 @@ MonoBehaviour:
   m_manager: {fileID: 5516742853000973423}
   m_fieldOfView: {fileID: 5516742853000973418}
   m_animator: {fileID: 5516742853000973413}
+  m_healthBar: {fileID: 1997462339579908276}
+  m_healthBarMask: {fileID: 1321857685820290837}
 --- !u!114 &5516742853000973416
 MonoBehaviour:
   m_ObjectHideFlags: 0
