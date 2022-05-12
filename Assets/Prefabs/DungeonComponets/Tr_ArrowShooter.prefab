@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 5623568289940875489}
   - component: {fileID: 5623568289940875488}
   m_Layer: 0
-  m_Name: ArrowShooter
+  m_Name: Tr_ArrowShooter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

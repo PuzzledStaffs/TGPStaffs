@@ -11,7 +11,8 @@ public class Enemy : MonoBehaviour, IHealth
     public StateManager m_manager;
     public FOV m_fieldOfView;
     public Animator m_animator;
-    public Action<GameObject> m_deadEvent; 
+    public Action<GameObject> m_deadEvent;
+    [SerializeField] GameObject m_DeathDrop;
 
     public int GetHealth()
     {
@@ -75,8 +76,10 @@ public class Enemy : MonoBehaviour, IHealth
         m_animator.SetBool("Dead", true);
         
         yield return new WaitForSeconds(2.6f);
+        if(m_DeathDrop != null)
+            Instantiate(m_DeathDrop, transform.position,transform.rotation,transform.parent);
         Destroy(this.gameObject);
-
+        
     }
 
     void RandomDeathAnim()
