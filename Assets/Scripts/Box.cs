@@ -11,10 +11,10 @@ public class Box : MonoBehaviour
     float xOffset;
     float yOffset;
 
-    public float m_boxLerpTime;
-    public Vector3 m_boxLerpStart;
-    public Vector3 m_boxLerpEnd;
-    public bool m_moving;
+    private float m_boxLerpTime;
+    private Vector3 m_boxLerpStart;
+    [HideInInspector] public Vector3 m_boxLerpEnd;
+    [HideInInspector] public bool m_moving;
 
     // Start is called before the first frame update
     void Start()
