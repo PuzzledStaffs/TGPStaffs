@@ -19,7 +19,9 @@ public class SwordItem : Item
         {
             if (col.CompareTag("Player"))
                 continue;
-            col.GetComponent<IInteractable>()?.Interact();
+            string name = col.transform.name;
+            Debug.Log(name);
+            col.GetComponent<IInteractable>()?.Interact();           
             col.GetComponent<IHealth>()?.TakeDamage(damage); 
         }
         pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
