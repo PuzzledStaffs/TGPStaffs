@@ -2,19 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Dispencer : Trap
 {
     [SerializeField] private GameObject m_spawnedObject;
-    [SerializeField][Range(1,99)] private int m_MaxiumInstances = 1;
+    [SerializeField][Range(1,99)] [FormerlySerializedAs("m_MaxiumInstances")] private int m_maxiumInstances = 1;
     List<GameObject> m_spawnedThings = new List<GameObject>();
-    [SerializeField] TextMeshProUGUI m_TopText;
-    [SerializeField] [Tooltip("The despencer will drop only the maximun instances, any more and it will not spawn")]
-    private bool m_NoReset;
+    [SerializeField] [FormerlySerializedAs("m_TopText")] TextMeshProUGUI m_TopText;
+    [SerializeField] [Tooltip("The despencer will drop only the maximum instances, any more and it will not spawn")]
+    [FormerlySerializedAs("m_NoReset")] private bool  m_NoReset;
 
     private void Start()
     {
-        m_TopText.text = m_MaxiumInstances.ToString();
+        m_TopText.text = m_maxiumInstances.ToString();
     }
 
     public override void EnterRoomEnabled()
@@ -29,7 +30,7 @@ public class Dispencer : Trap
     public void SpawnItem()
     {
         //Spawn Item
-        if(m_spawnedThings.Count < m_MaxiumInstances)
+        if(m_spawnedThings.Count < m_maxiumInstances)
         {
             SpawnObject();
         }
@@ -41,7 +42,7 @@ public class Dispencer : Trap
         }
 
         //Update Top Text
-        m_TopText.text = (m_MaxiumInstances - m_spawnedThings.Count).ToString();
+        m_TopText.text = (m_maxiumInstances - m_spawnedThings.Count).ToString();
         if (m_TopText.text == "0")
         {
             m_TopText.color = Color.red;

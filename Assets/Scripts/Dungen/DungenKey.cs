@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DungenKey : Trap
 {
 
-   private DungenManager m_dungenManager;
+   [FormerlySerializedAs("m_dungenManager")]  private DungenManager m_dungeonManager;
    private Animator m_animator;
 
     private void Awake()
     {
-        m_dungenManager = FindObjectOfType<DungenManager>();
+        m_dungeonManager = FindObjectOfType<DungenManager>();
         m_animator = GetComponent<Animator>();
     }
 
@@ -28,7 +29,7 @@ public class DungenKey : Trap
     {
         if(other.tag == "Player")
         {
-            m_dungenManager.AddKey();
+            m_dungeonManager.AddKey();
             gameObject.SetActive(false);
         }
     }

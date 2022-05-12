@@ -3,14 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class DungenBrige : MonoBehaviour
 {
     
-   
-    [SerializeField] private BoxCollider m_Collider;
+    [SerializeField] [FormerlySerializedAs("m_Collider")] private BoxCollider m_collider;
     [SerializeField] private bool m_open;
-    [SerializeField] private GameObject m_brige;
+    [SerializeField][FormerlySerializedAs("m_brige")] private GameObject m_bridge;
     
     
     private Animator m_animation;
@@ -21,17 +21,17 @@ public class DungenBrige : MonoBehaviour
         if (m_open)
         {
             m_animation.SetTrigger("Open");
-            m_Collider.enabled = true;
+            m_collider.enabled = true;
         }
         else
         {
             m_animation.SetTrigger("Closed");
-            m_Collider.enabled = false;
+            m_collider.enabled = false;
         }
     }
     public void OnOpen()
     {
-        m_Collider.enabled = true;
+        m_collider.enabled = true;
         m_open = true;
         m_animation.SetTrigger("Open");
 
@@ -45,16 +45,16 @@ public class DungenBrige : MonoBehaviour
 
     public void FinishClose()
     {
-        m_Collider.enabled = false;
+        m_collider.enabled = false;
     }
 
     public void ShowBrige()
     {
-        m_brige.SetActive(true);
+        m_bridge.SetActive(true);
     }
 
     public void HideBrige()
     {
-        m_brige.SetActive(false);
+        m_bridge.SetActive(false);
     }
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7042945861431128983}
   - component: {fileID: 8927505286149654769}
   m_Layer: 0
-  m_Name: DungenKey
+  m_Name: Tr_DungenKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

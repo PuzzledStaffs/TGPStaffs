@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class ExitDoor : DungenDoor
 {
-    [SerializeField] private string ExitScene;
+    [FormerlySerializedAs("ExitScene")]
+    [SerializeField] private string m_exitScene;
 
     protected override IEnumerator MoveRoomCoroutine(Collider other)
     {
         
-        SceneManager.LoadScene(ExitScene);
+        SceneManager.LoadScene(m_exitScene);
         yield return new WaitForEndOfFrame();
     }
 
@@ -25,7 +27,7 @@ public class ExitDoor : DungenDoor
             HideLocks();
         }
 
-        if (m_ClosedOnStart || m_locked)
+        if (m_closedOnStart || m_locked)
         {
             CloseDoor();
 
@@ -51,8 +53,8 @@ public class ExitDoor : DungenDoor
         if (!m_locked)
         {
             m_doorActive = true;
-            m_doorRenderer.material = m_DoorOpen;
-            m_DoorColider.isTrigger = true;
+            m_doorRenderer.material = m_doorOpen;
+            m_doorCollider.isTrigger = true;
 
         }
         else if (m_locked)

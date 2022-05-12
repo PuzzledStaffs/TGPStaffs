@@ -24,8 +24,13 @@ public class BowItem : Item
 
     public override void LeftClickAction(PlayerController pc)
     {
+
+        pc.animator.SetBool("BowDraw", true);
+        pc.animator.SetFloat("BowWalkSpeed", pc.m_rigidbody.velocity.magnitude / 10);
+        Debug.Log(pc.m_rigidbody.velocity.magnitude / 10);
         if (PlayOnce)
         {
+           // pc.animator.SetBool("BowDraw", true);
             pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ItemSound);
             PlayOnce = false;
         }
@@ -43,6 +48,7 @@ public class BowItem : Item
 
     public override void ReleaseAction(PlayerController pc)
     {
+        pc.animator.SetBool("BowDraw", false);
         pc.BowLineRenderer.SetPosition(1, new Vector3(0, 0, 0));
         GameObject arrow = Instantiate(Arrow, pc.spawnPoint.position, pc.spawnPoint.rotation);
         arrow.GetComponent<Arrow>().bowParent = this;

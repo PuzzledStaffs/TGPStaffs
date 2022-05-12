@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IHealth
 {
     [Header("Components")]
     public GameObject m_model;
-    private Rigidbody m_rigidbody;
+    public  Rigidbody m_rigidbody;
     private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
@@ -63,6 +63,10 @@ public class PlayerController : MonoBehaviour, IHealth
     private float m_deathLerpTime = 0.0f;
     public LineRenderer BowLineRenderer;
 
+    [Header("Currency")]
+    public int m_coins;
+
+
     [SerializeField] float m_AltInteractArea;
 
     void Awake()
@@ -77,15 +81,17 @@ public class PlayerController : MonoBehaviour, IHealth
         m_respawnPosition = transform.position;
 
         SetHealth(PersistentPrefs.m_currentSaveFile.currentHealth);
-        m_weaponWheelController.WeaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item1Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item2Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(2).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item3Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(3).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item4Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(4).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item5Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item6Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item7Unlocked;
-        m_weaponWheelController.WeaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item8Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item1Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item2Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(2).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item3Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(3).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item4Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(4).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item5Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item6Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item7Unlocked;
+        m_weaponWheelController.m_weaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.m_currentSaveFile.item8Unlocked;
         PersistentPrefs.m_currentSaveFile.scene = gameObject.scene.name;
+
+        m_coins = PlayerPrefs.GetInt("Coins", 0);
     }
 
     void OnDestroy()
@@ -268,11 +274,11 @@ public class PlayerController : MonoBehaviour, IHealth
 
                 if (m_weaponWheelController.isWheelOpen)
                 {
-                    m_weaponWheelController.SelectItem(m_weaponWheelController.currentIndex);
+                    m_weaponWheelController.SelectItem(m_weaponWheelController.m_currentIndex);
                     break;
                 }
 
-                if (!m_weaponWheelController.CurrentItem.ItemHold)
+                if (!m_weaponWheelController.m_CurrentItem.ItemHold)
                     m_weaponWheelController.LeftClickAction();
                 else
                     m_buttonHeld = true;
@@ -430,10 +436,6 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void TakeDamage(IHealth.Damage damage)
     {
-        //Kockback and other feedback stuff
-        animator.SetTrigger("Hit");
-        StartCoroutine(PlayerHitFeedback(1.0f));
-
         m_health -= damage.damageAmount;
         GetComponent<AudioSource>().PlayOneShot(m_damageSound);
         HealthText.text = "x " + m_health.ToString();
@@ -443,6 +445,21 @@ public class PlayerController : MonoBehaviour, IHealth
         }
 
     }
+
+    public void ApplyKnockack(Vector3 direction)
+    {
+        //Kockback and other feedback stuff
+        //m_rigidbody.AddForce(new Vector3(0,5.0f,-100.0f), ForceMode.Impulse);
+
+        Vector3 dir = direction - transform.position;
+        dir = dir.normalized;
+        m_rigidbody.AddForce(dir * 100.0f, ForceMode.Impulse);
+
+        animator.SetTrigger("Hit");
+        StartCoroutine(PlayerHitFeedback(1.0f));
+    }
+
+
 
     IEnumerator PlayerHitFeedback(float time)
     {
@@ -484,6 +501,12 @@ public class PlayerController : MonoBehaviour, IHealth
     }
     #endregion
 
+
+    public void AddCoins(int coins)
+    {
+        m_coins += coins;
+        PlayerPrefs.SetInt("Coins", m_coins);
+    }
 
     public void OnDrawGizmos()
     {
