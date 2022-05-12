@@ -8,8 +8,6 @@ public class EnemyController : MonoBehaviour, IHealth
     [Header("---------------Enemy Statistics------------------------------------------------------------")]
     public int m_health = 50;
     public float m_speed;
-    public float m_attackCooldown;
-    private bool m_canAttack = true;
     [Header("---------------Generic------------------------------------------------------------")]
     public NavMeshAgent m_agent;
     Transform m_player;
@@ -31,7 +29,6 @@ public class EnemyController : MonoBehaviour, IHealth
     [Header("---------------States------------------------------------------------------------")]
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
-
 
     private void Start()
     {
@@ -103,48 +100,13 @@ public class EnemyController : MonoBehaviour, IHealth
     {
         if (!m_died)
         {
-            
-
-            if (m_canAttack)
-            {
-                m_rb.velocity = new Vector3(0, 0, 0);
-                m_currentState = 3;
-                transform.LookAt(m_player);
-                StartCoroutine(AttackCoroutine());
-            }
-            
+            m_rb.velocity = new Vector3(0, 0, 0);
+            m_currentState = 3;
+            transform.LookAt(m_player);
             //not walking
         }
 
     }
-
-    IEnumerator AttackCoroutine()
-    {
-        m_canAttack = false;
-        Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(1.0f, 1.0f, 1.0f), transform.rotation);
-        foreach (var hitCollider in colliders)
-        {
-            //if its the player, then take damage
-            //Make sure player object tag is set to "Player"
-            if (hitCollider.CompareTag("Player"))
-            {
-                Debug.Log("Attacking Player");
-
-                IHealth.Damage damageStruct = new IHealth.Damage();
-                damageStruct.damageAmount = 1;
-                damageStruct.type = IHealth.DamageType.ENEMY;
-
-                //Take Damage
-                IHealth health = m_player.GetComponent<IHealth>();
-                health.TakeDamage(damageStruct);
-            }
-        }
-        yield return new WaitForSeconds(m_attackCooldown);
-        m_canAttack = true;
-    }
-
-
-
     void death()
     {
         m_died = true;
@@ -202,7 +164,6 @@ public class EnemyController : MonoBehaviour, IHealth
         //animator.SetBool("Walking", false);
         m_rb.AddForce(-transform.forward * m_pushBackForce);
         StartCoroutine(StopMoving());
-        m_canAttack = false;    
         // animator.SetTrigger("Hit");
         if (IsDead())
         {
