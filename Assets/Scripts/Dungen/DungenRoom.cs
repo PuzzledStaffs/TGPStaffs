@@ -158,9 +158,9 @@ public class DungenRoom : MonoBehaviour
     private void RoomEntered()
     {
         //Called First when player enter room
-        m_Camera.m_CurrentRoomType = m_RoomType;
+        m_Camera.m_currentRoomType = m_RoomType;
         m_Camera.m_roomOragin = m_origin.transform.position;
-        m_Camera.m_Locked = true;
+        m_Camera.m_locked = true;
         
         m_playerInRoom = true;
     }
@@ -170,7 +170,7 @@ public class DungenRoom : MonoBehaviour
         if (m_playerInRoom)
         {
             //Called after camra has finished moving and player unlocked
-            m_Camera.m_Locked = false;
+            m_Camera.m_locked = false;
             foreach (Enemy enemy in m_Enemies)
             {
                 enemy.m_manager.m_idle.isIdle = false;

@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class ExitDoor : DungenDoor
 {
-    [SerializeField] private string ExitScene;
+    [FormerlySerializedAs("ExitScene")]
+    [SerializeField] private string m_exitScene;
 
     protected override IEnumerator MoveRoomCoroutine(Collider other)
     {
         
-        SceneManager.LoadScene(ExitScene);
+        SceneManager.LoadScene(m_exitScene);
         yield return new WaitForEndOfFrame();
     }
 
