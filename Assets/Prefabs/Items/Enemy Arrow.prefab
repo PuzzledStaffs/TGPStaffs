@@ -9912,9 +9912,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c297caab7e6628b4abcee5160eedfe26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_damageAmount: 0
-  velocity: 0
-  attack: {fileID: 0}
+  m_damageAmount: 10
+  m_velocity: 5
+  m_attack: {fileID: 7303376395991135469, guid: 05da39efd3961194582d17a558e84807, type: 3}
 --- !u!1 &6126808086374791102
 GameObject:
   m_ObjectHideFlags: 0
