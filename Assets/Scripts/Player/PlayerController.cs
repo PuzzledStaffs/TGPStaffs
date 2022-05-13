@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Alt Interact")]
     [SerializeField] float m_altInteractArea;
     [SerializeField] Canvas m_altInteractToolTip;
+    [SerializeField] private TextMeshProUGUI m_altInteractToolTipText;
+    private IAltInteractable m_currentInteract;
 
     void Awake()
     {
@@ -146,23 +148,58 @@ public class PlayerController : MonoBehaviour, IHealth
             }
         }
 
-        bool interactInRange = false;
-        foreach(Collider coll in GetAnyInteract())
-        {
+        
+        CheckForInterpretablesInRange();
 
+    }
+
+    void CheckForInterpretablesInRange()
+    {
+        //Check for interactibles
+        List<IAltInteractable> interactInRange = new List<IAltInteractable>();
+        foreach (Collider coll in Physics.OverlapSphere(transform.position, m_altInteractArea))
+        {
             IAltInteractable interact = coll.GetComponent<IAltInteractable>();
             if (interact != null)
             {
-                if(interact.CanInteract())
+                if (interact.CanInteract().canInteract)
                 {
-                    interactInRange = true;
+                    interactInRange.Add(interact);
                 }
             }
         }
-        m_altInteractToolTip.enabled = interactInRange;
+        //If there are none display nothing on screem
+        if (interactInRange.Count == 0)
+        {
+            m_altInteractToolTip.enabled = false;
+            m_currentInteract = null;
+            return;
+        }
 
+        //Find the one with the hiest prority
+        IAltInteractable topPriority = null;
+        foreach (var interactable in interactInRange)
+        {
+            if (topPriority == null)
+            {
+                topPriority = interactable;
+            }
+            else if (interactable.CanInteract().priority > topPriority.CanInteract().priority)
+            {
+                topPriority = interactable;
+            }
+        }
+        //If a new one with higer priorty found use that
+        if (m_currentInteract != topPriority)
+        {
+            m_currentInteract = topPriority;
 
+            m_altInteractToolTip.enabled = true;
+            m_altInteractToolTipText.text = m_currentInteract.CanInteract().text;
+        }
+        
 
+        
     }
 
     void FixedUpdate()
@@ -339,7 +376,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 if (m_buttonHeld || m_weaponWheelController.isWheelOpen)
                     break;
 
-                foreach (Collider col in GetAnyInteract())
+                foreach (Collider col in Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(0.5f, 0.5f, 0.5f) / 2, m_model.transform.rotation))
                 {
                     if (col.CompareTag("Box"))
                     {
@@ -417,12 +454,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void OnAltInteract()
     {
-        Collider[]colliders = Physics.OverlapSphere(transform.position, m_altInteractArea);
-
-        foreach(Collider hitObject in colliders)
-        {
-            hitObject.GetComponent<IAltInteractable>()?.AltInteract();
-        }    
+        m_currentInteract?.AltInteract();
+        m_currentInteract = null;
+        CheckForInterpretablesInRange();
     }
 
     #endregion

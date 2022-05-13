@@ -115,9 +115,9 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
         }
     }
     
-    public bool CanInteract()
+    public InteractInfo CanInteract()
     {
-        return m_locked;
+        return new InteractInfo(m_locked, "Unlock Door", 3);
     }
     
 

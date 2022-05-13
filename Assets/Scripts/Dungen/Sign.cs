@@ -58,8 +58,8 @@ public class Sign : MonoBehaviour, IAltInteractable
         }
     }
 
-    public bool CanInteract()
+    public InteractInfo CanInteract()
     {
-        return true;
+        return new InteractInfo(true,"Read",1);
     }
 }

@@ -6957,6 +6957,7 @@ MonoBehaviour:
   m_coins: 0
   m_altInteractArea: 1.5
   m_altInteractToolTip: {fileID: 1014632801}
+  m_altInteractToolTipText: {fileID: 7200759753041244129}
 --- !u!114 &551475353
 MonoBehaviour:
   m_ObjectHideFlags: 0
