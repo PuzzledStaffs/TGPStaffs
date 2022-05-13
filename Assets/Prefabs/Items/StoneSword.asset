@@ -16,10 +16,11 @@ MonoBehaviour:
   ItemIcon: {fileID: 21300000, guid: 207123ab92b27504b8f19d255c03f6e8, type: 3}
   ItemDamage: 10
   CombatType: 0
-  MaxCooldown: 0.75
+  MaxCooldown: 0
   ItemSound: {fileID: 8300000, guid: 03465edbfaf488f42b44c540c71a03bf, type: 3}
   CanUse: 1
   ItemHold: 0
+  TypeName: Sword
   SwordRange: 1
   MainSwordTrailColor: {r: 0, g: 0.932251, b: 1, a: 1}
   SecondarySwordTrailColor: {r: 0.00965023, g: 0, b: 1, a: 1}
