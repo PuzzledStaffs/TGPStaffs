@@ -3,6 +3,8 @@ using UnityEngine;
 
 public static class PersistentPrefs
 {
+    public static string key_saveFileExists = "SaveFileExists";
+
     public static string key_currentHealth = "PlayerCurrentHealth";
 
     public static string key_item1Unlocked = "PlayerItem1Unlocked";
@@ -34,6 +36,11 @@ public static class PersistentPrefs
         saveFile.item8Unlocked = false;
         saveFile.scene = "Overworld";
         return saveFile;
+    }
+
+    public static bool HasSaveFile(int save)
+    {
+        return (PlayerPrefs.GetInt(key_saveFileExists + save) == 1);
     }
 
     public static void Load(int save)
