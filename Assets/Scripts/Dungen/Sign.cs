@@ -9,22 +9,25 @@ using UnityEngine.Serialization;
 public class Sign : MonoBehaviour, IAltInteractable
 {
     [SerializeField] [TextArea] private string m_signText;
+    protected SignCanvas m_signCanvasScript;
     private TextMeshProUGUI m_signTextText;
     private Canvas m_canvas;
     [FormerlySerializedAs("m_currentDungenRoom")]
     public DungenRoom m_currentDungeonRoom;
    
-    private bool m_reading;
+    protected bool m_reading;
     private PlayerController m_playerController;
     private PlayerInput m_playerInput;
 
-    private void Start()
+    protected virtual void Start()
     {
         m_playerController = FindObjectOfType<PlayerController>();
         m_playerInput = FindObjectOfType<PlayerInput>();
 
-        m_canvas = GameObject.FindGameObjectWithTag("SignCanvas").GetComponent<Canvas>();
-        m_signTextText = GameObject.FindGameObjectWithTag("SignText").GetComponent<TextMeshProUGUI>();
+        m_signCanvasScript = GameObject.FindGameObjectWithTag("SignCanvas").GetComponent<SignCanvas>();
+
+        m_canvas = m_signCanvasScript.m_canvas;
+        m_signTextText = m_signCanvasScript.m_textBody;
 
 
         m_reading = false;
@@ -58,7 +61,7 @@ public class Sign : MonoBehaviour, IAltInteractable
         }
     }
 
-    public InteractInfo CanInteract()
+    public virtual InteractInfo CanInteract()
     {
         return new InteractInfo(true,"Read",1);
     }
