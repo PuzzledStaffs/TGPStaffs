@@ -29,7 +29,6 @@ public class FleshSign : Sign
     {
         base.Start();
         m_nameText = m_signCanvasScript.m_nameText;
-
     }
 
     public override InteractInfo CanInteract()

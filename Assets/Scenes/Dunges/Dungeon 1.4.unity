@@ -7254,3 +7254,72 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.01, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1001 &740943660807231847
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 559565595}
+    m_Modifications:
+    - target: {fileID: 470966480675425388, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_Name
+      value: Sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 991606829269522134, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089247308423948685, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_signText
+      value: I am a human sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089247308423948685, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_displyName
+      value: Margret
+      objectReference: {fileID: 0}
+    - target: {fileID: 1089247308423948685, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
+      propertyPath: m_currentDungeonRoom
+      value: 
+      objectReference: {fileID: 559565594}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0e8221a9ea5ffad4290c845698e48563, type: 3}
