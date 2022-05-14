@@ -87,10 +87,10 @@ public class MenuButtons : MonoBehaviour
     // Save File Menu Code
     public void OpenSaveFileMenu()
     {
-        m_saveAutoButton.SetActive(!PersistentPrefs.GetInstance().HasSaveFile(0));
-        m_save1Button.SetActive(!PersistentPrefs.GetInstance().HasSaveFile(1));
-        m_save2Button.SetActive(!PersistentPrefs.GetInstance().HasSaveFile(2));
-        m_save3Button.SetActive(!PersistentPrefs.GetInstance().HasSaveFile(3));
+        m_saveAutoButton.SetActive(PersistentPrefs.GetInstance().HasSaveFile(0));
+        m_save1Button.SetActive(PersistentPrefs.GetInstance().HasSaveFile(1));
+        m_save2Button.SetActive(PersistentPrefs.GetInstance().HasSaveFile(2));
+        m_save3Button.SetActive(PersistentPrefs.GetInstance().HasSaveFile(3));
 
         m_mainMenu.SetActive(false);
         m_savesMenu.SetActive(true);
@@ -101,7 +101,8 @@ public class MenuButtons : MonoBehaviour
         if (PersistentPrefs.GetInstance().HasSaveFile(save))
         {
             PersistentPrefs.GetInstance().LoadSaveFile(save);
-            SceneManager.LoadScene(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene);
+            SceneManager.LoadScene("Overworld");
+            //SceneManager.LoadScene(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene);
         }
     }
 
