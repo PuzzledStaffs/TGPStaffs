@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
-    public static AudioMixer mixer;
+    [FormerlySerializedAs("instance")]
+    public static SoundManager m_instance;
+    [FormerlySerializedAs("mixer")]
+    public static AudioMixer m_mixer;
 
     //[SerializeField] private AudioSource musicSource;
 
     private void Awake()
     {
-        instance = this;
+        m_instance = this;
     }
 
     public void ChangeMasterVolume(float value)
