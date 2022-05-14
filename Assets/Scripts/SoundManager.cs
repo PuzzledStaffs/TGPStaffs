@@ -11,16 +11,22 @@ public class SoundManager : MonoBehaviour
     [FormerlySerializedAs("mixer")]
     public static AudioMixer m_mixer;
 
-    //[SerializeField] private AudioSource musicSource;
-
     private void Awake()
     {
         m_instance = this;
+        AudioListener.volume = PersistentPrefs.GetInstance().m_settings.m_volume;
     }
 
-    public void ChangeMasterVolume(float value)
+    public float GetMasterVolume()
     {
-        AudioListener.volume = value;
+        return AudioListener.volume;
+    }
+
+    public void ChangeMasterVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PersistentPrefs.GetInstance().m_settings.m_volume = volume;
+        PersistentPrefs.GetInstance().SaveSettings();
     }
  
 }

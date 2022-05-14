@@ -20,28 +20,28 @@ public class ItemPickup : MonoBehaviour
         switch (m_itemID)
         {
             case 1:
-                if (PersistentPrefs.m_currentSaveFile.item1Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item1Unlocked) { Destroy(gameObject); }
                 break;
             case 2:
-                if (PersistentPrefs.m_currentSaveFile.item2Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item2Unlocked) { Destroy(gameObject); }
                 break;
             case 3:
-                if (PersistentPrefs.m_currentSaveFile.item3Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item3Unlocked) { Destroy(gameObject); }
                 break;
             case 4:
-                if (PersistentPrefs.m_currentSaveFile.item4Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item4Unlocked) { Destroy(gameObject); }
                 break;
             case 5:
-                if (PersistentPrefs.m_currentSaveFile.item5Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item5Unlocked) { Destroy(gameObject); }
                 break;
             case 6:
-                if (PersistentPrefs.m_currentSaveFile.item6Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item6Unlocked) { Destroy(gameObject); }
                 break;
             case 7:
-                if (PersistentPrefs.m_currentSaveFile.item7Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item7Unlocked) { Destroy(gameObject); }
                 break;
             case 8:
-                if (PersistentPrefs.m_currentSaveFile.item8Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item8Unlocked) { Destroy(gameObject); }
                 break;
         }
     }
@@ -61,7 +61,7 @@ public class ItemPickup : MonoBehaviour
                 if (button.WheelItem == m_itemToGive)
                 {
                     button.ItemBlocked = false;
-                    PersistentPrefs.m_currentSaveFile.UnlockItem(i);
+                    PersistentPrefs.GetInstance().m_currentSaveFile.UnlockItem(i);
                     break;
                 }
             }
