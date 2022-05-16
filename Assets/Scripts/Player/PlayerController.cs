@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public float m_boxLerpTime;
 
     [Header("Weapon Models & Stuff")]
-    public GameObject Sword;
+    public GameObject Sword, Bow;
     public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
 
     [Header("SFX")]
@@ -66,8 +66,11 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Currency")]
     public int m_coins;
 
-
-    [SerializeField] float m_AltInteractArea;
+    [Header("Alt Interact")]
+    [SerializeField] float m_altInteractArea;
+    [SerializeField] Canvas m_altInteractToolTip;
+    [SerializeField] private TextMeshProUGUI m_altInteractToolTipText;
+    private IAltInteractable m_currentInteract;
 
     void Awake()
     {
@@ -93,6 +96,8 @@ public class PlayerController : MonoBehaviour, IHealth
         PersistentPrefs.GetInstance().SaveSaveFile(0);
 
         m_coins = PlayerPrefs.GetInt("Coins", 0);
+
+        m_altInteractToolTip.enabled = false;
     }
 
     void OnDestroy()
@@ -102,6 +107,27 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+ 
+
+
+
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+        {
+            animator.SetBool("Attack1", false);
+        }
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+        {
+            animator.SetBool("Attack2", false);
+            SwordItem.m_noOfClicks = 0;
+            Sword.SetActive(false);
+        }
+
+        if(Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
+        {
+            SwordItem.m_noOfClicks = 0;
+            Sword.SetActive(false);
+        }
+
         if (m_weaponWheelController.isWheelOpen)
         {
             Vector2 direction = m_pointerPos;
@@ -143,6 +169,59 @@ public class PlayerController : MonoBehaviour, IHealth
                 }
             }
         }
+
+        
+        CheckForInterpretablesInRange();
+
+    }
+
+    void CheckForInterpretablesInRange()
+    {
+        //Check for interactibles
+        List<IAltInteractable> interactInRange = new List<IAltInteractable>();
+        foreach (Collider coll in Physics.OverlapSphere(transform.position, m_altInteractArea))
+        {
+            IAltInteractable interact = coll.GetComponent<IAltInteractable>();
+            if (interact != null)
+            {
+                if (interact.CanInteract().canInteract)
+                {
+                    interactInRange.Add(interact);
+                }
+            }
+        }
+        //If there are none display nothing on screem
+        if (interactInRange.Count == 0)
+        {
+            m_altInteractToolTip.enabled = false;
+            m_currentInteract = null;
+            return;
+        }
+
+        //Find the one with the hiest prority
+        IAltInteractable topPriority = null;
+        foreach (var interactable in interactInRange)
+        {
+            if (topPriority == null)
+            {
+                topPriority = interactable;
+            }
+            else if (interactable.CanInteract().priority > topPriority.CanInteract().priority)
+            {
+                topPriority = interactable;
+            }
+        }
+        //If a new one with higer priorty found use that
+        if (m_currentInteract != topPriority)
+        {
+            m_currentInteract = topPriority;
+
+            m_altInteractToolTip.enabled = true;
+            m_altInteractToolTipText.text = m_currentInteract.CanInteract().text;
+        }
+        
+
+        
     }
 
     void FixedUpdate()
@@ -397,12 +476,9 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void OnAltInteract()
     {
-        Collider[]colliders = Physics.OverlapSphere(transform.position, m_AltInteractArea);
-
-        foreach(Collider hitObject in colliders)
-        {
-            hitObject.GetComponent<IAltInteractable>()?.AltInteract();
-        }    
+        m_currentInteract?.AltInteract();
+        m_currentInteract = null;
+        CheckForInterpretablesInRange();
     }
 
     #endregion
@@ -512,6 +588,11 @@ public class PlayerController : MonoBehaviour, IHealth
     public void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, m_AltInteractArea);
+        Gizmos.DrawWireSphere(transform.position, m_altInteractArea);
+    }
+
+    Collider[] GetAnyInteract()
+    {
+        return Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(0.5f, 0.5f, 0.5f) / 2, m_model.transform.rotation);
     }
 }

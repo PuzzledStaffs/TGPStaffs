@@ -20,6 +20,7 @@ MonoBehaviour:
   ItemSound: {fileID: 8300000, guid: 2b62c8410a710b24e8ab6be9c8bb67c2, type: 3}
   CanUse: 0
   ItemHold: 1
+  TypeName: Bow
   CurrentRange: 4
   ArrowSpeed: 10
   MaxRange: 10

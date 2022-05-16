@@ -94,4 +94,16 @@ public class Switch : MonoBehaviour, IAltInteractable
             lockObject.SetActive(show);
         }
     }
+
+    public InteractInfo CanInteract()
+    {
+        if (m_locked)
+        {
+            return new InteractInfo(true, "Unlock Switch", 2);
+        }
+        else
+        {
+            return new InteractInfo(true, "Use Switch", 2);
+        }
+    }
 }

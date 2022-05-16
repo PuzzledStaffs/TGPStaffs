@@ -73,7 +73,18 @@ public class DungenManager : MonoBehaviour
 
     private void PlayerDeath()
     {
-        SceneManager.LoadScene(gameObject.scene.name,LoadSceneMode.Single);
+        int sceneCount = SceneManager.sceneCount;
+        Scene[] scenes = new Scene[sceneCount];
+        for(int i = 0; i < sceneCount; i++)
+        {
+            scenes[i] = SceneManager.GetSceneAt(i);
+        }
+        SceneManager.LoadScene(scenes[0].name, LoadSceneMode.Single);
+        SceneManager.LoadScene(scenes[1].name, LoadSceneMode.Additive);
+        for(int i = 1; i < sceneCount; i++)
+        {
+            
+        }
     }
 
     public IEnumerator MoveCameraCoroutine(Vector3 TargetLocation)
