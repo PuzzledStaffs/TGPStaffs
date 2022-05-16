@@ -31,19 +31,19 @@ public class BossEnemy : Enemy
         //animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
 
 
-        //if (m_fieldOfView.m_inFOV == true)
-        //{
-        //    if (m_phaseSwitch)
-        //    {
-        //        Debug.Log("ranged");
-        //        m_manager.ChangeState(State.StateType.R_ATTACK);
-        //    }
-        //    else 
-        //    {
-        //        Debug.Log("melee");
-        //        m_manager.ChangeState(State.StateType.ATTACK);
-        //    }
-        //}
+        if (m_fieldOfView.m_inFOV == true)
+        {
+            if (m_phaseSwitch)
+            {
+                Debug.Log("ranged");
+                //m_manager.ChangeState(State.StateType.R_ATTACK);
+            }
+            else 
+            {
+                Debug.Log("melee");
+                m_manager.ChangeState(State.StateType.ATTACK);
+            }
+        }
     }
 
     public override void TakeDamage(IHealth.Damage damage)

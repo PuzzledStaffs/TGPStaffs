@@ -1256,9 +1256,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eef101681bf4b2542a721ae219f5395c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 2
-  stateManager: {fileID: 5516742853000973423}
-  isIdle: 1
+  m_timer: 2
+  m_stateManager: {fileID: 5516742853000973423}
+  m_isIdle: 1
 --- !u!114 &5516742853000973418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,10 +1271,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 926384b362c216746a79f2ee54b09f6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAngle: 45
-  radius: 5
-  target: {fileID: 0}
-  inFOV: 0
+  m_maxAngle: 45
+  m_radius: 5
+  m_target: {fileID: 0}
+  m_inFOV: 0
 --- !u!114 &5516742853000973419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1291,8 +1291,9 @@ MonoBehaviour:
   m_manager: {fileID: 5516742853000973423}
   m_fieldOfView: {fileID: 5516742853000973418}
   m_animator: {fileID: 5516742853000973413}
-  m_healthBar: {fileID: 1997462339579908276}
-  m_healthBarMask: {fileID: 1321857685820290837}
+  m_deathDrop: {fileID: 5983358334720439236, guid: ec556f80153c7304da5c241abeacfe05, type: 3}
+  m_healthBar: {fileID: 0}
+  m_healthBarMask: {fileID: 0}
 --- !u!114 &5516742853000973416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1305,14 +1306,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1855ad7ab7bebb43b8f1391148da8ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  manager: {fileID: 5516742853000973423}
-  player: {fileID: 0}
-  cooldown: 0
-  maxCooldown: 5
-  animationTime: 3.8
-  damage: 1
-  distance: 10
-  animator: {fileID: 5516742853000973413}
+  m_manager: {fileID: 5516742853000973423}
+  m_player: {fileID: 0}
+  m_cooldown: 0
+  m_maxCooldown: 5
+  m_animationTime: 3.8
+  m_damage: 1
+  m_distance: 10
+  m_animator: {fileID: 5516742853000973413}
 --- !u!195 &5516742853000973410
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -35,12 +35,14 @@ public class BossStateManager : StateManager
                 m_idle.enabled = false;
                 m_rangedAttack.enabled = false;
                 break;
-                //    case State.StateType.R_ATTACK:
-                //        m_roam.enabled = false;
-                //        m_attack.enabled = false;
-                //        m_idle.enabled = false;
-                //        m_rangedAttack.enabled = true;
-                //        break;
+        //    case State.StateType.R_ATTACK:
+        //        m_roam.enabled = false;
+        //        m_attack.enabled = false;
+        //        m_idle.enabled = false;
+        //        m_rangedAttack.enabled = true;
+        //        break;
+        
+        
         }
     }
 }
