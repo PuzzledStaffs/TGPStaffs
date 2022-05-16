@@ -4,6 +4,11 @@ using UnityEngine;
 public class PersistentPrefs
 {
     #region Save File Keys
+    public static string KEY_SAVE_DATE = "SaveDate";
+    public static string KEY_PLAYTIME_SECONDS = "PlaytimeSeconds";
+    public static string KEY_PLAYTIME_MINUTES = "PlaytimeMinutes";
+    public static string KEY_PLAYTIME_HOURS = "PlaytimeHours";
+
     public static string KEY_SAVE_FILE_EXISTS = "SaveFileExists";
 
     public static string KEY_CURRENT_HEALTH = "PlayerCurrentHealth";
@@ -51,6 +56,10 @@ public class PersistentPrefs
     {
         m_currentSaveFile = new SaveFile
         {
+            m_saveDate = DateTime.Now.ToString("dd/MM/yyyy"),
+            m_saveSeconds = 0,
+            m_saveMinutes = 0,
+            m_saveHours = 0,
             m_currentHealth = 5,
             m_item1Unlocked = true,
             m_item2Unlocked = false,
@@ -69,10 +78,14 @@ public class PersistentPrefs
         return (PlayerPrefs.GetInt(KEY_SAVE_FILE_EXISTS + save) == 1);
     }
 
-    public void LoadSaveFile(int save)
+    public SaveFile LoadSaveFile(int save)
     {
         SaveFile saveFile = new SaveFile
         {
+            m_saveDate = PlayerPrefs.GetString(KEY_SAVE_DATE + save),
+            m_saveSeconds = PlayerPrefs.GetInt(KEY_PLAYTIME_SECONDS + save),
+            m_saveMinutes = PlayerPrefs.GetInt(KEY_PLAYTIME_MINUTES + save),
+            m_saveHours = PlayerPrefs.GetInt(KEY_PLAYTIME_HOURS + save),
             m_currentHealth = PlayerPrefs.GetInt(KEY_CURRENT_HEALTH + save),
             m_item1Unlocked = PlayerPrefs.GetInt(KEY_ITEM_1_UNLOCKED + save) == 1,
             m_item2Unlocked = PlayerPrefs.GetInt(KEY_ITEM_2_UNLOCKED + save) == 1,
@@ -84,10 +97,15 @@ public class PersistentPrefs
             m_item8Unlocked = PlayerPrefs.GetInt(KEY_ITEM_8_UNLOCKED + save) == 1,
             m_currentScene = PlayerPrefs.GetString(key_scene)
         };
+        return saveFile;
     }
 
     public void SaveSaveFile(int save)
     {
+        PlayerPrefs.SetString(KEY_SAVE_DATE + save, DateTime.Now.ToString("dd/MM/yyyy"));
+        PlayerPrefs.SetInt(KEY_PLAYTIME_SECONDS + save, m_currentSaveFile.m_saveSeconds);
+        PlayerPrefs.SetInt(KEY_PLAYTIME_MINUTES + save, m_currentSaveFile.m_saveMinutes);
+        PlayerPrefs.SetInt(KEY_PLAYTIME_HOURS + save, m_currentSaveFile.m_saveHours);
         PlayerPrefs.SetInt(KEY_CURRENT_HEALTH + save, m_currentSaveFile.m_currentHealth);
         PlayerPrefs.SetInt(KEY_ITEM_1_UNLOCKED + save, m_currentSaveFile.m_item1Unlocked ? 1 : 0);
         PlayerPrefs.SetInt(KEY_ITEM_2_UNLOCKED + save, m_currentSaveFile.m_item2Unlocked ? 1 : 0);

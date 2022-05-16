@@ -20,9 +20,9 @@ public class MenuButtons : MonoBehaviour
     [Header("Saves Menu")]
     public GameObject m_savesMenu;
     public GameObject m_saveAutoButton;
-    public GameObject m_save1Button;
-    public GameObject m_save2Button;
-    public GameObject m_save3Button;
+    public SaveFileButton m_save1Button;
+    public SaveFileButton m_save2Button;
+    public SaveFileButton m_save3Button;
 
     private void Start()
     {
@@ -88,9 +88,30 @@ public class MenuButtons : MonoBehaviour
     public void OpenSaveFileMenu()
     {
         m_saveAutoButton.SetActive(PersistentPrefs.GetInstance().HasSaveFile(0));
-        m_save1Button.SetActive(PersistentPrefs.GetInstance().HasSaveFile(1));
-        m_save2Button.SetActive(PersistentPrefs.GetInstance().HasSaveFile(2));
-        m_save3Button.SetActive(PersistentPrefs.GetInstance().HasSaveFile(3));
+        if (PersistentPrefs.GetInstance().HasSaveFile(1))
+        {
+            SaveFile file = PersistentPrefs.GetInstance().LoadSaveFile(1);
+            m_save1Button.m_playtime.text = file.m_saveHours + ":" + file.m_saveMinutes;
+            m_save1Button.m_date.text = file.m_saveDate;
+            m_save1Button.m_level.text = file.m_currentScene;
+        }
+        m_save1Button.gameObject.SetActive(PersistentPrefs.GetInstance().HasSaveFile(1));
+        if (PersistentPrefs.GetInstance().HasSaveFile(2))
+        {
+            SaveFile file = PersistentPrefs.GetInstance().LoadSaveFile(2);
+            m_save2Button.m_playtime.text = file.m_saveHours + ":" + file.m_saveMinutes;
+            m_save2Button.m_date.text = file.m_saveDate;
+            m_save2Button.m_level.text = file.m_currentScene;
+        }
+        m_save2Button.gameObject.SetActive(PersistentPrefs.GetInstance().HasSaveFile(2));
+        if (PersistentPrefs.GetInstance().HasSaveFile(3))
+        {
+            SaveFile file = PersistentPrefs.GetInstance().LoadSaveFile(3);
+            m_save3Button.m_playtime.text = file.m_saveHours + ":" + file.m_saveMinutes;
+            m_save3Button.m_date.text = file.m_saveDate;
+            m_save3Button.m_level.text = file.m_currentScene;
+        }
+        m_save3Button.gameObject.SetActive(PersistentPrefs.GetInstance().HasSaveFile(3));
 
         m_mainMenu.SetActive(false);
         m_savesMenu.SetActive(true);
@@ -100,7 +121,7 @@ public class MenuButtons : MonoBehaviour
     {
         if (PersistentPrefs.GetInstance().HasSaveFile(save))
         {
-            PersistentPrefs.GetInstance().LoadSaveFile(save);
+            PersistentPrefs.GetInstance().m_currentSaveFile = PersistentPrefs.GetInstance().LoadSaveFile(save);
             SceneManager.LoadScene("Overworld");
             //SceneManager.LoadScene(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene);
         }

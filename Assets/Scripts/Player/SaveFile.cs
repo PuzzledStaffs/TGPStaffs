@@ -6,6 +6,11 @@ using System.Threading.Tasks;
 
 public class SaveFile
 {
+    public string m_saveDate;
+    public int m_saveSeconds;
+    public int m_saveMinutes;
+    public int m_saveHours;
+
     public int m_currentHealth;
     public string m_currentScene;
 
@@ -50,5 +55,22 @@ public class SaveFile
                 break;
         }
         PersistentPrefs.GetInstance().SaveSaveFile(0);
+    }
+
+    public void AddSecond()
+    {
+        m_saveSeconds++;
+
+        if (m_saveSeconds >= 60)
+        {
+            m_saveMinutes += m_saveSeconds / 60;
+            m_saveSeconds %= 60;
+        }
+
+        if (m_saveMinutes >= 60)
+        {
+            m_saveHours += m_saveMinutes / 60;
+            m_saveMinutes %= 60;
+        }
     }
 }
