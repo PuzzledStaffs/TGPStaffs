@@ -14,6 +14,8 @@ public class PrefabBrush : GameObjectBrush
 
     public List<GameObject> PreFabs = new List<GameObject>();
     
+    
+    
     public override void Erase(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
     {
         if (brushTarget.layer == 31)
@@ -21,7 +23,7 @@ public class PrefabBrush : GameObjectBrush
             return;
             ;
         }
-
+        
         Transform erased =
             GetObjectInCell(gridLayout, brushTarget.transform, new Vector3Int(position.x, position.y, 0));
         if (erased != null)
@@ -49,5 +51,15 @@ public class PrefabBrush : GameObjectBrush
         
         return null;
     }
-    
+
+    public override void Paint(GridLayout gridLayout, GameObject brushTarget, Vector3Int position)
+    { 
+        base.Paint(gridLayout, brushTarget, position);
+
+        Transform ToMove =
+            GetObjectInCell(gridLayout, brushTarget.transform, new Vector3Int(position.x, position.y, 0));
+
+        ToMove.position = new Vector3(ToMove.position.x, brushTarget.transform.position.y, ToMove.position.z);
+
+    }
 }
