@@ -154,6 +154,17 @@ public class WeaponWheelController : MonoBehaviour
                 Debug.Log("Item Selected: " + itemSelected.name);
             }
             ToggleWheel();
+
+
+            if(itemSelected.TypeName == "Bow")
+            {
+                m_pc.Bow.SetActive(true);
+            }
+            else
+            {
+                m_pc.Bow.SetActive(false);
+            }
+
         }
     }
 

@@ -12,7 +12,7 @@ public class Item : ScriptableObject
     public AudioClip ItemSound;
     public bool CanUse = true;
     public bool ItemHold;
-
+    public string TypeName;
 
     public virtual void LeftClickAction(PlayerController pc)
     {
