@@ -53,7 +53,10 @@ public class ExitDoor : DungenDoor
         if (!m_locked)
         {
             m_doorActive = true;
-            m_doorRenderer.material = m_doorOpen;
+            foreach (GameObject bar in m_bars)
+            {
+                bar.active = false;
+            }
             m_doorCollider.isTrigger = true;
 
         }
