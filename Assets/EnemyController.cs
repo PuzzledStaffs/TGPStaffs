@@ -16,7 +16,7 @@ public class EnemyController : MonoBehaviour, IHealth
     public float m_pushBackForce;
     public float m_deathForce;
     public GameObject m_destroyParticle;
-    public Animator m_animator;
+
 
     public Vector3 m_offset;
     public float m_dodgeChance = 0;
@@ -56,6 +56,11 @@ public class EnemyController : MonoBehaviour, IHealth
             if (m_playerInSightRange && !m_playerInAttackRange) ChasePlayer();
             if (m_playerInSightRange && m_playerInAttackRange) AttackPlayer();
         }
+
+        //Take Damage - check for collision
+
+       
+
 
     }
     void CalculatePath()
@@ -152,22 +157,8 @@ public class EnemyController : MonoBehaviour, IHealth
 
     public void TakeDamage(IHealth.Damage damage)
     {
-        if(damage.type == IHealth.DamageType.SWORD)
-        {
-            StartCoroutine(TakeDamageWait(damage, 0.5f));
-        }
-        else
-        {
-            StartCoroutine(TakeDamageWait(damage, 0.0f));
-        }
-        
-    }
-
-    IEnumerator TakeDamageWait(IHealth.Damage damage, float time)
-    {
-        yield return new WaitForSeconds(time);
         m_health -= damage.damageAmount;
-        m_animator.SetTrigger("EnemyHit");
+
         m_currentState = 4; //sets the state to take damage
         m_takingDamage = true;
         //animator.SetBool("Walking", false);
@@ -179,7 +170,6 @@ public class EnemyController : MonoBehaviour, IHealth
             death();
         }
     }
-
 
     public bool IsDead()
     {

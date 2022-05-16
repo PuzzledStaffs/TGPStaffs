@@ -24,6 +24,7 @@ public class BowItem : Item
 
     public override void LeftClickAction(PlayerController pc)
     {
+
         pc.animator.SetBool("BowDraw", true);
         pc.animator.SetFloat("BowWalkSpeed", pc.m_rigidbody.velocity.magnitude / 10);
         Debug.Log(pc.m_rigidbody.velocity.magnitude / 10);

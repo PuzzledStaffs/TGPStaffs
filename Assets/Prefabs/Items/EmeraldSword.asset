@@ -20,7 +20,6 @@ MonoBehaviour:
   ItemSound: {fileID: 8300000, guid: 03465edbfaf488f42b44c540c71a03bf, type: 3}
   CanUse: 1
   ItemHold: 0
-  TypeName: Sword
   SwordRange: 1
   MainSwordTrailColor: {r: 0, g: 1, b: 0.29917955, a: 1}
   SecondarySwordTrailColor: {r: 0, g: 0, b: 0, a: 1}
