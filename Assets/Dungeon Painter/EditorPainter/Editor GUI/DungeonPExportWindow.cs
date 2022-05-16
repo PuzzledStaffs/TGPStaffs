@@ -71,6 +71,23 @@ namespace TGP.DungeonEditor
 					this.Close();
 				DungeonPEditorWindow.window.Repaint();
 			}
+			if (GUILayout.Button("Export as Object", GUILayout.Height(30)))
+			{
+
+				if (exportImg == null)
+				{
+					EditorUtility.DisplayDialog(
+						"Select Image",
+						"You Must Select an Image first!",
+						"Ok");
+					return;
+				}
+
+				bool succes = DungeonPSession.ExportImageAsScriptableObject(exportImg);
+				if (succes)
+					this.Close();
+				DungeonPEditorWindow.window.Repaint();
+			}
 		}
 	}
 }

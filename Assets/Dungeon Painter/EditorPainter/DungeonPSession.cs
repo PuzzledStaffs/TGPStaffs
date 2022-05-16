@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
+using TGP.Utilites;
 
 namespace TGP.DungeonEditor
 {
@@ -195,6 +196,56 @@ namespace TGP.DungeonEditor
 			AssetDatabase.ImportAsset(path);
 
 			return true;
+		}
+
+		public static bool ExportImageAsScriptableObject(DungeonPLayout img)
+		{
+			DungeonPRoom room = ScriptableObject.CreateInstance<DungeonPRoom>();
+			EditorUtility.SetDirty(room);
+
+			foreach (var layer in img.layers)
+			{
+			
+				GameObject[,] Array2D = new GameObject[layer.tex.width, layer.tex.height];
+				for (int x = 0; x < layer.tex.width; x++)
+				{
+					for (int z = 0; z < layer.tex.height; z++)
+					{
+						Color XZColor = layer.tex.GetPixel(x, z);
+						if (layer.ParentLayout.KeyData.ContainsKey(XZColor))
+						{
+							GameObject Object;
+							if (layer.ParentLayout.KeyData.TryGetValue(XZColor, out Object))
+							{
+								Array2D[x, z] = Object;
+							}
+							else
+							{
+								Array2D[x, z] = null;
+								Debug.Log($"{x}, {z} is null");
+							}
+						}
+						else
+						{
+							Array2D[x, z] = null;
+						}
+					}
+				}
+				
+				room.ObjectsInRoom.Add(new SerializableMultiDimensionalArray<GameObject>(Array2D)); //ADD THIS SOME MULTIDIMENSIONAL ARRAY
+			}
+			
+			Debug.Log(room.ObjectsInRoom.Count);
+
+			string Location = EditorUtility.SaveFilePanel(
+				"Export image as .asset",
+				"Assets/",
+				img.name + ".asset",
+				"asset");
+			string path = FileUtil.GetProjectRelativePath(Location);
+			AssetDatabase.CreateAsset(room,path);
+			AssetDatabase.SaveAssets();
+			return Directory.Exists(Location);
 		}
 	}
 }
