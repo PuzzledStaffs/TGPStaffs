@@ -579,8 +579,4 @@ public class PlayerController : MonoBehaviour, IHealth
         Debug.Log("Knockback");
         m_rigidbody.AddForce(enemy.transform.forward * m_pushBackForce);
     }
-
-   
-
-
 }
