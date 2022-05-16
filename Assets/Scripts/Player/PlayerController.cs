@@ -188,7 +188,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 }
             }
         }
-        //If there are none display nothing on screem
+        //If there are none display nothing on screen
         if (interactInRange.Count == 0)
         {
             m_altInteractToolTip.enabled = false;
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour, IHealth
             return;
         }
 
-        //Find the one with the hiest prority
+        //Find the one with the highest priority
         IAltInteractable topPriority = null;
         foreach (var interactable in interactInRange)
         {
@@ -209,7 +209,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 topPriority = interactable;
             }
         }
-        //If a new one with higer priorty found use that
+        //If a new one with hinger priority found use that
         if (m_currentInteract != topPriority)
         {
             m_currentInteract = topPriority;
