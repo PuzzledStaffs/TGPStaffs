@@ -302,7 +302,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 203435674}
-  m_LocalRotation: {x: -0.008519134, y: -0.0000017509371, z: -0.000000014912803, w: 0.9999637}
+  m_LocalRotation: {x: -0.008519134, y: -0.0000017509684, z: -0.000000014912553, w: 0.9999637}
   m_LocalPosition: {x: 0, y: 3.5, z: -12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -830,9 +830,29 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4439799624039226185, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439799624039226185, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439799624039226185, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439799624039226185, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439799624039226185, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6026570980422571608, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6026570980422571608, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_LocalPosition.x
@@ -873,6 +893,26 @@ PrefabInstance:
     - target: {fileID: 6026570980422571608, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 35.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -27.152039
       objectReference: {fileID: 0}
     - target: {fileID: 8655418251543230784, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_Name
@@ -1206,7 +1246,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1083622359}
-  m_LocalRotation: {x: -0.026658528, y: -0.000001729822, z: -0.000000046130893, w: 0.99964464}
+  m_LocalRotation: {x: -0.026658526, y: -0.0000017341094, z: -0.00000004624523, w: 0.99964464}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2121,7 +2161,7 @@ Transform:
   - {fileID: 1083622361}
   - {fileID: 1209006060}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1948483001
 GameObject:
@@ -2683,7 +2723,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2141603885}
-  m_LocalRotation: {x: 0.009671108, y: -0.0000017506727, z: 0.000000016931734, w: 0.99995327}
+  m_LocalRotation: {x: 0.009671106, y: -0.0000017506977, z: 0.000000016931974, w: 0.99995327}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
