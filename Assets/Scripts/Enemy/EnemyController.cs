@@ -17,19 +17,22 @@ public class EnemyController : State, IHealth
     public float m_deathForce;
     public GameObject m_destroyParticle;
     public Animator m_animator;
-
+    bool m_canAttack = true;
     public Vector3 m_offset;
     public float m_dodgeChance = 0;
     private bool m_takingDamage = false;
    // public int m_currentState = 0;
     public StateType m_stateType;
 
+    public float m_attack_cooldown;
     public LayerMask m_whatIsPlayer, m_whatIsGround;
 
     public bool m_died = false;
     [Header("---------------States------------------------------------------------------------")]
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
+
+    public GameObject m_attackParticle;
 
     private void Start()
     {
@@ -78,6 +81,7 @@ public class EnemyController : State, IHealth
         //if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != 4)
         if (m_pathToPlayer.corners.Length > 1 && !m_died && m_stateType != StateType.IDLE)
         {
+            transform.LookAt(m_player);
             Debug.Log("Chase State");
            // m_currentState = 2;
             m_stateType = StateType.CHASE;
@@ -100,16 +104,30 @@ public class EnemyController : State, IHealth
 
     void AttackPlayer()
     {
-        if (!m_died)
+        if (!m_died && m_canAttack)
         {
+            m_canAttack = false;
             m_rb.velocity = new Vector3(0, 0, 0);
-           // m_currentState = 3;
             m_stateType = StateType.ATTACK;
             transform.LookAt(m_player);
-            //not walking
+            StartCoroutine(AttackCooldwon());
         }
 
     }
+
+    IEnumerator AttackCooldwon()
+    {
+        
+      //  m_attackParticle.SetActive(true);
+        m_animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(m_attack_cooldown);
+        m_canAttack = true;
+       // m_attackParticle.SetActive(false);
+    }
+
+
+
+
     void death()
     {
         m_died = true;
