@@ -9,6 +9,7 @@ public class State : MonoBehaviour
     {
         IDLE,
         ROAM,
+        CHASE,
         ATTACK,
         R_ATTACK,
     };
