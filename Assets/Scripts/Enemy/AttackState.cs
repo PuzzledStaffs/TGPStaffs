@@ -113,7 +113,6 @@ public class AttackState : State
                 //Take Damage
                 IHealth health = m_player.GetComponent<IHealth>();
                 health.TakeDamage(damageStruct);
-                m_player.GetComponent<PlayerController>().ApplyKnockack(transform.position);
 
 
             }

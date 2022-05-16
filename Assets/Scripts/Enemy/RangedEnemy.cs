@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class RangedEnemy : State, IHealth
 {
@@ -17,12 +18,16 @@ public class RangedEnemy : State, IHealth
     public float m_deathForce;
     public GameObject m_destroyParticle;
     public Animator m_animator;
+    public GameObject m_projectile;
+    public int m_damage;
+    public GameObject m_model;
 
     public Vector3 m_offset;
     public float m_dodgeChance = 0;
     private bool m_takingDamage = false;
-   // public int m_currentState = 0;
-    public StateType m_stateType;
+
+    [FormerlySerializedAs("m_stateType")]
+    public StateType m_currentState;
 
     public LayerMask m_whatIsPlayer, m_whatIsGround;
 
@@ -34,7 +39,7 @@ public class RangedEnemy : State, IHealth
     private void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
-        m_stateType = StateType.CHASE;
+        m_currentState = StateType.ATTACK;
         m_pathToPlayer = new NavMeshPath();
         Debug.Log("calculate 1");
         InvokeRepeating("CalculatePath", 0.5f, 0.5f);
@@ -56,15 +61,16 @@ public class RangedEnemy : State, IHealth
 
         if (!m_takingDamage)
         {
-            if (m_playerInSightRange && !m_playerInAttackRange) ChasePlayer();
-            if (m_playerInSightRange && m_playerInAttackRange) AttackPlayer();
+           // if (m_playerInSightRange && !m_playerInAttackRange) ChasePlayer();
+            if (m_playerInSightRange && m_playerInAttackRange)
+                AttackPlayer();
         }
 
     }
     void CalculatePath()
     {
         Debug.Log("calculate 2");
-        if(m_stateType == StateType.CHASE)//if (m_currentState == 2)
+        if(m_currentState == StateType.CHASE)//if (m_currentState == 2)
         {
             Debug.Log("calculate 3");
             m_agent.Warp(transform.position);
@@ -73,40 +79,51 @@ public class RangedEnemy : State, IHealth
         }
     }
 
-    void ChasePlayer()
-    {
-        //if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != 4)
-        if (m_pathToPlayer.corners.Length > 1 && !m_died && m_stateType != StateType.IDLE)
-        {
-            Debug.Log("Chase State");
-           // m_currentState = 2;
-            m_stateType = StateType.CHASE;
-          //  if (!m_takingDamage || m_currentState != 3) // walking
-         //   {
+    //void ChasePlayer()
+    //{
+    //    //if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != 4)
+    //    if (m_pathToPlayer.corners.Length > 1 && !m_died && m_stateType != StateType.IDLE)
+    //    {
+    //        Debug.Log("Chase State");
+    //       // m_currentState = 2;
+    //        m_stateType = StateType.CHASE;
+    //      //  if (!m_takingDamage || m_currentState != 3) // walking
+    //     //   {
                 
-        //    }
-            //Apply Force in the direction fo the next point
-            Vector3 dir = (m_pathToPlayer.corners[1] - transform.position).normalized;
-            var rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z));
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);           
-            m_rb.velocity = (Vector3.ClampMagnitude(m_rb.velocity, 3f));
-            m_rb.AddForce(dir * m_speed);
-            if (Vector3.Distance(transform.position, new Vector3(m_pathToPlayer.corners[1].x, transform.position.y, m_pathToPlayer.corners[1].z)) < 6)
-            {
-                CalculatePath();
-            }
-        }
-    }
+    //    //    }
+    //        //Apply Force in the direction fo the next point
+    //        Vector3 dir = (m_pathToPlayer.corners[1] - transform.position).normalized;
+    //        var rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z));
+    //        transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);           
+    //        m_rb.velocity = (Vector3.ClampMagnitude(m_rb.velocity, 3f));
+    //        m_rb.AddForce(dir * m_speed);
+    //        if (Vector3.Distance(transform.position, new Vector3(m_pathToPlayer.corners[1].x, transform.position.y, m_pathToPlayer.corners[1].z)) < 6)
+    //        {
+    //            CalculatePath();
+    //        }
+    //    }
+    //}
 
     void AttackPlayer()
     {
         if (!m_died)
         {
             m_rb.velocity = new Vector3(0, 0, 0);
-           // m_currentState = 3;
-            m_stateType = StateType.ATTACK;
+            m_currentState = StateType.ATTACK;
             transform.LookAt(m_player);
-            //not walking
+
+            //rotate to player
+            Vector3 direction = (m_player.transform.position - transform.position).normalized;
+            Quaternion lookTowards = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookTowards, Time.deltaTime * 5.0f);
+
+            GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 1.0f, 0), transform.rotation);
+
+                attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
+                attack.GetComponent<Projectile>().m_damageAmount = m_damage;
+                attack.GetComponent<Projectile>().m_attack = m_model;
+            
+
         }
 
     }
@@ -129,20 +146,33 @@ public class RangedEnemy : State, IHealth
 
     IEnumerator StopMoving()
     {
-      //  m_currentState = 4;
-        m_stateType = StateType.IDLE;
+     
+        m_currentState = StateType.IDLE;
         m_rb.velocity = new Vector3(0, 0, 0);
-        //yield return new WaitForSeconds(1.8f);
         yield return new WaitForSeconds(1f);
-     //   m_currentState = 2;
-        m_stateType = StateType.CHASE;
+   
+        m_currentState = StateType.ATTACK;
         m_takingDamage = false;
     }
 
+
+    public void ChangeState(StateType state)
+    {
+        if (state == StateType.IDLE)
+        {
+            StopMoving();
+        }
+        else if (state == StateType.ATTACK)
+        {
+            AttackPlayer();
+        }
+    }
+
+
+
     public void Dodge()
     {
-        if(m_stateType != StateType.IDLE)
-        //if (m_currentState != 4) //if not equal to take damage state
+        if(m_currentState != StateType.IDLE)
         {
             m_dodgeChance += 1 * Time.deltaTime;
             float randomNum = Random.Range(0, 1000 - (m_dodgeChance * 200));
@@ -179,8 +209,8 @@ public class RangedEnemy : State, IHealth
         yield return new WaitForSeconds(time);
         m_health -= damage.damageAmount;
         m_animator.SetTrigger("EnemyHit");
-      //  m_currentState = 4; //sets the state to take damage
-        m_stateType = StateType.IDLE;
+
+        m_currentState = StateType.IDLE;
         m_takingDamage = true;
         //animator.SetBool("Walking", false);
         m_rb.AddForce(-transform.forward * m_pushBackForce);

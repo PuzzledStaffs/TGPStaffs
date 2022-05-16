@@ -11,7 +11,6 @@ public class State : MonoBehaviour
         ROAM,
         CHASE,
         ATTACK,
-        R_ATTACK,
     };
 
     [FormerlySerializedAs("type")]

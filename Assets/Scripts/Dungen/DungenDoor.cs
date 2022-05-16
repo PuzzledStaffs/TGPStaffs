@@ -16,13 +16,14 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
     protected DungenManager m_dungenManager;
 
     [Header("Door Closed Controls")]
-    protected Renderer m_doorRenderer;
+   
    [FormerlySerializedAs("m_DoorColider")] protected BoxCollider m_doorCollider;
 
     [Header("Door Cosmetics")]
-    [SerializeField][FormerlySerializedAs("m_DoorClosed")] Material m_doorClosed;
-    [SerializeField][FormerlySerializedAs("m_DoorOpen")] protected Material m_doorOpen;
+    
     [SerializeField] List<GameObject> m_locks;
+    [SerializeField] protected List<GameObject> m_bars;
+
 
     [Header("Door Controles")]
     [SerializeField] public bool m_locked;
@@ -37,8 +38,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
 
     private void Awake()
     {
-        m_dungenManager = GameObject.FindObjectOfType<DungenManager>();
-        m_doorRenderer = transform.GetComponent<Renderer>();
+        m_dungenManager = GameObject.FindObjectOfType<DungenManager>();       
         m_doorCollider = transform.GetComponent<BoxCollider>();
 
         CheckDoorSet();
@@ -128,7 +128,10 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
         if (m_toRoomCameraMove != null && m_toRoomExitPoint != null && !m_locked)
         {
             m_doorActive = true;
-            m_doorRenderer.material = m_doorOpen;
+            foreach(GameObject bar in m_bars)
+            {
+                bar.active = false;
+            }
             m_doorCollider.isTrigger = true;
           
         }
@@ -146,7 +149,10 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
     public void CloseDoor()
     {
         m_doorActive = false;
-        m_doorRenderer.material = m_doorClosed;
+        foreach (GameObject bar in m_bars)
+        {
+            bar.active = true;
+        }
         m_doorCollider.isTrigger = false;
     }
 

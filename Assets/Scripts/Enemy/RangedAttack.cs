@@ -26,7 +26,7 @@ public class RangedAttack : AttackState
 
     void Attack()
     {
-   
+
         //rotate to player
         Vector3 direction = (m_player.transform.position - transform.position).normalized;
         Quaternion lookTowards = Quaternion.LookRotation(direction);
@@ -42,7 +42,6 @@ public class RangedAttack : AttackState
 
             attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
             attack.GetComponent<Projectile>().m_damageAmount = m_damage;
-            //attack.GetComponent<Projectile>().m_velocity = m_velocity;
             attack.GetComponent<Projectile>().m_attack = m_model;
         }
     }
