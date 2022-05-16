@@ -143,7 +143,7 @@ public class EnemyController : State, IHealth
         switch(state)
         {
             case StateType.IDLE:
-                StopMoving();
+                Freeze();
                 break;
             case StateType.CHASE:
                 ChasePlayer();
@@ -192,8 +192,18 @@ public class EnemyController : State, IHealth
         m_currentState = StateType.IDLE;
         m_rb.velocity = new Vector3(0, 0, 0);
         yield return null;
-       // yield return new WaitForSeconds(1f);
+       yield return new WaitForSeconds(1f);
   
+        m_currentState = StateType.CHASE;
+        m_takingDamage = false;
+    }
+
+    void Freeze()
+    {
+        m_agent.isStopped = true;
+        m_currentState = StateType.IDLE;
+        m_rb.velocity = new Vector3(0, 0, 0);
+       
         m_currentState = StateType.IDLE;
         m_takingDamage = false;
     }
