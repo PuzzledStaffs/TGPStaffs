@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField, ReadOnly]
     private bool m_movementFrozen = false;
     public float m_speed = 5.0f;
+    public float m_pushBackForce;
 
     [Header("Weapon Wheel")]
     [SerializeField, ReadOnly]
@@ -107,9 +108,6 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
- 
-
-
 
         if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
         {
@@ -190,7 +188,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 }
             }
         }
-        //If there are none display nothing on screem
+        //If there are none display nothing on screen
         if (interactInRange.Count == 0)
         {
             m_altInteractToolTip.enabled = false;
@@ -198,7 +196,7 @@ public class PlayerController : MonoBehaviour, IHealth
             return;
         }
 
-        //Find the one with the hiest prority
+        //Find the one with the highest priority
         IAltInteractable topPriority = null;
         foreach (var interactable in interactInRange)
         {
@@ -211,7 +209,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 topPriority = interactable;
             }
         }
-        //If a new one with higer priorty found use that
+        //If a new one with hinger priority found use that
         if (m_currentInteract != topPriority)
         {
             m_currentInteract = topPriority;
@@ -523,27 +521,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     }
 
-    public void ApplyKnockack(Vector3 direction)
-    {
-        //Kockback and other feedback stuff
-        //m_rigidbody.AddForce(new Vector3(0,5.0f,-100.0f), ForceMode.Impulse);
 
-        Vector3 dir = direction - transform.position;
-        dir = dir.normalized;
-        m_rigidbody.AddForce(dir * 100.0f, ForceMode.Impulse);
-
-        animator.SetTrigger("Hit");
-        StartCoroutine(PlayerHitFeedback(1.0f));
-    }
-
-
-
-    IEnumerator PlayerHitFeedback(float time)
-    {
-        playerKnockbackUI.SetActive(true);
-        yield return new WaitForSeconds(time);
-        playerKnockbackUI.SetActive(false);
-    }
 
 
 
@@ -594,5 +572,11 @@ public class PlayerController : MonoBehaviour, IHealth
     Collider[] GetAnyInteract()
     {
         return Physics.OverlapBox(transform.position + m_model.transform.forward, new Vector3(0.5f, 0.5f, 0.5f) / 2, m_model.transform.rotation);
+    }
+
+    public void PlayerKnockBack(GameObject enemy)
+    {
+        Debug.Log("Knockback");
+        m_rigidbody.AddForce(enemy.transform.forward * m_pushBackForce);
     }
 }
