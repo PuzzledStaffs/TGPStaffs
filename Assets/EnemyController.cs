@@ -57,11 +57,6 @@ public class EnemyController : MonoBehaviour, IHealth
             if (m_playerInSightRange && m_playerInAttackRange) AttackPlayer();
         }
 
-        //Take Damage - check for collision
-
-       
-
-
     }
     void CalculatePath()
     {
