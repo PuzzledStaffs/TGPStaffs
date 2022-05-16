@@ -17,13 +17,15 @@ public class EnemyController : State, IHealth
     public float m_deathForce;
     public GameObject m_destroyParticle;
     public Animator m_animator;
-
+    bool m_canAttack = true;
     public Vector3 m_offset;
     public float m_dodgeChance = 0;
     private bool m_takingDamage = false;
    // public int m_currentState = 0;
     public StateType m_stateType;
+    public int m_damage;
 
+    public float m_attack_cooldown;
     public LayerMask m_whatIsPlayer, m_whatIsGround;
 
     public bool m_died = false;
@@ -31,19 +33,19 @@ public class EnemyController : State, IHealth
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
 
+    public GameObject m_attackParticle;
+
     private void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
         m_stateType = StateType.CHASE;
         m_pathToPlayer = new NavMeshPath();
-        Debug.Log("calculate 1");
         InvokeRepeating("CalculatePath", 0.5f, 0.5f);
     }
 
     private void Awake()
     {       
         m_agent = GetComponent<NavMeshAgent>();
-        // animator = GetComponent<Animator>();
         m_agent.updatePosition = false;
         m_agent.updateRotation = false;
     }
@@ -78,14 +80,11 @@ public class EnemyController : State, IHealth
         //if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != 4)
         if (m_pathToPlayer.corners.Length > 1 && !m_died && m_stateType != StateType.IDLE)
         {
+            transform.LookAt(m_player);
             Debug.Log("Chase State");
            // m_currentState = 2;
             m_stateType = StateType.CHASE;
-          //  if (!m_takingDamage || m_currentState != 3) // walking
-         //   {
-                
-        //    }
-            //Apply Force in the direction fo the next point
+
             Vector3 dir = (m_pathToPlayer.corners[1] - transform.position).normalized;
             var rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);           
@@ -100,16 +99,53 @@ public class EnemyController : State, IHealth
 
     void AttackPlayer()
     {
-        if (!m_died)
+        if (!m_died && m_canAttack)
         {
+            m_canAttack = false;
             m_rb.velocity = new Vector3(0, 0, 0);
-           // m_currentState = 3;
             m_stateType = StateType.ATTACK;
             transform.LookAt(m_player);
-            //not walking
+
+            Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(1.0f, 1.0f, 1.0f), transform.rotation);
+            foreach (var hitCollider in colliders)
+            {
+                //if its the player, then take damage
+                //Make sure player object tag is set to "Player"
+                if (hitCollider.CompareTag("Player"))
+                {
+                    Debug.Log("Attacking Player");
+
+                    IHealth.Damage damageStruct = new IHealth.Damage();
+                    damageStruct.damageAmount = m_damage;
+                    damageStruct.type = IHealth.DamageType.ENEMY;
+
+                    //Take Damage
+                    IHealth health = m_player.GetComponent<IHealth>();
+                    health.TakeDamage(damageStruct);
+                    m_player.GetComponent<PlayerController>().PlayerKnockBack(gameObject);
+
+
+                }
+            }
+
+            StartCoroutine(AttackCooldwon());
         }
 
     }
+
+    IEnumerator AttackCooldwon()
+    {
+       
+        //  m_attackParticle.SetActive(true);
+        m_animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(m_attack_cooldown);
+        m_canAttack = true;
+       // m_attackParticle.SetActive(false);
+    }
+
+
+
+
     void death()
     {
         m_died = true;
@@ -182,10 +218,9 @@ public class EnemyController : State, IHealth
       //  m_currentState = 4; //sets the state to take damage
         m_stateType = StateType.IDLE;
         m_takingDamage = true;
-        //animator.SetBool("Walking", false);
         m_rb.AddForce(-transform.forward * m_pushBackForce);
         StartCoroutine(StopMoving());
-        // animator.SetTrigger("Hit");
+
         if (IsDead())
         {
             death();
