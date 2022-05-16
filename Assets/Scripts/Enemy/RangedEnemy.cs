@@ -18,6 +18,9 @@ public class RangedEnemy : State, IHealth
     public float m_deathForce;
     public GameObject m_destroyParticle;
     public Animator m_animator;
+    public GameObject m_projectile;
+    public int m_damage;
+    public GameObject m_model;
 
     public Vector3 m_offset;
     public float m_dodgeChance = 0;
@@ -106,10 +109,21 @@ public class RangedEnemy : State, IHealth
         if (!m_died)
         {
             m_rb.velocity = new Vector3(0, 0, 0);
-           // m_currentState = 3;
             m_currentState = StateType.ATTACK;
             transform.LookAt(m_player);
-            //not walking
+
+            //rotate to player
+            Vector3 direction = (m_player.transform.position - transform.position).normalized;
+            Quaternion lookTowards = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookTowards, Time.deltaTime * 5.0f);
+
+            GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 1.0f, 0), transform.rotation);
+
+                attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
+                attack.GetComponent<Projectile>().m_damageAmount = m_damage;
+                attack.GetComponent<Projectile>().m_attack = m_model;
+            
+
         }
 
     }
@@ -135,9 +149,8 @@ public class RangedEnemy : State, IHealth
      
         m_currentState = StateType.IDLE;
         m_rb.velocity = new Vector3(0, 0, 0);
-        //yield return new WaitForSeconds(1.8f);
         yield return new WaitForSeconds(1f);
-     //   m_currentState = 2;
+   
         m_currentState = StateType.ATTACK;
         m_takingDamage = false;
     }
@@ -160,7 +173,6 @@ public class RangedEnemy : State, IHealth
     public void Dodge()
     {
         if(m_currentState != StateType.IDLE)
-        //if (m_currentState != 4) //if not equal to take damage state
         {
             m_dodgeChance += 1 * Time.deltaTime;
             float randomNum = Random.Range(0, 1000 - (m_dodgeChance * 200));
@@ -197,7 +209,7 @@ public class RangedEnemy : State, IHealth
         yield return new WaitForSeconds(time);
         m_health -= damage.damageAmount;
         m_animator.SetTrigger("EnemyHit");
-      //  m_currentState = 4; //sets the state to take damage
+
         m_currentState = StateType.IDLE;
         m_takingDamage = true;
         //animator.SetBool("Walking", false);
