@@ -36,7 +36,7 @@ public class BossEnemy : Enemy
             if (m_phaseSwitch)
             {
                 Debug.Log("ranged");
-                m_manager.ChangeState(State.StateType.R_ATTACK);
+                //m_manager.ChangeState(State.StateType.R_ATTACK);
             }
             else 
             {
