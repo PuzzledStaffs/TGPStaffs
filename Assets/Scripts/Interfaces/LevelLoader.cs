@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class LevelLoader : MonoBehaviour
 {
-    public Animator transition;
-
-    public float transitionTime = 1f;
+    [FormerlySerializedAs("transition")]
+    public Animator m_transition;
+    [FormerlySerializedAs("transitionTime")]
+    public float m_transitionTime = 1f;
 
 
     // Update is called once per frame
@@ -30,9 +32,9 @@ public class LevelLoader : MonoBehaviour
 
     IEnumerator LoadLevelCoroutine(int levelIndex)
     {
-        transition.SetTrigger("Start");
+        m_transition.SetTrigger("Start");
 
-        yield return new WaitForSeconds(transitionTime);
+        yield return new WaitForSeconds(m_transitionTime);
 
         SceneManager.LoadScene(levelIndex);
     }

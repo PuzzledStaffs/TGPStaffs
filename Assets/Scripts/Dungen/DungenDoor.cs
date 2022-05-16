@@ -1,12 +1,13 @@
+using UnityEngine.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DungenDoor : MonoBehaviour ,IInteractable
+public class DungenDoor : MonoBehaviour ,IAltInteractable
 {
     [Header("Door Oriatation and locating")]
-    [SerializeField] public DoorLoaction m_doorLoaction;
+    [SerializeField][FormerlySerializedAs("m_doorLoaction")] public DoorLoaction m_doorLocation;
     [Tooltip("This is the ExitPoint item on the door prefab, this is where the player go")] protected GameObject m_toRoomExitPoint;
     [Tooltip("This is where the camara gose to")] protected GameObject m_toRoomCameraMove;
     [SerializeField] public GameObject m_ownExitPoint;
@@ -16,17 +17,17 @@ public class DungenDoor : MonoBehaviour ,IInteractable
 
     [Header("Door Closed Controls")]
     protected Renderer m_doorRenderer;
-    protected BoxCollider m_DoorColider;
+   [FormerlySerializedAs("m_DoorColider")] protected BoxCollider m_doorCollider;
 
     [Header("Door Cosmetics")]
-    [SerializeField] Material m_DoorClosed;
-    [SerializeField] protected Material m_DoorOpen;
+    [SerializeField][FormerlySerializedAs("m_DoorClosed")] Material m_doorClosed;
+    [SerializeField][FormerlySerializedAs("m_DoorOpen")] protected Material m_doorOpen;
     [SerializeField] List<GameObject> m_locks;
 
     [Header("Door Controles")]
     [SerializeField] public bool m_locked;
     public bool m_doorActive { get; protected set; }
-    [SerializeField] protected bool m_ClosedOnStart = false;
+    [SerializeField][FormerlySerializedAs("m_ClosedOnStart")] protected bool m_closedOnStart = false;
 
     public event Action OnEnterRoom;
     public event Action OnExitRoom;
@@ -38,7 +39,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
     {
         m_dungenManager = GameObject.FindObjectOfType<DungenManager>();
         m_doorRenderer = transform.GetComponent<Renderer>();
-        m_DoorColider = transform.GetComponent<BoxCollider>();
+        m_doorCollider = transform.GetComponent<BoxCollider>();
 
         CheckDoorSet();
     }
@@ -61,7 +62,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
             HideLocks();
         }
 
-        if (m_ClosedOnStart || m_locked)
+        if (m_closedOnStart || m_locked)
         {
             CloseDoor();
 
@@ -101,7 +102,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         other.GetComponent<PlayerController>().UnFreezeMovement();
     }
 
-    public virtual void Interact()
+    public virtual void AltInteract()
     {
         if (m_locked && m_toRoomCameraMove != null && m_toRoomExitPoint != null)
         {
@@ -113,6 +114,12 @@ public class DungenDoor : MonoBehaviour ,IInteractable
             }
         }
     }
+    
+    public InteractInfo CanInteract()
+    {
+        return new InteractInfo(m_locked, "Unlock Door", 3);
+    }
+    
 
     #region Door Controls
 
@@ -121,8 +128,8 @@ public class DungenDoor : MonoBehaviour ,IInteractable
         if (m_toRoomCameraMove != null && m_toRoomExitPoint != null && !m_locked)
         {
             m_doorActive = true;
-            m_doorRenderer.material = m_DoorOpen;
-            m_DoorColider.isTrigger = true;
+            m_doorRenderer.material = m_doorOpen;
+            m_doorCollider.isTrigger = true;
           
         }
         else if (m_locked)
@@ -139,8 +146,8 @@ public class DungenDoor : MonoBehaviour ,IInteractable
     public void CloseDoor()
     {
         m_doorActive = false;
-        m_doorRenderer.material = m_DoorClosed;
-        m_DoorColider.isTrigger = false;
+        m_doorRenderer.material = m_doorClosed;
+        m_doorCollider.isTrigger = false;
     }
 
     #endregion
@@ -161,6 +168,7 @@ public class DungenDoor : MonoBehaviour ,IInteractable
             lockModel.SetActive(false);
         }
     }
+
     #endregion
 }
 

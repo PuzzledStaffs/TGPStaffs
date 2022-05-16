@@ -4,30 +4,35 @@ using UnityEngine;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class Sign : MonoBehaviour, IAltInteractable
 {
     [SerializeField] [TextArea] private string m_signText;
+    protected SignCanvas m_signCanvasScript;
     private TextMeshProUGUI m_signTextText;
     private Canvas m_canvas;
-    public DungenRoom m_currentDungenRoom;
-    [SerializeField] TextMeshProUGUI m_signHelpUI;
-    private bool m_reading;
+    [FormerlySerializedAs("m_currentDungenRoom")]
+    public DungenRoom m_currentDungeonRoom;
+   
+    protected bool m_reading;
     private PlayerController m_playerController;
     private PlayerInput m_playerInput;
 
-    private void Start()
+    protected virtual void Start()
     {
         m_playerController = FindObjectOfType<PlayerController>();
         m_playerInput = FindObjectOfType<PlayerInput>();
 
-        m_canvas = GameObject.FindGameObjectWithTag("SignCanvas").GetComponent<Canvas>();
-        m_signTextText = GameObject.FindGameObjectWithTag("SignText").GetComponent<TextMeshProUGUI>();
+        m_signCanvasScript = GameObject.FindGameObjectWithTag("SignCanvas").GetComponent<SignCanvas>();
+
+        m_canvas = m_signCanvasScript.m_canvas;
+        m_signTextText = m_signCanvasScript.m_textBody;
 
 
         m_reading = false;
         //m_canvas.enabled = false;
-        m_signHelpUI.enabled = false;
+       
     }
 
     public virtual void AltInteract()
@@ -38,9 +43,9 @@ public class Sign : MonoBehaviour, IAltInteractable
             m_canvas.enabled = true;
             m_reading = true;
             m_playerController.enabled = false;
-            if (m_currentDungenRoom != null)
+            if (m_currentDungeonRoom != null)
             {
-                m_currentDungenRoom.FrezzeExatingRoom();
+                m_currentDungeonRoom.FreezeExitingRoom();
             }
 
         }
@@ -49,21 +54,15 @@ public class Sign : MonoBehaviour, IAltInteractable
             m_reading = false;
             m_canvas.enabled = false;
             m_playerController.enabled = true;
-            if (m_currentDungenRoom != null)
+            if (m_currentDungeonRoom != null)
             {
-                m_currentDungenRoom.UnFrezeRoom();
+                m_currentDungeonRoom.UnFrezeRoom();
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    public virtual InteractInfo CanInteract()
     {
-        m_signHelpUI.enabled = true;
-    }
-
-    void OnTriggerExit(Collider other)
-    {
-        m_signHelpUI.enabled = false;
-
+        return new InteractInfo(true,"Read",1);
     }
 }

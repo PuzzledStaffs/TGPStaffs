@@ -2,39 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class IdleState : State
 {
-    public float timer;
-    float maxTime;
-    public StateManager stateManager;
-    public bool isIdle = true;
-    NavMeshAgent agent;
+    [FormerlySerializedAs("timer")]
+    public float m_timer;
+    [FormerlySerializedAs("maxTime")]
+    float m_maxTime;
+    [FormerlySerializedAs("stateManager")]
+    public StateManager m_stateManager;
+    [FormerlySerializedAs("isIdle")]
+    public bool m_isIdle = true;
+    [FormerlySerializedAs("agent")]
+    NavMeshAgent m_agent;
 
     // Start is called before the first frame update
     void Start()
     {
-        maxTime = timer;
-        agent = GetComponent<NavMeshAgent>();
+        m_maxTime = m_timer;
+        m_agent = GetComponent<NavMeshAgent>();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        agent.isStopped = true;
-        timer -= Time.deltaTime;
+        m_agent.isStopped = true;
+        m_timer -= Time.deltaTime;
 
-        if (timer <= 0)
+        if (m_timer <= 0)
         {
-            if (!isIdle)
+            if (!m_isIdle)
             {
-                agent.isStopped = false;
-                timer = maxTime;
+                m_agent.isStopped = false;
+                m_timer = m_maxTime;
 
-                stateManager.ChangeState(StateType.ROAM);
+                m_stateManager.ChangeState(StateType.ROAM);
             }
-            timer = maxTime;
+            m_timer = m_maxTime;
         }
     }
 

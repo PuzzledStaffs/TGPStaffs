@@ -2,35 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class BossEnemy : Enemy
 {
-    bool phaseSwitch = false;
-    int maxHealth;
+    [FormerlySerializedAs("phaseSwitch")]
+    bool m_phaseSwitch = false;
+    [FormerlySerializedAs("maxHealth")]
+    int m_maxHealth;
 
     // Start is called before the first frame update
     void Start()
     {
         m_health = 100;
-        maxHealth = m_health;
+        m_maxHealth = m_health;
         m_fieldOfView = GetComponent<FOV>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (m_health <= maxHealth/2)
+        if (m_health <= m_maxHealth/2)
         {
-            phaseSwitch = true;
+            m_phaseSwitch = true;
         }
 
         //Debug.Log(GetComponent<NavMeshAgent>().velocity.magnitude);
         //animator.SetFloat("Speed", GetComponent<NavMeshAgent>().velocity.magnitude);
 
 
-        if (m_fieldOfView.inFOV == true)
+        if (m_fieldOfView.m_inFOV == true)
         {
-            if (phaseSwitch)
+            if (m_phaseSwitch)
             {
                 Debug.Log("ranged");
                 m_manager.ChangeState(State.StateType.R_ATTACK);
@@ -47,7 +50,7 @@ public class BossEnemy : Enemy
     {
         if (IsDead())
             return;
-        if (phaseSwitch && damage.type == IHealth.DamageType.BOW)
+        if (m_phaseSwitch && damage.type == IHealth.DamageType.BOW)
         {
 
         }

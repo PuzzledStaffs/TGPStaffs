@@ -4,23 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class DungenRoom : MonoBehaviour
 {
-    [SerializeField] private DungonCamaraControler m_Camera;
-    [SerializeField] public RoomType m_RoomType;
+    [SerializeField] [FormerlySerializedAs("m_Camera")] private DungonCamaraControler m_camera;
+    [SerializeField][FormerlySerializedAs("m_RoomType")] public RoomType m_roomType;
     [SerializeField] private GameObject m_origin;
-    [SerializeField] private bool m_PlayerStartingRoom = false;
+    [SerializeField][FormerlySerializedAs("m_PlayerStartingRoom")] private bool m_playerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
 
-    List<Enemy> m_Enemies;
-    List<IdleState> m_EnemiesIdle;
-    [SerializeField] private GameObject m_EneamyPerent;
+    [FormerlySerializedAs("m_Enemies")]List<Enemy> m_enemies;   
+    [SerializeField][FormerlySerializedAs("m_EneamyPerent")] private GameObject m_enemyParent;
     Trap[] m_traps;
-    [SerializeField] private GameObject m_TrapPernet;
+    [SerializeField][FormerlySerializedAs("m_TrapPernet")] private GameObject m_trapParent;
 
-    public UnityEvent m_roomCleard;
+    [FormerlySerializedAs("m_roomCleard")]  public UnityEvent m_roomCleared;
     int m_enemyCount;
     PauseMenu m_pauseMenu;
     bool m_playerInRoom;
@@ -29,35 +29,32 @@ public class DungenRoom : MonoBehaviour
 
     private void Awake()
     {
-      
-
-        m_traps = m_TrapPernet.GetComponentsInChildren<Trap>();
-        m_Enemies = new List<Enemy>(m_EneamyPerent.GetComponentsInChildren<Enemy>());
-        m_EnemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
-        m_enemyCount = m_Enemies.Count;
+        m_traps = m_trapParent.GetComponentsInChildren<Trap>();
+        m_enemies = new List<Enemy>(m_enemyParent.GetComponentsInChildren<Enemy>());
+        //m_enemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
+        m_enemyCount = m_enemies.Count;
 
         SceneManager.sceneLoaded += onSceneLoad;
     }
 
     private void Start()
     {
-        if(m_Camera == null)
+        if(m_camera == null)
         {
-            m_Camera = Camera.main.GetComponent<DungonCamaraControler>();
+            m_camera = Camera.main.GetComponent<DungonCamaraControler>();
         }
-        foreach (IdleState enemy in m_EnemiesIdle)
-        {
-            enemy.isIdle = true;
-        }
-        foreach (Enemy enemy in m_Enemies)
+       
+        foreach (Enemy enemy in m_enemies)
         {
             enemy.m_deadEvent += EnameyDie;
+            enemy.m_manager.m_idle.enabled = true;
+            enemy.m_fieldOfView.enabled = false;
         }
         //Set door
         foreach (DungenDoor door in m_doorsIn)
         {
             
-            switch(door.m_doorLoaction)
+            switch(door.m_doorLocation)
             {
                 case DoorLoaction.NORTH:
                     m_doorsOut[1].UpdateExit(door.m_ownExitPoint, door.m_ownCamraNode);
@@ -76,26 +73,26 @@ public class DungenRoom : MonoBehaviour
         }
 
         m_pauseMenu = GameObject.FindObjectOfType<PauseMenu>();
-        m_pauseMenu.m_pause += FrezzeExatingRoom;
+        m_pauseMenu.m_pause += FreezeExitingRoom;
         m_pauseMenu.m_unPause += UnFrezeRoom;
 
-        if (m_PlayerStartingRoom)
+        if (m_playerStartingRoom)
         {
             RoomEntered();
-            m_Camera.transform.position = m_origin.transform.position;
+            m_camera.transform.position = m_origin.transform.position;
             
         }
         else
         {
-            FrezzeExatingRoom();
+            FreezeExitingRoom();
             RoomExited();
         }
         if (m_enemyCount <= 0)
         {
-            m_roomCleard?.Invoke();
+            m_roomCleared?.Invoke();
         }
 
-        if (m_PlayerStartingRoom)
+        if (m_playerStartingRoom)
         {
             m_playerInRoom = true;
             DungenManager manager = GameObject.FindWithTag("dungeonManager").GetComponent<DungenManager>();
@@ -136,7 +133,7 @@ public class DungenRoom : MonoBehaviour
         foreach (DungenDoor door in m_doorsOut)
         {
             door.OnExitRoom += RoomExited;
-            door.OnFrezzeExited += FrezzeExatingRoom;
+            door.OnFrezzeExited += FreezeExitingRoom;
         }
     }
 
@@ -151,7 +148,7 @@ public class DungenRoom : MonoBehaviour
         foreach (DungenDoor door in m_doorsOut)
         {
             door.OnExitRoom -= RoomExited;
-            door.OnFrezzeExited -= FrezzeExatingRoom;
+            door.OnFrezzeExited -= FreezeExitingRoom;
         }
     }
     
@@ -161,9 +158,9 @@ public class DungenRoom : MonoBehaviour
     private void RoomEntered()
     {
         //Called First when player enter room
-        m_Camera.m_CurrentRoomType = m_RoomType;
-        m_Camera.m_roomOragin = m_origin.transform.position;
-        m_Camera.m_Locked = true;
+        m_camera.m_currentRoomType = m_roomType;
+        m_camera.m_roomOrigin = m_origin.transform.position;
+        m_camera.m_locked = true;
         
         m_playerInRoom = true;
     }
@@ -173,10 +170,13 @@ public class DungenRoom : MonoBehaviour
         if (m_playerInRoom)
         {
             //Called after camra has finished moving and player unlocked
-            m_Camera.m_Locked = false;
-            foreach (IdleState enemy in m_EnemiesIdle)
+            m_camera.m_locked = false;
+            foreach (Enemy enemy in m_enemies)
             {
-                enemy.isIdle = false;
+                enemy.m_manager.m_idle.m_isIdle = false;
+                enemy.m_manager.m_idle.enabled = false;
+
+                enemy.m_fieldOfView.enabled = true;
             }
             foreach (Trap trap in m_traps)
             {
@@ -193,27 +193,30 @@ public class DungenRoom : MonoBehaviour
         
     }
 
-    public void FrezzeExatingRoom()
+    /// <summary>
+    /// Called To Frezze room
+    /// </summary>
+    public void FreezeExitingRoom()
     {
-       
-            //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
-            foreach (Enemy enemy in m_Enemies)
-            {
-                enemy.GetComponent<StateManager>().ChangeState(State.StateType.IDLE);
 
-            }
+        //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
+        foreach (Enemy enemy in m_enemies)
+        {
+            enemy.m_manager.m_attack.enabled = false;
+            enemy.m_manager.m_idle.m_isIdle = true;
+            enemy.m_manager.m_idle.enabled = true;
 
-            foreach (IdleState enemy in m_EnemiesIdle)
+            enemy.m_fieldOfView.enabled = false;
+        }
+
+
+        foreach (Trap trap in m_traps)
             {
-                enemy.isIdle = true;
-            }
-            foreach (Trap trap in m_traps)
-            {
-                if (trap != null)
+            if (trap != null)
                 {
-                    trap.ExitRoomDisabled();
+                trap.ExitRoomDisabled();
                 }
-            }
+        }
       
     }
     #endregion
@@ -221,11 +224,11 @@ public class DungenRoom : MonoBehaviour
     private void EnameyDie(GameObject enemy)
     {
         m_enemyCount--;
-        m_Enemies.Remove(enemy.GetComponent<Enemy>());
-        m_EnemiesIdle.Remove(enemy.GetComponent<IdleState>());
+        m_enemies.Remove(enemy.GetComponent<Enemy>());
+        //m_enemiesIdle.Remove(enemy.GetComponent<IdleState>());
         if(m_enemyCount <= 0)
         {
-            m_roomCleard?.Invoke();
+            m_roomCleared?.Invoke();
         }
     }
 
@@ -281,8 +284,8 @@ public class DungenRoom : MonoBehaviour
         Transform pit = transform.Find("Floor").Find("Pit");
         Transform boxTiles = transform.Find("Floor").Find("Box Tiles");
 
-        float xOffset = m_RoomType == RoomType.NORMAL ? -4.5f : -9.0f;
-        float yOffset = m_RoomType == RoomType.NORMAL ? -9.5f : -19.0f;
+        float xOffset = m_roomType == RoomType.NORMAL ? -4.5f : -9.0f;
+        float yOffset = m_roomType == RoomType.NORMAL ? -9.5f : -19.0f;
 
         // Loop through all tiles and create them
         for (int y = 0; y < map.Length; y++)

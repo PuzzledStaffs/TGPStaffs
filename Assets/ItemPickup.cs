@@ -2,42 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public class ItemPickup : MonoBehaviour
 {
-    public Item ItemToGive;
-    //public UnityEvent m_pickedUp;
-    public GameObject CollectParticle;
-    public AudioClip CollectionSound;
-    public int ItemID;
+    [FormerlySerializedAs("ItemToGive")]
+    public Item m_itemToGive;
+    [FormerlySerializedAs("CollectParticle")]
+    public GameObject m_collectParticle;
+    [FormerlySerializedAs("CollectionSound")]
+    public AudioClip m_collectionSound;
+    [FormerlySerializedAs("ItemID")]
+    public int m_itemID;
 
     void Start()
     {
-        switch (ItemID)
+        switch (m_itemID)
         {
             case 1:
-                if (PersistentPrefs.m_currentSaveFile.item1Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item1Unlocked) { Destroy(gameObject); }
                 break;
             case 2:
-                if (PersistentPrefs.m_currentSaveFile.item2Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item2Unlocked) { Destroy(gameObject); }
                 break;
             case 3:
-                if (PersistentPrefs.m_currentSaveFile.item3Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item3Unlocked) { Destroy(gameObject); }
                 break;
             case 4:
-                if (PersistentPrefs.m_currentSaveFile.item4Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item4Unlocked) { Destroy(gameObject); }
                 break;
             case 5:
-                if (PersistentPrefs.m_currentSaveFile.item5Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item5Unlocked) { Destroy(gameObject); }
                 break;
             case 6:
-                if (PersistentPrefs.m_currentSaveFile.item6Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item6Unlocked) { Destroy(gameObject); }
                 break;
             case 7:
-                if (PersistentPrefs.m_currentSaveFile.item7Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item7Unlocked) { Destroy(gameObject); }
                 break;
             case 8:
-                if (PersistentPrefs.m_currentSaveFile.item8Unlocked) { Destroy(gameObject); }
+                if (PersistentPrefs.GetInstance().m_currentSaveFile.m_item8Unlocked) { Destroy(gameObject); }
                 break;
         }
     }
@@ -51,20 +55,20 @@ public class ItemPickup : MonoBehaviour
             WeaponWheelController WeaponWheel = other.GetComponent<PlayerController>().m_weaponWheelController;
 
             int i = 0;
-            foreach (WeaponButtonInfo button in WeaponWheel.Buttons)
+            foreach (WeaponButtonInfo button in WeaponWheel.m_buttons)
             {
                 i++;
-                if (button.WheelItem == ItemToGive)
+                if (button.WheelItem == m_itemToGive)
                 {
                     button.ItemBlocked = false;
-                    PersistentPrefs.m_currentSaveFile.UnlockItem(i);
+                    PersistentPrefs.GetInstance().m_currentSaveFile.UnlockItem(i);
                     break;
                 }
             }
-            other.GetComponent<AudioSource>().PlayOneShot(CollectionSound);
-            WeaponWheel.ItemUnlockedUI.ItemUnlocked();
+            other.GetComponent<AudioSource>().PlayOneShot(m_collectionSound);
+            WeaponWheel.m_itemUnlockedUI.ItemUnlocked();
             //m_pickedUp?.Invoke();
-            Instantiate(CollectParticle, transform.position, Quaternion.identity);
+            Instantiate(m_collectParticle, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
     }

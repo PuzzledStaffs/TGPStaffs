@@ -2,22 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 
 public class SoundManager : MonoBehaviour
 {
-    public static SoundManager instance;
-    public static AudioMixer mixer;
-
-    //[SerializeField] private AudioSource musicSource;
+    [FormerlySerializedAs("instance")]
+    public static SoundManager m_instance;
+    [FormerlySerializedAs("mixer")]
+    public static AudioMixer m_mixer;
 
     private void Awake()
     {
-        instance = this;
+        m_instance = this;
+        AudioListener.volume = PersistentPrefs.GetInstance().m_settings.m_volume;
     }
 
-    public void ChangeMasterVolume(float value)
+    public float GetMasterVolume()
     {
-        AudioListener.volume = value;
+        return AudioListener.volume;
+    }
+
+    public void ChangeMasterVolume(float volume)
+    {
+        AudioListener.volume = volume;
+        PersistentPrefs.GetInstance().m_settings.m_volume = volume;
+        PersistentPrefs.GetInstance().SaveSettings();
     }
  
 }
