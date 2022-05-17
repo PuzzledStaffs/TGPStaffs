@@ -112,7 +112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6348191554822467161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.15408, y: 1.02, z: -12.158997}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8458599599068647428}
@@ -158,7 +158,10 @@ MonoBehaviour:
   m_animator: {fileID: 1315692046332246767}
   m_offset: {x: 0, y: 1.6, z: 0}
   m_dodgeChance: 0
+  m_deathDrop: {fileID: 0}
   m_currentState: 2
+  m_damage: 0
+  m_attack_cooldown: 0
   m_whatIsPlayer:
     serializedVersion: 2
     m_Bits: 128
@@ -170,6 +173,7 @@ MonoBehaviour:
   m_attackRange: 4
   m_playerInSightRange: 0
   m_playerInAttackRange: 0
+  m_attackParticle: {fileID: 0}
 --- !u!195 &1361184129102678503
 NavMeshAgent:
   m_ObjectHideFlags: 0

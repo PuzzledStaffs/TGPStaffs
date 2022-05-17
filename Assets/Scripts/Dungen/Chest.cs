@@ -6,7 +6,7 @@ public class Chest : MonoBehaviour, IAltInteractable
 {
     [Header("Chest Controls")]
     [SerializeField] bool m_open = false;
-    [SerializeField] GameObject m_lootPickup;
+    [SerializeField] public GameObject m_lootPickup;
     
     
     [Header("References")]
