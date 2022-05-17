@@ -91,7 +91,7 @@ public class MenuButtons : MonoBehaviour
         if (PersistentPrefs.GetInstance().HasSaveFile(1))
         {
             SaveFile file = PersistentPrefs.GetInstance().LoadSaveFile(1);
-            m_save1Button.m_playtime.text = file.m_saveHours + ":" + file.m_saveMinutes;
+            m_save1Button.m_playtime.text = file.m_saveHours + ":" + (file.m_saveMinutes < 10 ? "0" : "") + file.m_saveMinutes;
             m_save1Button.m_date.text = file.m_saveDate;
             m_save1Button.m_level.text = file.m_currentScene;
         }
@@ -99,7 +99,7 @@ public class MenuButtons : MonoBehaviour
         if (PersistentPrefs.GetInstance().HasSaveFile(2))
         {
             SaveFile file = PersistentPrefs.GetInstance().LoadSaveFile(2);
-            m_save2Button.m_playtime.text = file.m_saveHours + ":" + file.m_saveMinutes;
+            m_save2Button.m_playtime.text = file.m_saveHours + ":" + (file.m_saveMinutes < 10 ? "0" : "") + file.m_saveMinutes;
             m_save2Button.m_date.text = file.m_saveDate;
             m_save2Button.m_level.text = file.m_currentScene;
         }
@@ -107,7 +107,7 @@ public class MenuButtons : MonoBehaviour
         if (PersistentPrefs.GetInstance().HasSaveFile(3))
         {
             SaveFile file = PersistentPrefs.GetInstance().LoadSaveFile(3);
-            m_save3Button.m_playtime.text = file.m_saveHours + ":" + file.m_saveMinutes;
+            m_save3Button.m_playtime.text = file.m_saveHours + ":" + (file.m_saveMinutes < 10 ? "0" : "") + file.m_saveMinutes;
             m_save3Button.m_date.text = file.m_saveDate;
             m_save3Button.m_level.text = file.m_currentScene;
         }

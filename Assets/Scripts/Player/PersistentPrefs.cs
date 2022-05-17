@@ -22,7 +22,7 @@ public class PersistentPrefs
     public static string KEY_ITEM_7_UNLOCKED = "PlayerItem7Unlocked";
     public static string KEY_ITEM_8_UNLOCKED = "PlayerItem8Unlocked";
 
-    public static string key_scene = "PlayerScene";
+    public static string KEY_CURRENT_SCENE = "PlayerScene";
     #endregion
 
     #region Settings Keys
@@ -95,7 +95,7 @@ public class PersistentPrefs
             m_item6Unlocked = PlayerPrefs.GetInt(KEY_ITEM_6_UNLOCKED + save) == 1,
             m_item7Unlocked = PlayerPrefs.GetInt(KEY_ITEM_7_UNLOCKED + save) == 1,
             m_item8Unlocked = PlayerPrefs.GetInt(KEY_ITEM_8_UNLOCKED + save) == 1,
-            m_currentScene = PlayerPrefs.GetString(key_scene)
+            m_currentScene = PlayerPrefs.GetString(KEY_CURRENT_SCENE + save)
         };
         return saveFile;
     }
@@ -115,7 +115,7 @@ public class PersistentPrefs
         PlayerPrefs.SetInt(KEY_ITEM_6_UNLOCKED + save, m_currentSaveFile.m_item6Unlocked ? 1 : 0);
         PlayerPrefs.SetInt(KEY_ITEM_7_UNLOCKED + save, m_currentSaveFile.m_item7Unlocked ? 1 : 0);
         PlayerPrefs.SetInt(KEY_ITEM_8_UNLOCKED + save, m_currentSaveFile.m_item8Unlocked ? 1 : 0);
-        PlayerPrefs.SetString(key_scene + save, m_currentSaveFile.m_currentScene);
+        PlayerPrefs.SetString(KEY_CURRENT_SCENE + save, m_currentSaveFile.m_currentScene);
         PlayerPrefs.SetInt(KEY_SAVE_FILE_EXISTS + save, 1);
     }
     #endregion

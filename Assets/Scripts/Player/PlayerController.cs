@@ -73,9 +73,10 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] private TextMeshProUGUI m_altInteractToolTipText;
     private IAltInteractable m_currentInteract;
 
+    private float m_timeLeftUntilTick = 1.0f;
+
     void Awake()
     {
-
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
         HealthText.text = "x " + m_health.ToString();
@@ -108,8 +109,14 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+        if (m_timeLeftUntilTick <= 0.0f)
+        {
+            m_timeLeftUntilTick += 1.0f;
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddSecond();
+        }
+        m_timeLeftUntilTick -= Time.deltaTime;
 
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
         {
             animator.SetBool("Attack1", false);
         }
