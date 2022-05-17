@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
+[System.Serializable]
 public class SaveFile
 {
     public bool m_saveLoaded = false;
@@ -12,7 +14,11 @@ public class SaveFile
     public int m_currentHealth;
     public string m_currentScene;
     public bool m_isInDungeon;
-    public Vector3 m_savePosition;
+
+    // Vector3 is not serilizable so must store seperately
+    public float m_savePositionX;
+    public float m_savePositionY;
+    public float m_savePositionZ;
 
     public bool m_item1Unlocked;
     public bool m_item2Unlocked;
@@ -22,6 +28,8 @@ public class SaveFile
     public bool m_item6Unlocked;
     public bool m_item7Unlocked;
     public bool m_item8Unlocked;
+
+    public Dictionary<string, bool> m_flags;
 
     public void UnlockItem(int i)
     {

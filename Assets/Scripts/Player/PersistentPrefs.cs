@@ -1,41 +1,17 @@
 ﻿using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class PersistentPrefs
 {
-    #region Save File Keys
-    public static string KEY_SAVE_DATE = "SaveDate";
-    public static string KEY_PLAYTIME_SECONDS = "PlaytimeSeconds";
-    public static string KEY_PLAYTIME_MINUTES = "PlaytimeMinutes";
-    public static string KEY_PLAYTIME_HOURS = "PlaytimeHours";
-
-    public static string KEY_SAVE_FILE_EXISTS = "SaveFileExists";
-
-    public static string KEY_CURRENT_HEALTH = "PlayerCurrentHealth";
-
-    public static string KEY_ITEM_1_UNLOCKED = "PlayerItem1Unlocked";
-    public static string KEY_ITEM_2_UNLOCKED = "PlayerItem2Unlocked";
-    public static string KEY_ITEM_3_UNLOCKED = "PlayerItem3Unlocked";
-    public static string KEY_ITEM_4_UNLOCKED = "PlayerItem4Unlocked";
-    public static string KEY_ITEM_5_UNLOCKED = "PlayerItem5Unlocked";
-    public static string KEY_ITEM_6_UNLOCKED = "PlayerItem6Unlocked";
-    public static string KEY_ITEM_7_UNLOCKED = "PlayerItem7Unlocked";
-    public static string KEY_ITEM_8_UNLOCKED = "PlayerItem8Unlocked";
-
-    public static string KEY_CURRENT_SCENE = "PlayerScene";
-    public static string KEY_IS_IN_DUNGEON = "PlayerSceneIsDungeon";
-    public static string KEY_POSITION_X = "PlayerSavePositionX";
-    public static string KEY_POSITION_Y = "PlayerSavePositionY";
-    public static string KEY_POSITION_Z = "PlayerSavePositionZ";
-    #endregion
-
     #region Settings Keys
     public static string KEY_SETTINGS_EXISTS = "SettingsExist";
     public static string KEY_SETTINGS_VOLUME = "SettingsVolume";
     #endregion
 
     public SaveFile m_currentSaveFile;
-    public Settings m_settings;
+    public float m_volume;
 
     private static PersistentPrefs _instance = new PersistentPrefs();
 
@@ -75,88 +51,57 @@ public class PersistentPrefs
             m_item8Unlocked = false,
             m_currentScene = "Overworld",
             m_isInDungeon = false,
-            m_savePosition = new Vector3(),
-            m_saveLoaded = false
+            m_savePositionX = 0.0f,
+            m_savePositionY = 0.0f,
+            m_savePositionZ = 0.0f,
+            m_saveLoaded = false,
+            m_flags = new System.Collections.Generic.Dictionary<string, bool>()
         };
     }
 
     public bool HasSaveFile(int save)
     {
-        return (PlayerPrefs.GetInt(KEY_SAVE_FILE_EXISTS + save) == 1);
+        return File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".save");
     }
 
     public SaveFile LoadSaveFile(int save)
     {
-        SaveFile saveFile = new SaveFile
+        if (File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".save"))
         {
-            m_saveDate = PlayerPrefs.GetString(KEY_SAVE_DATE + save),
-            m_saveSeconds = PlayerPrefs.GetInt(KEY_PLAYTIME_SECONDS + save),
-            m_saveMinutes = PlayerPrefs.GetInt(KEY_PLAYTIME_MINUTES + save),
-            m_saveHours = PlayerPrefs.GetInt(KEY_PLAYTIME_HOURS + save),
-            m_currentHealth = PlayerPrefs.GetInt(KEY_CURRENT_HEALTH + save),
-            m_item1Unlocked = PlayerPrefs.GetInt(KEY_ITEM_1_UNLOCKED + save) == 1,
-            m_item2Unlocked = PlayerPrefs.GetInt(KEY_ITEM_2_UNLOCKED + save) == 1,
-            m_item3Unlocked = PlayerPrefs.GetInt(KEY_ITEM_3_UNLOCKED + save) == 1,
-            m_item4Unlocked = PlayerPrefs.GetInt(KEY_ITEM_4_UNLOCKED + save) == 1,
-            m_item5Unlocked = PlayerPrefs.GetInt(KEY_ITEM_5_UNLOCKED + save) == 1,
-            m_item6Unlocked = PlayerPrefs.GetInt(KEY_ITEM_6_UNLOCKED + save) == 1,
-            m_item7Unlocked = PlayerPrefs.GetInt(KEY_ITEM_7_UNLOCKED + save) == 1,
-            m_item8Unlocked = PlayerPrefs.GetInt(KEY_ITEM_8_UNLOCKED + save) == 1,
-            m_currentScene = PlayerPrefs.GetString(KEY_CURRENT_SCENE + save),
-            m_isInDungeon = PlayerPrefs.GetInt(KEY_IS_IN_DUNGEON + save) == 1,
-            m_savePosition = new Vector3(
-                PlayerPrefs.GetFloat(KEY_POSITION_X + save),
-                PlayerPrefs.GetFloat(KEY_POSITION_Y + save),
-                PlayerPrefs.GetFloat(KEY_POSITION_Z + save)),
-        };
-        return saveFile;
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/SaveFile" + save + ".save", FileMode.Open);
+            SaveFile saveFile = (SaveFile)bf.Deserialize(file);
+            file.Close();
+
+            return saveFile;
+        }
+        return null;
     }
 
     public void SaveSaveFile(int save)
     {
-        PlayerPrefs.SetString(KEY_SAVE_DATE + save, DateTime.Now.ToString("dd/MM/yyyy"));
-        PlayerPrefs.SetInt(KEY_PLAYTIME_SECONDS + save, m_currentSaveFile.m_saveSeconds);
-        PlayerPrefs.SetInt(KEY_PLAYTIME_MINUTES + save, m_currentSaveFile.m_saveMinutes);
-        PlayerPrefs.SetInt(KEY_PLAYTIME_HOURS + save, m_currentSaveFile.m_saveHours);
-        PlayerPrefs.SetInt(KEY_CURRENT_HEALTH + save, m_currentSaveFile.m_currentHealth);
-        PlayerPrefs.SetInt(KEY_ITEM_1_UNLOCKED + save, m_currentSaveFile.m_item1Unlocked ? 1 : 0);
-        PlayerPrefs.SetInt(KEY_ITEM_2_UNLOCKED + save, m_currentSaveFile.m_item2Unlocked ? 1 : 0);
-        PlayerPrefs.SetInt(KEY_ITEM_3_UNLOCKED + save, m_currentSaveFile.m_item3Unlocked ? 1 : 0);
-        PlayerPrefs.SetInt(KEY_ITEM_4_UNLOCKED + save, m_currentSaveFile.m_item4Unlocked ? 1 : 0);
-        PlayerPrefs.SetInt(KEY_ITEM_5_UNLOCKED + save, m_currentSaveFile.m_item5Unlocked ? 1 : 0);
-        PlayerPrefs.SetInt(KEY_ITEM_6_UNLOCKED + save, m_currentSaveFile.m_item6Unlocked ? 1 : 0);
-        PlayerPrefs.SetInt(KEY_ITEM_7_UNLOCKED + save, m_currentSaveFile.m_item7Unlocked ? 1 : 0);
-        PlayerPrefs.SetInt(KEY_ITEM_8_UNLOCKED + save, m_currentSaveFile.m_item8Unlocked ? 1 : 0);
-        PlayerPrefs.SetString(KEY_CURRENT_SCENE + save, m_currentSaveFile.m_currentScene);
-        PlayerPrefs.SetInt(KEY_IS_IN_DUNGEON + save, m_currentSaveFile.m_isInDungeon ? 1 : 0);
-        PlayerPrefs.SetFloat(KEY_POSITION_X + save, m_currentSaveFile.m_savePosition.x);
-        PlayerPrefs.SetFloat(KEY_POSITION_Y + save, m_currentSaveFile.m_savePosition.y);
-        PlayerPrefs.SetFloat(KEY_POSITION_Z + save, m_currentSaveFile.m_savePosition.z);
-        PlayerPrefs.SetInt(KEY_SAVE_FILE_EXISTS + save, 1);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/SaveFile" + save + ".save");
+        bf.Serialize(file, m_currentSaveFile);
+        file.Close();
     }
     #endregion
 
     #region Settings Methods
     public void LoadDefaultSettings()
     {
-        m_settings = new Settings
-        {
-            m_volume = 1.0f
-        };
+        m_volume = 1.0f;
     }
 
     public void LoadSettings()
     {
-        m_settings = new Settings
-        {
-            m_volume = PlayerPrefs.GetFloat(KEY_SETTINGS_VOLUME)
-        };
+        m_volume = PlayerPrefs.GetFloat(KEY_SETTINGS_VOLUME);
     }
 
     public void SaveSettings()
     {
         PlayerPrefs.SetInt(KEY_SETTINGS_EXISTS, 1);
-        PlayerPrefs.SetFloat(KEY_SETTINGS_VOLUME, m_settings.m_volume);
+        PlayerPrefs.SetFloat(KEY_SETTINGS_VOLUME, m_volume);
     }
     #endregion
 }

@@ -22,7 +22,7 @@ public class MenuButtons : MonoBehaviour
     public SaveFileButton m_save2Button;
     public SaveFileButton m_save3Button;
 
-    private void Start()
+    void Start()
     {
         if (!PersistentPrefs.GetInstance().HasSaveFile(0) &&
             !PersistentPrefs.GetInstance().HasSaveFile(1) &&

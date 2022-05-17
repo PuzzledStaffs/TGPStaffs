@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         m_gamePaused = false;
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("Title Screen");
     }
 
     public void Quit()
@@ -94,7 +94,10 @@ public class PauseMenu : MonoBehaviour
 
     public void TrySaveSave(int save)
     {
-        PersistentPrefs.GetInstance().m_currentSaveFile.m_savePosition = GameObject.FindGameObjectWithTag("Player").transform.position;
+        Vector3 vec = GameObject.FindGameObjectWithTag("Player").transform.position;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX = vec.x;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY = vec.y;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ = vec.z;
         PersistentPrefs.GetInstance().SaveSaveFile(save);
         OpenSaveMenu();
     }

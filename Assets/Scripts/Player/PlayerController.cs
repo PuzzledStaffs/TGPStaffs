@@ -85,6 +85,7 @@ public class PlayerController : MonoBehaviour, IHealth
         Cursor.visible = false;
         m_respawnPosition = transform.position;
 
+        // Loading Save Data
         SetHealth(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentHealth);
         m_weaponWheelController.m_weaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item1Unlocked;
         m_weaponWheelController.m_weaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item2Unlocked;
@@ -101,15 +102,25 @@ public class PlayerController : MonoBehaviour, IHealth
         else
             PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = gameObject.scene.name;
         PersistentPrefs.GetInstance().m_currentSaveFile.m_isInDungeon = gameObject.scene.name.Equals("DungeonBase");
+
         if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
         {
             PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
-            transform.position = PersistentPrefs.GetInstance().m_currentSaveFile.m_savePosition;
+            transform.position = new Vector3(
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX,
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY,
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ);
         }
-        PersistentPrefs.GetInstance().m_currentSaveFile.m_savePosition = transform.position;
+        else
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX = transform.position.x;
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY = transform.position.y;
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ = transform.position.z;
+        }
+        // Save to Autosave
         PersistentPrefs.GetInstance().SaveSaveFile(0);
 
-        m_coins = PlayerPrefs.GetInt("Coins", 0);
+        m_coins = 0; //Do not use PlayerPrefs, ask Kit to add this
 
         m_altInteractToolTip.enabled = false;
     }
