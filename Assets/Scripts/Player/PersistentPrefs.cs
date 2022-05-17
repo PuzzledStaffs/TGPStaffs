@@ -23,6 +23,10 @@ public class PersistentPrefs
     public static string KEY_ITEM_8_UNLOCKED = "PlayerItem8Unlocked";
 
     public static string KEY_CURRENT_SCENE = "PlayerScene";
+    public static string KEY_IS_IN_DUNGEON = "PlayerSceneIsDungeon";
+    public static string KEY_POSITION_X = "PlayerSavePositionX";
+    public static string KEY_POSITION_Y = "PlayerSavePositionY";
+    public static string KEY_POSITION_Z = "PlayerSavePositionZ";
     #endregion
 
     #region Settings Keys
@@ -69,7 +73,10 @@ public class PersistentPrefs
             m_item6Unlocked = false,
             m_item7Unlocked = false,
             m_item8Unlocked = false,
-            m_currentScene = "Overworld"
+            m_currentScene = "Overworld",
+            m_isInDungeon = false,
+            m_savePosition = new Vector3(),
+            m_saveLoaded = false
         };
     }
 
@@ -95,7 +102,12 @@ public class PersistentPrefs
             m_item6Unlocked = PlayerPrefs.GetInt(KEY_ITEM_6_UNLOCKED + save) == 1,
             m_item7Unlocked = PlayerPrefs.GetInt(KEY_ITEM_7_UNLOCKED + save) == 1,
             m_item8Unlocked = PlayerPrefs.GetInt(KEY_ITEM_8_UNLOCKED + save) == 1,
-            m_currentScene = PlayerPrefs.GetString(KEY_CURRENT_SCENE + save)
+            m_currentScene = PlayerPrefs.GetString(KEY_CURRENT_SCENE + save),
+            m_isInDungeon = PlayerPrefs.GetInt(KEY_IS_IN_DUNGEON + save) == 1,
+            m_savePosition = new Vector3(
+                PlayerPrefs.GetFloat(KEY_POSITION_X + save),
+                PlayerPrefs.GetFloat(KEY_POSITION_Y + save),
+                PlayerPrefs.GetFloat(KEY_POSITION_Z + save)),
         };
         return saveFile;
     }
@@ -116,6 +128,10 @@ public class PersistentPrefs
         PlayerPrefs.SetInt(KEY_ITEM_7_UNLOCKED + save, m_currentSaveFile.m_item7Unlocked ? 1 : 0);
         PlayerPrefs.SetInt(KEY_ITEM_8_UNLOCKED + save, m_currentSaveFile.m_item8Unlocked ? 1 : 0);
         PlayerPrefs.SetString(KEY_CURRENT_SCENE + save, m_currentSaveFile.m_currentScene);
+        PlayerPrefs.SetInt(KEY_IS_IN_DUNGEON + save, m_currentSaveFile.m_isInDungeon ? 1 : 0);
+        PlayerPrefs.SetFloat(KEY_POSITION_X + save, m_currentSaveFile.m_savePosition.x);
+        PlayerPrefs.SetFloat(KEY_POSITION_Y + save, m_currentSaveFile.m_savePosition.y);
+        PlayerPrefs.SetFloat(KEY_POSITION_Z + save, m_currentSaveFile.m_savePosition.z);
         PlayerPrefs.SetInt(KEY_SAVE_FILE_EXISTS + save, 1);
     }
     #endregion

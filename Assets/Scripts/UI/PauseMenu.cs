@@ -27,7 +27,6 @@ public class PauseMenu : MonoBehaviour
 
     public void ResumeGame()
     {
-        Debug.Log("Resume the game");
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         m_pauseMenu.SetActive(false);
@@ -51,6 +50,7 @@ public class PauseMenu : MonoBehaviour
     public void BackToMainMenu()
     {
         Time.timeScale = 1.0f;
+        m_gamePaused = false;
         SceneManager.LoadScene("MainMenu");
     }
 
@@ -94,6 +94,7 @@ public class PauseMenu : MonoBehaviour
 
     public void TrySaveSave(int save)
     {
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_savePosition = GameObject.FindGameObjectWithTag("Player").transform.position;
         PersistentPrefs.GetInstance().SaveSaveFile(save);
         OpenSaveMenu();
     }

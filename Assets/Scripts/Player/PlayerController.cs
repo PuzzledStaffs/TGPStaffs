@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IHealth
 {
     [Header("Components")]
     public GameObject m_model;
-    public  Rigidbody m_rigidbody;
+    public Rigidbody m_rigidbody;
     private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
@@ -94,7 +94,19 @@ public class PlayerController : MonoBehaviour, IHealth
         m_weaponWheelController.m_weaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item6Unlocked;
         m_weaponWheelController.m_weaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item7Unlocked;
         m_weaponWheelController.m_weaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item8Unlocked;
-        PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = gameObject.scene.name;
+        if (gameObject.scene.name.Equals("DungeonBase"))
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = SceneManager.GetSceneAt(1).name;
+        }
+        else
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = gameObject.scene.name;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_isInDungeon = gameObject.scene.name.Equals("DungeonBase");
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
+            transform.position = PersistentPrefs.GetInstance().m_currentSaveFile.m_savePosition;
+        }
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_savePosition = transform.position;
         PersistentPrefs.GetInstance().SaveSaveFile(0);
 
         m_coins = PlayerPrefs.GetInt("Coins", 0);
@@ -127,7 +139,7 @@ public class PlayerController : MonoBehaviour, IHealth
             Sword.SetActive(false);
         }
 
-        if(Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
+        if (Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
         {
             SwordItem.m_noOfClicks = 0;
             Sword.SetActive(false);
@@ -175,7 +187,7 @@ public class PlayerController : MonoBehaviour, IHealth
             }
         }
 
-        
+
         CheckForInterpretablesInRange();
 
     }
@@ -224,9 +236,9 @@ public class PlayerController : MonoBehaviour, IHealth
             m_altInteractToolTip.enabled = true;
             m_altInteractToolTipText.text = m_currentInteract.CanInteract().text;
         }
-        
 
-        
+
+
     }
 
     void FixedUpdate()

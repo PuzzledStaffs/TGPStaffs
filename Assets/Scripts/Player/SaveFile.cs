@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 public class SaveFile
 {
+    public bool m_saveLoaded = false;
+
     public string m_saveDate;
     public int m_saveSeconds;
     public int m_saveMinutes;
@@ -13,6 +11,8 @@ public class SaveFile
 
     public int m_currentHealth;
     public string m_currentScene;
+    public bool m_isInDungeon;
+    public Vector3 m_savePosition;
 
     public bool m_item1Unlocked;
     public bool m_item2Unlocked;

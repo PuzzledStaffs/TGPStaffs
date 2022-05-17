@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -122,8 +120,15 @@ public class MenuButtons : MonoBehaviour
         if (PersistentPrefs.GetInstance().HasSaveFile(save))
         {
             PersistentPrefs.GetInstance().m_currentSaveFile = PersistentPrefs.GetInstance().LoadSaveFile(save);
-            SceneManager.LoadScene("Overworld");
-            //SceneManager.LoadScene(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene);
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = true;
+
+            if (PersistentPrefs.GetInstance().m_currentSaveFile.m_isInDungeon)
+            {
+                SceneManager.LoadScene("DungeonBase");
+                SceneManager.LoadSceneAsync(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene, LoadSceneMode.Additive);
+            }
+            else
+                SceneManager.LoadScene(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene);
         }
     }
 
