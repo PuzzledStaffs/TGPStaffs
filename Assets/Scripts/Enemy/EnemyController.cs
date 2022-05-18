@@ -1,7 +1,9 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Serialization;
 
 public class EnemyController : State, IHealth
 {
@@ -21,8 +23,12 @@ public class EnemyController : State, IHealth
     public Vector3 m_offset;
     public float m_dodgeChance = 0;
     private bool m_takingDamage = false;
-   // public int m_currentState = 0;
-    public StateType m_stateType;
+    public System.Action<GameObject> m_deadEvent;
+    [FormerlySerializedAs("m_DeathDrop")]
+    [SerializeField] GameObject m_deathDrop;
+
+    [FormerlySerializedAs ("m_stateType")]
+    public StateType m_currentState;
     public int m_damage;
 
     public float m_attack_cooldown;
@@ -38,7 +44,7 @@ public class EnemyController : State, IHealth
     private void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
-        m_stateType = StateType.CHASE;
+        m_currentState = StateType.CHASE;
         m_pathToPlayer = new NavMeshPath();
         InvokeRepeating("CalculatePath", 0.5f, 0.5f);
     }
@@ -52,7 +58,7 @@ public class EnemyController : State, IHealth
 
     private void Update()
     {
-        //Chekc for sight and attack range
+        //Check for sight and attack range
         m_playerInSightRange = Physics.CheckSphere(transform.position, m_sightRange, m_whatIsPlayer);
         m_playerInAttackRange = Physics.CheckSphere(transform.position, m_attackRange, m_whatIsPlayer);
 
@@ -66,7 +72,7 @@ public class EnemyController : State, IHealth
     void CalculatePath()
     {
         Debug.Log("calculate 2");
-        if(m_stateType == StateType.CHASE)//if (m_currentState == 2)
+        if(m_currentState == StateType.CHASE)
         {
             Debug.Log("calculate 3");
             m_agent.Warp(transform.position);
@@ -77,13 +83,12 @@ public class EnemyController : State, IHealth
 
     void ChasePlayer()
     {
-        //if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != 4)
-        if (m_pathToPlayer.corners.Length > 1 && !m_died && m_stateType != StateType.IDLE)
+        if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE)
         {
             transform.LookAt(m_player);
             Debug.Log("Chase State");
            // m_currentState = 2;
-            m_stateType = StateType.CHASE;
+            m_currentState = StateType.CHASE;
 
             Vector3 dir = (m_pathToPlayer.corners[1] - transform.position).normalized;
             var rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z));
@@ -103,7 +108,7 @@ public class EnemyController : State, IHealth
         {
             m_canAttack = false;
             m_rb.velocity = new Vector3(0, 0, 0);
-            m_stateType = StateType.ATTACK;
+            m_currentState = StateType.ATTACK;
             transform.LookAt(m_player);
 
             Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(1.0f, 1.0f, 1.0f), transform.rotation);
@@ -133,9 +138,24 @@ public class EnemyController : State, IHealth
 
     }
 
+    public void ChangeState(StateType state)
+    {
+        switch(state)
+        {
+            case StateType.IDLE:
+                Freeze();
+                break;
+            case StateType.CHASE:
+                ChasePlayer();
+                break;
+            default:
+                break;
+        }
+    }
+
     IEnumerator AttackCooldwon()
     {
-       
+
         //  m_attackParticle.SetActive(true);
         m_animator.SetTrigger("Attack");
         yield return new WaitForSeconds(m_attack_cooldown);
@@ -149,35 +169,48 @@ public class EnemyController : State, IHealth
     void death()
     {
         m_died = true;
+        m_deadEvent?.Invoke(gameObject);
         StartCoroutine(DestroyObject());
-        //animator.SetTrigger("Death");
+ 
+
         m_rb.AddForce(-transform.forward * m_deathForce);
         m_rb.AddForce(transform.up * m_deathForce);
-        // GameManager.gameObject.GetComponent<TimeManager>().SlowDownTime();
     }
 
     IEnumerator DestroyObject()
     {
         Instantiate(m_destroyParticle, transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(0.7f);       
+        yield return new WaitForSeconds(0.7f);
+        if (m_deathDrop != null)
+            Instantiate(m_deathDrop, transform.position, transform.rotation, transform.parent);
         Destroy(gameObject);
     }
 
     IEnumerator StopMoving()
     {
-      //  m_currentState = 4;
-        m_stateType = StateType.IDLE;
+        m_agent.isStopped = true;
+        m_currentState = StateType.IDLE;
         m_rb.velocity = new Vector3(0, 0, 0);
-        //yield return new WaitForSeconds(1.8f);
-        yield return new WaitForSeconds(1f);
-     //   m_currentState = 2;
-        m_stateType = StateType.CHASE;
+        yield return null;
+       yield return new WaitForSeconds(1f);
+  
+        m_currentState = StateType.CHASE;
+        m_takingDamage = false;
+    }
+
+    void Freeze()
+    {
+        m_agent.isStopped = true;
+        m_currentState = StateType.IDLE;
+        m_rb.velocity = new Vector3(0, 0, 0);
+       
+        m_currentState = StateType.IDLE;
         m_takingDamage = false;
     }
 
     public void Dodge()
     {
-        if(m_stateType != StateType.IDLE)
+        if(m_currentState != StateType.IDLE)
         //if (m_currentState != 4) //if not equal to take damage state
         {
             m_dodgeChance += 1 * Time.deltaTime;
@@ -216,7 +249,7 @@ public class EnemyController : State, IHealth
         m_health -= damage.damageAmount;
         m_animator.SetTrigger("EnemyHit");
       //  m_currentState = 4; //sets the state to take damage
-        m_stateType = StateType.IDLE;
+        m_currentState = StateType.IDLE;
         m_takingDamage = true;
         m_rb.AddForce(-transform.forward * m_pushBackForce);
         StartCoroutine(StopMoving());

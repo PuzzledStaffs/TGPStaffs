@@ -5,11 +5,12 @@ using UnityEngine;
 public class Chest : MonoBehaviour, IAltInteractable
 {
     [Header("Chest Controls")]
-    [SerializeField] bool m_open;
-    [SerializeField] Transform m_dropLocation;
+    [SerializeField] bool m_open = false;
+    [SerializeField] GameObject m_lootPickup;
+    
     
     [Header("References")]
-    [SerializeField] GameObject m_lootPickup;
+    [SerializeField] Transform m_dropLocation;
     [SerializeField] GameObject m_closedModel;
     [SerializeField] GameObject m_openModel;
 
@@ -34,7 +35,7 @@ public class Chest : MonoBehaviour, IAltInteractable
 
     public InteractInfo CanInteract()
     {
-        return new InteractInfo(m_open,"OpenChest",2);
+        return new InteractInfo(!m_open,"OpenChest",2);
     }
 
     void SwitchOpenStateModel(bool open)

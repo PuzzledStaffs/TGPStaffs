@@ -15,7 +15,7 @@ public class DungenRoom : MonoBehaviour
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
 
-    [FormerlySerializedAs("m_Enemies")]List<Enemy> m_enemies;   
+    [FormerlySerializedAs("m_Enemies")]List<EnemyController> m_enemies;   
     [SerializeField][FormerlySerializedAs("m_EneamyPerent")] private GameObject m_enemyParent;
     Trap[] m_traps;
     [SerializeField][FormerlySerializedAs("m_TrapPernet")] private GameObject m_trapParent;
@@ -30,7 +30,7 @@ public class DungenRoom : MonoBehaviour
     private void Awake()
     {
         m_traps = m_trapParent.GetComponentsInChildren<Trap>();
-        m_enemies = new List<Enemy>(m_enemyParent.GetComponentsInChildren<Enemy>());
+        m_enemies = new List<EnemyController>(m_enemyParent.GetComponentsInChildren<EnemyController>());
         //m_enemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
         m_enemyCount = m_enemies.Count;
 
@@ -44,11 +44,13 @@ public class DungenRoom : MonoBehaviour
             m_camera = Camera.main.GetComponent<DungonCamaraControler>();
         }
        
-        foreach (Enemy enemy in m_enemies)
+        foreach (EnemyController enemy in m_enemies)
         {
+
+            enemy.ChangeState(State.StateType.IDLE);
             enemy.m_deadEvent += EnameyDie;
-            enemy.m_manager.m_idle.enabled = true;
-            enemy.m_fieldOfView.enabled = false;
+            //enemy.m_manager.m_idle.enabled = true;
+            //enemy.m_fieldOfView.enabled = false;
         }
         //Set door
         foreach (DungenDoor door in m_doorsIn)
@@ -171,12 +173,13 @@ public class DungenRoom : MonoBehaviour
         {
             //Called after camra has finished moving and player unlocked
             m_camera.m_locked = false;
-            foreach (Enemy enemy in m_enemies)
+            foreach (EnemyController enemy in m_enemies)
             {
-                enemy.m_manager.m_idle.m_isIdle = false;
-                enemy.m_manager.m_idle.enabled = false;
+                enemy.ChangeState(State.StateType.CHASE);
+                //enemy.m_manager.m_idle.m_isIdle = false;
+                //enemy.m_manager.m_idle.enabled = false;
 
-                enemy.m_fieldOfView.enabled = true;
+                //enemy.m_fieldOfView.enabled = true;
             }
             foreach (Trap trap in m_traps)
             {
@@ -200,13 +203,14 @@ public class DungenRoom : MonoBehaviour
     {
 
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
-        foreach (Enemy enemy in m_enemies)
+        foreach (EnemyController enemy in m_enemies)
         {
-            enemy.m_manager.m_attack.enabled = false;
-            enemy.m_manager.m_idle.m_isIdle = true;
-            enemy.m_manager.m_idle.enabled = true;
+            enemy.ChangeState(State.StateType.IDLE);
+            //enemy.m_manager.m_attack.enabled = false;
+            //enemy.m_manager.m_idle.m_isIdle = true;
+            //enemy.m_manager.m_idle.enabled = true;
 
-            enemy.m_fieldOfView.enabled = false;
+            //enemy.m_fieldOfView.enabled = false;
         }
 
 
@@ -224,7 +228,7 @@ public class DungenRoom : MonoBehaviour
     private void EnameyDie(GameObject enemy)
     {
         m_enemyCount--;
-        m_enemies.Remove(enemy.GetComponent<Enemy>());
+        m_enemies.Remove(enemy.GetComponent<EnemyController>());
         //m_enemiesIdle.Remove(enemy.GetComponent<IdleState>());
         if(m_enemyCount <= 0)
         {
