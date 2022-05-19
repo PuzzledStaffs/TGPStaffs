@@ -25,7 +25,7 @@ public class DungenRoom : MonoBehaviour
     PauseMenu m_pauseMenu;
     bool m_playerInRoom;
 
-    
+    private DungenManager m_dungeonManager;
 
     private void Awake()
     {
@@ -33,6 +33,7 @@ public class DungenRoom : MonoBehaviour
         m_enemies = new List<EnemyController>(m_enemyParent.GetComponentsInChildren<EnemyController>());
         //m_enemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
         m_enemyCount = m_enemies.Count;
+        m_dungeonManager = GameObject.FindGameObjectWithTag("dungeonManager").GetComponent<DungenManager>();
 
         SceneManager.sceneLoaded += onSceneLoad;
     }
@@ -43,11 +44,11 @@ public class DungenRoom : MonoBehaviour
         {
             m_camera = Camera.main.GetComponent<DungeonCameraController>();
         }
-       
+
         foreach (EnemyController enemy in m_enemies)
         {
-            if (PersistentPrefs.GetInstance().m_currentSaveFile.GetFlag(gameObject.scene.name + "_EnemyKilled_" + enemy.gameObject.GetInstanceID()))
-                enemy.m_deleteSelf = true;
+            if (enemy.IsDead())
+                continue;
             enemy.ChangeState(State.StateType.IDLE);
             enemy.m_deadEvent += EnameyDie;
             //enemy.m_manager.m_idle.enabled = true;
@@ -122,6 +123,7 @@ public class DungenRoom : MonoBehaviour
 
     public void StartRoom()
     {
+        m_dungeonManager.m_currentRoom = this;
         UnFrezeRoom();
     }
 
@@ -176,6 +178,8 @@ public class DungenRoom : MonoBehaviour
             m_camera.m_locked = false;
             foreach (EnemyController enemy in m_enemies)
             {
+                if (enemy.IsDead())
+                    continue;
                 enemy.ChangeState(State.StateType.CHASE);
                 //enemy.m_manager.m_idle.m_isIdle = false;
                 //enemy.m_manager.m_idle.enabled = false;
@@ -206,6 +210,8 @@ public class DungenRoom : MonoBehaviour
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
         foreach (EnemyController enemy in m_enemies)
         {
+            if (enemy.IsDead())
+                continue;
             enemy.ChangeState(State.StateType.IDLE);
             //enemy.m_manager.m_attack.enabled = false;
             //enemy.m_manager.m_idle.m_isIdle = true;

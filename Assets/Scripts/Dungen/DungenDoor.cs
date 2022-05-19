@@ -26,7 +26,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
 
 
     [Header("Door Controles")]
-    [SerializeField] public bool m_locked;
+    [SerializeField] protected bool m_locked;
     public bool m_doorActive { get; protected set; }
     [SerializeField][FormerlySerializedAs("m_ClosedOnStart")] protected bool m_closedOnStart = false;
 
@@ -40,6 +40,15 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
     {
         m_dungenManager = GameObject.FindObjectOfType<DungenManager>();       
         m_doorCollider = transform.GetComponent<BoxCollider>();
+
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_DoorOpen_" + gameObject.scene.name + "_" + gameObject.transform.parent.name + "_" + gameObject.name))
+        {
+            m_closedOnStart = false;
+        }
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_DoorUnlocked_" + gameObject.scene.name + "_" + gameObject.transform.parent.name + "_" + gameObject.name))
+        {
+            m_locked = false;
+        }
 
         CheckDoorSet();
     }
@@ -109,6 +118,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
             if (m_dungenManager.UseKey())
             {
                 m_locked = false;
+                PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_DoorUnlocked_" + gameObject.scene.name + "_" + gameObject.transform.parent.name + "_" + gameObject.name);
                 HideLocks();
                 OpenDoor();
             }
@@ -125,6 +135,8 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
 
     public virtual void OpenDoor()
     {
+        PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_DoorOpen_" + gameObject.scene.name + "_" + gameObject.transform.parent.name + "_" + gameObject.name);
+
         if (m_toRoomCameraMove != null && m_toRoomExitPoint != null && !m_locked)
         {
             m_doorActive = true;
@@ -148,6 +160,8 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
 
     public void CloseDoor()
     {
+        PersistentPrefs.GetInstance().m_currentSaveFile.RemoveFlag(gameObject.scene.name + "_DoorOpen_" + gameObject.scene.name + "_" + gameObject.transform.parent.name + "_" + gameObject.name);
+
         m_doorActive = false;
         foreach (GameObject bar in m_bars)
         {

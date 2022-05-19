@@ -20,9 +20,6 @@ public class SaveFile
     public float m_savePositionX;
     public float m_savePositionY;
     public float m_savePositionZ;
-    public float m_cameraPositionX;
-    public float m_cameraPositionY;
-    public float m_cameraPositionZ;
 
     public bool m_item1Unlocked;
     public bool m_item2Unlocked;
@@ -66,7 +63,6 @@ public class SaveFile
             default:
                 break;
         }
-        PersistentPrefs.GetInstance().SaveSaveFile(0);
     }
 
     public void AddSecond()

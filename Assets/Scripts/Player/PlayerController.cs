@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] private TextMeshProUGUI m_altInteractToolTipText;
     private IAltInteractable m_currentInteract;
 
+    [Header("Misc")]
+    public DungenManager m_dungeonManager;
     private float m_timeLeftUntilTick = 1.0f;
 
     void Awake()
@@ -86,6 +88,24 @@ public class PlayerController : MonoBehaviour, IHealth
         m_respawnPosition = transform.position;
 
         // Loading Save Data
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
+            transform.position = new Vector3(
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX,
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY,
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ);
+            if (gameObject.scene.name.Equals("DungeonBase"))
+            {
+
+            }
+        }
+        else
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX = transform.position.x;
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY = transform.position.y;
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ = transform.position.z;
+        }
         SetHealth(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentHealth);
         m_weaponWheelController.m_weaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item1Unlocked;
         m_weaponWheelController.m_weaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item2Unlocked;
@@ -98,25 +118,13 @@ public class PlayerController : MonoBehaviour, IHealth
         if (gameObject.scene.name.Equals("DungeonBase"))
         {
             PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = SceneManager.GetSceneAt(1).name;
+            //PersistentPrefs.GetInstance().m_currentSaveFile.m_currentRoomID = m_dungeonManager.m_currentRoom.GetInstanceID();
         }
         else
             PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = gameObject.scene.name;
         PersistentPrefs.GetInstance().m_currentSaveFile.m_isInDungeon = gameObject.scene.name.Equals("DungeonBase");
 
-        if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
-        {
-            PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
-            transform.position = new Vector3(
-                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX,
-                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY,
-                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ);
-        }
-        else
-        {
-            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX = transform.position.x;
-            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY = transform.position.y;
-            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ = transform.position.z;
-        }
+
         // Save to Autosave
         PersistentPrefs.GetInstance().SaveSaveFile(0);
 
@@ -124,7 +132,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
         m_altInteractToolTip.enabled = false;
 
-        
+
     }
 
     void OnDestroy()
@@ -506,12 +514,26 @@ public class PlayerController : MonoBehaviour, IHealth
 
     public void OnEInteract(InputAction.CallbackContext context)
     {
-        if (context.started)
+        if (PauseMenu.m_gamePaused)
+            return;
+
+        // Check the phase of the button press. Equivalent to if ctx.started else if ctx.performed else if ctx.canceled
+        switch (context.phase)
         {
-            m_currentInteract?.AltInteract();
-            Debug.Log("Interact");
-            m_currentInteract = null;
-            CheckForInterpretablesInRange();
+            // Button was pressed
+            case InputActionPhase.Started:
+                m_currentInteract?.AltInteract();
+                m_currentInteract = null;
+                CheckForInterpretablesInRange();
+                break;
+            // Button is being held
+            case InputActionPhase.Performed:
+            // Button was released
+            case InputActionPhase.Canceled:
+            case InputActionPhase.Disabled:
+            case InputActionPhase.Waiting:
+            default:
+                break;
         }
     }
 

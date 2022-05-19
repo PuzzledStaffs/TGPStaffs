@@ -422,6 +422,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
+--- !u!114 &323394579 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9024133131068660373, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
+  m_PrefabInstance: {fileID: 323394578}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffc38904358441b47b67c8136685bff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &550479964
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +664,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2109082283556361527, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_dungeonManager
+      value: 
+      objectReference: {fileID: 323394579}
     - target: {fileID: 4439799624039226185, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -739,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -26.59616
+      value: -26.900269
       objectReference: {fileID: 0}
     - target: {fileID: 8655418251543230784, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_Name
