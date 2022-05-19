@@ -22,8 +22,13 @@ public class LavaTrap : Trap
 
         if (other.tag == "Player")
         {
-            other.transform.GetComponent<PlayerController>().Respawn();
-            other.transform.GetComponent<PlayerController>().TakeDamage(damage);
+            other.transform.GetComponent<PlayerController>()?.Respawn();
+            other.transform.GetComponent<IHealth>()?.TakeDamage(damage);
+        }
+        else
+        {
+            damage.damageAmount = 10000;
+            other.transform.GetComponent<IHealth>()?.TakeDamage(damage);
         }
     }
 }

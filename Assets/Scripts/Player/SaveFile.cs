@@ -1,13 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
+[System.Serializable]
 public class SaveFile
 {
+    public bool m_saveLoaded = false;
+
+    public string m_saveDate;
+    public int m_saveSeconds;
+    public int m_saveMinutes;
+    public int m_saveHours;
+
     public int m_currentHealth;
     public string m_currentScene;
+    public bool m_isInDungeon;
+
+    // Vector3 is not serilizable so must store seperately
+    public float m_savePositionX;
+    public float m_savePositionY;
+    public float m_savePositionZ;
 
     public bool m_item1Unlocked;
     public bool m_item2Unlocked;
@@ -17,6 +28,8 @@ public class SaveFile
     public bool m_item6Unlocked;
     public bool m_item7Unlocked;
     public bool m_item8Unlocked;
+
+    public Dictionary<string, bool> m_flags;
 
     public void UnlockItem(int i)
     {
@@ -50,5 +63,22 @@ public class SaveFile
                 break;
         }
         PersistentPrefs.GetInstance().SaveSaveFile(0);
+    }
+
+    public void AddSecond()
+    {
+        m_saveSeconds++;
+
+        if (m_saveSeconds >= 60)
+        {
+            m_saveMinutes += m_saveSeconds / 60;
+            m_saveSeconds %= 60;
+        }
+
+        if (m_saveMinutes >= 60)
+        {
+            m_saveHours += m_saveMinutes / 60;
+            m_saveMinutes %= 60;
+        }
     }
 }

@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IHealth
 {
     [Header("Components")]
     public GameObject m_model;
-    public  Rigidbody m_rigidbody;
+    public Rigidbody m_rigidbody;
     private PlayerInput m_playerInput;
 
     [Header("Health and Death")]
@@ -73,9 +73,10 @@ public class PlayerController : MonoBehaviour, IHealth
     [SerializeField] private TextMeshProUGUI m_altInteractToolTipText;
     private IAltInteractable m_currentInteract;
 
+    private float m_timeLeftUntilTick = 1.0f;
+
     void Awake()
     {
-
         m_rigidbody = GetComponent<Rigidbody>();
         m_playerInput = GetComponent<PlayerInput>();
         HealthText.text = "x " + m_health.ToString();
@@ -84,6 +85,7 @@ public class PlayerController : MonoBehaviour, IHealth
         Cursor.visible = false;
         m_respawnPosition = transform.position;
 
+        // Loading Save Data
         SetHealth(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentHealth);
         m_weaponWheelController.m_weaponWheel.transform.GetChild(0).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item1Unlocked;
         m_weaponWheelController.m_weaponWheel.transform.GetChild(1).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item2Unlocked;
@@ -93,12 +95,36 @@ public class PlayerController : MonoBehaviour, IHealth
         m_weaponWheelController.m_weaponWheel.transform.GetChild(5).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item6Unlocked;
         m_weaponWheelController.m_weaponWheel.transform.GetChild(6).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item7Unlocked;
         m_weaponWheelController.m_weaponWheel.transform.GetChild(7).GetComponent<WeaponButtonInfo>().ItemBlocked = !PersistentPrefs.GetInstance().m_currentSaveFile.m_item8Unlocked;
-        PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = gameObject.scene.name;
+        if (gameObject.scene.name.Equals("DungeonBase"))
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = SceneManager.GetSceneAt(1).name;
+        }
+        else
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene = gameObject.scene.name;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_isInDungeon = gameObject.scene.name.Equals("DungeonBase");
+
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
+            transform.position = new Vector3(
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX,
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY,
+                PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ);
+        }
+        else
+        {
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX = transform.position.x;
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY = transform.position.y;
+            PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ = transform.position.z;
+        }
+        // Save to Autosave
         PersistentPrefs.GetInstance().SaveSaveFile(0);
 
-        m_coins = PlayerPrefs.GetInt("Coins", 0);
+        m_coins = 0; //Do not use PlayerPrefs, ask Kit to add this
 
         m_altInteractToolTip.enabled = false;
+
+        
     }
 
     void OnDestroy()
@@ -108,8 +134,14 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+        if (m_timeLeftUntilTick <= 0.0f)
+        {
+            m_timeLeftUntilTick += 1.0f;
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddSecond();
+        }
+        m_timeLeftUntilTick -= Time.deltaTime;
 
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
         {
             animator.SetBool("Attack1", false);
         }
@@ -120,7 +152,7 @@ public class PlayerController : MonoBehaviour, IHealth
             Sword.SetActive(false);
         }
 
-        if(Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
+        if (Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
         {
             SwordItem.m_noOfClicks = 0;
             Sword.SetActive(false);
@@ -168,7 +200,7 @@ public class PlayerController : MonoBehaviour, IHealth
             }
         }
 
-        
+
         CheckForInterpretablesInRange();
 
     }
@@ -188,7 +220,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 }
             }
         }
-        //If there are none display nothing on screem
+        //If there are none display nothing on screen
         if (interactInRange.Count == 0)
         {
             m_altInteractToolTip.enabled = false;
@@ -196,7 +228,7 @@ public class PlayerController : MonoBehaviour, IHealth
             return;
         }
 
-        //Find the one with the hiest prority
+        //Find the one with the highest priority
         IAltInteractable topPriority = null;
         foreach (var interactable in interactInRange)
         {
@@ -209,7 +241,7 @@ public class PlayerController : MonoBehaviour, IHealth
                 topPriority = interactable;
             }
         }
-        //If a new one with higer priorty found use that
+        //If a new one with hinger priority found use that
         if (m_currentInteract != topPriority)
         {
             m_currentInteract = topPriority;
@@ -217,9 +249,9 @@ public class PlayerController : MonoBehaviour, IHealth
             m_altInteractToolTip.enabled = true;
             m_altInteractToolTipText.text = m_currentInteract.CanInteract().text;
         }
-        
 
-        
+
+
     }
 
     void FixedUpdate()
@@ -472,11 +504,15 @@ public class PlayerController : MonoBehaviour, IHealth
 
     }
 
-    public void OnAltInteract()
+    public void OnEInteract(InputAction.CallbackContext context)
     {
-        m_currentInteract?.AltInteract();
-        m_currentInteract = null;
-        CheckForInterpretablesInRange();
+        if (context.started)
+        {
+            m_currentInteract?.AltInteract();
+            Debug.Log("Interact");
+            m_currentInteract = null;
+            CheckForInterpretablesInRange();
+        }
     }
 
     #endregion
