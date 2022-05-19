@@ -14,7 +14,7 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         m_instance = this;
-        AudioListener.volume = PersistentPrefs.GetInstance().m_settings.m_volume;
+        AudioListener.volume = PersistentPrefs.GetInstance().m_volume;
     }
 
     public float GetMasterVolume()
@@ -25,7 +25,7 @@ public class SoundManager : MonoBehaviour
     public void ChangeMasterVolume(float volume)
     {
         AudioListener.volume = volume;
-        PersistentPrefs.GetInstance().m_settings.m_volume = volume;
+        PersistentPrefs.GetInstance().m_volume = volume;
         PersistentPrefs.GetInstance().SaveSettings();
     }
  
