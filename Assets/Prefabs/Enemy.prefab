@@ -93,10 +93,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8251213727836274910}
   - component: {fileID: 4574969054359232141}
-  - component: {fileID: 8936545886331049612}
   - component: {fileID: 1361184129102678503}
   - component: {fileID: 3613738522202238260}
   - component: {fileID: 1315692046332246767}
+  - component: {fileID: 1751988848533710212}
+  - component: {fileID: 8936545886331049612}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -112,7 +113,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6348191554822467161}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.15408, y: 1.02, z: -12.158997}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8458599599068647428}
@@ -136,40 +137,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &8936545886331049612
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6348191554822467161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f06c67c74d0e4d4c85b8e8ee4220c30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_health: 50
-  m_speed: 3
-  m_agent: {fileID: 1361184129102678503}
-  m_rb: {fileID: 4574969054359232141}
-  m_pushBackForce: 400
-  m_deathForce: 100
-  m_destroyParticle: {fileID: 2453638331243843887, guid: dffc008c1b8805843a6acf6639288537, type: 3}
-  m_animator: {fileID: 1315692046332246767}
-  m_offset: {x: 0, y: 1.6, z: 0}
-  m_dodgeChance: 0
-  m_currentState: 2
-  m_whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 128
-  m_whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
-  m_died: 0
-  m_sightRange: 55
-  m_attackRange: 4
-  m_playerInSightRange: 0
-  m_playerInAttackRange: 0
 --- !u!195 &1361184129102678503
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -225,6 +192,78 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1751988848533710212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348191554822467161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 741860553249efb4998c7e4749595abd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 50
+  m_speed: 5
+  m_agent: {fileID: 1361184129102678503}
+  m_rb: {fileID: 4574969054359232141}
+  m_pushBackForce: 400
+  m_deathForce: 100
+  m_destroyParticle: {fileID: 2453638331243843887, guid: dffc008c1b8805843a6acf6639288537, type: 3}
+  m_animator: {fileID: 1315692046332246767}
+  m_dodgeChance: 0
+  m_deathDrop: {fileID: 0}
+  m_currentState: 0
+  m_damage: 2
+  m_attack_cooldown: 3
+  m_whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  m_whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  m_died: 0
+  m_sightRange: 55
+  m_attackRange: 1
+  m_playerInSightRange: 0
+  m_playerInAttackRange: 0
+--- !u!114 &8936545886331049612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6348191554822467161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f06c67c74d0e4d4c85b8e8ee4220c30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_health: 50
+  m_speed: 3
+  m_agent: {fileID: 1361184129102678503}
+  m_rb: {fileID: 4574969054359232141}
+  m_pushBackForce: 400
+  m_deathForce: 100
+  m_destroyParticle: {fileID: 2453638331243843887, guid: dffc008c1b8805843a6acf6639288537, type: 3}
+  m_animator: {fileID: 1315692046332246767}
+  m_dodgeChance: 0
+  m_deathDrop: {fileID: 0}
+  m_currentState: 2
+  m_damage: 0
+  m_attack_cooldown: 0
+  m_whatIsPlayer:
+    serializedVersion: 2
+    m_Bits: 128
+  m_whatIsGround:
+    serializedVersion: 2
+    m_Bits: 64
+  m_died: 0
+  m_sightRange: 55
+  m_attackRange: 4
+  m_playerInSightRange: 0
+  m_playerInAttackRange: 0
 --- !u!1 &8786777753364422152
 GameObject:
   m_ObjectHideFlags: 0

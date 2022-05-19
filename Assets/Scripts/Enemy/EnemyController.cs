@@ -12,17 +12,17 @@ public class EnemyController : State, IHealth
     public float m_speed;
     [Header("---------------Generic------------------------------------------------------------")]
     public NavMeshAgent m_agent;
-    Transform m_player;
-    private NavMeshPath m_pathToPlayer;
+    protected Transform m_player;
+    protected NavMeshPath m_pathToPlayer;
     public Rigidbody m_rb;
     public float m_pushBackForce;
     public float m_deathForce;
     public GameObject m_destroyParticle;
     public Animator m_animator;
-    bool m_canAttack = true;
-    public Vector3 m_offset;
+    protected bool m_canAttack = true; //cooldown
+   // public Vector3 m_offset; unused?
     public float m_dodgeChance = 0;
-    private bool m_takingDamage = false;
+    protected bool m_takingDamage = false;
     public System.Action<GameObject> m_deadEvent;
     [FormerlySerializedAs("m_DeathDrop")]
     [SerializeField] GameObject m_deathDrop;
@@ -39,12 +39,12 @@ public class EnemyController : State, IHealth
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
 
-    public GameObject m_attackParticle;
+   // public GameObject m_attackParticle; unused
 
-    private void Start()
+    protected void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
-        m_currentState = StateType.CHASE;
+        m_currentState = StateType.IDLE;
         m_pathToPlayer = new NavMeshPath();
         InvokeRepeating("CalculatePath", 0.5f, 0.5f);
     }
@@ -56,8 +56,10 @@ public class EnemyController : State, IHealth
         m_agent.updateRotation = false;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
+
+        ChangeState(m_currentState);
         //Check for sight and attack range
         m_playerInSightRange = Physics.CheckSphere(transform.position, m_sightRange, m_whatIsPlayer);
         m_playerInAttackRange = Physics.CheckSphere(transform.position, m_attackRange, m_whatIsPlayer);
@@ -76,18 +78,23 @@ public class EnemyController : State, IHealth
         {
             Debug.Log("calculate 3");
             m_agent.Warp(transform.position);
-            m_pathToPlayer = new NavMeshPath();
+            //m_pathToPlayer = new NavMeshPath();
+           
             m_agent.CalculatePath(m_player.position, m_pathToPlayer);
+            Debug.Log("calculate 4");
+            Debug.Log(m_agent.CalculatePath(m_player.position, m_pathToPlayer));
         }
     }
 
-    void ChasePlayer()
+    protected void ChasePlayer()
     {
+        CalculatePath();
+        Debug.Log(m_pathToPlayer.corners.Length);
         if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE)
         {
             transform.LookAt(m_player);
             Debug.Log("Chase State");
-           // m_currentState = 2;
+ 
             m_currentState = StateType.CHASE;
 
             Vector3 dir = (m_pathToPlayer.corners[1] - transform.position).normalized;
@@ -102,50 +109,31 @@ public class EnemyController : State, IHealth
         }
     }
 
-    void AttackPlayer()
+    public virtual void AttackPlayer()
     {
-        if (!m_died && m_canAttack)
-        {
-            m_canAttack = false;
-            m_rb.velocity = new Vector3(0, 0, 0);
-            m_currentState = StateType.ATTACK;
-            transform.LookAt(m_player);
-
-            Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(1.0f, 1.0f, 1.0f), transform.rotation);
-            foreach (var hitCollider in colliders)
-            {
-                //if its the player, then take damage
-                //Make sure player object tag is set to "Player"
-                if (hitCollider.CompareTag("Player"))
-                {
-                    Debug.Log("Attacking Player");
-
-                    IHealth.Damage damageStruct = new IHealth.Damage();
-                    damageStruct.damageAmount = m_damage;
-                    damageStruct.type = IHealth.DamageType.ENEMY;
-
-                    //Take Damage
-                    IHealth health = m_player.GetComponent<IHealth>();
-                    health.TakeDamage(damageStruct);
-                    m_player.GetComponent<PlayerController>().PlayerKnockBack(gameObject);
-
-
-                }
-            }
-
-            StartCoroutine(AttackCooldwon());
-        }
-
+       
     }
 
-    public void ChangeState(StateType state)
+    protected IEnumerator Wait()
+    {
+        m_agent.isStopped = true;
+        m_rb.velocity = new Vector3(0, 0, 0);
+        yield return new WaitForSeconds(1f);
+
+
+        m_takingDamage = false;
+    }
+
+    public virtual void ChangeState(StateType state)
     {
         switch(state)
         {
             case StateType.IDLE:
-                Freeze();
+                m_currentState = StateType.IDLE;
+                IdleState();
                 break;
             case StateType.CHASE:
+                m_currentState = StateType.CHASE;
                 ChasePlayer();
                 break;
             default:
@@ -153,9 +141,9 @@ public class EnemyController : State, IHealth
         }
     }
 
-    IEnumerator AttackCooldwon()
-    {
 
+    protected IEnumerator AttackCooldown()
+    {
         //  m_attackParticle.SetActive(true);
         m_animator.SetTrigger("Attack");
         yield return new WaitForSeconds(m_attack_cooldown);
@@ -164,7 +152,33 @@ public class EnemyController : State, IHealth
     }
 
 
+    virtual protected void IdleState()
+    {
+        m_agent.isStopped = true;
+        m_rb.velocity = new Vector3(0, 0, 0);
+        m_takingDamage = false;
+    }
 
+
+    //Not implemented yet
+    public void Dodge()
+    {
+        if (m_currentState != StateType.IDLE)
+        {
+            m_dodgeChance += 1 * Time.deltaTime;
+            float randomNum = Random.Range(0, 1000 - (m_dodgeChance * 200));
+            if (randomNum <= 1)
+            {
+                Debug.Log("Dodged with a percent of: " + m_dodgeChance * 10);
+                m_dodgeChance = 0;
+                gameObject.GetComponent<Animator>().SetTrigger("Dodge");
+                StartCoroutine(Wait());
+            }
+        }
+    }
+
+
+    #region Health
 
     void death()
     {
@@ -184,45 +198,6 @@ public class EnemyController : State, IHealth
         if (m_deathDrop != null)
             Instantiate(m_deathDrop, transform.position, transform.rotation, transform.parent);
         Destroy(gameObject);
-    }
-
-    IEnumerator StopMoving()
-    {
-        m_agent.isStopped = true;
-        m_currentState = StateType.IDLE;
-        m_rb.velocity = new Vector3(0, 0, 0);
-        yield return null;
-       yield return new WaitForSeconds(1f);
-  
-        m_currentState = StateType.CHASE;
-        m_takingDamage = false;
-    }
-
-    void Freeze()
-    {
-        m_agent.isStopped = true;
-        m_currentState = StateType.IDLE;
-        m_rb.velocity = new Vector3(0, 0, 0);
-       
-        m_currentState = StateType.IDLE;
-        m_takingDamage = false;
-    }
-
-    public void Dodge()
-    {
-        if(m_currentState != StateType.IDLE)
-        //if (m_currentState != 4) //if not equal to take damage state
-        {
-            m_dodgeChance += 1 * Time.deltaTime;
-            float randomNum = Random.Range(0, 1000 - (m_dodgeChance * 200));
-            if (randomNum <= 1)
-            {
-                Debug.Log("Dodged with a percent of: " + m_dodgeChance * 10);
-                m_dodgeChance = 0;
-                gameObject.GetComponent<Animator>().SetTrigger("Dodge");
-                StartCoroutine(StopMoving());
-            }
-        }
     }
 
     public int GetHealth()
@@ -248,11 +223,11 @@ public class EnemyController : State, IHealth
         yield return new WaitForSeconds(time);
         m_health -= damage.damageAmount;
         m_animator.SetTrigger("EnemyHit");
-      //  m_currentState = 4; //sets the state to take damage
+ 
         m_currentState = StateType.IDLE;
         m_takingDamage = true;
         m_rb.AddForce(-transform.forward * m_pushBackForce);
-        StartCoroutine(StopMoving());
+        StartCoroutine(Wait());
 
         if (IsDead())
         {
@@ -274,4 +249,8 @@ public class EnemyController : State, IHealth
 
         }
     }
+
+    #endregion
 }
+
+
