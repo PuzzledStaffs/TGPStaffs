@@ -45,6 +45,7 @@ public class DungenRoom : MonoBehaviour
             m_camera = Camera.main.GetComponent<DungeonCameraController>();
         }
 
+        if (m_enemies != null)
         foreach (EnemyController enemy in m_enemies)
         {
             if (enemy.IsDead())
@@ -178,7 +179,7 @@ public class DungenRoom : MonoBehaviour
             m_camera.m_locked = false;
             foreach (EnemyController enemy in m_enemies)
             {
-                if (enemy.IsDead())
+                if (enemy == null || enemy.IsDead())
                     continue;
                 enemy.ChangeState(State.StateType.CHASE);
                 //enemy.m_manager.m_idle.m_isIdle = false;
@@ -210,7 +211,7 @@ public class DungenRoom : MonoBehaviour
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
         foreach (EnemyController enemy in m_enemies)
         {
-            if (enemy.IsDead())
+            if (enemy == null || enemy.IsDead())
                 continue;
             enemy.ChangeState(State.StateType.IDLE);
             //enemy.m_manager.m_attack.enabled = false;

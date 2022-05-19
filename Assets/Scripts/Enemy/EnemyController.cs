@@ -65,7 +65,7 @@ public class EnemyController : State, IHealth
         m_agent.updateRotation = false;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         m_healthBarCanvas.position = transform.position + Vector3.forward;
         Vector3 lookPos = Camera.main.transform.position - m_healthBarCanvas.position;

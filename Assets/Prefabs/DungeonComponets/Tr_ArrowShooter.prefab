@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5623568289820642827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.19, y: -0.181, z: 0.811}
+  m_LocalPosition: {x: -0.19, y: -0.181, z: 0.85}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5623568289940875489}
@@ -174,12 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8145852ad3fa94948919049be4dd4407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ThingToShoot: {fileID: 8247497913766278947, guid: a9754b1fe9d699e47a840996e0331959, type: 3}
+  m_thingToShoot: {fileID: 8247497913766278947, guid: a9754b1fe9d699e47a840996e0331959, type: 3}
   m_dispencerBow: {fileID: 11400000, guid: 271ef4f6117252b41ab13cd710f86535, type: 2}
   m_shotDestination: {fileID: 5623568290984040041}
-  m_shotOragin: {fileID: 5623568289820642827}
+  m_shotOrigin: {fileID: 5623568289820642827}
   m_timedShots: 1
-  m_shotIntervall: 1
+  m_shotInterval: 1
 --- !u!1 &5623568290984040041
 GameObject:
   m_ObjectHideFlags: 0
