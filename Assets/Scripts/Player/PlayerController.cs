@@ -511,7 +511,7 @@ public class PlayerController : MonoBehaviour, IHealth
             m_currentInteract?.AltInteract();
             Debug.Log("Interact");
             m_currentInteract = null;
-            CheckForInterpretablesInRange();
+            CheckForInterpretablesInRange();            
         }
     }
 
