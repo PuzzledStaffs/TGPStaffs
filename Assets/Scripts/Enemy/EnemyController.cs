@@ -125,8 +125,7 @@ public class EnemyController : State, IHealth
         switch(state)
         {
             case StateType.IDLE:
-                m_currentState = StateType.IDLE;
-                StopMoving();
+                Freeze();
                 break;
             case StateType.CHASE:
                 m_currentState = StateType.CHASE;
@@ -187,6 +186,45 @@ public class EnemyController : State, IHealth
         if (m_deathDrop != null)
             Instantiate(m_deathDrop, transform.position, transform.rotation, transform.parent);
         Destroy(gameObject);
+    }
+
+    IEnumerator StopMoving()
+    {
+        m_agent.isStopped = true;
+        m_currentState = StateType.IDLE;
+        m_rb.velocity = new Vector3(0, 0, 0);
+        yield return null;
+       yield return new WaitForSeconds(1f);
+  
+        m_currentState = StateType.CHASE;
+        m_takingDamage = false;
+    }
+
+    void Freeze()
+    {
+        m_agent.isStopped = true;
+        m_currentState = StateType.IDLE;
+        m_rb.velocity = new Vector3(0, 0, 0);
+       
+        m_currentState = StateType.IDLE;
+        m_takingDamage = false;
+    }
+
+    public void Dodge()
+    {
+        if(m_currentState != StateType.IDLE)
+        //if (m_currentState != 4) //if not equal to take damage state
+        {
+            m_dodgeChance += 1 * Time.deltaTime;
+            float randomNum = Random.Range(0, 1000 - (m_dodgeChance * 200));
+            if (randomNum <= 1)
+            {
+                Debug.Log("Dodged with a percent of: " + m_dodgeChance * 10);
+                m_dodgeChance = 0;
+                gameObject.GetComponent<Animator>().SetTrigger("Dodge");
+                StartCoroutine(StopMoving());
+            }
+        }
     }
 
     public int GetHealth()
