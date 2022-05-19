@@ -45,8 +45,6 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0f;
         m_pause?.Invoke();
         m_gamePaused = true;
-
-        Debug.Log("Pause");
     }
 
     public void BackToMainMenu()
