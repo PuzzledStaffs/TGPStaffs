@@ -6,30 +6,62 @@ using UnityEngine.Serialization;
 public class PushWall : Trap
 {
 
-    [SerializeField] AnimationCurve m_wallTravelOut;
-    [FormerlySerializedAs("m_StartLocation")]
-    [SerializeField] Vector3 m_startLocation;
-    [FormerlySerializedAs("m_EndLocation")]
-    [SerializeField] Vector3 m_endLocation;
-    [FormerlySerializedAs("inter")]
-    private float m_inter = 0;
+    [SerializeField] float m_wallDelay;
+    [SerializeField] bool m_pushOnActivate;
+    [SerializeField] bool m_randomStartDeylay;
+    [SerializeField] Vector2 m_randomStartDelayInterval;
+    Coroutine m_waitCorutine;
+    Animator m_animator;
+    bool m_active;
 
+    private void Start()
+    {
+        m_animator = GetComponent<Animator>();
+        m_active = false;
+    }
 
     public override void EnterRoomEnabled()
     {
-        //Begin push pull sequence  
+        m_active = true;
+        m_animator.enabled = true;
+
+        if (m_randomStartDeylay)
+            StartCoroutine(CRandomStartDelay());
+        else
+            StartWalls();
+    }
+
+    void StartWalls()
+    {
+        if (m_pushOnActivate)
+            m_animator.SetTrigger("Push");
+        else
+            m_waitCorutine = StartCoroutine(CWallWait());
     }
 
     public override void ExitRoomDisabled()
     {
         //End push pull sequence
-
-        //Reset position
+        StopCoroutine(m_waitCorutine);
+        m_active = false;
+        m_animator.enabled = false;
     }
 
-    private IEnumerator PushWallAction()
-    {        
-        yield return new WaitForFixedUpdate();
-        m_inter += 0.1f;
+    public void WallCycleFinished()
+    {
+        if(m_active)
+            m_waitCorutine = StartCoroutine(CWallWait());
+    }
+
+    IEnumerator CWallWait()
+    {
+        yield return new WaitForSecondsRealtime(m_wallDelay + 0.5f);
+        m_animator.SetTrigger("Push");
+    }
+
+    IEnumerator CRandomStartDelay()
+    {
+        yield return new WaitForSecondsRealtime(Random.Range(m_randomStartDelayInterval.x,m_randomStartDelayInterval.y));
+        StartWalls();
     }
 }
