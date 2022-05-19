@@ -46,7 +46,8 @@ public class DungenRoom : MonoBehaviour
        
         foreach (EnemyController enemy in m_enemies)
         {
-
+            if (PersistentPrefs.GetInstance().m_currentSaveFile.GetFlag(gameObject.scene.name + "_EnemyKilled_" + enemy.gameObject.GetInstanceID()))
+                enemy.m_deleteSelf = true;
             enemy.ChangeState(State.StateType.IDLE);
             enemy.m_deadEvent += EnameyDie;
             //enemy.m_manager.m_idle.enabled = true;

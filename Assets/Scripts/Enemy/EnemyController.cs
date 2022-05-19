@@ -35,6 +35,7 @@ public class EnemyController : State, IHealth
     public LayerMask m_whatIsPlayer, m_whatIsGround;
 
     public bool m_died = false;
+    public bool m_deleteSelf = false;
     [Header("---------------States------------------------------------------------------------")]
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
@@ -43,6 +44,8 @@ public class EnemyController : State, IHealth
 
     private void Start()
     {
+        if (m_deleteSelf)
+            Destroy(gameObject);
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
         m_currentState = StateType.CHASE;
         m_pathToPlayer = new NavMeshPath();
@@ -169,6 +172,7 @@ public class EnemyController : State, IHealth
     void death()
     {
         m_died = true;
+        PersistentPrefs.GetInstance().m_currentSaveFile.SetFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.GetInstanceID(), true);
         m_deadEvent?.Invoke(gameObject);
         StartCoroutine(DestroyObject());
  

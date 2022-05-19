@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -80,5 +81,17 @@ public class SaveFile
             m_saveHours += m_saveMinutes / 60;
             m_saveMinutes %= 60;
         }
+    }
+
+    public bool GetFlag(string key)
+    {
+        if (m_flags.ContainsKey(key))
+            return m_flags[key];
+        return false;
+    }
+
+    public void SetFlag(string key, bool value)
+    {
+        m_flags[key] = value;
     }
 }
