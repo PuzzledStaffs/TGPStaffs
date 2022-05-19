@@ -15660,6 +15660,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1016268822}
     m_Modifications:
     - target: {fileID: 5623568289940875488, guid: d971b9d391db44b4fa9f6a5d421be5f0, type: 3}
+      propertyPath: m_shotInterval
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5623568289940875488, guid: d971b9d391db44b4fa9f6a5d421be5f0, type: 3}
       propertyPath: m_shotIntervall
       value: 1.25
       objectReference: {fileID: 0}
