@@ -42,6 +42,8 @@ public class Sign : MonoBehaviour, IAltInteractable
             m_signTextText.text = m_signText;
             m_canvas.enabled = true;
             m_reading = true;
+            m_playerController.m_rigidbody.velocity = Vector3.zero;
+            m_playerController.animator.SetFloat("Speed", 0);
             m_playerController.enabled = false;
             if (m_currentDungeonRoom != null)
             {

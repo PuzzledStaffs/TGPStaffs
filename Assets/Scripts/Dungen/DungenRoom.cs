@@ -46,11 +46,13 @@ public class DungenRoom : MonoBehaviour
        
         foreach (EnemyController enemy in m_enemies)
         {
-
-            enemy.ChangeState(State.StateType.IDLE);
-            enemy.m_deadEvent += EnameyDie;
-            //enemy.m_manager.m_idle.enabled = true;
-            //enemy.m_fieldOfView.enabled = false;
+            if (m_enemies != null)
+            {
+                enemy.ChangeState(State.StateType.IDLE);
+                enemy.m_deadEvent += EnameyDie;
+                //enemy.m_manager.m_idle.enabled = true;
+                //enemy.m_fieldOfView.enabled = false;
+            }
         }
         //Set door
         foreach (DungenDoor door in m_doorsIn)
@@ -175,7 +177,8 @@ public class DungenRoom : MonoBehaviour
             m_camera.m_locked = false;
             foreach (EnemyController enemy in m_enemies)
             {
-                enemy.ChangeState(State.StateType.CHASE);
+                if(enemy != null)
+                    enemy.ChangeState(State.StateType.CHASE);
                 //enemy.m_manager.m_idle.m_isIdle = false;
                 //enemy.m_manager.m_idle.enabled = false;
 
@@ -205,7 +208,8 @@ public class DungenRoom : MonoBehaviour
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
         foreach (EnemyController enemy in m_enemies)
         {
-            enemy.ChangeState(State.StateType.IDLE);
+            if(enemy != null)
+                enemy.ChangeState(State.StateType.IDLE);
             //enemy.m_manager.m_attack.enabled = false;
             //enemy.m_manager.m_idle.m_isIdle = true;
             //enemy.m_manager.m_idle.enabled = true;
