@@ -205,7 +205,7 @@ public class EnemyController : State, IHealth
         return m_health;
     }
 
-    public void TakeDamage(IHealth.Damage damage)
+    public virtual void TakeDamage(IHealth.Damage damage)
     {
         if(damage.type == IHealth.DamageType.SWORD)
         {
