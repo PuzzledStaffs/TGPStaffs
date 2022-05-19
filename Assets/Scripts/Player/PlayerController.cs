@@ -123,6 +123,8 @@ public class PlayerController : MonoBehaviour, IHealth
         m_coins = 0; //Do not use PlayerPrefs, ask Kit to add this
 
         m_altInteractToolTip.enabled = false;
+
+        
     }
 
     void OnDestroy()
@@ -502,11 +504,15 @@ public class PlayerController : MonoBehaviour, IHealth
 
     }
 
-    public void OnAltInteract()
+    public void OnEInteract(InputAction.CallbackContext context)
     {
-        m_currentInteract?.AltInteract();
-        m_currentInteract = null;
-        CheckForInterpretablesInRange();
+        if (context.started)
+        {
+            m_currentInteract?.AltInteract();
+            Debug.Log("Interact");
+            m_currentInteract = null;
+            CheckForInterpretablesInRange();
+        }
     }
 
     #endregion

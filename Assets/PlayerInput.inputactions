@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "AltInteract",
+                    "name": "EInteract",
                     "type": "Button",
                     "id": "36132f4c-1e13-4db7-b6b9-c0074ac26690",
                     "expectedControlType": "Button",
@@ -253,8 +253,8 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "AltInteract",
+                    "groups": "Keyboard And Mouse",
+                    "action": "EInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -264,8 +264,8 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "AltInteract",
+                    "groups": "Controller",
+                    "action": "EInteract",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
