@@ -8,6 +8,8 @@ public class PushWall : Trap
 
     [SerializeField] float m_wallDelay;
     [SerializeField] bool m_pushOnActivate;
+    [SerializeField] bool m_randomStartDeylay;
+    [SerializeField] Vector2 m_randomStartDelayInterval;
     Coroutine m_waitCorutine;
     Animator m_animator;
     bool m_active;
@@ -23,6 +25,14 @@ public class PushWall : Trap
         m_active = true;
         m_animator.enabled = true;
 
+        if (m_randomStartDeylay)
+            StartCoroutine(CRandomStartDelay());
+        else
+            StartWalls();
+    }
+
+    void StartWalls()
+    {
         if (m_pushOnActivate)
             m_animator.SetTrigger("Push");
         else
@@ -47,5 +57,11 @@ public class PushWall : Trap
     {
         yield return new WaitForSecondsRealtime(m_wallDelay + 0.5f);
         m_animator.SetTrigger("Push");
+    }
+
+    IEnumerator CRandomStartDelay()
+    {
+        yield return new WaitForSecondsRealtime(Random.Range(m_randomStartDelayInterval.x,m_randomStartDelayInterval.y));
+        StartWalls();
     }
 }
