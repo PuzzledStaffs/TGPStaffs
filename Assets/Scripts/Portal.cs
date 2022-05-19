@@ -11,7 +11,7 @@ public class Portal : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            SceneManager.LoadSceneAsync("DungeonBase");
+            SceneManager.LoadScene("DungeonBase");
             SceneManager.LoadSceneAsync(m_destinationScene,LoadSceneMode.Additive);
         }
     }
