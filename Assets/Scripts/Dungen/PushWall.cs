@@ -6,18 +6,20 @@ using UnityEngine.Serialization;
 public class PushWall : Trap
 {
 
-    [SerializeField] AnimationCurve m_wallTravelOut;
-    [FormerlySerializedAs("m_StartLocation")]
-    [SerializeField] Vector3 m_startLocation;
-    [FormerlySerializedAs("m_EndLocation")]
-    [SerializeField] Vector3 m_endLocation;
-    [FormerlySerializedAs("inter")]
-    private float m_inter = 0;
+    [SerializeField] float m_wallDelay;
+    [SerializeField] bool m_pushOnActivate;
+    Coroutine wait;
+    Animator m_animator;
 
+    private void Start()
+    {
+        m_animator = GetComponent<Animator>();
+    }
 
     public override void EnterRoomEnabled()
     {
-        //Begin push pull sequence  
+        if (m_pushOnActivate)
+            m_animator.SetTrigger("Push");
     }
 
     public override void ExitRoomDisabled()
@@ -27,9 +29,8 @@ public class PushWall : Trap
         //Reset position
     }
 
-    private IEnumerator PushWallAction()
-    {        
-        yield return new WaitForFixedUpdate();
-        m_inter += 0.1f;
+    public void WallCycleFinished()
+    {
+
     }
 }
