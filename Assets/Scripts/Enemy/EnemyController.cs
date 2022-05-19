@@ -36,6 +36,9 @@ public class EnemyController : State, IHealth
 
     public bool m_died = false;
     public bool m_deleteSelf = false;
+
+    public RectTransform m_healthBarCanvas;
+    public RectTransform m_healthBarMask;
     [Header("---------------States------------------------------------------------------------")]
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
@@ -61,6 +64,11 @@ public class EnemyController : State, IHealth
 
     private void Update()
     {
+        m_healthBarCanvas.position = transform.position + Vector3.forward;
+        Vector3 lookPos = Camera.main.transform.position - m_healthBarCanvas.position;
+        lookPos.x = 0;
+        lookPos.z = 0;
+        m_healthBarCanvas.rotation = Quaternion.LookRotation(lookPos);
 
         ChangeState(m_currentState);
         //Check for sight and attack range
@@ -226,6 +234,7 @@ public class EnemyController : State, IHealth
     {
         yield return new WaitForSeconds(time);
         m_health -= damage.damageAmount;
+        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
         m_animator.SetTrigger("EnemyHit");
  
         m_currentState = StateType.IDLE;

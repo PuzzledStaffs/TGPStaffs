@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class DungenRoom : MonoBehaviour
 {
-    [SerializeField] [FormerlySerializedAs("m_Camera")] private DungonCamaraControler m_camera;
+    [SerializeField] [FormerlySerializedAs("m_Camera")] private DungeonCameraController m_camera;
     [SerializeField][FormerlySerializedAs("m_RoomType")] public RoomType m_roomType;
     [SerializeField] private GameObject m_origin;
     [SerializeField][FormerlySerializedAs("m_PlayerStartingRoom")] private bool m_playerStartingRoom = false;
@@ -41,7 +41,7 @@ public class DungenRoom : MonoBehaviour
     {
         if(m_camera == null)
         {
-            m_camera = Camera.main.GetComponent<DungonCamaraControler>();
+            m_camera = Camera.main.GetComponent<DungeonCameraController>();
         }
        
         foreach (EnemyController enemy in m_enemies)

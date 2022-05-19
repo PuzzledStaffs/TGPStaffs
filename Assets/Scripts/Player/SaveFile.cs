@@ -20,6 +20,9 @@ public class SaveFile
     public float m_savePositionX;
     public float m_savePositionY;
     public float m_savePositionZ;
+    public float m_cameraPositionX;
+    public float m_cameraPositionY;
+    public float m_cameraPositionZ;
 
     public bool m_item1Unlocked;
     public bool m_item2Unlocked;
@@ -30,7 +33,7 @@ public class SaveFile
     public bool m_item7Unlocked;
     public bool m_item8Unlocked;
 
-    public Dictionary<string, bool> m_flags;
+    public List<string> m_flags;
 
     public void UnlockItem(int i)
     {
@@ -83,15 +86,20 @@ public class SaveFile
         }
     }
 
-    public bool GetFlag(string key)
+    public bool HasFlag(string key)
     {
-        if (m_flags.ContainsKey(key))
-            return m_flags[key];
-        return false;
+        return m_flags.Contains(key);
     }
 
-    public void SetFlag(string key, bool value)
+    public void AddFlag(string key)
     {
-        m_flags[key] = value;
+        if (!HasFlag(key))
+            m_flags.Add(key);
+    }
+
+    public void RemoveFlag(string key)
+    {
+        if (HasFlag(key))
+            m_flags.Remove(key);
     }
 }
