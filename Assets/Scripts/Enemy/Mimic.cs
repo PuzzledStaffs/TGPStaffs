@@ -2,15 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnemy : EnemyController
+public class Mimic : EnemyController
 {
-    void Start()
-    {
-        base.Start();
-        m_health = 30;
-    }
-
-
     override public void AttackPlayer()
     {
         if (!m_died && m_canAttack)
@@ -45,5 +38,23 @@ public class MeleeEnemy : EnemyController
             StartCoroutine(AttackCooldown());
         }
     }
+
+    override public void ChangeState(StateType state)
+    {
+        switch (state)
+        {
+            case StateType.IDLE:
+                m_currentState = StateType.IDLE;
+                Wait();
+                break;
+            case StateType.CHASE:
+                m_currentState = StateType.CHASE;
+                ChasePlayer();
+                break;
+            default:
+                break;
+        }
+    }
+
 
 }
