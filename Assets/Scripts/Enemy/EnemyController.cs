@@ -41,7 +41,7 @@ public class EnemyController : State, IHealth
 
    // public GameObject m_attackParticle; unused
 
-    protected void Start()
+    protected virtual void Start()
     {
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
         m_currentState = StateType.IDLE;
@@ -86,7 +86,7 @@ public class EnemyController : State, IHealth
         }
     }
 
-    protected void ChasePlayer()
+    protected virtual void ChasePlayer()
     {
         CalculatePath();
         Debug.Log(m_pathToPlayer.corners.Length);

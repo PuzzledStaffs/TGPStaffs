@@ -2,8 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mimic : EnemyController
+public class Mimic : EnemyController , IAltInteractable
 {
+    bool m_isActive = false;
+    [SerializeField] List<GameObject> m_ActiveChest;
+    [SerializeField] List<GameObject> m_InactiveChest;
+
+
+    public void AltInteract()
+    {
+        m_isActive = true;
+        ChangeState(StateType.CHASE);
+        SetActiveApperance(true);
+        m_rb.isKinematic = false;
+        m_rb.constraints = RigidbodyConstraints.FreezeRotation;
+
+
+
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        m_rb.isKinematic = true;        
+        m_rb.constraints = RigidbodyConstraints.FreezeAll;
+        SetActiveApperance(false);
+
+    }
+
+    void SetActiveApperance(bool active)
+    {
+        foreach (GameObject part in m_ActiveChest)
+        {
+            part.SetActive(active);
+        }
+        foreach (GameObject part in m_InactiveChest)
+        {
+            part.SetActive(!active);
+        }
+    }
+
+    protected override void ChasePlayer()
+    {
+        if(m_isActive)
+            base.ChasePlayer();
+    }
+
     override public void AttackPlayer()
     {
         if (!m_died && m_canAttack)
@@ -39,6 +83,11 @@ public class Mimic : EnemyController
         }
     }
 
+    public InteractInfo CanInteract()
+    {
+        return new InteractInfo(!m_isActive, "OpenChest", 2);
+    }
+
     override public void ChangeState(StateType state)
     {
         switch (state)
@@ -48,13 +97,20 @@ public class Mimic : EnemyController
                 Wait();
                 break;
             case StateType.CHASE:
-                m_currentState = StateType.CHASE;
-                ChasePlayer();
+                if (m_isActive)
+                {
+                    m_currentState = StateType.CHASE;
+                    ChasePlayer();
+                }
                 break;
             default:
                 break;
         }
     }
 
-
+    public override void TakeDamage(IHealth.Damage damage)
+    {
+        if(m_isActive)
+            base.TakeDamage(damage);
+    }
 }

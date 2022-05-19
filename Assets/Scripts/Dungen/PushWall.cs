@@ -42,7 +42,8 @@ public class PushWall : Trap
     public override void ExitRoomDisabled()
     {
         //End push pull sequence
-        StopCoroutine(m_waitCorutine);
+        if(m_waitCorutine != null)
+            StopCoroutine(m_waitCorutine);
         m_active = false;
         m_animator.enabled = false;
     }
