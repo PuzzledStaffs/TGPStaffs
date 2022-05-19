@@ -56,7 +56,7 @@ public class EnemyController : State, IHealth
         m_agent.updateRotation = false;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
 
         ChangeState(m_currentState);
