@@ -231,13 +231,23 @@ public class DungenRoom : MonoBehaviour
 
     private void EnameyDie(GameObject enemy)
     {
+        EnemyController controller = enemy.GetComponent<EnemyController>();
         m_enemyCount--;
-        m_enemies.Remove(enemy.GetComponent<EnemyController>());
+        m_enemies.Remove(controller);
+        controller.m_deadEvent -= EnameyDie;
         //m_enemiesIdle.Remove(enemy.GetComponent<IdleState>());
-        if(m_enemyCount <= 0)
+        if (m_enemyCount <= 0)
         {
             m_roomCleared?.Invoke();
         }
+    }
+
+    public void AddEnemy(EnemyController enemy)
+    {
+        m_enemyCount++;
+        m_enemies.Add(enemy);
+        enemy.ChangeState(State.StateType.IDLE);
+        enemy.m_deadEvent += EnameyDie;
     }
 
     #region Floor Generation

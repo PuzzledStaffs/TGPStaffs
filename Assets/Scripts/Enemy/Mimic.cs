@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Mimic : EnemyController , IAltInteractable
+public class Mimic : EnemyController
 {
+    /*
     bool m_isActive = false;
     [SerializeField] List<GameObject> m_ActiveChest;
     [SerializeField] List<GameObject> m_InactiveChest;
@@ -112,5 +113,5 @@ public class Mimic : EnemyController , IAltInteractable
     {
         if(m_isActive)
             base.TakeDamage(damage);
-    }
+    } */
 }
