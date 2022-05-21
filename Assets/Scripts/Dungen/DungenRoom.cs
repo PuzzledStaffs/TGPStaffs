@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 
 public class DungenRoom : MonoBehaviour
 {
-    [SerializeField] [FormerlySerializedAs("m_Camera")] private DungonCamaraControler m_camera;
+    [SerializeField] [FormerlySerializedAs("m_Camera")] private DungeonCameraController m_camera;
     [SerializeField][FormerlySerializedAs("m_RoomType")] public RoomType m_roomType;
     [SerializeField] private GameObject m_origin;
     [SerializeField][FormerlySerializedAs("m_PlayerStartingRoom")] private bool m_playerStartingRoom = false;
@@ -25,7 +25,7 @@ public class DungenRoom : MonoBehaviour
     PauseMenu m_pauseMenu;
     bool m_playerInRoom;
 
-    
+    private DungenManager m_dungeonManager;
 
     private void Awake()
     {
@@ -33,6 +33,7 @@ public class DungenRoom : MonoBehaviour
         m_enemies = new List<EnemyController>(m_enemyParent.GetComponentsInChildren<EnemyController>());
         //m_enemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
         m_enemyCount = m_enemies.Count;
+        m_dungeonManager = GameObject.FindGameObjectWithTag("dungeonManager").GetComponent<DungenManager>();
 
         SceneManager.sceneLoaded += onSceneLoad;
     }
@@ -41,18 +42,18 @@ public class DungenRoom : MonoBehaviour
     {
         if(m_camera == null)
         {
-            m_camera = Camera.main.GetComponent<DungonCamaraControler>();
+            m_camera = Camera.main.GetComponent<DungeonCameraController>();
         }
-       
+
+        if (m_enemies != null)
         foreach (EnemyController enemy in m_enemies)
         {
-            if (m_enemies != null)
-            {
-                enemy.ChangeState(State.StateType.IDLE);
-                enemy.m_deadEvent += EnameyDie;
-                //enemy.m_manager.m_idle.enabled = true;
-                //enemy.m_fieldOfView.enabled = false;
-            }
+            if (enemy.IsDead())
+                continue;
+            enemy.ChangeState(State.StateType.IDLE);
+            enemy.m_deadEvent += EnameyDie;
+            //enemy.m_manager.m_idle.enabled = true;
+            //enemy.m_fieldOfView.enabled = false;
         }
         //Set door
         foreach (DungenDoor door in m_doorsIn)
@@ -123,6 +124,7 @@ public class DungenRoom : MonoBehaviour
 
     public void StartRoom()
     {
+        m_dungeonManager.m_currentRoom = this;
         UnFrezeRoom();
     }
 
@@ -177,8 +179,9 @@ public class DungenRoom : MonoBehaviour
             m_camera.m_locked = false;
             foreach (EnemyController enemy in m_enemies)
             {
-                if(enemy != null)
-                    enemy.ChangeState(State.StateType.CHASE);
+                if (enemy == null || enemy.IsDead())
+                    continue;
+                enemy.ChangeState(State.StateType.CHASE);
                 //enemy.m_manager.m_idle.m_isIdle = false;
                 //enemy.m_manager.m_idle.enabled = false;
 
@@ -208,8 +211,9 @@ public class DungenRoom : MonoBehaviour
         //Called when room is first exated (Enamys etrar that need to be frozen in place befor being disabled after has moced)
         foreach (EnemyController enemy in m_enemies)
         {
-            if(enemy != null)
-                enemy.ChangeState(State.StateType.IDLE);
+            if (enemy == null || enemy.IsDead())
+                continue;
+            enemy.ChangeState(State.StateType.IDLE);
             //enemy.m_manager.m_attack.enabled = false;
             //enemy.m_manager.m_idle.m_isIdle = true;
             //enemy.m_manager.m_idle.enabled = true;

@@ -51,11 +51,8 @@ public class PersistentPrefs
             m_item8Unlocked = false,
             m_currentScene = "Overworld",
             m_isInDungeon = false,
-            m_savePositionX = 0.0f,
-            m_savePositionY = 0.0f,
-            m_savePositionZ = 0.0f,
             m_saveLoaded = false,
-            m_flags = new System.Collections.Generic.Dictionary<string, bool>()
+            m_flags = new System.Collections.Generic.List<string>()
         };
     }
 
