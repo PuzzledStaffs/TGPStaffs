@@ -42,6 +42,7 @@ public class Chest : MonoBehaviour, IAltInteractable
                     m_enemyParent.transform).GetComponent<EnemyController>();
                 m_room.AddEnemy(mimic);
                 mimic.ChangeState(State.StateType.CHASE);
+                Destroy(gameObject);
                 return;
             }
 

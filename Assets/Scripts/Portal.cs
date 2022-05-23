@@ -32,7 +32,10 @@ public class Portal : MonoBehaviour
 
     IEnumerator LoadLevelCoroutine(string currentLevel)
     {
-        m_transition.SetTrigger("Start");
+        if(m_transition != null)
+        {
+            m_transition.SetTrigger("Start");
+        }
 
         yield return new WaitForSeconds(m_transitionTime);
 

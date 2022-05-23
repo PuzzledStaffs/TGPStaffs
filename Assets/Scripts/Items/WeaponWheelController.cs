@@ -36,7 +36,7 @@ public class WeaponWheelController : MonoBehaviour
     public ItemUnlockedUI m_itemUnlockedUI;
     [FormerlySerializedAs("ItemSelectedIcon")]
     public Image m_itemSelectedIcon;
-
+    public bool m_attackAnim = false;
 
 
 
@@ -60,13 +60,14 @@ public class WeaponWheelController : MonoBehaviour
         if (m_CoolDownCounter <= 0)
         {
           m_CoolDownCounter = m_CurrentItem.MaxCooldown;
-          m_CurrentItem.LeftClickAction(m_pc);
+            m_attackAnim = !m_attackAnim;
+          m_CurrentItem.LeftClickAction(m_pc, m_attackAnim);
         }
     }
 
     public void LeftClickHoldAction()
     {
-        m_CurrentItem.LeftClickAction(m_pc);
+        m_CurrentItem.LeftClickAction(m_pc, m_attackAnim);
     }
 
     public void HoldActionCooldown()

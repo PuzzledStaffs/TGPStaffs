@@ -11,7 +11,7 @@ public class BombItem : Item
     public GameObject m_ExplosionPrefab;
     public AudioClip ExplosionSound;
 
-    public override void LeftClickAction(PlayerController pc)
+    public override void LeftClickAction(PlayerController pc, bool attackAnim)
     {
         //Create bomb - Instantiate it
         pc.animator.SetTrigger("ThrowBomb");

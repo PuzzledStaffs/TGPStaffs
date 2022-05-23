@@ -55,17 +55,18 @@ public class EnemyController : State, IHealth
         m_agent.updatePosition = false;
         m_agent.updateRotation = false;
 
-        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
-        {
-            m_died = true;
-            gameObject.SetActive(false);
-            return;
-        }
-
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
         m_currentState = StateType.IDLE;
         m_pathToPlayer = new NavMeshPath();
         InvokeRepeating("CalculatePath", 0.5f, 0.5f);
+
+      //  if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
+      //  {
+       //     m_died = true;
+       //     gameObject.SetActive(false);
+        //    return;
+       // }
+
     }
 
     protected virtual void Update()
@@ -90,7 +91,7 @@ public class EnemyController : State, IHealth
     }
     void CalculatePath()
     {
-        if (m_currentState == StateType.CHASE)
+        if (m_currentState == StateType.CHASE && gameObject.activeSelf)
         {
             m_agent.Warp(transform.position);
             //m_pathToPlayer = new NavMeshPath();
@@ -169,6 +170,7 @@ public class EnemyController : State, IHealth
 
     virtual protected void IdleState()
     {
+        if (!gameObject.activeSelf) { return; }
         m_agent.isStopped = true;
         m_rb.velocity = new Vector3(0, 0, 0);
         m_takingDamage = false;
@@ -255,6 +257,23 @@ public class EnemyController : State, IHealth
     {
         return m_health <= 0 || m_died;
     }
+
+    public void Test()
+    {
+        GameObject[] array;
+
+
+ 
+
+
+
+
+    }
+
+
+
+
+
 
     #endregion
 }
