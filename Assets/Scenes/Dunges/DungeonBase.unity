@@ -130,6 +130,49 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5677522662734030756, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.9643043
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030756, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.7745793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030756, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.030000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030756, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030756, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030756, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030756, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030778, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_text
+      value: Ahead is the Exit, you can tell because it's Gold. I hope this was worth
+        what you did to Bob. My name is Peasant Digory and I was onuce like you,
+        coming thrugh these cavens with nothing but will power and a rusty spoon.
+        I hope my gidents will see you thrugh - Digory
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030778, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_fontSize
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 5677522662734030778, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
+      propertyPath: m_enableWordWrapping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5677522663058435052, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
       propertyPath: m_Name
       value: SignTextCanvus
