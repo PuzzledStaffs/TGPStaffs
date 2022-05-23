@@ -21,6 +21,6 @@ MonoBehaviour:
   CanUse: 1
   ItemHold: 0
   TypeName: Sword
-  SwordRange: 1.4
+  SwordRange: 2.5
   MainSwordTrailColor: {r: 0, g: 0.932251, b: 1, a: 1}
   SecondarySwordTrailColor: {r: 0.00965023, g: 0, b: 1, a: 1}
