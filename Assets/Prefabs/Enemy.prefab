@@ -322,7 +322,6 @@ GameObject:
   - component: {fileID: 3613738522202238260}
   - component: {fileID: 1315692046332246767}
   - component: {fileID: 1751988848533710212}
-  - component: {fileID: 8936545886331049612}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -396,9 +395,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.46
-  m_Height: 1.1273208
+  m_Height: 3.4585474
   m_Direction: 1
-  m_Center: {x: 0.015658617, y: 0.2989626, z: 0.0046896935}
+  m_Center: {x: 0.015658613, y: 1.4645759, z: 0.0046896925}
 --- !u!95 &1315692046332246767
 Animator:
   serializedVersion: 3
@@ -450,7 +449,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   m_died: 0
-  m_deleteSelf: 0
   m_healthBarCanvas: {fileID: 2015981990684519798}
   m_healthBarMask: {fileID: 4522836332536743971}
   m_sightRange: 55
