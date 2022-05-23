@@ -39,6 +39,7 @@ public class EnemyController : State, IHealth
 
     public RectTransform m_healthBarCanvas;
     public RectTransform m_healthBarMask;
+    public string m_killedFlag = "";
     [Header("---------------States------------------------------------------------------------")]
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
@@ -56,7 +57,7 @@ public class EnemyController : State, IHealth
         m_agent.updatePosition = false;
         m_agent.updateRotation = false;
         
-        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
         {
             m_died = true;
             gameObject.SetActive(false);
@@ -201,7 +202,10 @@ public class EnemyController : State, IHealth
     void death()
     {
         m_died = true;
-        PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        if (m_killedFlag.Equals(""))
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        else
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(m_killedFlag);
         m_deadEvent?.Invoke(gameObject);
         StartCoroutine(DestroyObject());
 

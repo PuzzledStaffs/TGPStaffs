@@ -17,9 +17,9 @@ public class DungenBrige : MonoBehaviour
     private void Start()
     {
         m_animation = GetComponent<Animator>();
-        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_BridgeOpen_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_BridgeOpen_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
             m_open = true;
-        else if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_BridgeClosed_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
+        else if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_BridgeClosed_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
             m_open = false;
 
         if (m_open)
@@ -38,16 +38,16 @@ public class DungenBrige : MonoBehaviour
         m_collider.enabled = true;
         m_open = true;
         m_animation.SetTrigger("Open");
-        PersistentPrefs.GetInstance().m_currentSaveFile.RemoveFlag(gameObject.scene.name + "_BridgeClosed_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
-        PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_BridgeOpen_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        PersistentPrefs.GetInstance().m_currentSaveFile.RemoveFlag(gameObject.scene.name + "_BridgeClosed_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_BridgeOpen_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
     }
 
     public void OnClose()
     {
         m_open = false;
         m_animation.SetTrigger("Closed");
-        PersistentPrefs.GetInstance().m_currentSaveFile.RemoveFlag(gameObject.scene.name + "_BridgeOpen_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
-        PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_BridgeClosed_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        PersistentPrefs.GetInstance().m_currentSaveFile.RemoveFlag(gameObject.scene.name + "_BridgeOpen_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_BridgeClosed_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
     }
 
     public void FinishClose()

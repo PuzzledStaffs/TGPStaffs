@@ -16,9 +16,9 @@ public class Dispencer : Trap
 
     private void Start()
     {
-        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
         {
-            m_spawnedObjectsCount = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+            m_spawnedObjectsCount = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
         }
         m_TopText.text = m_maxiumInstances.ToString();
     }
@@ -38,7 +38,7 @@ public class Dispencer : Trap
         if(m_spawnedObjectsCount < m_maxiumInstances)
         {
             SpawnObject();
-            PersistentPrefs.GetInstance().m_currentSaveFile.SetIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name, m_spawnedObjectsCount);
+            PersistentPrefs.GetInstance().m_currentSaveFile.SetIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.transform.parent.parent.name + "_" + gameObject.name, m_spawnedObjectsCount);
         }
         else if(!m_NoReset)
         {       
