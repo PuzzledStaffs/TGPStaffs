@@ -1,25 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 public class TargetToShoot : MonoBehaviour, IHealth
 {
-    [FormerlySerializedAs("notShotMaterial")]
-    public Material m_notShotMaterial;
-    [FormerlySerializedAs("yesShotMaterial")]
-    public Material m_yesShotMaterial;
-    [FormerlySerializedAs("moveForce")]
-    public float m_moveForce;
+    [SerializeField] private Animator m_animator;
+    [SerializeField] private bool m_shotOnce;
+    private bool m_shot;
 
-    [Header("Components")]
-    [FormerlySerializedAs("modelRenderer")]
-    private Renderer m_modelRenderer;
-
+    public UnityEvent m_shotEvent;
 
     void Start()
     {
-        m_modelRenderer = gameObject.GetComponent<Renderer>();
+        //m_modelRenderer = gameObject.GetComponent<Renderer>();
     }
 
     public int GetHealth()
@@ -36,25 +31,14 @@ public class TargetToShoot : MonoBehaviour, IHealth
     {
         if (damage.type == IHealth.DamageType.BOW)
         {
-            StartCoroutine(GetShotCoroutine());
+            //Play spin anumation
+            m_animator.SetTrigger("Shot");
+            //Call shot
+            m_shotEvent?.Invoke();
         }
-        else if(damage.type==IHealth.DamageType.BOMB)
-        {
-            gameObject.GetComponent<Rigidbody>().AddForce(gameObject.transform.up * m_moveForce,ForceMode.Impulse);
-        }
+       
     }
 
-    IEnumerator GetShotCoroutine()
-    {
-        m_modelRenderer.material = m_yesShotMaterial;
-        yield return new WaitForSeconds(2);
-        m_modelRenderer.material = m_notShotMaterial;
-    }
+   
 
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

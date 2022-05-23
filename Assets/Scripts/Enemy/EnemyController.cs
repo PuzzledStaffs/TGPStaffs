@@ -90,7 +90,7 @@ public class EnemyController : State, IHealth
     }
     void CalculatePath()
     {
-        if (m_currentState == StateType.CHASE)
+        if (m_currentState == StateType.CHASE && !m_died)
         {
             m_agent.Warp(transform.position);
             //m_pathToPlayer = new NavMeshPath();

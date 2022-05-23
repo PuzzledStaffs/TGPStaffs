@@ -33,6 +33,12 @@ public class ExitDoor : DungenDoor
         }
     }
 
+
+    private void Start()
+    {
+        
+    }
+
     protected override IEnumerator MoveRoomCoroutine(Collider other)
     {
         m_transition.SetTrigger("Start");

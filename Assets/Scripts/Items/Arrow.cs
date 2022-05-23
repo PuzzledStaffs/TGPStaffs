@@ -20,7 +20,7 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         var Distance = Vector3.Distance(transform.position, EndPoint);
-        Debug.LogWarning("Distance: " + Distance);
+        //Debug.LogWarning("Distance: " + Distance);
         if (Distance > 1.6f)
         {
             float speed = (bowParent.ArrowSpeed + bowParent.CurrentRange) * Time.deltaTime;

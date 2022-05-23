@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Dispencer : Trap
+public class Dispencer : MonoBehaviour
 {
     [SerializeField] private GameObject m_spawnedObject;
     [SerializeField][Range(1,99)] [FormerlySerializedAs("m_MaxiumInstances")] private int m_maxiumInstances = 1;
@@ -18,14 +18,7 @@ public class Dispencer : Trap
         m_TopText.text = m_maxiumInstances.ToString();
     }
 
-    public override void EnterRoomEnabled()
-    {
-
-    }
-    public override void ExitRoomDisabled()
-    {
-
-    }
+   
 
     public void SpawnItem()
     {
