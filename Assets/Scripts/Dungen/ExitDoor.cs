@@ -8,10 +8,16 @@ public class ExitDoor : DungenDoor
 {
     [FormerlySerializedAs("ExitScene")]
     [SerializeField] private string m_exitScene;
+    public Animator m_transition;
+    public float m_transitionTime = 1f;
+    public string m_textForNextScene;
 
     protected override IEnumerator MoveRoomCoroutine(Collider other)
     {
-        
+        m_transition.SetTrigger("Start");
+
+        yield return new WaitForSeconds(m_transitionTime);
+
         SceneManager.LoadScene(m_exitScene);
         yield return new WaitForEndOfFrame();
     }
