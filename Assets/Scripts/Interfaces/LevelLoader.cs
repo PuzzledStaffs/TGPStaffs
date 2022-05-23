@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LevelLoader : MonoBehaviour
     public Animator m_transition;
     [FormerlySerializedAs("transitionTime")]
     public float m_transitionTime = 1f;
+    public string m_textForNextScene;
 
 
     // Update is called once per frame
@@ -23,6 +25,9 @@ public class LevelLoader : MonoBehaviour
     {
         if(other.tag=="Player")
         LoadNextLevel();
+        Text name = GameObject.Find("LevelLoader/RotatingMove/Image/Loading").GetComponent<Text>();
+        name.text = m_textForNextScene;
+
     }
 
     public void LoadNextLevel()
