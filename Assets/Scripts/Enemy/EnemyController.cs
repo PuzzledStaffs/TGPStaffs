@@ -54,7 +54,7 @@ public class EnemyController : State, IHealth
         m_agent = GetComponent<NavMeshAgent>();
         m_agent.updatePosition = false;
         m_agent.updateRotation = false;
-        
+
         if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
         {
             m_died = true;
@@ -90,27 +90,25 @@ public class EnemyController : State, IHealth
     }
     void CalculatePath()
     {
-        Debug.Log("calculate 2");
         if (m_currentState == StateType.CHASE)
         {
-            Debug.Log("calculate 3");
             m_agent.Warp(transform.position);
             //m_pathToPlayer = new NavMeshPath();
 
             m_agent.CalculatePath(m_player.position, m_pathToPlayer);
-            Debug.Log("calculate 4");
             Debug.Log(m_agent.CalculatePath(m_player.position, m_pathToPlayer));
         }
     }
 
     protected virtual void ChasePlayer()
     {
+        Debug.Log("Calculate Path1");
         CalculatePath();
         Debug.Log(m_pathToPlayer.corners.Length);
         if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE)
         {
             transform.LookAt(m_player);
-            Debug.Log("Chase State");
+            Debug.Log("Calculate Path2");
 
             m_currentState = StateType.CHASE;
 
@@ -242,9 +240,8 @@ public class EnemyController : State, IHealth
         m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
         m_animator.SetTrigger("EnemyHit");
 
-        m_currentState = StateType.IDLE;
-        m_takingDamage = true;
         m_rb.AddForce(-transform.forward * m_pushBackForce);
+        m_takingDamage = true;      
         StartCoroutine(Wait());
 
         if (IsDead())
