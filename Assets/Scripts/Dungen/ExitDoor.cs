@@ -12,6 +12,12 @@ public class ExitDoor : DungenDoor
     public float m_transitionTime = 1f;
     public string m_textForNextScene;
 
+
+    private void Start()
+    {
+        
+    }
+
     protected override IEnumerator MoveRoomCoroutine(Collider other)
     {
         m_transition.SetTrigger("Start");
