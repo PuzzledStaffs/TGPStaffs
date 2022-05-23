@@ -277,9 +277,6 @@ public class EnemyController : State, IHealth
 
 
 
-
-
-
     #endregion
 }
 

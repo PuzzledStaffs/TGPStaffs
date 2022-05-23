@@ -207,13 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d180287c23c54e44918f1318dbe09c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemToGive: {fileID: 11400000, guid: 049d4697718d41a4f90af4533fab306b, type: 2}
-  m_pickedUp:
-    m_PersistentCalls:
-      m_Calls: []
-  CollectParticle: {fileID: 4778128939460442851, guid: f32b8e432a63e4140b63253ad7ede138, type: 3}
-  CollectionSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
-  ItemID: 3
+  m_itemToGive: {fileID: 11400000, guid: 049d4697718d41a4f90af4533fab306b, type: 2}
+  m_collectParticle: {fileID: 4778128939460442851, guid: f32b8e432a63e4140b63253ad7ede138, type: 3}
+  m_collectionSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
+  m_itemID: 3
 --- !u!65 &6589999410195528493
 BoxCollider:
   m_ObjectHideFlags: 0
