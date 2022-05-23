@@ -107,8 +107,7 @@ public class SaveFile
 
     public void SetIntFlag(string key, int value)
     {
-        if (!HasIntFlag(key))
-            m_int_flags[key] = value;
+        m_int_flags[key] = value;
     }
 
     public int GetIntFlag(string key)
