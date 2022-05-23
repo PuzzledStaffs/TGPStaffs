@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour, IHealth
         // Loading Save Data
         if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
         {
-            PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
             transform.position = new Vector3(
                 PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX,
                 PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY,
@@ -138,6 +137,7 @@ public class PlayerController : MonoBehaviour, IHealth
     void OnDestroy()
     {
         PersistentPrefs.GetInstance().m_currentSaveFile.m_currentHealth = IsDead() ? 5 : m_health;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
     }
 
     void Update()

@@ -4,10 +4,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Dispencer : Trap
+public class Dispencer : MonoBehaviour
 {
     [SerializeField] private GameObject m_spawnedObject;
     [SerializeField][Range(1,99)] [FormerlySerializedAs("m_MaxiumInstances")] private int m_maxiumInstances = 1;
+    private int m_spawnedObjectsCount;
     List<GameObject> m_spawnedThings = new List<GameObject>();
     [SerializeField] [FormerlySerializedAs("m_TopText")] TextMeshProUGUI m_TopText;
     [SerializeField] [Tooltip("The despencer will drop only the maximum instances, any more and it will not spawn")]
@@ -15,24 +16,22 @@ public class Dispencer : Trap
 
     private void Start()
     {
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
+        {
+            m_spawnedObjectsCount = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        }
         m_TopText.text = m_maxiumInstances.ToString();
     }
 
-    public override void EnterRoomEnabled()
-    {
-
-    }
-    public override void ExitRoomDisabled()
-    {
-
-    }
+   
 
     public void SpawnItem()
     {
         //Spawn Item
-        if(m_spawnedThings.Count < m_maxiumInstances)
+        if(m_spawnedObjectsCount < m_maxiumInstances)
         {
             SpawnObject();
+            PersistentPrefs.GetInstance().m_currentSaveFile.SetIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.transform.parent.parent.name + "_" + gameObject.name, m_spawnedObjectsCount);
         }
         else if(!m_NoReset)
         {       
@@ -60,5 +59,6 @@ public class Dispencer : Trap
     private void SpawnObject()
     {
         m_spawnedThings.Add(Instantiate(m_spawnedObject, transform.forward  + transform.position, transform.rotation));
+        m_spawnedObjectsCount++;
     }
 }

@@ -31,6 +31,7 @@ public class SaveFile
     public bool m_item8Unlocked;
 
     public List<string> m_flags;
+    public Dictionary<string, int> m_int_flags;
 
     public void UnlockItem(int i)
     {
@@ -97,5 +98,26 @@ public class SaveFile
     {
         if (HasFlag(key))
             m_flags.Remove(key);
+    }
+
+    public bool HasIntFlag(string key)
+    {
+        return m_int_flags.ContainsKey(key);
+    }
+
+    public void SetIntFlag(string key, int value)
+    {
+        m_int_flags[key] = value;
+    }
+
+    public int GetIntFlag(string key)
+    {
+        return m_int_flags[key];
+    }
+
+    public void RemoveIntFlag(string key)
+    {
+        if (HasFlag(key))
+            m_int_flags.Remove(key);
     }
 }

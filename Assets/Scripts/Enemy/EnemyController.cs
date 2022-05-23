@@ -9,6 +9,7 @@ public class EnemyController : State, IHealth
 {
     [Header("---------------Enemy Statistics------------------------------------------------------------")]
     public int m_health = 50;
+    protected int m_maxHealth;
     public float m_speed;
     [Header("---------------Generic------------------------------------------------------------")]
     public NavMeshAgent m_agent;
@@ -38,6 +39,7 @@ public class EnemyController : State, IHealth
 
     public RectTransform m_healthBarCanvas;
     public RectTransform m_healthBarMask;
+    public string m_killedFlag = "";
     [Header("---------------States------------------------------------------------------------")]
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
@@ -46,7 +48,7 @@ public class EnemyController : State, IHealth
 
     protected virtual void Start()
     {
-       
+        m_maxHealth = m_health;
     }
 
     private void Awake()
@@ -200,7 +202,10 @@ public class EnemyController : State, IHealth
     void death()
     {
         m_died = true;
-        PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        if (m_killedFlag.Equals(""))
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
+        else
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(m_killedFlag);
         m_deadEvent?.Invoke(gameObject);
         StartCoroutine(DestroyObject());
 
@@ -239,7 +244,7 @@ public class EnemyController : State, IHealth
     {
         yield return new WaitForSeconds(time);
         m_health -= damage.damageAmount;
-        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
+        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / (float) m_maxHealth), 0.5f);
         m_animator.SetTrigger("EnemyHit");
 
         m_rb.AddForce(-transform.forward * m_pushBackForce);

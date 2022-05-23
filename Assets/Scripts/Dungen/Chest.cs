@@ -7,7 +7,8 @@ public class Chest : MonoBehaviour, IAltInteractable
     [Header("Chest Controls")]
     [SerializeField] bool m_open = false;
     [SerializeField] public GameObject m_lootPickup;
-
+    public int m_chestIndex;
+    public string m_flagPrefix;
 
     [Header("References")] 
    
@@ -29,6 +30,12 @@ public class Chest : MonoBehaviour, IAltInteractable
         m_isMimic = false;
     }
 
+    public void LoadOpen()
+    {
+        SwitchOpenStateModel(true);
+        m_open = true;
+    }
+
     public void AltInteract()
     {
         if(!m_open)
@@ -40,11 +47,14 @@ public class Chest : MonoBehaviour, IAltInteractable
                 m_closedModel.SetActive(false);
                 EnemyController mimic =  Instantiate(m_mimicPrefab, transform.position, transform.rotation,
                     m_enemyParent.transform).GetComponent<EnemyController>();
+                mimic.m_killedFlag = m_flagPrefix + "_MimicKilled_" + m_chestIndex;
                 m_room.AddEnemy(mimic);
                 mimic.ChangeState(State.StateType.CHASE);
                 Destroy(gameObject);
                 return;
             }
+            else
+                PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(m_flagPrefix + "_ChestOpened_" + m_chestIndex);
 
             SwitchOpenStateModel(m_open);
 
