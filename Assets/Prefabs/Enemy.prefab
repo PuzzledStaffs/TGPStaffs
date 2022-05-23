@@ -322,7 +322,6 @@ GameObject:
   - component: {fileID: 3613738522202238260}
   - component: {fileID: 1315692046332246767}
   - component: {fileID: 1751988848533710212}
-  - component: {fileID: 8936545886331049612}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -430,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741860553249efb4998c7e4749595abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 50
+  m_health: 30
   m_speed: 5
   m_agent: {fileID: 1361184129102678503}
   m_rb: {fileID: 4574969054359232141}
@@ -450,7 +449,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   m_died: 0
-  m_deleteSelf: 0
   m_healthBarCanvas: {fileID: 2015981990684519798}
   m_healthBarMask: {fileID: 4522836332536743971}
   m_sightRange: 55

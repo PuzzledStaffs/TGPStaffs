@@ -9,6 +9,7 @@ public class EnemyController : State, IHealth
 {
     [Header("---------------Enemy Statistics------------------------------------------------------------")]
     public int m_health = 50;
+    protected int m_maxHealth;
     public float m_speed;
     [Header("---------------Generic------------------------------------------------------------")]
     public NavMeshAgent m_agent;
@@ -46,7 +47,7 @@ public class EnemyController : State, IHealth
 
     protected virtual void Start()
     {
-       
+        m_maxHealth = m_health;
     }
 
     private void Awake()
@@ -239,7 +240,7 @@ public class EnemyController : State, IHealth
     {
         yield return new WaitForSeconds(time);
         m_health -= damage.damageAmount;
-        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / 20.0f), 0.5f);
+        m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / (float) m_maxHealth), 0.5f);
         m_animator.SetTrigger("EnemyHit");
 
         m_currentState = StateType.IDLE;
