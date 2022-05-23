@@ -34,7 +34,10 @@ public class DungenManager : MonoBehaviour
     private void Awake()
     {
         m_cameraRB = m_dungeonCam.transform.GetComponent<Rigidbody>();
-        m_keysCollected = m_startingKeys;
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded && PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Keys"))
+            m_keysCollected = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Keys");
+        else
+            m_keysCollected = m_startingKeys;
         UpdateKeyUI();
         if (m_keysCollected == 0)
         {
@@ -109,7 +112,8 @@ public class DungenManager : MonoBehaviour
 
     public void AddKey()
     {
-        m_keysCollected++;        
+        m_keysCollected++;
+        PersistentPrefs.GetInstance().m_currentSaveFile.SetIntFlag(gameObject.scene.name + "_Keys", m_keysCollected);
         UpdateKeyUI();
     }
 
@@ -117,7 +121,8 @@ public class DungenManager : MonoBehaviour
     {
         if(m_keysCollected > 0)
         {
-            m_keysCollected--;            
+            m_keysCollected--;
+            PersistentPrefs.GetInstance().m_currentSaveFile.SetIntFlag(gameObject.scene.name + "_Keys", m_keysCollected);
             UpdateKeyUI();
             return true;
         }

@@ -52,7 +52,8 @@ public class PersistentPrefs
             m_currentScene = "Overworld",
             m_isInDungeon = false,
             m_saveLoaded = false,
-            m_flags = new System.Collections.Generic.List<string>()
+            m_flags = new System.Collections.Generic.List<string>(),
+            m_int_flags = new System.Collections.Generic.Dictionary<string, int>()
         };
     }
 
