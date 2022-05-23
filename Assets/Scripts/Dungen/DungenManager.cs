@@ -29,6 +29,8 @@ public class DungenManager : MonoBehaviour
     [SerializeField][FormerlySerializedAs("m_TitalText")] TextMeshProUGUI m_titleText;
     private Animator m_animator;
 
+    public DungenRoom m_currentRoom;
+
     private void Awake()
     {
         m_cameraRB = m_dungeonCam.transform.GetComponent<Rigidbody>();
@@ -43,7 +45,7 @@ public class DungenManager : MonoBehaviour
         m_player.m_Death += PlayerDeath;
         m_playerLight = gameObject.GetComponentInChildren<Light>();
 
-        
+        m_currentRoom = m_startingRoom;
     }
 
     private void Start()

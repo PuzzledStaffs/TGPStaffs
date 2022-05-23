@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -29,7 +30,7 @@ public class SaveFile
     public bool m_item7Unlocked;
     public bool m_item8Unlocked;
 
-    public Dictionary<string, bool> m_flags;
+    public List<string> m_flags;
 
     public void UnlockItem(int i)
     {
@@ -62,7 +63,6 @@ public class SaveFile
             default:
                 break;
         }
-        PersistentPrefs.GetInstance().SaveSaveFile(0);
     }
 
     public void AddSecond()
@@ -80,5 +80,22 @@ public class SaveFile
             m_saveHours += m_saveMinutes / 60;
             m_saveMinutes %= 60;
         }
+    }
+
+    public bool HasFlag(string key)
+    {
+        return m_flags.Contains(key);
+    }
+
+    public void AddFlag(string key)
+    {
+        if (!HasFlag(key))
+            m_flags.Add(key);
+    }
+
+    public void RemoveFlag(string key)
+    {
+        if (HasFlag(key))
+            m_flags.Remove(key);
     }
 }

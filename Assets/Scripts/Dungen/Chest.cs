@@ -7,16 +7,26 @@ public class Chest : MonoBehaviour, IAltInteractable
     [Header("Chest Controls")]
     [SerializeField] bool m_open = false;
     [SerializeField] public GameObject m_lootPickup;
-    
-    
-    [Header("References")]
+
+
+    [Header("References")] 
+   
     [SerializeField] Transform m_dropLocation;
     [SerializeField] GameObject m_closedModel;
     [SerializeField] GameObject m_openModel;
 
+    [Header("Mimic")]
+    [Tooltip("The ability to be a mimi is controlled by chest randomizer")]
+    [SerializeField] private GameObject m_mimicPrefab;
+     public bool m_isMimic;
+    
+    public GameObject m_enemyParent;
+    public DungenRoom m_room;
+
     private void Awake()
     {
         SwitchOpenStateModel(m_open);
+        m_isMimic = false;
     }
 
     public void AltInteract()
@@ -24,6 +34,17 @@ public class Chest : MonoBehaviour, IAltInteractable
         if(!m_open)
         {
             m_open = true;
+
+            if (m_isMimic)
+            {
+                m_closedModel.SetActive(false);
+                EnemyController mimic =  Instantiate(m_mimicPrefab, transform.position, transform.rotation,
+                    m_enemyParent.transform).GetComponent<EnemyController>();
+                m_room.AddEnemy(mimic);
+                mimic.ChangeState(State.StateType.CHASE);
+                return;
+            }
+
             SwitchOpenStateModel(m_open);
 
             if(m_lootPickup != null && m_dropLocation != null)

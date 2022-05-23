@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class DungonCamaraControler : MonoBehaviour
+public class DungeonCameraController : MonoBehaviour
 {
     [FormerlySerializedAs("m_Locked")]
     public bool m_locked;

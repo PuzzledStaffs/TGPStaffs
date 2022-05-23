@@ -98,6 +98,7 @@ public class PauseMenu : MonoBehaviour
         PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX = vec.x;
         PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY = vec.y;
         PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ = vec.z;
+
         PersistentPrefs.GetInstance().SaveSaveFile(save);
         OpenSaveMenu();
     }

@@ -82,6 +82,10 @@ MonoBehaviour:
   m_dropLocation: {fileID: 596238837068093025}
   m_closedModel: {fileID: 4948342962256843188}
   m_openModel: {fileID: 8845002613532583119}
+  m_mimicPrefab: {fileID: 5300810563399229741, guid: a3e8e4f9725e05e46b1396977cff93c7, type: 3}
+  m_isMimic: 0
+  m_enemyParent: {fileID: 0}
+  m_room: {fileID: 0}
 --- !u!65 &4532785085586461371
 BoxCollider:
   m_ObjectHideFlags: 0
