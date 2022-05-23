@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class ExitDoor : DungenDoor
 {
@@ -10,7 +11,27 @@ public class ExitDoor : DungenDoor
     [SerializeField] private string m_exitScene;
     public Animator m_transition;
     public float m_transitionTime = 1f;
-    public string m_textForNextScene;
+
+    private void Awake()
+    {
+        if(m_transition == null)
+            m_transition = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Animator>();
+        
+        
+        Text name = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Text>();
+        name.text = m_textForNextScene;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            StartCoroutine(MoveRoomCoroutine(other));
+
+            //Text name = GameObject.Find("LevelLoader/RotatingMove/Image/Loading").GetComponent<Text>();
+            //name.text = m_textForNextScene;
+        }
+    }
 
     protected override IEnumerator MoveRoomCoroutine(Collider other)
     {

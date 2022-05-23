@@ -31,7 +31,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
     [SerializeField] protected bool m_locked;
     public bool m_doorActive { get; protected set; }
     [SerializeField][FormerlySerializedAs("m_ClosedOnStart")] protected bool m_closedOnStart = false;
-    protected string m_textForNextScene;
+    public string m_textForNextScene;
 
     public event Action OnEnterRoom;
     public event Action OnExitRoom;
@@ -96,8 +96,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
         {
                            
             StartCoroutine(MoveRoomCoroutine(other));
-            Text name = GameObject.Find("LevelLoader/RotatingMove/Image/Loading").GetComponent<Text>();
-            name.text = m_textForNextScene;
+            
         }
     }
 

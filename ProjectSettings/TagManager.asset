@@ -17,6 +17,7 @@ TagManager:
   - PlayerHitFeedbackUI
   - Ground
   - dungeonManager
+  - LevelLoader
   layers:
   - Default
   - TransparentFX
