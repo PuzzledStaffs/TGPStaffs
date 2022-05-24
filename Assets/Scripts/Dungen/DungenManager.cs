@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 
 public class DungenManager : MonoBehaviour
 {
-    [SerializeField][FormerlySerializedAs("m_DungenCam")] Camera m_dungeonCam;
+    [SerializeField][FormerlySerializedAs("m_DungenCam")] public Camera m_dungeonCam;
     //[SerializeField] float m_cameraSpeed;
     float m_cameraTransitionTime = 1.0f;
     [SerializeField][FormerlySerializedAs("m_KeyCountText")] TextMeshProUGUI m_keyCountText;
@@ -23,21 +23,26 @@ public class DungenManager : MonoBehaviour
     [SerializeField] PlayerController m_player;
     //[SerializeField] string m_scene;
     [Header("Room Start Info")]
-    public DungenRoom m_startingRoom;
+    private DungenRoom m_startingRoom;
     [SerializeField] string m_dungenEnterText;
     [SerializeField] Canvas m_welcomeCanvas;
     [SerializeField][FormerlySerializedAs("m_TitalText")] TextMeshProUGUI m_titleText;
     private Animator m_animator;
 
-    public DungenRoom m_currentRoom;
-
-    private void Awake()
+    private void Start()
     {
         m_cameraRB = m_dungeonCam.transform.GetComponent<Rigidbody>();
-        if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded && PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Keys"))
-            m_keysCollected = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Keys");
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
+        {
+            if (PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Keys"))
+                m_keysCollected = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Keys");
+            if (PersistentPrefs.GetInstance().m_currentSaveFile.m_currentDungeonRoom != "null")
+                SetStartingRoom(GameObject.Find(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentDungeonRoom).GetComponent<DungenRoom>());
+        }
         else
             m_keysCollected = m_startingKeys;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_currentDungeonRoom = m_startingRoom == null ? "null" : m_startingRoom.name;
+
         UpdateKeyUI();
         if (m_keysCollected == 0)
         {
@@ -48,15 +53,26 @@ public class DungenManager : MonoBehaviour
         m_player.m_Death += PlayerDeath;
         m_playerLight = gameObject.GetComponentInChildren<Light>();
 
-        m_currentRoom = m_startingRoom;
-    }
-
-    private void Start()
-    {
         GameObject.FindObjectOfType<PlayerController>().enabled = false;
         //m_TitalText.text = m_dungenEnterText;
         m_welcomeCanvas.enabled = true;
         m_animator.SetTrigger("Start");
+    }
+
+    public void SetStartingRoom(DungenRoom room)
+    {
+        if (m_startingRoom == null)
+        {
+            m_startingRoom = room;
+            m_startingRoom.m_playerStartingRoom = true;
+            m_startingRoom.m_playerInRoom = true;
+            m_startingRoom.RoomEntered();
+            m_dungeonCam.transform.position = room.m_origin.transform.position;
+            if (m_startingRoom.m_roomType == RoomType.BIG)
+                m_dungeonCam.GetComponent<DungeonCameraController>().UpdateForBigRoom();
+            SetTitalText(m_startingRoom.gameObject.scene.name.ToString());
+            //m_startingRoom.UnFrezeRoom();
+        }
     }
 
     public void Update()
@@ -80,15 +96,15 @@ public class DungenManager : MonoBehaviour
     {
         int sceneCount = SceneManager.sceneCount;
         Scene[] scenes = new Scene[sceneCount];
-        for(int i = 0; i < sceneCount; i++)
+        for (int i = 0; i < sceneCount; i++)
         {
             scenes[i] = SceneManager.GetSceneAt(i);
         }
         SceneManager.LoadScene(scenes[0].name, LoadSceneMode.Single);
         SceneManager.LoadScene(scenes[1].name, LoadSceneMode.Additive);
-        for(int i = 1; i < sceneCount; i++)
+        for (int i = 1; i < sceneCount; i++)
         {
-            
+
         }
     }
 
@@ -119,7 +135,7 @@ public class DungenManager : MonoBehaviour
 
     public bool UseKey()
     {
-        if(m_keysCollected > 0)
+        if (m_keysCollected > 0)
         {
             m_keysCollected--;
             PersistentPrefs.GetInstance().m_currentSaveFile.SetIntFlag(gameObject.scene.name + "_Keys", m_keysCollected);
@@ -136,7 +152,7 @@ public class DungenManager : MonoBehaviour
     private void UpdateKeyUI()
     {
         m_keyCountText.text = "x" + m_keysCollected.ToString();
-        if(m_keysCollected > 0)
+        if (m_keysCollected > 0)
         {
             m_keyCanvas.enabled = true;
         }

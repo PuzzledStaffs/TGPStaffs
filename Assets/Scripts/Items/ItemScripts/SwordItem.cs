@@ -38,8 +38,6 @@ public class SwordItem : Item
         {
             if (col.CompareTag("Player"))
                 continue;
-            string name = col.transform.name;
-            Debug.Log(name);
             col.GetComponent<IInteractable>()?.Interact();
             col.GetComponent<IHealth>()?.TakeDamage(damage);
         }

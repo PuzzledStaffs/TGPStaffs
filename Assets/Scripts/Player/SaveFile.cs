@@ -15,6 +15,7 @@ public class SaveFile
     public int m_currentHealth;
     public string m_currentScene;
     public bool m_isInDungeon;
+    public string m_currentDungeonRoom;
 
     // Vector3 is not serilizable so must store seperately
     public float m_savePositionX;

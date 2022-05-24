@@ -51,7 +51,7 @@ public class EnemyController : State, IHealth
         m_maxHealth = m_health;
     }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         m_agent = GetComponent<NavMeshAgent>();
         m_agent.updatePosition = false;
@@ -62,12 +62,12 @@ public class EnemyController : State, IHealth
         m_pathToPlayer = new NavMeshPath();
         InvokeRepeating("CalculatePath", 0.5f, 0.5f);
 
-      //  if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.scene.name + "_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
-      //  {
-       //     m_died = true;
-       //     gameObject.SetActive(false);
-        //    return;
-       // }
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_EnemyKilled_" + gameObject.transform.parent.parent.name + "_" + gameObject.name))
+        {
+            m_died = true;
+            gameObject.SetActive(false);
+            return;
+        }
 
     }
 
@@ -99,19 +99,19 @@ public class EnemyController : State, IHealth
             //m_pathToPlayer = new NavMeshPath();
 
             m_agent.CalculatePath(m_player.position, m_pathToPlayer);
-            Debug.Log(m_agent.CalculatePath(m_player.position, m_pathToPlayer));
+            //Debug.Log(m_agent.CalculatePath(m_player.position, m_pathToPlayer));
         }
     }
 
     protected virtual void ChasePlayer()
     {
-        Debug.Log("Calculate Path1");
+        //Debug.Log("Calculate Path1");
         CalculatePath();
-        Debug.Log(m_pathToPlayer.corners.Length);
+        //Debug.Log(m_pathToPlayer.corners.Length);
         if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE)
         {
             transform.LookAt(m_player);
-            Debug.Log("Calculate Path2");
+            //Debug.Log("Calculate Path2");
 
             m_currentState = StateType.CHASE;
 
