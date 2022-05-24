@@ -32,31 +32,36 @@ public class DungeonCameraController : MonoBehaviour
                 case RoomType.NORMAL:
                     break;
                 case RoomType.BIG:
-                    Vector3 camaraPos = m_player.transform.position;                 
-                    
-                    if(m_player.transform.position.x > m_roomOrigin.x + m_bigRoomCamLimit.x)
-                    {
-                        camaraPos.x = m_roomOrigin.x + m_bigRoomCamLimit.x;
-                    }
-                    else if(m_player.transform.position.x < m_roomOrigin.x - m_bigRoomCamLimit.x)
-                    {
-                        camaraPos.x = m_roomOrigin.x  - m_bigRoomCamLimit.x;
-                    }
-
-                    if (m_player.transform.position.z > m_roomOrigin.z + m_bigRoomCamLimit.y)
-                    {
-                        camaraPos.z = m_roomOrigin.z + m_bigRoomCamLimit.y;
-                    }
-                    else if (m_player.transform.position.z < m_roomOrigin.z - m_bigRoomCamLimit.y)
-                    {
-                        camaraPos.z = m_roomOrigin.z - m_bigRoomCamLimit.y;
-                    }
-
-                    camaraPos.y = m_roomOrigin.y;
-                    transform.position = camaraPos;
+                    UpdateForBigRoom();
                     break;
             }
         }
+    }
+
+    public void UpdateForBigRoom()
+    {
+        Vector3 camaraPos = m_player.transform.position;
+
+        if (m_player.transform.position.x > m_roomOrigin.x + m_bigRoomCamLimit.x)
+        {
+            camaraPos.x = m_roomOrigin.x + m_bigRoomCamLimit.x;
+        }
+        else if (m_player.transform.position.x < m_roomOrigin.x - m_bigRoomCamLimit.x)
+        {
+            camaraPos.x = m_roomOrigin.x - m_bigRoomCamLimit.x;
+        }
+
+        if (m_player.transform.position.z > m_roomOrigin.z + m_bigRoomCamLimit.y)
+        {
+            camaraPos.z = m_roomOrigin.z + m_bigRoomCamLimit.y;
+        }
+        else if (m_player.transform.position.z < m_roomOrigin.z - m_bigRoomCamLimit.y)
+        {
+            camaraPos.z = m_roomOrigin.z - m_bigRoomCamLimit.y;
+        }
+
+        camaraPos.y = m_roomOrigin.y;
+        transform.position = camaraPos;
     }
 }
 

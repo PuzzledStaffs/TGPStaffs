@@ -10,8 +10,8 @@ public class DungenRoom : MonoBehaviour
 {
     [SerializeField] [FormerlySerializedAs("m_Camera")] private DungeonCameraController m_camera;
     [SerializeField][FormerlySerializedAs("m_RoomType")] public RoomType m_roomType;
-    [SerializeField] private GameObject m_origin;
-    [SerializeField][FormerlySerializedAs("m_PlayerStartingRoom")] private bool m_playerStartingRoom = false;
+    [SerializeField] public GameObject m_origin;
+    [SerializeField][FormerlySerializedAs("m_PlayerStartingRoom")] public bool m_playerStartingRoom = false;
     public List<DungenDoor> m_doorsIn;
     public List<DungenDoor> m_doorsOut;
 
@@ -23,7 +23,7 @@ public class DungenRoom : MonoBehaviour
     [FormerlySerializedAs("m_roomCleard")]  public UnityEvent m_roomCleared;
     int m_enemyCount;
     PauseMenu m_pauseMenu;
-    bool m_playerInRoom;
+    public bool m_playerInRoom;
 
     private DungenManager m_dungeonManager;
 
@@ -34,16 +34,13 @@ public class DungenRoom : MonoBehaviour
         //m_enemiesIdle = new List<IdleState>(m_EneamyPerent.GetComponentsInChildren<IdleState>());
         m_enemyCount = m_enemies.Count;
         m_dungeonManager = GameObject.FindGameObjectWithTag("dungeonManager").GetComponent<DungenManager>();
+        m_camera = m_dungeonManager.m_dungeonCam.GetComponent<DungeonCameraController>();
 
         SceneManager.sceneLoaded += onSceneLoad;
     }
 
     private void Start()
     {
-        if(m_camera == null)
-        {
-            m_camera = Camera.main.GetComponent<DungeonCameraController>();
-        }
 
         if (m_enemies != null)
         foreach (EnemyController enemy in m_enemies)
@@ -81,17 +78,6 @@ public class DungenRoom : MonoBehaviour
         m_pauseMenu.m_pause += FreezeExitingRoom;
         m_pauseMenu.m_unPause += UnFrezeRoom;
 
-        if (m_playerStartingRoom)
-        {
-            RoomEntered();
-            m_camera.transform.position = m_origin.transform.position;
-            
-        }
-        else
-        {
-            FreezeExitingRoom();
-            RoomExited();
-        }
         if (m_enemyCount <= 0)
         {
             m_roomCleared?.Invoke();
@@ -99,16 +85,16 @@ public class DungenRoom : MonoBehaviour
 
         if (m_playerStartingRoom)
         {
-            m_playerInRoom = true;
-            DungenManager manager = GameObject.FindWithTag("dungeonManager").GetComponent<DungenManager>();
-            if (manager != null)
+            if (m_dungeonManager != null)
             {
-                manager.m_startingRoom = this;
-                manager.SetTitalText(gameObject.scene.name.ToString());
+                m_dungeonManager.SetStartingRoom(this);
             }
         }
         else
-            m_playerInRoom = false;
+        {
+            FreezeExitingRoom();
+            RoomExited();
+        }
     }
 
     void onSceneLoad(Scene scene, LoadSceneMode mode)
@@ -124,7 +110,6 @@ public class DungenRoom : MonoBehaviour
 
     public void StartRoom()
     {
-        m_dungeonManager.m_currentRoom = this;
         UnFrezeRoom();
     }
 
@@ -161,8 +146,10 @@ public class DungenRoom : MonoBehaviour
     #endregion
 
     #region RoomJoiningControls
-    private void RoomEntered()
+    public void RoomEntered()
     {
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_currentDungeonRoom = gameObject.name;
+
         //Called First when player enter room
         m_camera.m_currentRoomType = m_roomType;
         m_camera.m_roomOrigin = m_origin.transform.position;

@@ -125,7 +125,7 @@ public class MenuButtons : MonoBehaviour
             if (PersistentPrefs.GetInstance().m_currentSaveFile.m_isInDungeon)
             {
                 SceneManager.LoadScene("DungeonBase");
-                SceneManager.LoadSceneAsync(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene, LoadSceneMode.Additive);
+                SceneManager.LoadScene(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene, LoadSceneMode.Additive);
             }
             else
                 SceneManager.LoadScene(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentScene);

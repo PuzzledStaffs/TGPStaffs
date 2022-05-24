@@ -40,6 +40,6 @@ public class Portal : MonoBehaviour
         yield return new WaitForSeconds(m_transitionTime);
 
         SceneManager.LoadScene(currentLevel);
-        SceneManager.LoadSceneAsync(m_destinationScene, LoadSceneMode.Additive);
+        SceneManager.LoadScene(m_destinationScene, LoadSceneMode.Additive);
     }
 }
