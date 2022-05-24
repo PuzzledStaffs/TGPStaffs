@@ -12121,6 +12121,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2047466674}
     m_Modifications:
     - target: {fileID: 1653178168452529925, guid: 95aa8ec5e4d1e1043847eee8303a7e31, type: 3}
+      propertyPath: m_exitScene
+      value: EndScreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653178168452529925, guid: 95aa8ec5e4d1e1043847eee8303a7e31, type: 3}
       propertyPath: m_transition
       value: 
       objectReference: {fileID: 0}
