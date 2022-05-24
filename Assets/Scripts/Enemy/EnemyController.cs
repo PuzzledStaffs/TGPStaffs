@@ -256,6 +256,11 @@ public class EnemyController : State, IHealth
         return m_health <= 0 || m_died;
     }
 
+    public void toggleHeathBar(bool shown)
+    {
+        m_healthBarCanvas.GetComponent<Canvas>().enabled = shown;
+    }
+
     #endregion
 }
 

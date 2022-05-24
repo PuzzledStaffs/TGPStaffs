@@ -182,6 +182,7 @@ public class DungenRoom : MonoBehaviour
                 if (enemy == null || enemy.IsDead())
                     continue;
                 enemy.ChangeState(State.StateType.CHASE);
+                enemy.toggleHeathBar(true);
                 //enemy.m_manager.m_idle.m_isIdle = false;
                 //enemy.m_manager.m_idle.enabled = false;
 
@@ -214,6 +215,7 @@ public class DungenRoom : MonoBehaviour
             if (enemy == null || enemy.IsDead())
                 continue;
             enemy.ChangeState(State.StateType.IDLE);
+            enemy.toggleHeathBar(false);
             //enemy.m_manager.m_attack.enabled = false;
             //enemy.m_manager.m_idle.m_isIdle = true;
             //enemy.m_manager.m_idle.enabled = true;
@@ -223,11 +225,11 @@ public class DungenRoom : MonoBehaviour
 
 
         foreach (Trap trap in m_traps)
-            {
+        {
             if (trap != null)
-                {
+            {
                 trap.ExitRoomDisabled();
-                }
+            }
         }
       
     }
