@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour, IHealth
         // Loading Save Data
         if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
         {
-            PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
             transform.position = new Vector3(
                 PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX,
                 PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY,
@@ -138,33 +137,35 @@ public class PlayerController : MonoBehaviour, IHealth
     void OnDestroy()
     {
         PersistentPrefs.GetInstance().m_currentSaveFile.m_currentHealth = IsDead() ? 5 : m_health;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded = false;
     }
 
     void Update()
     {
-        if (m_timeLeftUntilTick <= 0.0f)
-        {
-            m_timeLeftUntilTick += 1.0f;
-            PersistentPrefs.GetInstance().m_currentSaveFile.AddSecond();
-        }
-        m_timeLeftUntilTick -= Time.deltaTime;
 
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
-        {
-            animator.SetBool("Attack1", false);
-        }
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
-        {
-            animator.SetBool("Attack2", false);
-            SwordItem.m_noOfClicks = 0;
-            Sword.SetActive(false);
-        }
+        //if (m_timeLeftUntilTick <= 0.0f)
+        //{
+        //    m_timeLeftUntilTick += 1.0f;
+        //    PersistentPrefs.GetInstance().m_currentSaveFile.AddSecond();
+        //}
+        //m_timeLeftUntilTick -= Time.deltaTime;
 
-        if (Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
-        {
-            SwordItem.m_noOfClicks = 0;
-            Sword.SetActive(false);
-        }
+        //if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
+        //{
+        //    animator.SetBool("Attack1", false);
+        //}
+        //if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
+        //{
+        //    animator.SetBool("Attack2", false);
+        //    SwordItem.m_noOfClicks = 0;
+        //    Sword.SetActive(false);
+        //}
+
+        //if (Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
+        //{
+        //    SwordItem.m_noOfClicks = 0;
+        //    Sword.SetActive(false);
+        //}
 
         if (m_weaponWheelController.isWheelOpen)
         {

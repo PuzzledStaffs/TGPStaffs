@@ -14,7 +14,7 @@ public class Item : ScriptableObject
     public bool ItemHold;
     public string TypeName;
 
-    public virtual void LeftClickAction(PlayerController pc)
+    public virtual void LeftClickAction(PlayerController pc, bool attackAnim)
     {
 
     }

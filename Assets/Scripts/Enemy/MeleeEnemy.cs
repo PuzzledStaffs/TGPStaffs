@@ -4,13 +4,6 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyController
 {
-    void Start()
-    {
-        base.Start();
-        m_health = 30;
-    }
-
-
     override public void AttackPlayer()
     {
         if (!m_died && m_canAttack)

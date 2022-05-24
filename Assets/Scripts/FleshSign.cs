@@ -8,7 +8,7 @@ public class FleshSign : Sign
     private TextMeshProUGUI m_nameText;
 
     [SerializeField] string m_displyName;
-    [SerializeField] private Animator m_animator;
+   // [SerializeField] private Animator m_animator;
 
     public override void AltInteract()
     {
@@ -16,12 +16,12 @@ public class FleshSign : Sign
         if (m_reading)
         {
             m_nameText.text = m_displyName;
-            m_animator.SetBool("Talking", true);
+            //m_animator.SetBool("Talking", true);
         }
         else
         {
             m_nameText.text = "";
-            m_animator.SetBool("Talking", false);
+           // m_animator.SetBool("Talking", false);
         }
     }
 

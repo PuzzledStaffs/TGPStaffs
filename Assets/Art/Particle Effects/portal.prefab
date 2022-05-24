@@ -4753,6 +4753,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82051826c600d4a46bb15a956b2b04c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_transition: {fileID: 0}
+  m_transitionTime: 1
+  m_textForNextScene: 
+  m_destinationScene: 
 --- !u!1 &1817046680323596
 GameObject:
   m_ObjectHideFlags: 0
