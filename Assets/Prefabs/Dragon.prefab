@@ -267,6 +267,7 @@ MonoBehaviour:
   m_died: 0
   m_healthBarCanvas: {fileID: 580986156083431201}
   m_healthBarMask: {fileID: 6176629299864822779}
+  m_killedFlag: 
   m_sightRange: 60
   m_attackRange: 10
   m_playerInSightRange: 0
