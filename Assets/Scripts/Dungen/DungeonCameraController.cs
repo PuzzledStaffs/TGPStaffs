@@ -40,28 +40,28 @@ public class DungeonCameraController : MonoBehaviour
 
     public void UpdateForBigRoom()
     {
-        Vector3 camaraPos = m_player.transform.position;
+        Vector3 cameraPos = m_player.transform.position;
 
         if (m_player.transform.position.x > m_roomOrigin.x + m_bigRoomCamLimit.x)
         {
-            camaraPos.x = m_roomOrigin.x + m_bigRoomCamLimit.x;
+            cameraPos.x = m_roomOrigin.x + m_bigRoomCamLimit.x;
         }
         else if (m_player.transform.position.x < m_roomOrigin.x - m_bigRoomCamLimit.x)
         {
-            camaraPos.x = m_roomOrigin.x - m_bigRoomCamLimit.x;
+            cameraPos.x = m_roomOrigin.x - m_bigRoomCamLimit.x;
         }
 
         if (m_player.transform.position.z > m_roomOrigin.z + m_bigRoomCamLimit.y)
         {
-            camaraPos.z = m_roomOrigin.z + m_bigRoomCamLimit.y;
+            cameraPos.z = m_roomOrigin.z + m_bigRoomCamLimit.y;
         }
         else if (m_player.transform.position.z < m_roomOrigin.z - m_bigRoomCamLimit.y)
         {
-            camaraPos.z = m_roomOrigin.z - m_bigRoomCamLimit.y;
+            cameraPos.z = m_roomOrigin.z - m_bigRoomCamLimit.y;
         }
 
-        camaraPos.y = m_roomOrigin.y;
-        transform.position = camaraPos;
+        cameraPos.y = m_roomOrigin.y;
+        transform.position = cameraPos;
     }
 }
 

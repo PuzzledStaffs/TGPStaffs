@@ -33,6 +33,10 @@ public class Switch : MonoBehaviour, IAltInteractable
     {
         m_modelRenderer = m_model.GetComponent<Renderer>();
         m_dungenManager = GameObject.FindObjectOfType<DungenManager>();
+
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_SwitchUnlocked_" + gameObject.transform.parent.name + "_" + gameObject.name))
+            m_locked = false;
+
         ToggleLocks(m_locked);
     }
 
@@ -68,6 +72,7 @@ public class Switch : MonoBehaviour, IAltInteractable
             if (m_dungenManager.UseKey())
             {
                 m_locked = false;
+                PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_SwitchUnlocked_" + gameObject.transform.parent.name + "_" + gameObject.name);
                 ToggleLocks(false);
             }
             else

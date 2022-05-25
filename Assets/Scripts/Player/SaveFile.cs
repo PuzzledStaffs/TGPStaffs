@@ -22,6 +22,10 @@ public class SaveFile
     public float m_savePositionY;
     public float m_savePositionZ;
 
+    public float m_overworldRespawnPositionX;
+    public float m_overworldRespawnPositionY;
+    public float m_overworldRespawnPositionZ;
+
     public bool m_item1Unlocked;
     public bool m_item2Unlocked;
     public bool m_item3Unlocked;

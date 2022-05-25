@@ -26,7 +26,6 @@ public class BowItem : Item
     {
         pc.animator.SetBool("BowDraw", true);
         pc.animator.SetFloat("BowWalkSpeed", pc.m_rigidbody.velocity.magnitude / 10);
-        Debug.Log(pc.m_rigidbody.velocity.magnitude / 10);
         if (PlayOnce)
         {
            // pc.animator.SetBool("BowDraw", true);
@@ -42,7 +41,6 @@ public class BowItem : Item
         pc.BowLineRenderer.SetPosition(1, new Vector3(0, 0, CurrentRange - StartingRange));
         pc.BowLineRenderer.gameObject.transform.rotation = pc.m_model.transform.rotation;
         Debug.DrawRay(pc.transform.position, pc.m_model.transform.forward * CurrentRange, Color.red);
-        Debug.Log("BOW FIRE!");
     }
 
     public override void ReleaseAction(PlayerController pc)
@@ -56,7 +54,6 @@ public class BowItem : Item
         CurrentRange = StartingRange;
         PlayOnce = true;
         pc.gameObject.GetComponent<AudioSource>().PlayOneShot(ReleaseSound);
-        Debug.Log("BOW RELEASE!");
     }
 }
 
