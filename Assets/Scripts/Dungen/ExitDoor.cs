@@ -12,8 +12,10 @@ public class ExitDoor : DungenDoor
     public Animator m_transition;
     public float m_transitionTime = 1f;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         if(m_transition == null)
             m_transition = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Animator>();
         
@@ -21,6 +23,8 @@ public class ExitDoor : DungenDoor
         Text name = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Text>();
         name.text = m_textForNextScene;
     }
+
+    
 
     private void OnTriggerEnter(Collider other)
     {
@@ -73,11 +77,14 @@ public class ExitDoor : DungenDoor
 
     public override void AltInteract()
     {
-        if (m_dungenManager.UseKey())
+        if (m_locked)
         {
-            m_locked = false;
-            HideLocks();
-            OpenDoor();
+            if (m_dungenManager.UseKey())
+            {
+                m_locked = false;
+                HideLocks();
+                OpenDoor();
+            }
         }
     }
 

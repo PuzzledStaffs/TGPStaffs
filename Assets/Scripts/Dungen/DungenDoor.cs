@@ -39,7 +39,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
     public event Action OnFrezzeExited;
 
 
-    private void Awake()
+    protected virtual void Awake()
     {
         m_dungenManager = GameObject.FindObjectOfType<DungenManager>();       
         m_doorCollider = transform.GetComponent<BoxCollider>();
