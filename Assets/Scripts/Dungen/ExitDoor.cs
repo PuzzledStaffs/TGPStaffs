@@ -7,10 +7,12 @@ using UnityEngine.UI;
 
 public class ExitDoor : DungenDoor
 {
+    [Header("Duexit Controles")]
     [FormerlySerializedAs("ExitScene")]
     [SerializeField] private string m_exitScene;
     public Animator m_transition;
     public float m_transitionTime = 1f;
+    public string m_textForNextScene;
 
     protected override void Awake()
     {

@@ -31,7 +31,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
     [SerializeField] protected bool m_locked;
     public bool m_doorActive { get; protected set; }
     [SerializeField][FormerlySerializedAs("m_ClosedOnStart")] protected bool m_closedOnStart = false;
-    public string m_textForNextScene;
+
 
     public event Action OnEnterRoom;
     public event Action OnExitRoom;
