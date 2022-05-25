@@ -1110,7 +1110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -32.40448
+      value: -26.59616
       objectReference: {fileID: 0}
     - target: {fileID: 8655418251543230784, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_Name
@@ -1123,12 +1123,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2109082283556361527, guid: 680754e104d82754684c3f27f17deace, type: 3}
   m_PrefabInstance: {fileID: 1433405683}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1433405685}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1077a413b8f908a4084041dd3d97e6b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1433405685 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8655418251543230784, guid: 680754e104d82754684c3f27f17deace, type: 3}
+  m_PrefabInstance: {fileID: 1433405683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1616883317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1369,7 +1374,7 @@ MonoBehaviour:
   m_locked: 0
   m_currentRoomType: 1
   m_roomOrigin: {x: 0, y: 11.5, z: 17.13}
-  m_player: {fileID: 0}
+  m_player: {fileID: 1433405685}
   m_bigRoomCamLimit: {x: 11, y: 5.62}
 --- !u!1 &6340215732902239980
 GameObject:

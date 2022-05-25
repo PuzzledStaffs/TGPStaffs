@@ -94,13 +94,16 @@ public class PlayerController : MonoBehaviour, IHealth
                 PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX,
                 PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY,
                 PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ);
-            if (gameObject.scene.name.Equals("DungeonBase"))
-            {
-
-            }
         }
         else
         {
+            if (!gameObject.scene.name.Equals("DungeonBase"))
+            {
+                transform.position = new Vector3(
+                    PersistentPrefs.GetInstance().m_currentSaveFile.m_overworldRespawnPositionX,
+                    PersistentPrefs.GetInstance().m_currentSaveFile.m_overworldRespawnPositionY,
+                    PersistentPrefs.GetInstance().m_currentSaveFile.m_overworldRespawnPositionZ);
+            }
             PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionX = transform.position.x;
             PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionY = transform.position.y;
             PersistentPrefs.GetInstance().m_currentSaveFile.m_savePositionZ = transform.position.z;
@@ -142,13 +145,13 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
-
-        //if (m_timeLeftUntilTick <= 0.0f)
-        //{
-        //    m_timeLeftUntilTick += 1.0f;
-        //    PersistentPrefs.GetInstance().m_currentSaveFile.AddSecond();
-        //}
-        //m_timeLeftUntilTick -= Time.deltaTime;
+        // Adds time to Playtime - DON'T COMMENT
+        if (m_timeLeftUntilTick <= 0.0f)
+        {
+            m_timeLeftUntilTick += 1.0f;
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddSecond();
+        }
+        m_timeLeftUntilTick -= Time.deltaTime;
 
         //if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
         //{
