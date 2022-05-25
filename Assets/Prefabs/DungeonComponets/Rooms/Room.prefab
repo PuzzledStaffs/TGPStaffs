@@ -1274,6 +1274,7 @@ MonoBehaviour:
   m_roomCleared:
     m_PersistentCalls:
       m_Calls: []
+  m_playerInRoom: 0
   tilePrefab: {fileID: 890995243919376708, guid: 075f3314c83bb214283a7373e6d8bb33, type: 3}
   lavaTilePrefab: {fileID: 6536936591211894330, guid: 709e2ec23eeb8d045a8785d1592b4b40, type: 3}
   boxTilePrefab: {fileID: 1922608210075214041, guid: 921e64ccf668d8b4b8816d29e3f5dad0, type: 3}
@@ -1303,7 +1304,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8926693824229221633}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 11.5, z: 0}
+  m_LocalPosition: {x: 0, y: 12.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8926693823954975626}
