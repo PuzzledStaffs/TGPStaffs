@@ -4162,8 +4162,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_open: 1
-  m_closedXRotation: 0
-  m_openXRotation: 50
+  m_newRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!4 &233442377 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4531497067768824393, guid: 7e5f449750705444c8c018395998b1a4, type: 3}
@@ -44751,6 +44750,18 @@ PrefabInstance:
     - target: {fileID: 732062778860118648, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
       propertyPath: m_textForNextScene
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392922176419241193, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.535
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392922176419241193, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.95
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392922176419241193, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 5572123481427565552, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
       propertyPath: InitialModule.startSizeY.scalar
