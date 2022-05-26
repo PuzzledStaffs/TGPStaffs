@@ -495,7 +495,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a0d39586dde7af40a1bf802b1440516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 50
+  m_health: 10
   m_speed: 3
   m_agent: {fileID: 246264534360114835}
   m_rb: {fileID: 3383473906724884985}
@@ -506,7 +506,7 @@ MonoBehaviour:
   m_dodgeChance: 0
   m_deathDrop: {fileID: 5983358334720439236, guid: ec556f80153c7304da5c241abeacfe05, type: 3}
   m_currentState: 0
-  m_damage: 0
+  m_damage: 1
   m_attack_cooldown: 3
   m_whatIsPlayer:
     serializedVersion: 2
@@ -517,6 +517,7 @@ MonoBehaviour:
   m_died: 0
   m_healthBarCanvas: {fileID: 9169293226734854490}
   m_healthBarMask: {fileID: 1742719616170178275}
+  m_killedFlag: 
   m_sightRange: 55
   m_attackRange: 1
   m_playerInSightRange: 0

@@ -245,7 +245,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 312d5eec59f941c479dfd3fb175a245c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 5
+  m_health: 10
   m_speed: 5
   m_agent: {fileID: 1191027764745919425}
   m_rb: {fileID: 1191027764745918527}
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_dodgeChance: 0
   m_deathDrop: {fileID: 0}
   m_currentState: 2
-  m_damage: 1
+  m_damage: 2
   m_attack_cooldown: 3
   m_whatIsPlayer:
     serializedVersion: 2
@@ -274,6 +274,7 @@ MonoBehaviour:
   m_playerInAttackRange: 0
   m_projectile: {fileID: 2520354385350476971, guid: c0dd7626047d0fb4c996904fe1327e1e, type: 3}
   m_model: {fileID: 8384976017431049034}
+  m_cooldown: 0
 --- !u!195 &1191027764745919425
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -184,7 +184,7 @@ MonoBehaviour:
   m_dodgeChance: 0
   m_deathDrop: {fileID: 0}
   m_currentState: 0
-  m_damage: 2
+  m_damage: 3
   m_attack_cooldown: 3
   m_whatIsPlayer:
     serializedVersion: 2
