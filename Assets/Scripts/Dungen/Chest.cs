@@ -20,7 +20,11 @@ public class Chest : MonoBehaviour, IAltInteractable
     [Tooltip("The ability to be a mimi is controlled by chest randomizer")]
     [SerializeField] private GameObject m_mimicPrefab;
      public bool m_isMimic;
-    
+
+    [Header("Audio")]
+    public AudioSource m_audioSource;
+    public AudioClip m_chestOpen;
+
     public GameObject m_enemyParent;
     public DungenRoom m_room;
 
@@ -41,7 +45,7 @@ public class Chest : MonoBehaviour, IAltInteractable
         if(!m_open)
         {
             m_open = true;
-
+            m_audioSource.PlayOneShot(m_chestOpen);
             if (m_isMimic)
             {
                 m_closedModel.SetActive(false);
