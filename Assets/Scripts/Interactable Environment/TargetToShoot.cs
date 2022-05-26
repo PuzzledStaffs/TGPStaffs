@@ -14,6 +14,7 @@ public class TargetToShoot : MonoBehaviour, IHealth
 
     void Start()
     {
+        m_shot = false;
         //m_modelRenderer = gameObject.GetComponent<Renderer>();
     }
 
@@ -29,12 +30,14 @@ public class TargetToShoot : MonoBehaviour, IHealth
 
     public void TakeDamage(IHealth.Damage damage)
     {
-        if (damage.type == IHealth.DamageType.BOW)
+        if (damage.type == IHealth.DamageType.BOW && !m_shot)
         {
             //Play spin anumation
             m_animator.SetTrigger("Shot");
             //Call shot
             m_shotEvent?.Invoke();
+
+            m_shot = true;
         }
        
     }
