@@ -58,7 +58,7 @@ public class MenuButtons : MonoBehaviour
     public void NewGame()
     {
         PersistentPrefs.GetInstance().LoadDefaultSave();
-        SceneManager.LoadScene("Overworld");
+        SceneManager.LoadScene("OverworldV2");
     }
 
     public void Quit()
