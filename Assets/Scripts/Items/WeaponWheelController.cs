@@ -145,15 +145,8 @@ public class WeaponWheelController : MonoBehaviour
         if (!weaponScript.ItemBlocked)
         {
             Item itemSelected = weaponScript.WheelItem;
-            if (itemSelected == m_CurrentItem)
-            {
-                Debug.Log("Item Already Selected: " + itemSelected.name);
-            }
-            else
-            {
+            if (itemSelected != m_CurrentItem)
                 m_CurrentItem = itemSelected;
-                Debug.Log("Item Selected: " + itemSelected.name);
-            }
             ToggleWheel();
 
 

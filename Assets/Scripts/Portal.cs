@@ -27,6 +27,11 @@ public class Portal : MonoBehaviour
 
     public void LoadNextLevel()
     {
+        Vector3 respawnPos = transform.Find("Exit").position;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_overworldRespawnPositionX = respawnPos.x;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_overworldRespawnPositionY = respawnPos.y;
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_overworldRespawnPositionZ = respawnPos.z;
+
         StartCoroutine(LoadLevelCoroutine("DungeonBase"));
     }
 
