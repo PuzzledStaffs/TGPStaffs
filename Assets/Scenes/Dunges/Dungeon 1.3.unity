@@ -630,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: 'You know who is famously susceptible bomb... Dragons. :) - Digory '
+      value: 'You know who is famously susceptible to bombs... Dragons. :) - Digory '
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungeonRoom
@@ -1177,6 +1177,10 @@ PrefabInstance:
     - target: {fileID: 5458344121244819004, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
       propertyPath: m_locked
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5458344121244819004, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
+      propertyPath: m_closedOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5574244937487260630, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
       propertyPath: m_RootOrder
@@ -10283,7 +10287,7 @@ PrefabInstance:
     - target: {fileID: 8886898950433763618, guid: 574bd1f8819e20d4584ae00623f94311, type: 3}
       propertyPath: m_switchDisabled.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 224617287}
+      objectReference: {fileID: 224617288}
     - target: {fileID: 8886898950433763618, guid: 574bd1f8819e20d4584ae00623f94311, type: 3}
       propertyPath: m_switchEnabled.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -14609,15 +14613,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5474085781765861140, guid: e2c72184a68225645894cfb9ae321be8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.68
+      value: -5.63
       objectReference: {fileID: 0}
     - target: {fileID: 5474085781765861140, guid: e2c72184a68225645894cfb9ae321be8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 4.03
       objectReference: {fileID: 0}
     - target: {fileID: 5474085781765861140, guid: e2c72184a68225645894cfb9ae321be8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.01
+      value: 4.61
       objectReference: {fileID: 0}
     - target: {fileID: 5474085781765861140, guid: e2c72184a68225645894cfb9ae321be8, type: 3}
       propertyPath: m_LocalRotation.w
