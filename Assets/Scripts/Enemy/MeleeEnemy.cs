@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MeleeEnemy : EnemyController
 {
+    public Vector3 m_colliderRange;
+
     override public void AttackPlayer()
     {
         if (!m_died && m_canAttack)
@@ -13,7 +15,7 @@ public class MeleeEnemy : EnemyController
             m_currentState = StateType.ATTACK;
             transform.LookAt(m_player);
 
-            Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, new Vector3(1.0f, 1.0f, 1.0f), transform.rotation);
+            Collider[] colliders = Physics.OverlapBox(transform.position + transform.forward, m_colliderRange, transform.rotation);
             foreach (var hitCollider in colliders)
             {
                 //if its the player, then take damage
