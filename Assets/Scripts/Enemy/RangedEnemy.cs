@@ -8,15 +8,18 @@ public class RangedEnemy : EnemyController
 {
     public GameObject m_projectile;
     public GameObject m_model;
-    public float m_cooldown;
+    float m_cooldown;
 
-    public virtual void AttackPlayer()
+    public override void AttackPlayer()
     {
         //rotate to player
         Vector3 direction = (m_player.transform.position - transform.position).normalized;
         Quaternion lookTowards = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookTowards, Time.deltaTime * 5.0f);
 
+      
+        //Stops the enemy from moving
+      //  m_rb.velocity = new Vector3(0, 0, 0);
         if (m_cooldown <= 0)
         {
             StartCoroutine(AttackCooldown());
