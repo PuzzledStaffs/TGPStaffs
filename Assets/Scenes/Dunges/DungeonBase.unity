@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_transition: {fileID: 0}
-  m_transitionTime: 1
+  m_transitionTime: 1.01e+9
   m_textForNextScene: I it gonna be overrden
 --- !u!4 &381458870
 Transform:
