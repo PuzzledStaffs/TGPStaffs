@@ -14,12 +14,15 @@ public class Boss : EnemyController
 
     public override void AttackPlayer()
     {
-        if (m_health <= 50 && m_health > 40 || m_health <= 20 && m_health > 10)
+        Debug.Log("Attack");
+        if (m_health > 40 || m_health <= 20 && m_health > 10)
         {
+            Debug.Log("Melee");
             AttackMelee();
         }
         else if(m_health <= 40 && m_health > 20 || m_health <= 10 && m_health > 0)
         {
+            Debug.Log("ranged");
             AttackRanged();
         }
     }
