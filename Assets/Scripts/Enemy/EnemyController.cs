@@ -279,21 +279,6 @@ public class EnemyController : State, IHealth
     {
         m_healthBarCanvas.GetComponent<Canvas>().enabled = shown;
     }
-
-    public void Test()
-    {
-        GameObject[] array;
-
-
- 
-
-
-
-
-    }
-
-
-
     #endregion
 }
 
