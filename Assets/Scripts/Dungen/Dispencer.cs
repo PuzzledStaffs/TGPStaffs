@@ -20,7 +20,8 @@ public class Dispencer : MonoBehaviour
         {
             m_spawnedObjectsCount = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Dispenser_" + gameObject.transform.parent.parent.name + "_" + gameObject.name);
         }
-        m_TopText.text = m_maxiumInstances.ToString();
+        //m_TopText.text = (m_maxiumInstances-m_spawnedObjectsCount).ToString();
+        UpdateTopText(m_spawnedObjectsCount);
     }
 
    
@@ -41,11 +42,16 @@ public class Dispencer : MonoBehaviour
         }
 
         //Update Top Text
-        m_TopText.text = (m_maxiumInstances - m_spawnedThings.Count).ToString();
+        UpdateTopText(m_spawnedThings.Count);
+    }
+
+    private void UpdateTopText(int spawnedThings)
+    {
+        m_TopText.text = (m_maxiumInstances - spawnedThings).ToString();
         if (m_TopText.text == "0")
         {
             m_TopText.color = Color.red;
-            if(m_NoReset)
+            if (m_NoReset)
             {
                 m_TopText.text = "X";
             }
