@@ -4397,7 +4397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2003171499334075015, guid: 82d1a52436739604586a7bb79fdffc28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.99
       objectReference: {fileID: 0}
     - target: {fileID: 2003171499334075015, guid: 82d1a52436739604586a7bb79fdffc28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -7012,7 +7012,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2003171499334075015, guid: 82d1a52436739604586a7bb79fdffc28, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 2003171499334075015, guid: 82d1a52436739604586a7bb79fdffc28, type: 3}
       propertyPath: m_LocalPosition.z
@@ -14811,5 +14811,13 @@ PrefabInstance:
       propertyPath: m_shotEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 2053553649}
+    - target: {fileID: 2868307119360204043, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
+      propertyPath: m_shotEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnOpen
+      objectReference: {fileID: 0}
+    - target: {fileID: 2868307119360204043, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
+      propertyPath: m_shotEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DungenBrige, Assembly-CSharp
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
