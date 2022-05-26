@@ -62,29 +62,22 @@ public class PersistentPrefs
 
     public bool HasSaveFile(int save)
     {
-        return File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".save");
+        return File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".json");
     }
 
     public SaveFile LoadSaveFile(int save)
     {
-        if (File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".save"))
+        if (File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".json"))
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/SaveFile" + save + ".save", FileMode.Open);
-            SaveFile saveFile = (SaveFile)bf.Deserialize(file);
-            file.Close();
-
-            return saveFile;
+            return JsonUtility.FromJson<SaveFile>(File.ReadAllText(Application.persistentDataPath + "/SaveFile" + save + ".json"));
         }
         return null;
     }
 
     public void SaveSaveFile(int save)
     {
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/SaveFile" + save + ".save");
-        bf.Serialize(file, m_currentSaveFile);
-        file.Close();
+        string saveData = JsonUtility.ToJson(m_currentSaveFile);
+        File.WriteAllText(Application.persistentDataPath + "/SaveFile" + save + ".json", saveData);
     }
     #endregion
 
