@@ -22,7 +22,10 @@ MonoBehaviour:
   - {fileID: 7374883135257379924}
   m_locked: 0
   m_closedOnStart: 0
-  m_exitScene: Overworld
+  m_exitScene: OverworldV2
+  m_transition: {fileID: 0}
+  m_transitionTime: 1
+  m_textForNextScene: 
 --- !u!1001 &4583333713470175164
 PrefabInstance:
   m_ObjectHideFlags: 0
