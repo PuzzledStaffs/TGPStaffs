@@ -66,7 +66,7 @@ public class Boss : EnemyController
     void AttackRanged()
     {
         //rotate to player
-        Vector3 direction = (m_player.transform.position - transform.position).normalized;
+        //Vector3 direction = (m_player.transform.position - transform.position).normalized;
         Quaternion lookTowards = Quaternion.LookRotation(direction);
         transform.rotation = Quaternion.Slerp(transform.rotation, lookTowards, Time.deltaTime * 5.0f);
         if (m_cooldown <= 0)
