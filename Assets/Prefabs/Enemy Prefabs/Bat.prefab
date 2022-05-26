@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1685796443307395868}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.737, y: 1.488, z: 48.241}
+  m_LocalPosition: {x: 0, y: 1.488, z: 0}
   m_LocalScale: {x: 0.32129556, y: 0.32129565, z: 0.32129556}
   m_Children:
   - {fileID: 2793757854009041843}
@@ -234,6 +234,7 @@ MonoBehaviour:
   m_attackRange: 1
   m_playerInSightRange: 0
   m_playerInAttackRange: 0
+  m_enemyHit: 0
   m_audioSource: {fileID: 350160191995030608}
   m_moveSound: {fileID: 8300000, guid: 310f7366febe8d342ab17893348bb93e, type: 3}
   m_hitSound: {fileID: 8300000, guid: 05e9cdb4a0362a947b0f5b16e076076d, type: 3}
