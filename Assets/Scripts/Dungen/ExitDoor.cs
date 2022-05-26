@@ -18,31 +18,26 @@ public class ExitDoor : DungenDoor
     {
         base.Awake();
 
-        if(m_transition == null)
+        if (m_transition == null)
             m_transition = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Animator>();
-        
-        
+
+
         Text name = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Text>();
         name.text = m_textForNextScene;
     }
-
-    
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
+            if (other.GetComponent<PlayerController>().GetHealth() < 5)
+                other.GetComponent<PlayerController>().SetHealth(5);
+
             StartCoroutine(MoveRoomCoroutine(other));
 
             //Text name = GameObject.Find("LevelLoader/RotatingMove/Image/Loading").GetComponent<Text>();
             //name.text = m_textForNextScene;
         }
-    }
-
-
-    private void Start()
-    {
-        
     }
 
     protected override IEnumerator MoveRoomCoroutine(Collider other)
@@ -70,7 +65,7 @@ public class ExitDoor : DungenDoor
         {
             CloseDoor();
 
-        }       
+        }
         else
         {
             OpenDoor();
