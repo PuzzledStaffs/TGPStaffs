@@ -3197,6 +3197,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1101447692624729781, guid: dc088e7b71c7c0f46b3513bf052cbbc9, type: 3}
   m_PrefabInstance: {fileID: 217000823}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &218367559 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 114413830858832949, guid: 680754e104d82754684c3f27f17deace, type: 3}
+  m_PrefabInstance: {fileID: 688332715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &221882019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4496,7 +4501,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9921976, y: 1}
+    m_SensorSize: {x: 2.2449799, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4512,7 +4517,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 328922618}
-  m_LocalRotation: {x: 0.07742081, y: -0.000000016376966, z: 0.0000000012717348, w: 0.99699855}
+  m_LocalRotation: {x: 0.07742081, y: 0.0000000176827, z: -0.0000000013731306, w: 0.99699855}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6955,7 +6960,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9921976, y: 1}
+    m_SensorSize: {x: 2.2449799, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8615,7 +8620,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634928321}
-  m_LocalRotation: {x: 0.09538314, y: 0.000000050055586, z: -0.0000000047959583, w: 0.99544066}
+  m_LocalRotation: {x: 0.09538314, y: 0.000000057007746, z: -0.000000005462172, w: 0.99544066}
   m_LocalPosition: {x: -3, y: 6, z: -15.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -9121,6 +9126,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -7.179739
       objectReference: {fileID: 0}
+    - target: {fileID: 114413830858832949, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 5c3e3e2aaa6f8a849bf9bcdc84ffdcc1, type: 2}
     - target: {fileID: 381541390733116121, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 12.412587
@@ -9317,6 +9326,22 @@ PrefabInstance:
       propertyPath: m_speed
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 2109082283556361527, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_footsteps
+      value: 
+      objectReference: {fileID: 8300000, guid: 08a4867f8971c144390e2e62acb5278f, type: 3}
+    - target: {fileID: 2109082283556361527, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_audioSource
+      value: 
+      objectReference: {fileID: 218367559}
+    - target: {fileID: 2109082283556361527, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_footstepsLeft
+      value: 
+      objectReference: {fileID: 8300000, guid: 50e3ddf1f7b04c1459344590c77a7235, type: 3}
+    - target: {fileID: 2109082283556361527, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_footstepsRight
+      value: 
+      objectReference: {fileID: 8300000, guid: 16ddf77c9c9146a4fa630a6419a51c3c, type: 3}
     - target: {fileID: 2349778754582911613, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 57.958057
@@ -9667,7 +9692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6939598776727863436, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28.912811
+      value: -25.657227
       objectReference: {fileID: 0}
     - target: {fileID: 7097723616741810333, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -39735,7 +39760,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9921976, y: 1}
+    m_SensorSize: {x: 2.2449799, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -39751,7 +39776,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833262626}
-  m_LocalRotation: {x: 0.09538313, y: 0.000000050053917, z: -0.000000004796166, w: 0.99544066}
+  m_LocalRotation: {x: 0.09538313, y: 0.00000005700627, z: -0.0000000054623412, w: 0.99544066}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -57300,7 +57325,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9921976, y: 1}
+    m_SensorSize: {x: 2.2449799, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -57316,7 +57341,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094262041}
-  m_LocalRotation: {x: 0.05070731, y: -0.000000017318618, z: 8.7931157e-10, w: 0.99871355}
+  m_LocalRotation: {x: 0.05070731, y: 0.000000017317975, z: -8.79279e-10, w: 0.99871355}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -58354,11 +58379,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294037439960334776, guid: d5072577142842f408d9b199047fc82e, type: 3}
       propertyPath: deepColor.r
-      value: 0.2563188
+      value: 0.25631538
       objectReference: {fileID: 0}
     - target: {fileID: 6294037439960334776, guid: d5072577142842f408d9b199047fc82e, type: 3}
       propertyPath: shoreColor.b
-      value: 0.30187088
+      value: 0.30186746
       objectReference: {fileID: 0}
     - target: {fileID: 6294037439960334776, guid: d5072577142842f408d9b199047fc82e, type: 3}
       propertyPath: waveSteepness
@@ -58374,7 +58399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294037439960334776, guid: d5072577142842f408d9b199047fc82e, type: 3}
       propertyPath: horizonColor.g
-      value: 0.22736108
+      value: 0.22735766
       objectReference: {fileID: 0}
     - target: {fileID: 6294037439960334776, guid: d5072577142842f408d9b199047fc82e, type: 3}
       propertyPath: shallowColor.b
@@ -58386,7 +58411,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6294037439960334776, guid: d5072577142842f408d9b199047fc82e, type: 3}
       propertyPath: shallowColor.r
-      value: 0.41972214
+      value: 0.4197187
       objectReference: {fileID: 0}
     - target: {fileID: 6294037439960334776, guid: d5072577142842f408d9b199047fc82e, type: 3}
       propertyPath: refractionStrength
