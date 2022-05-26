@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5677522663058435054, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5677522663058435054, guid: ccfca11500c6b364a8ae8f484e8dc52a, type: 3}
       propertyPath: m_AnchorMax.x
@@ -438,7 +438,7 @@ PrefabInstance:
     - target: {fileID: 9024133131068660373, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
       propertyPath: m_player
       value: 
-      objectReference: {fileID: 1433405684}
+      objectReference: {fileID: 0}
     - target: {fileID: 9024133131068660373, guid: 4f20d932022a8654fa78d27cd6618b8a, type: 3}
       propertyPath: m_DungenCam
       value: 
@@ -1024,6 +1024,10 @@ PrefabInstance:
       propertyPath: m_dungeonManager
       value: 
       objectReference: {fileID: 323394579}
+    - target: {fileID: 4253041858183087929, guid: 680754e104d82754684c3f27f17deace, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     - target: {fileID: 4439799624039226185, guid: 680754e104d82754684c3f27f17deace, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1114,22 +1118,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 680754e104d82754684c3f27f17deace, type: 3}
---- !u!114 &1433405684 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2109082283556361527, guid: 680754e104d82754684c3f27f17deace, type: 3}
-  m_PrefabInstance: {fileID: 1433405683}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1433405685}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1077a413b8f908a4084041dd3d97e6b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1433405685 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8655418251543230784, guid: 680754e104d82754684c3f27f17deace, type: 3}
-  m_PrefabInstance: {fileID: 1433405683}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1616883317
 GameObject:
   m_ObjectHideFlags: 0
@@ -1370,7 +1358,7 @@ MonoBehaviour:
   m_locked: 0
   m_currentRoomType: 1
   m_roomOrigin: {x: 0, y: 11.5, z: 17.13}
-  m_player: {fileID: 1433405685}
+  m_player: {fileID: 0}
   m_bigRoomCamLimit: {x: 11, y: 5.62}
 --- !u!1 &6340215732902239980
 GameObject:
@@ -1457,5 +1445,5 @@ Transform:
   m_Children:
   - {fileID: 775542779}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
