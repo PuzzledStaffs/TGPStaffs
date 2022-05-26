@@ -28,6 +28,7 @@ public class DungenManager : MonoBehaviour
     [SerializeField] Canvas m_welcomeCanvas;
     [SerializeField][FormerlySerializedAs("m_TitalText")] TextMeshProUGUI m_titleText;
     private Animator m_animator;
+    private float m_animTime = 2.0f;
 
     private void Start()
     {
@@ -77,6 +78,13 @@ public class DungenManager : MonoBehaviour
 
     public void Update()
     {
+        if (m_animTime > 0.0f)
+        {
+            m_animTime -= Time.deltaTime;
+            if (m_animTime <= 0.0f)
+                JoinAnimationEnd();
+        }
+
         m_playerLight.transform.position = m_player.transform.position + new Vector3(0, 5, 0);
     }
 
