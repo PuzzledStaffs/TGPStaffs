@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Wooden Bow
   ItemIcon: {fileID: 21300000, guid: 2662772b1a21cee4ba0fb8d54250eb72, type: 3}
-  ItemDamage: 2
+  ItemDamage: 3
   CombatType: 0
   MaxCooldown: 4
   ItemSound: {fileID: 8300000, guid: 2b62c8410a710b24e8ab6be9c8bb67c2, type: 3}
