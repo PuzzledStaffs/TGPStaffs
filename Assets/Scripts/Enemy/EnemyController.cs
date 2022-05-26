@@ -43,6 +43,8 @@ public class EnemyController : State, IHealth
     [Header("---------------States------------------------------------------------------------")]
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
+    public bool m_enemyHit = false;
+
 
     //Sounds
     public AudioSource m_audioSource;
@@ -79,7 +81,8 @@ public class EnemyController : State, IHealth
 
     protected virtual void Update()
     {
-        if(m_rb.velocity.magnitude > 0.0f && !m_audioSource.isPlaying && m_currentState == StateType.CHASE)
+
+        if (m_rb.velocity.magnitude > 0.0f && !m_audioSource.isPlaying && m_currentState == StateType.CHASE)
         {
             m_audioSource.PlayOneShot(m_moveSound);
         }
@@ -119,7 +122,7 @@ public class EnemyController : State, IHealth
         //Debug.Log("Calculate Path1");
         CalculatePath();
         //Debug.Log(m_pathToPlayer.corners.Length);
-        if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE)
+        if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE && !m_enemyHit)
         {
             transform.LookAt(m_player);
             //Debug.Log("Calculate Path2");
@@ -254,6 +257,7 @@ public class EnemyController : State, IHealth
     IEnumerator TakeDamageWait(IHealth.Damage damage, float time)
     {
         yield return new WaitForSeconds(time);
+        StartCoroutine(HitCoolDown());
         m_audioSource.PlayOneShot(m_hitSound);
         m_health -= damage.damageAmount;
         m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / (float) m_maxHealth), 0.5f);
@@ -267,6 +271,13 @@ public class EnemyController : State, IHealth
         {
             death();
         }
+    }
+
+    IEnumerator HitCoolDown()
+    {
+        m_enemyHit = true;
+        yield return new WaitForSeconds(1.0f);
+        m_enemyHit = false;
     }
 
 

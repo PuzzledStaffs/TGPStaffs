@@ -15,12 +15,13 @@ public class Boss : EnemyController
     public override void AttackPlayer()
     {
         Debug.Log("Attack");
-        if (m_health > 40 || m_health <= 20 && m_health > 10)
+        if (m_health >= 25)
         {
             Debug.Log("Melee");
             AttackMelee();
         }
-        else if(m_health <= 40 && m_health > 20 || m_health <= 10 && m_health > 0)
+       // else if(m_health <= 40 && m_health > 20 || m_health <= 10 && m_health > 0)
+       else if(m_health < 25)
         {
             Debug.Log("ranged");
             AttackRanged();
@@ -38,6 +39,7 @@ public class Boss : EnemyController
     {
         if (!m_died && m_canAttack)
         {
+            m_attackRange = 3;
             m_canAttack = false;
             m_rb.velocity = new Vector3(0, 0, 0);
             m_currentState = StateType.ATTACK;
@@ -68,6 +70,7 @@ public class Boss : EnemyController
 
     void AttackRanged()
     {
+        m_attackRange = 6;
         //rotate to player
         Vector3 direction = (m_player.transform.position - transform.position).normalized;
         Quaternion lookTowards = Quaternion.LookRotation(direction);
@@ -77,20 +80,11 @@ public class Boss : EnemyController
             StartCoroutine(RangedAttackCooldown());
             m_cooldown = m_attack_cooldown;
 
-            if (m_health <= 10)
-            {
-                GameObject attack = Instantiate(m_bomb, transform.position + new Vector3(0, 3.5f, 0.5f), transform.rotation);
-                attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
-                attack.GetComponent<Projectile>().m_damageAmount = m_damage;
-                attack.GetComponent<Projectile>().m_attack = m_bombModel;
-            }
-            else 
-            {
-                GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 3.5f, 0.5f), transform.rotation);
-                attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
-                attack.GetComponent<Projectile>().m_damageAmount = m_damage;
-                attack.GetComponent<Projectile>().m_attack = m_model;
-            }
+           GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 3.5f, 0.5f), transform.rotation);
+           attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
+           attack.GetComponent<Projectile>().m_damageAmount = m_damage;
+           attack.GetComponent<Projectile>().m_attack = m_model;
+
         }
     }
 
