@@ -10,7 +10,7 @@ public class RangedEnemy : EnemyController
     public GameObject m_model;
     public float m_cooldown;
 
-    public virtual void AttackPlayer()
+    public override void AttackPlayer()
     {
         //rotate to player
         Vector3 direction = (m_player.transform.position - transform.position).normalized;

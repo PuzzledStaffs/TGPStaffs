@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3338028235869557248}
   - component: {fileID: 1872606204764986789}
   - component: {fileID: 4474363759705811311}
-  - component: {fileID: 3483538064465249372}
+  - component: {fileID: 5649785642157315903}
   m_Layer: 0
   m_Name: Bell_Tower
   m_TagString: Untagged
@@ -92,8 +92,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &3483538064465249372
-MeshCollider:
+--- !u!65 &5649785642157315903
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -102,7 +102,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7248542918122357775, guid: 9e5ed90cde5613a4689e573d7d03f2a3, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.019369366, y: 0.022285197, z: 0.047606107}
+  m_Center: {x: 0.000000025536417, y: 0.0001093223, z: 0.023802007}

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5655581474348069882}
   - component: {fileID: 8778486506789862495}
   - component: {fileID: 6789042015529339029}
-  - component: {fileID: 1286022674175273138}
+  - component: {fileID: 4294776386769222009}
   m_Layer: 0
   m_Name: Blacksmith
   m_TagString: Untagged
@@ -90,8 +90,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1286022674175273138
-MeshCollider:
+--- !u!65 &4294776386769222009
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -100,7 +100,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5738487098208364652, guid: 45b021b21ce27cc49acc26b1043c6f0b, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.038900264, y: 0.032834984, z: 0.030034153}
+  m_Center: {x: 0.006212001, y: 0.00016132017, z: 0.014977603}

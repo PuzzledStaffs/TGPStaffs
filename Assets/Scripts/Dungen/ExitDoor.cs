@@ -97,7 +97,7 @@ public class ExitDoor : DungenDoor
             m_doorActive = true;
             foreach (GameObject bar in m_bars)
             {
-                bar.active = false;
+                bar.SetActive(false);
             }
             m_doorCollider.isTrigger = true;
 

@@ -34,11 +34,11 @@ public class DungenManager : MonoBehaviour
         m_cameraRB = m_dungeonCam.transform.GetComponent<Rigidbody>();
         if (PersistentPrefs.GetInstance().m_currentSaveFile.m_saveLoaded)
         {
-            if (PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Keys"))
-                m_keysCollected = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Keys");
             if (PersistentPrefs.GetInstance().m_currentSaveFile.m_currentDungeonRoom != "null")
                 SetStartingRoom(GameObject.Find(PersistentPrefs.GetInstance().m_currentSaveFile.m_currentDungeonRoom).GetComponent<DungenRoom>());
         }
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasIntFlag(gameObject.scene.name + "_Keys"))
+            m_keysCollected = PersistentPrefs.GetInstance().m_currentSaveFile.GetIntFlag(gameObject.scene.name + "_Keys");
         else
             m_keysCollected = m_startingKeys;
         PersistentPrefs.GetInstance().m_currentSaveFile.m_currentDungeonRoom = m_startingRoom == null ? "null" : m_startingRoom.name;

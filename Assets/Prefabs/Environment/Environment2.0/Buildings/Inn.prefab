@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6491343966313273625}
   - component: {fileID: 7906695200095164092}
   - component: {fileID: 5358947301281079926}
-  - component: {fileID: 1531453113563425236}
+  - component: {fileID: 7174282352546896794}
   m_Layer: 0
   m_Name: Inn
   m_TagString: Untagged
@@ -89,8 +89,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &1531453113563425236
-MeshCollider:
+--- !u!65 &7174282352546896794
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -99,7 +99,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5650888115274377999, guid: 091c0732d072c964f877bc4f4a4fe231, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.040291123, y: 0.04021362, z: 0.034912013}
+  m_Center: {x: 0.000036802143, y: -0.000000014901161, z: 0.017399244}

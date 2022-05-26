@@ -53,8 +53,10 @@ public class PlayerController : MonoBehaviour, IHealth
     public ParticleSystem SwordTrailParticle, SecondarySwordTrail;
 
     [Header("SFX")]
+    public AudioSource m_audioSource;
     public AudioClip m_damageSound;
     public AudioClip m_deathSound;
+    public AudioClip m_footstepsRight, m_footstepsLeft;
 
     [Header("Animations")]
     public Animator animator;
@@ -77,6 +79,7 @@ public class PlayerController : MonoBehaviour, IHealth
     [Header("Misc")]
     public DungenManager m_dungeonManager;
     private float m_timeLeftUntilTick = 1.0f;
+    private int m_stepCounter = 1;
 
     void Awake()
     {
@@ -146,6 +149,24 @@ public class PlayerController : MonoBehaviour, IHealth
 
     void Update()
     {
+        //footstep sounds
+        if(m_rigidbody.velocity.magnitude > 2.0f && !m_audioSource.isPlaying)
+        {          
+            if(m_stepCounter == 1)
+            {
+                m_audioSource.PlayOneShot(m_footstepsRight);
+                m_stepCounter = 2;
+            }
+            else
+            {
+                m_audioSource.PlayOneShot(m_footstepsLeft);
+                m_stepCounter = 1;
+            }
+        }
+
+
+
+
         // Adds time to Playtime - DON'T COMMENT
         if (m_timeLeftUntilTick <= 0.0f)
         {
@@ -154,22 +175,6 @@ public class PlayerController : MonoBehaviour, IHealth
         }
         m_timeLeftUntilTick -= Time.deltaTime;
 
-        //if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
-        //{
-        //    animator.SetBool("Attack1", false);
-        //}
-        //if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && animator.GetCurrentAnimatorStateInfo(0).IsName("Attack2"))
-        //{
-        //    animator.SetBool("Attack2", false);
-        //    SwordItem.m_noOfClicks = 0;
-        //    Sword.SetActive(false);
-        //}
-
-        //if (Time.time - SwordItem.m_lastClickedTime > SwordItem.m_maxComboDelay)
-        //{
-        //    SwordItem.m_noOfClicks = 0;
-        //    Sword.SetActive(false);
-        //}
 
         if (m_weaponWheelController.isWheelOpen)
         {
@@ -336,7 +341,7 @@ public class PlayerController : MonoBehaviour, IHealth
             {
                 // Gravity is handled by Rigidbody
                 m_rigidbody.velocity = new Vector3(m_moveDir.x * m_speed, m_rigidbody.velocity.y, m_moveDir.y * m_speed);
-
+                    
                 // Rotates model to face the direction of movement
                 if (m_moveDir.x != 0 || m_moveDir.y != 0)
                     m_model.transform.rotation = Quaternion.LookRotation(new Vector3(m_moveDir.x, 0.0f, m_moveDir.y), Vector3.up);
