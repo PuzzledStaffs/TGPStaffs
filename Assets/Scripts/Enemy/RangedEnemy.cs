@@ -34,5 +34,7 @@ public class RangedEnemy : EnemyController
     {
         base.Update();
         m_cooldown -= Time.deltaTime;
+
+        Debug.Log(m_currentState);
     }
 }
