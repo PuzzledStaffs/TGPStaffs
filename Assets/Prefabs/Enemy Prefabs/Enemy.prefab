@@ -431,11 +431,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_health: 5
-  m_speed: 5
+  m_speed: 0.5
   m_agent: {fileID: 1361184129102678503}
   m_rb: {fileID: 4574969054359232141}
   m_pushBackForce: 400
-  m_deathForce: 100
+  m_deathForce: 10000
   m_destroyParticle: {fileID: 2453638331243843887, guid: dffc008c1b8805843a6acf6639288537, type: 3}
   m_animator: {fileID: 1315692046332246767}
   m_dodgeChance: 0
