@@ -4609,7 +4609,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7431805276255159285, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
       propertyPath: m_textForNextScene
-      value: Muie mie
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 9162364829834096145, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
       propertyPath: m_Name
