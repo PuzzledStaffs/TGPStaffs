@@ -57,14 +57,11 @@ public class EnemyController : State, IHealth
     protected virtual void Start()
     {
         m_maxHealth = m_health;
-    }
 
-    protected virtual void Awake()
-    {
         m_agent = GetComponent<NavMeshAgent>();
         m_agent.updatePosition = false;
         m_agent.updateRotation = false;
-
+        
         m_player = GameObject.FindGameObjectWithTag("Player").transform;
         m_currentState = StateType.IDLE;
         m_pathToPlayer = new NavMeshPath();

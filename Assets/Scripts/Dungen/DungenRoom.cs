@@ -41,7 +41,7 @@ public class DungenRoom : MonoBehaviour
         SceneManager.sceneLoaded += onSceneLoad;
 
         m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
-    //    m_playerController.m_Death1 += playerDeath;
+        //m_playerController.m_Death1 += playerDeath;
     }
 
     private void Start()
