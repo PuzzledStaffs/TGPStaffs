@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Currency")]
     public int m_coins;
+    public TextMeshProUGUI m_currencyText;
 
     [Header("Alt Interact")]
     [SerializeField] float m_altInteractArea;
@@ -137,7 +138,7 @@ public class PlayerController : MonoBehaviour, IHealth
         PersistentPrefs.GetInstance().SaveSaveFile(0);
 
         m_coins = 0; //Do not use PlayerPrefs, ask Kit to add this
-
+        m_currencyText.text = m_coins.ToString();
         m_altInteractToolTip.enabled = false;
 
 
@@ -633,6 +634,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public void AddCoins(int coins)
     {
         m_coins += coins;
+        m_currencyText.text = m_coins.ToString();
         PlayerPrefs.SetInt("Coins", m_coins);
     }
 
