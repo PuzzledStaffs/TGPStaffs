@@ -386,7 +386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.3740144
+      value: -3.521
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -394,7 +394,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7.7668433
+      value: -7.837
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -630,7 +630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: 'You know who is famously susceptible to bombs... Dragons. :) - Digory '
+      value: 'You know who is famously susceptible to bombs... Dragons. ;) - Digory '
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungeonRoom
@@ -3997,7 +3997,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: 'I hope you''ve had an Explosively fun time. I know I did!  - Digory '
+      value: 'I hope you''ve had an EXPLOSIVELY fun time. I know I did!  - Digory '
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -6938,11 +6938,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5474085781765861140, guid: e2c72184a68225645894cfb9ae321be8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.88
+      value: 0.954
       objectReference: {fileID: 0}
     - target: {fileID: 5474085781765861140, guid: e2c72184a68225645894cfb9ae321be8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.81
+      value: 7.915
       objectReference: {fileID: 0}
     - target: {fileID: 5474085781765861140, guid: e2c72184a68225645894cfb9ae321be8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11824,7 +11824,7 @@ PrefabInstance:
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
       value: Go ahead and pick up that Bomb, you'll be needing it. I don't know who
-        in there right mind is level explosives about - Digory
+        in their right mind is leaving explosives about - Digory
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungeonRoom
@@ -13485,7 +13485,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: 'Hold Right Click to push or pull a box. - Digory '
+      value: 'Hold right click to push or pull a box. - Digory '
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -13718,8 +13718,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: 'The crack run deep, both in sosiaty and this solid wall, maybe a bomb
-        could be use to solve both of these? - Digory '
+      value: 'The cracks run deep, both in society and this solid wall, maybe a bomb
+        could be used to solve both of these? - Digory '
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungeonRoom
@@ -14833,11 +14833,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.49
+      value: 7.94
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalRotation.x
@@ -14845,7 +14845,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalRotation.z
@@ -14857,7 +14857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 2868307119360204042, guid: 9bd2b07623a5aff4d999ab37a19b05f0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
