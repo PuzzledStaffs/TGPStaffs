@@ -27,6 +27,8 @@ public class DungenRoom : MonoBehaviour
 
     private DungenManager m_dungeonManager;
 
+    private PlayerController m_playerController;
+
     private void Awake()
     {
         m_traps = m_trapParent.GetComponentsInChildren<Trap>();
@@ -37,6 +39,9 @@ public class DungenRoom : MonoBehaviour
         m_camera = m_dungeonManager.m_dungeonCam.GetComponent<DungeonCameraController>();
 
         SceneManager.sceneLoaded += onSceneLoad;
+
+        m_playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        m_playerController.m_Death1 += playerDeath;
     }
 
     private void Start()
@@ -94,6 +99,14 @@ public class DungenRoom : MonoBehaviour
         {
             FreezeExitingRoom();
             RoomExited();
+        }
+    }
+
+    private void playerDeath()
+    {
+        if(m_playerInRoom)
+        {
+            FreezeExitingRoom();
         }
     }
 

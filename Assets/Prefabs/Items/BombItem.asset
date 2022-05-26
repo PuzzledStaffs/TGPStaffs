@@ -14,12 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Bomb
   ItemIcon: {fileID: 21300000, guid: 4c2d3cd91f7662b478da1d4a24d3bed5, type: 3}
-  ItemDamage: 3
+  ItemDamage: 4
   CombatType: 0
   MaxCooldown: 1
   ItemSound: {fileID: 0}
   CanUse: 1
   ItemHold: 0
+  TypeName: 
   m_bombItem: {fileID: 8587875842583300380, guid: a9357974655a48140a40fb2d603dc39a, type: 3}
   m_moveForce: 10
   m_radius: 3
