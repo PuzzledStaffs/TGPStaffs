@@ -54,7 +54,7 @@ public class EnemyController : State, IHealth
 
     // public GameObject m_attackParticle; unused
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         m_maxHealth = m_health;
 
@@ -117,6 +117,8 @@ public class EnemyController : State, IHealth
     protected virtual void ChasePlayer()
     {
         //Debug.Log("Calculate Path1");
+        if (m_agent == null || m_player == null || m_pathToPlayer == null)
+            return;
         CalculatePath();
         //Debug.Log(m_pathToPlayer.corners.Length);
         if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE && !m_enemyHit)

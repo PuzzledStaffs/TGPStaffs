@@ -137,9 +137,9 @@ PrefabInstance:
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
       value: Ahead is the Exit, you can tell because it's Gold. I hope this was worth
-        what you did to Bob. My name is Peasant Digory and I was onuce like you,
-        coming thrugh these cavens with nothing but will power and a rusty spoon.
-        I hope my gidents will see you thrugh - Digory
+        what you did to Bob. My name is Peasant Digory and I was once like you, coming
+        through these caverns with nothing but willpower and a rusty spoon. I hope
+        my guidance will see you through. - Digory
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -478,8 +478,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
-      value: 'Welcome to your first Dungeon. Enter the next room and meet Bob, hes
-        an old frend, here since I first entered the rooms  - Digory '
+      value: 'Welcome to your first Dungeon. Enter the next room and meet Bob, he''s
+        an old friend. He''s been here since I first discovered this place.  - Digory '
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
@@ -11949,8 +11949,8 @@ PrefabInstance:
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_signText
       value: 'Behind is a pressure plate. Ignore your urges to interact with it and
-        stand on it instead. And avoid the feeling to sing any sings about being
-        "under presure"  - Digory '
+        stand on it instead. And avoid the feeling to sing any songs about being
+        "under pressure". - Digory '
       objectReference: {fileID: 0}
     - target: {fileID: 784869309647894264, guid: e63995112734e70418b444f930534b82, type: 3}
       propertyPath: m_currentDungenRoom
