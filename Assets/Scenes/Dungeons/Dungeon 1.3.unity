@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12563,6 +12563,62 @@ PrefabInstance:
     - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
       propertyPath: m_expectedInputs
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_accumulated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_unAccumulated.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_accumulated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_accumulated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 299291056}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_unAccumulated.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_unAccumulated.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 299291056}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_accumulated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_accumulated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OpenDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_unAccumulated.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_unAccumulated.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CloseDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_accumulated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DungenDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_unAccumulated.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: DungenDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_accumulated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172447034286338416, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
+      propertyPath: m_unAccumulated.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ca74efa136308ff4399a7b6a9037b8cc, type: 3}
