@@ -30,6 +30,7 @@ public class SwordItem : Item
             col.GetComponent<IHealth>()?.TakeDamage(damage);
         }
 
+        pc.m_audioSource.PlayOneShot(ItemSound);
         pc.SwordTrailParticle.startColor = MainSwordTrailColor;
         pc.SecondarySwordTrail.startColor = SecondarySwordTrailColor;
         pc.Sword.SetActive(true);
