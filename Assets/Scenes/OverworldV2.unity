@@ -3025,7 +3025,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 634928321}
-  m_LocalRotation: {x: 0.6544851, y: 0.000000013491332, z: -0.0000000087636876, w: 0.75607497}
+  m_LocalRotation: {x: 0.6544851, y: 0.000000013491583, z: -0.0000000087639895, w: 0.75607497}
   m_LocalPosition: {x: -3, y: 31, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -37241,6 +37241,14 @@ PrefabInstance:
       propertyPath: m_textForNextScene
       value: poggers
       objectReference: {fileID: 0}
+    - target: {fileID: 5392922176419241193, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 5392922176419241193, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.55
+      objectReference: {fileID: 0}
     - target: {fileID: 5572123481427565552, guid: 0b25ce112bfcf32459c34c51e4ff8693, type: 3}
       propertyPath: InitialModule.startSizeY.scalar
       value: 2.5
@@ -38365,7 +38373,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094262041}
-  m_LocalRotation: {x: 0.6199681, y: -0.000000020250884, z: 0.000000016001106, w: 0.7846271}
+  m_LocalRotation: {x: 0.6199681, y: 0.000000020250884, z: -0.000000016001108, w: 0.7846271}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
