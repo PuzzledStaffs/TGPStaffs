@@ -44,6 +44,12 @@ public class EnemyController : State, IHealth
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
 
+    //Sounds
+    public AudioSource m_audioSource;
+    public AudioClip m_moveSound, m_hitSound;
+
+
+
     // public GameObject m_attackParticle; unused
 
     protected virtual void Start()
@@ -73,6 +79,11 @@ public class EnemyController : State, IHealth
 
     protected virtual void Update()
     {
+        if(m_rb.velocity.magnitude > 0.0f && !m_audioSource.isPlaying && m_currentState == StateType.CHASE)
+        {
+            m_audioSource.PlayOneShot(m_moveSound);
+        }
+
         m_healthBarCanvas.position = transform.position + Vector3.forward;
         Vector3 lookPos = Camera.main.transform.position - m_healthBarCanvas.position;
         lookPos.x = 0;
@@ -243,6 +254,7 @@ public class EnemyController : State, IHealth
     IEnumerator TakeDamageWait(IHealth.Damage damage, float time)
     {
         yield return new WaitForSeconds(time);
+        m_audioSource.PlayOneShot(m_hitSound);
         m_health -= damage.damageAmount;
         m_healthBarMask.sizeDelta = new Vector2(4.5f * (m_health / (float) m_maxHealth), 0.5f);
         m_animator.SetTrigger("EnemyHit");
