@@ -21,6 +21,14 @@ public class ExitDoor : DungenDoor
         if (m_transition == null)
             m_transition = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Animator>();
 
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_ExitDoorOpen_" + gameObject.transform.parent.name + "_" + gameObject.name))
+        {
+            m_closedOnStart = false;
+        }
+        if (PersistentPrefs.GetInstance().m_currentSaveFile.HasFlag(gameObject.scene.name + "_ExitDoorUnlocked_" + gameObject.transform.parent.name + "_" + gameObject.name))
+        {
+            m_locked = false;
+        }
 
         Text name = GameObject.FindGameObjectWithTag("LevelLoader").GetComponentInChildren<Text>();
         name.text = m_textForNextScene;
@@ -79,6 +87,7 @@ public class ExitDoor : DungenDoor
             if (m_dungenManager.UseKey())
             {
                 m_locked = false;
+                PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_ExitDoorUnlocked_" + gameObject.transform.parent.name + "_" + gameObject.name);
                 HideLocks();
                 OpenDoor();
             }
@@ -90,6 +99,7 @@ public class ExitDoor : DungenDoor
         if (!m_locked)
         {
             m_doorActive = true;
+            PersistentPrefs.GetInstance().m_currentSaveFile.AddFlag(gameObject.scene.name + "_ExitDoorOpen_" + gameObject.transform.parent.name + "_" + gameObject.name);
             foreach (GameObject bar in m_bars)
             {
                 bar.SetActive(false);
