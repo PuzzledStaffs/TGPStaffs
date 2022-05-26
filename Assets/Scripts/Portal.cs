@@ -12,6 +12,8 @@ public class Portal : MonoBehaviour
     public string m_textForNextScene;
     [SerializeField] [FormerlySerializedAs("SceneToGoTo")]string m_destinationScene;
 
+    public AudioSource m_audioSource;
+    public AudioClip m_portalSoundEffect;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -37,6 +39,7 @@ public class Portal : MonoBehaviour
 
     IEnumerator LoadLevelCoroutine(string currentLevel)
     {
+        m_audioSource.PlayOneShot(m_portalSoundEffect);
         if(m_transition != null)
         {
             m_transition.SetTrigger("Start");

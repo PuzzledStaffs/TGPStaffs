@@ -235,15 +235,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dungeon spelt right
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4b672ba1ab6157c45835e634cabc4687, type: 2}
+  m_sharedMaterial: {fileID: -5539472885316861968, guid: 4b672ba1ab6157c45835e634cabc4687, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_fontSizeMax: 80
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -416,7 +416,7 @@ GameObject:
   - component: {fileID: 769942065}
   m_Layer: 0
   m_Name: DungenManager
-  m_TagString: Untagged
+  m_TagString: dungeonManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -450,16 +450,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffc38904358441b47b67c8136685bff5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DungenCam: {fileID: 0}
-  m_KeyCountText: {fileID: 9024133131753135688}
+  m_dungeonCam: {fileID: 0}
+  m_keyCountText: {fileID: 9024133131753135688}
   m_keyCanvas: {fileID: 9024133131493501210}
-  m_StartingKeys: 0
+  m_startingKeys: 0
   m_playerLight: {fileID: 888253239}
   m_player: {fileID: 0}
-  m_startingRoom: {fileID: 0}
   m_dungenEnterText: Dungeon
   m_welcomeCanvas: {fileID: 9024133131116821806}
-  m_TitalText: {fileID: 9024133130386573380}
+  m_titleText: {fileID: 9024133130386573380}
 --- !u!95 &9024133131068660374
 Animator:
   serializedVersion: 3
@@ -489,7 +488,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 131123699275828177, guid: a3fd89f38168d1a4a9ed3a104ef980ae, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 452d89540a9adb046b5e1236da3c090f, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -734,15 +733,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 0.75686276}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 51f18a6ca976f0e4896f8f30ce7ceded, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 53cdd823e9b6e324fb32a6c0a3a9823a, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
