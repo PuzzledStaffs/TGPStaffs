@@ -12,21 +12,23 @@ public class RangedEnemy : EnemyController
 
     public override void AttackPlayer()
     {
-        //rotate to player
-        Vector3 direction = (m_player.transform.position - transform.position).normalized;
-        Quaternion lookTowards = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookTowards, Time.deltaTime * 5.0f);
-
-        if (m_cooldown <= 0)
+        if(m_currentState != StateType.IDLE)
         {
-            StartCoroutine(AttackCooldown());
-            m_cooldown = m_attack_cooldown;
-            GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 3.5f, 0.5f), transform.rotation);
+            //rotate to player
+            Vector3 direction = (m_player.transform.position - transform.position).normalized;
+            Quaternion lookTowards = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookTowards, Time.deltaTime * 5.0f);
 
-            attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
-            attack.GetComponent<Projectile>().m_damageAmount = m_damage;
-            attack.GetComponent<Projectile>().m_attack = m_model;
-            
+            if (m_cooldown <= 0)
+            {
+                StartCoroutine(AttackCooldown());
+                m_cooldown = m_attack_cooldown;
+                GameObject attack = Instantiate(m_projectile, transform.position + new Vector3(0, 3.5f, 0.5f), transform.rotation);
+
+                attack.GetComponent<Projectile>().m_target = GameObject.FindGameObjectWithTag("Player").transform.position;
+                attack.GetComponent<Projectile>().m_damageAmount = m_damage;
+                attack.GetComponent<Projectile>().m_attack = m_model;
+            }
         }
     }
 
