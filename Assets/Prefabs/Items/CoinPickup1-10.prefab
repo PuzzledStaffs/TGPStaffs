@@ -131,6 +131,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_rangeOfCoinsSpawned: {x: 1, y: 10}
+  m_pickupSound: {fileID: 8300000, guid: c67a6e36a183dc74c99cadbccc698126, type: 3}
 --- !u!135 &5983358334720439243
 SphereCollider:
   m_ObjectHideFlags: 0
