@@ -10,26 +10,14 @@ public class SwordItem : Item
     public float SwordRange;
     public Color MainSwordTrailColor, SecondarySwordTrailColor;
 
-    public static float m_nextFireTime = 0.0f;
-    public static int m_noOfClicks = 0;
-    public static float m_lastClickedTime = 0;
-    public static float m_maxComboDelay = 1.0f;
-
-
     public override void LeftClickAction(PlayerController pc, bool attackAnim)
     {
-        if (Time.time > m_nextFireTime)
-        {
-            SwordAttack(pc, attackAnim);
-        }
+        SwordAttack(pc, attackAnim);
     }
 
 
     public void SwordAttack(PlayerController pc, bool attackAnim)
     {
-       // m_lastClickedTime = Time.time;
-       // m_noOfClicks++;
-
         IHealth.Damage damage = new IHealth.Damage();
         damage.type = IHealth.DamageType.SWORD;
         damage.damageAmount = ItemDamage;
@@ -48,7 +36,7 @@ public class SwordItem : Item
 
         int r = Random.Range(1,3);
 
-        if(attackAnim)
+        if (attackAnim)
         {
             pc.animator.SetTrigger("AttackTrigger");
 
@@ -58,25 +46,6 @@ public class SwordItem : Item
             pc.animator.SetTrigger("AttackTrigger2");
 
         }
-
-
-        //if (m_noOfClicks == 1)
-        //{
-        //    pc.SwordTrailParticle.startColor = MainSwordTrailColor;
-        //    pc.SecondarySwordTrail.startColor = SecondarySwordTrailColor;
-        //    pc.Sword.SetActive(true);
-        //    pc.animator.SetBool("Attack1", true);
-
-        //}
-        //m_noOfClicks = Mathf.Clamp(m_noOfClicks, 0, 2);
-
-        //if (m_noOfClicks >= 2 && pc.animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.7f && pc.animator.GetCurrentAnimatorStateInfo(0).IsName("Attack1"))
-        //{
-        //    pc.SwordTrailParticle.startColor = MainSwordTrailColor;
-        //    pc.SecondarySwordTrail.startColor = SecondarySwordTrailColor;
-        //    pc.animator.SetBool("Attack1", false);
-        //    pc.animator.SetBool("Attack2", true);
-        //}
     }
 
 
