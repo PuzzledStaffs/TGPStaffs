@@ -198,14 +198,14 @@ MonoBehaviour:
   m_healthBarMask: {fileID: 4821532221281502158}
   m_killedFlag: 
   m_sightRange: 60
-  m_attackRange: 1
+  m_attackRange: 2
   m_playerInSightRange: 0
   m_playerInAttackRange: 0
   m_audioSource: {fileID: -5032104855952043674}
   m_moveSound: {fileID: 8300000, guid: 310f7366febe8d342ab17893348bb93e, type: 3}
   m_hitSound: {fileID: 8300000, guid: 05e9cdb4a0362a947b0f5b16e076076d, type: 3}
-  m_projectile: {fileID: 537071889095325641, guid: 677f08036412d4047ac544a6ad049141, type: 3}
-  m_model: {fileID: 537071889095325641, guid: 677f08036412d4047ac544a6ad049141, type: 3}
+  m_projectile: {fileID: 2520354385350476971, guid: c0dd7626047d0fb4c996904fe1327e1e, type: 3}
+  m_model: {fileID: 2520354385350476971, guid: c0dd7626047d0fb4c996904fe1327e1e, type: 3}
   m_bomb: {fileID: 8587875842583300380, guid: b1fa3fa678cd56648b74fbdd253ffda8, type: 3}
   m_bombModel: {fileID: 8587875842583300380, guid: b1fa3fa678cd56648b74fbdd253ffda8, type: 3}
   m_cooldown: 3
@@ -271,7 +271,7 @@ Animator:
   m_GameObject: {fileID: 478293743626996701}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ca7d773e8c9209f4ea0c5bb4fc6c64b9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 172b904cfe76888478c3574a846d5c4d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
