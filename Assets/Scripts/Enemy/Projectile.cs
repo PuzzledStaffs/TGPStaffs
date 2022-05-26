@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    private float m_lastSqMagnitude;
     private Vector3 m_desiredVelocity;
-    float m_timer = 0;
     public int m_damageAmount;
     Rigidbody m_rigidBody;
     public float m_velocity;
@@ -19,7 +17,6 @@ public class Projectile : MonoBehaviour
     {
         m_rigidBody = GetComponent<Rigidbody>();
         m_moveDirection = m_attack.transform.forward;
-        m_lastSqMagnitude = Mathf.Infinity;
         m_desiredVelocity = ((m_target + new Vector3(0, 1.0f, 0)) - transform.position).normalized * m_velocity;
 
     }

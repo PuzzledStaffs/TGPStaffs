@@ -145,7 +145,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
             m_doorActive = true;
             foreach(GameObject bar in m_bars)
             {
-                bar.active = false;
+                bar.SetActive(false);
             }
             m_doorCollider.isTrigger = true;
           
@@ -168,7 +168,7 @@ public class DungenDoor : MonoBehaviour ,IAltInteractable
         m_doorActive = false;
         foreach (GameObject bar in m_bars)
         {
-            bar.active = true;
+            bar.SetActive(true);
         }
         m_doorCollider.isTrigger = false;
     }
