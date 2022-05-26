@@ -20,11 +20,13 @@ public class OverworldBridge : MonoBehaviour
     public void OpenBridge()
     {
         transform.rotation = Quaternion.Euler(m_openXRotation, 0, 0);
+        m_open = true;
     }
 
     public void CloseBridge()
     {
         transform.rotation = Quaternion.Euler(m_closedXRotation, 0, 0);
+        m_open = false;
 
     }
 }
