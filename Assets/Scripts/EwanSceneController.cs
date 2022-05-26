@@ -10,7 +10,7 @@ public class EwanSceneController : MonoBehaviour
 
     private void Start()
     {
-        m_playerController.m_Death += Respawn;
+        m_playerController.m_Death2 += Respawn;
 
 
     }

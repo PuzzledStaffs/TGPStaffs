@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    public Action m_Death;
+    public Action m_Death1;
+    public Action m_Death2;
     public Scene currentScene;
 
     [SerializeField]
@@ -596,9 +597,10 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_playerInput.enabled = false;
         animator.SetBool("Dead", true);
+        m_Death1?.Invoke();
         GetComponent<AudioSource>().PlayOneShot(m_deathSound);
         yield return new WaitForSeconds(3.6f);
-        m_Death?.Invoke();
+        m_Death2?.Invoke();
         // Do not destroy this object
     }
 

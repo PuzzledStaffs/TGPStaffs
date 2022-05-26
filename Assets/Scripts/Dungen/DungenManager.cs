@@ -50,7 +50,7 @@ public class DungenManager : MonoBehaviour
         }
         m_animator = GetComponent<Animator>();
         m_welcomeCanvas.enabled = false;
-        m_player.m_Death += PlayerDeath;
+        m_player.m_Death2 += PlayerDeath;
         m_playerLight = gameObject.GetComponentInChildren<Light>();
 
         GameObject.FindObjectOfType<PlayerController>().enabled = false;
