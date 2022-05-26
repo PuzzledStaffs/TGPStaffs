@@ -496,7 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741860553249efb4998c7e4749595abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 50
+  m_health: 10
   m_speed: 3
   m_agent: {fileID: 246264534360114835}
   m_rb: {fileID: 3383473906724884985}
