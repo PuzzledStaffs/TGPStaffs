@@ -267,7 +267,7 @@ MonoBehaviour:
     m_Bits: 1088
   m_died: 0
   m_healthBarCanvas: {fileID: 580986156083431201}
-  m_healthBarMask: {fileID: 6176629299864822779}
+  m_healthBarMask: {fileID: 6110780870375149614}
   m_killedFlag: 
   m_sightRange: 60
   m_attackRange: 10
