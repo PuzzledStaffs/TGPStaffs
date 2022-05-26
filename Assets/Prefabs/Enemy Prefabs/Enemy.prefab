@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 741860553249efb4998c7e4749595abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_health: 30
+  m_health: 3
   m_speed: 5
   m_agent: {fileID: 1361184129102678503}
   m_rb: {fileID: 4574969054359232141}
@@ -451,6 +451,7 @@ MonoBehaviour:
   m_died: 0
   m_healthBarCanvas: {fileID: 2015981990684519798}
   m_healthBarMask: {fileID: 4522836332536743971}
+  m_killedFlag: 
   m_sightRange: 55
   m_attackRange: 1
   m_playerInSightRange: 0
