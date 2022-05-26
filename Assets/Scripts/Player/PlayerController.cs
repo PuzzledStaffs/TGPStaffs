@@ -16,7 +16,8 @@ public class PlayerController : MonoBehaviour, IHealth
 
     [Header("Health and Death")]
     public Vector3 m_respawnPosition;
-    public Action m_Death;
+    public Action m_Death1;
+    public Action m_Death2;
     public Scene currentScene;
 
     [SerializeField]
@@ -56,6 +57,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public AudioClip m_damageSound;
     public AudioClip m_deathSound;
     public AudioClip m_footstepsRight, m_footstepsLeft;
+    public AudioClip m_hitSoundEffect;
 
     [Header("Animations")]
     public Animator animator;
@@ -79,6 +81,7 @@ public class PlayerController : MonoBehaviour, IHealth
     public DungenManager m_dungeonManager;
     private float m_timeLeftUntilTick = 1.0f;
     private int m_stepCounter = 1;
+    public GameObject m_hitParticle;
 
     void Awake()
     {
@@ -601,9 +604,10 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_playerInput.enabled = false;
         animator.SetBool("Dead", true);
+        m_Death1?.Invoke();
         GetComponent<AudioSource>().PlayOneShot(m_deathSound);
         yield return new WaitForSeconds(3.6f);
-        m_Death?.Invoke();
+        m_Death2?.Invoke();
         // Do not destroy this object
     }
 
@@ -644,6 +648,8 @@ public class PlayerController : MonoBehaviour, IHealth
     public void PlayerKnockBack(GameObject enemy)
     {
         Debug.Log("Knockback");
-        m_rigidbody.AddForce(enemy.transform.forward * m_pushBackForce);
+        animator.SetTrigger("Hit");
+        Instantiate(m_hitParticle, transform.position + new Vector3(0,1,0), Quaternion.identity);
+        m_audioSource.PlayOneShot(m_hitSoundEffect);
     }
 }
