@@ -18584,7 +18584,7 @@ GameObject:
   - component: {fileID: 3967710052175281199}
   - component: {fileID: 114413830858832949}
   m_Layer: 7
-  m_Name: NewPlayer
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18689,8 +18689,11 @@ MonoBehaviour:
   Bow: {fileID: 2205930701218193196}
   SwordTrailParticle: {fileID: 5335101744625065146}
   SecondarySwordTrail: {fileID: 5335101746083796050}
+  m_audioSource: {fileID: 114413830858832949}
   m_damageSound: {fileID: 8300000, guid: f0e5c9260b6613340afb98a00cdcf07e, type: 3}
   m_deathSound: {fileID: 8300000, guid: 307e6ea6cf7915b47a3229d9e10ac9ef, type: 3}
+  m_footstepsRight: {fileID: 8300000, guid: 16ddf77c9c9146a4fa630a6419a51c3c, type: 3}
+  m_footstepsLeft: {fileID: 8300000, guid: 50e3ddf1f7b04c1459344590c77a7235, type: 3}
   animator: {fileID: 5060069508840278887}
   playerKnockbackUI: {fileID: 2109082283314651462}
   m_gameOverText: {fileID: 5883297187871406088}
