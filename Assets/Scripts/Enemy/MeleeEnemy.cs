@@ -8,7 +8,7 @@ public class MeleeEnemy : EnemyController
 
     override public void AttackPlayer()
     {
-        if (!m_died && m_canAttack)
+        if (!m_died && m_canAttack && !m_firstTime)
         {
             m_canAttack = false;
             m_rb.velocity = new Vector3(0, 0, 0);
@@ -39,6 +39,15 @@ public class MeleeEnemy : EnemyController
 
             StartCoroutine(AttackCooldown());
         }
+        else if (!m_died && m_canAttack && m_firstTime)
+        {
+            StartCoroutine(FirstTimeCooldown());
+        }
     }
 
+    IEnumerator FirstTimeCooldown()
+    {
+        yield return new WaitForSeconds(2.0f);
+        m_firstTime = false;
+    }
 }

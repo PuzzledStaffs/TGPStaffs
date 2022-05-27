@@ -20,8 +20,8 @@ public class EnemyController : State, IHealth
     public float m_deathForce;
     public GameObject m_destroyParticle;
     public Animator m_animator;
-    protected bool m_canAttack = true; //cooldown
-                                       // public Vector3 m_offset; unused?
+    protected bool m_canAttack = true; 
+
     public float m_dodgeChance = 0;
     protected bool m_takingDamage = false;
     public System.Action<GameObject> m_deadEvent;
@@ -44,16 +44,13 @@ public class EnemyController : State, IHealth
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
     public bool m_enemyHit = false;
-
+    public bool m_firstTime = true;
 
     //Sounds
     public AudioSource m_audioSource;
     public AudioClip m_moveSound, m_hitSound;
 
-
-
-    // public GameObject m_attackParticle; unused
-
+    #region Basic Unity Functions
     protected virtual void Awake()
     {
         m_maxHealth = m_health;
@@ -73,17 +70,14 @@ public class EnemyController : State, IHealth
             gameObject.SetActive(false);
             return;
         }
-
     }
 
     protected virtual void Update()
     {
-
         if (m_rb.velocity.magnitude > 0.0f && !m_audioSource.isPlaying && m_currentState == StateType.CHASE)
         {
             m_audioSource.PlayOneShot(m_moveSound);
         }
-
         m_healthBarCanvas.position = transform.position + Vector3.forward;
         Vector3 lookPos = Camera.main.transform.position - m_healthBarCanvas.position;
         lookPos.x = 0;
@@ -91,6 +85,7 @@ public class EnemyController : State, IHealth
         m_healthBarCanvas.rotation = Quaternion.LookRotation(lookPos);
 
         ChangeState(m_currentState);
+
         //Check for sight and attack range
         m_playerInSightRange = Physics.CheckSphere(transform.position, m_sightRange, m_whatIsPlayer);
         m_playerInAttackRange = Physics.CheckSphere(transform.position, m_attackRange, m_whatIsPlayer);
@@ -100,34 +95,33 @@ public class EnemyController : State, IHealth
             if (m_playerInSightRange && !m_playerInAttackRange) ChasePlayer();
             if (m_playerInSightRange && m_playerInAttackRange) AttackPlayer();
         }
-
     }
+
+    #endregion
+
+    #region Custom Functions For Enemy Controls
+    //calcualte the path directly from the nav mesh agent 
     void CalculatePath()
     {
         if (m_currentState == StateType.CHASE && gameObject.activeSelf)
         {
             m_agent.Warp(transform.position);
-            //m_pathToPlayer = new NavMeshPath();
 
             m_agent.CalculatePath(m_player.position, m_pathToPlayer);
-            //Debug.Log(m_agent.CalculatePath(m_player.position, m_pathToPlayer));
         }
     }
 
+    //Chase the player - with physics
     protected virtual void ChasePlayer()
     {
-        //Debug.Log("Calculate Path1");
         if (m_agent == null || m_player == null || m_pathToPlayer == null)
             return;
         CalculatePath();
-        //Debug.Log(m_pathToPlayer.corners.Length);
+
         if (m_pathToPlayer.corners.Length > 1 && !m_died && m_currentState != StateType.IDLE && !m_enemyHit)
         {
             transform.LookAt(m_player);
-            //Debug.Log("Calculate Path2");
-
             m_currentState = StateType.CHASE;
-
             Vector3 dir = (m_pathToPlayer.corners[1] - transform.position).normalized;
             var rotation = Quaternion.LookRotation(new Vector3(dir.x, dir.y, dir.z));
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 2);
@@ -140,21 +134,22 @@ public class EnemyController : State, IHealth
         }
     }
 
+    //Attack function - gets ovverddien by differnt enemy types
     public virtual void AttackPlayer()
     {
 
     }
 
+    //weait function that stops the enemy for a set time
     protected IEnumerator Wait()
     {
         m_agent.isStopped = true;
         m_rb.velocity = new Vector3(0, 0, 0);
         yield return new WaitForSeconds(1f);
-
-
         m_takingDamage = false;
     }
 
+    //Change state
     public virtual void ChangeState(StateType state)
     {
         switch (state)
@@ -172,17 +167,15 @@ public class EnemyController : State, IHealth
         }
     }
 
-
+    //attack cooldwon
     protected IEnumerator AttackCooldown()
     {
-        //  m_attackParticle.SetActive(true);
         m_animator.SetTrigger("Attack");
         yield return new WaitForSeconds(m_attack_cooldown);
         m_canAttack = true;
-        // m_attackParticle.SetActive(false);
     }
 
-
+    //idle state - no moving static
     virtual protected void IdleState()
     {
         if (!gameObject.activeSelf) { return; }
@@ -191,8 +184,7 @@ public class EnemyController : State, IHealth
         m_takingDamage = false;
     }
 
-
-    //Not implemented yet
+    //Dodging - not implemented into final build
     public void Dodge()
     {
         if (m_currentState != StateType.IDLE)
@@ -208,10 +200,11 @@ public class EnemyController : State, IHealth
             }
         }
     }
-
+    #endregion
 
     #region Health
 
+    //Death function
     void death()
     {
         m_died = true;
@@ -226,6 +219,7 @@ public class EnemyController : State, IHealth
         m_rb.AddForce(transform.up * m_deathForce);
     }
 
+    //destroy object when dead
     IEnumerator DestroyObject()
     {
         Instantiate(m_destroyParticle, transform.position, Quaternion.identity);
@@ -235,11 +229,13 @@ public class EnemyController : State, IHealth
         gameObject.SetActive(false);
     }
 
+    //get health func
     public int GetHealth()
     {
         return m_health;
     }
 
+    //take damage ovverride
     public virtual void TakeDamage(IHealth.Damage damage)
     {
         if (damage.type == IHealth.DamageType.SWORD)
@@ -253,6 +249,7 @@ public class EnemyController : State, IHealth
 
     }
 
+    //take damage main function - on a timer
     IEnumerator TakeDamageWait(IHealth.Damage damage, float time)
     {
         yield return new WaitForSeconds(time);
@@ -272,6 +269,7 @@ public class EnemyController : State, IHealth
         }
     }
 
+    //hit cooldwon
     IEnumerator HitCoolDown()
     {
         m_enemyHit = true;
@@ -279,12 +277,13 @@ public class EnemyController : State, IHealth
         m_enemyHit = false;
     }
 
-
+    //chekc if dead
     public bool IsDead()
     {
         return m_health <= 0 || m_died;
     }
 
+    //toggle th healthbar
     public void toggleHeathBar(bool shown)
     {
         m_healthBarCanvas.GetComponent<Canvas>().enabled = shown;
