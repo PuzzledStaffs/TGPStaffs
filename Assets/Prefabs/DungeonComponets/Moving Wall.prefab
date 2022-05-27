@@ -131,6 +131,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_wallDelay: 3
   m_pushOnActivate: 1
+  m_randomStartDeylay: 0
+  m_randomStartDelayInterval: {x: 0, y: 0}
+  m_animator: {fileID: 6880750630121258597}
 --- !u!1 &4902599724727526247
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,7 +157,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4902599724727526247}
-  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 1.55, z: 0}
   m_LocalScale: {x: 1, y: 3, z: 2}
   m_Children:

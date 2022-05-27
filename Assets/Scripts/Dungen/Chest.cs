@@ -49,13 +49,13 @@ public class Chest : MonoBehaviour, IAltInteractable
             if (m_isMimic)
             {
                 m_closedModel.SetActive(false);
+                GetComponent<BoxCollider>().enabled = false;
                 EnemyController mimic =  Instantiate(m_mimicPrefab, transform.position, transform.rotation,
                     m_enemyParent.transform).GetComponent<EnemyController>();
                 mimic.m_killedFlag = m_flagPrefix + "_MimicKilled_" + m_chestIndex;
                 m_room.AddEnemy(mimic);
                 mimic.ChangeState(State.StateType.CHASE);
                 mimic.name = "mimicOf" + gameObject.name;
-                Destroy(gameObject);
                 return;
             }
             else
