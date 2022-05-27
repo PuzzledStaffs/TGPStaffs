@@ -11,12 +11,12 @@ public class PushWall : Trap
     [SerializeField] bool m_randomStartDeylay;
     [SerializeField] Vector2 m_randomStartDelayInterval;
     Coroutine m_waitCorutine;
-    Animator m_animator;
+    [SerializeField] Animator m_animator;
     bool m_active;
 
     private void Start()
     {
-        m_animator = GetComponent<Animator>();
+        //m_animator = GetComponent<Animator>();
         m_active = false;
     }
 
