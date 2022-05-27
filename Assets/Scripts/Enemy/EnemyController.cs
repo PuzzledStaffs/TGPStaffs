@@ -44,6 +44,7 @@ public class EnemyController : State, IHealth
     public float m_sightRange, m_attackRange;
     public bool m_playerInSightRange, m_playerInAttackRange;
     public bool m_enemyHit = false;
+    public bool m_firstTime = true;
 
     //Sounds
     public AudioSource m_audioSource;
@@ -169,11 +170,9 @@ public class EnemyController : State, IHealth
     //attack cooldwon
     protected IEnumerator AttackCooldown()
     {
-
         m_animator.SetTrigger("Attack");
         yield return new WaitForSeconds(m_attack_cooldown);
         m_canAttack = true;
-
     }
 
     //idle state - no moving static
