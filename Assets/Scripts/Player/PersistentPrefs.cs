@@ -41,6 +41,7 @@ public class PersistentPrefs
             m_saveMinutes = 0,
             m_saveHours = 0,
             m_currentHealth = 5,
+            m_coins = 0,
             m_item1Unlocked = true,
             m_item2Unlocked = false,
             m_item3Unlocked = false,
@@ -62,22 +63,29 @@ public class PersistentPrefs
 
     public bool HasSaveFile(int save)
     {
-        return File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".json");
+        return File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".save");
     }
 
     public SaveFile LoadSaveFile(int save)
     {
-        if (File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".json"))
+        if (File.Exists(Application.persistentDataPath + "/SaveFile" + save + ".save"))
         {
-            return JsonUtility.FromJson<SaveFile>(File.ReadAllText(Application.persistentDataPath + "/SaveFile" + save + ".json"));
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/SaveFile" + save + ".save", FileMode.Open);
+            SaveFile saveFile = (SaveFile)bf.Deserialize(file);
+            file.Close();
+
+            return saveFile;
         }
         return null;
     }
 
     public void SaveSaveFile(int save)
     {
-        string saveData = JsonUtility.ToJson(m_currentSaveFile);
-        File.WriteAllText(Application.persistentDataPath + "/SaveFile" + save + ".json", saveData);
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/SaveFile" + save + ".save");
+        bf.Serialize(file, m_currentSaveFile);
+        file.Close();
     }
     #endregion
 

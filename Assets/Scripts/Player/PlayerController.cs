@@ -137,8 +137,8 @@ public class PlayerController : MonoBehaviour, IHealth
         // Save to Autosave
         PersistentPrefs.GetInstance().SaveSaveFile(0);
 
-        m_coins = 0; //Do not use PlayerPrefs, ask Kit to add this
-        m_currencyText.text = m_coins.ToString();
+        m_coins = 0;
+        AddCoins(PersistentPrefs.GetInstance().m_currentSaveFile.m_coins);
         m_altInteractToolTip.enabled = false;
 
 
@@ -635,7 +635,7 @@ public class PlayerController : MonoBehaviour, IHealth
     {
         m_coins += coins;
         m_currencyText.text = m_coins.ToString();
-        PlayerPrefs.SetInt("Coins", m_coins);
+        PersistentPrefs.GetInstance().m_currentSaveFile.m_coins = m_coins;
     }
 
     public void OnDrawGizmos()
