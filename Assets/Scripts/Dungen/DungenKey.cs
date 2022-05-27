@@ -6,8 +6,9 @@ using UnityEngine.Serialization;
 public class DungenKey : Trap
 {
 
-   [FormerlySerializedAs("m_dungenManager")]  private DungenManager m_dungeonManager;
-   private Animator m_animator;
+    [FormerlySerializedAs("m_dungenManager")]  private DungenManager m_dungeonManager;
+    private Animator m_animator;
+    public AudioClip m_pickupSound;
 
     private void Awake()
     {
@@ -24,11 +25,11 @@ public class DungenKey : Trap
         m_animator.enabled = false;
 
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
+            other.GetComponent<PlayerController>().m_audioSource.PlayOneShot(m_pickupSound);
             m_dungeonManager.AddKey();
             gameObject.SetActive(false);
         }
