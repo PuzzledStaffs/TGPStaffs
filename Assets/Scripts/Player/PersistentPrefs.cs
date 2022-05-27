@@ -41,6 +41,7 @@ public class PersistentPrefs
             m_saveMinutes = 0,
             m_saveHours = 0,
             m_currentHealth = 5,
+            m_coins = 0,
             m_item1Unlocked = true,
             m_item2Unlocked = false,
             m_item3Unlocked = false,

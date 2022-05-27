@@ -13,6 +13,7 @@ public class SaveFile
     public int m_saveHours;
 
     public int m_currentHealth;
+    public int m_coins;
     public string m_currentScene;
     public bool m_isInDungeon;
     public string m_currentDungeonRoom;
