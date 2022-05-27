@@ -4584,83 +4584,6 @@ PrefabInstance:
       objectReference: {fileID: 1109609684}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
---- !u!1001 &686896060
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1681101769}
-    m_Modifications:
-    - target: {fileID: 7431805276255159285, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: ExitScene
-      value: Overworld
-      objectReference: {fileID: 0}
-    - target: {fileID: 7431805276255159285, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_exitScene
-      value: EndScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 7431805276255159285, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_transition
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7431805276255159285, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_closedOnStart
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7431805276255159285, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_textForNextScene
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096145, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_Name
-      value: DungeonDoorExit
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 9162364829834096146, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: eb5a4927375b9094ea29ca99eac1cb5a, type: 3}
 --- !u!1 &726060068
 GameObject:
   m_ObjectHideFlags: 0
@@ -10010,11 +9933,6 @@ Transform:
   m_Father: {fileID: 604599585}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1681101769 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7449501374489858696, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
-  m_PrefabInstance: {fileID: 2047466672}
-  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1690427843
 Mesh:
   m_ObjectHideFlags: 0
@@ -10750,6 +10668,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1653178168452529925, guid: 95aa8ec5e4d1e1043847eee8303a7e31, type: 3}
+      propertyPath: m_closedOnStart
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1653178168452529925, guid: 95aa8ec5e4d1e1043847eee8303a7e31, type: 3}
       propertyPath: m_textForNextScene
       value: Complete dungeon
       objectReference: {fileID: 0}
@@ -10803,6 +10725,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95aa8ec5e4d1e1043847eee8303a7e31, type: 3}
+--- !u!114 &1839305851 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1653178168452529925, guid: 95aa8ec5e4d1e1043847eee8303a7e31, type: 3}
+  m_PrefabInstance: {fileID: 1839305850}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8d4ab40c8b6a5a4e80b945150f40874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1847599016
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14757,7 +14690,7 @@ PrefabInstance:
     - target: {fileID: 8186132769778373084, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
       propertyPath: m_roomCleared.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 2047466676}
+      objectReference: {fileID: 1839305851}
     - target: {fileID: 8186132769778373084, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
       propertyPath: m_roomCleard.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -14780,7 +14713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8186132769778373084, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
       propertyPath: m_roomCleared.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: DungenDoor, Assembly-CSharp
+      value: ExitDoor, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 8186132769778373084, guid: b295310d3226dde4ea62a6c706a0eb29, type: 3}
       propertyPath: m_roomCleard.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
